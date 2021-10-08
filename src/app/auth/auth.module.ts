@@ -2,7 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LoginComponent} from './pages/login/login.component';
 import {AuthRoutingModule} from "./auth-routing.module";
-import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import {UserSettingsComponent} from './pages/user-settings/user-settings.component';
+import {AppCommonModule} from "../app-common/app-common.module";
 
 @NgModule({
     declarations: [
@@ -11,10 +12,10 @@ import { UserSettingsComponent } from './pages/user-settings/user-settings.compo
     ],
     imports: [
         CommonModule,
+        AppCommonModule,
         AuthRoutingModule,
     ],
-    exports: [
-    ]
+    exports: []
 })
 export class AuthModule {
 }
