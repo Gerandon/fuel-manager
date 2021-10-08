@@ -1,0 +1,70 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+#npm config
+#.npmrc
+npmrc
+npm
+bck_npmrc
+
+.nyc_output
+coverage
+
+tests/e2e/screenshots
+tests/e2e/videos
+
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# local cert
+certificate.cnf
+localhost.key
+localhost.crt
+
+# dependencies
+/node_modules
+
+# docs
+documentation
+projects/bicon/src/assets/docs
+projects/main/src/assets/docs
+projects/vdrbo/src/assets/docs
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+
+# System Files
+.DS_Store
+Thumbs.db
+
+#vscode workspace files
+*.code-workspace
+
+# Project config
