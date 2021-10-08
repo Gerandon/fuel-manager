@@ -1,24 +1,39 @@
-<mat-accordion>
-    <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                This is the expansion title
-            </mat-panel-title>
-            <mat-panel-description>
-                This is a summary of the content
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>This is the primary content of the panel.</p>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Self aware panel
-            </mat-panel-title>
-            <mat-panel-description>
-                Currently I am
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-    </mat-expansion-panel>
-</mat-accordion>
+<div class="login" fxLayout="row">
+    <div fxFlex="60" fxFlexOffset="20" fxLayoutAlign="center center">
+        <mat-card fxFlex>
+            <mat-card-header>
+                <h3>Bejelentkezés</h3>
+            </mat-card-header>
+            <mat-card-content>
+                <form #loginForm="ngForm" appCheckForm>
+                    <div class="open-panel" fxLayout="column">
+                        <div fxLayout="column">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Felhasználónév</mat-label>
+                                <input matInput
+                                       #username
+                                       name="userName"
+                                       placeholder="Ex. Pizza"
+                                       [required]="true"
+                                       [(ngModel)]="user.userName">
+                                <mat-icon matPrefix color="primary">person</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Jelszó</mat-label>
+                                <input matInput
+                                       name="password"
+                                       placeholder="Ex. Pizza"
+                                       [required]="true"
+                                       [(ngModel)]="user.password">
+                                <mat-icon matPrefix color="primary">password</mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="buttons" fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Bejelentkezés</button>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

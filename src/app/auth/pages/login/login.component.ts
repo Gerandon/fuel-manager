@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-login',
@@ -7,7 +7,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-    constructor() {
+    public user: { userName?: string; password?: string; } = {};
+
+    constructor(public cdr: ChangeDetectorRef) {
     }
 
     ngOnInit(): void {

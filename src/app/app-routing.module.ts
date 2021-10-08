@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {LoginRequiredGuard} from "./app-common/guards/login-required.guard";
 
 const routes: Routes = [
     {
@@ -9,7 +10,8 @@ const routes: Routes = [
     },
     {
         path: '**',
-        redirectTo: ''
+        redirectTo: '',
+        canActivate: [/*LoginRequiredGuard*/]
     }
 ];
 
