@@ -1,18 +1,17 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {VendorModule} from "./vendor.module";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
-    declarations: [
-    ],
+    declarations: [],
     imports: [
         CommonModule,
-        VendorModule
+        MatExpansionModule
     ],
     exports: [
-        VendorModule
+        MatExpansionModule
     ]
 })
-export class AppCommonModule {
+export class VendorModule {
 }
