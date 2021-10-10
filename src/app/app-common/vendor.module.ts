@@ -8,6 +8,11 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import * as _ from 'lodash';
+import {NgxWebstorageModule} from "ngx-webstorage";
+import {MissingTranslationHandler, TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {MissingTranslationService} from "./services/missing-translations.service";
 
 export const lodash = _;
 
@@ -21,7 +26,22 @@ export const lodash = _;
         MatIconModule,
         MatCardModule,
         MatDividerModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        NgxWebstorageModule.forRoot({
+            prefix: 'fuel-manager',
+            caseSensitive: true,
+        }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (httpClient: HttpClient) => new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'),
+                deps: [HttpClient],
+            },
+            missingTranslationHandler: {
+                provide: MissingTranslationHandler,
+                useClass: MissingTranslationService,
+            },
+        }),
     ],
     exports: [
         MatExpansionModule,
@@ -30,7 +50,9 @@ export const lodash = _;
         MatIconModule,
         MatCardModule,
         MatDividerModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        TranslateModule,
+        HttpClientModule,
     ]
 })
 export class VendorModule {

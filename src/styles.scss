@@ -9,3 +9,23 @@ body {
     height: 100%;
     font-family: Roboto, Arial, Helvetica, sans-serif;
 }
+
+$pixels: (5: 5px, 10: 10px, 15: 15px, 20: 20px, 25: 25px, 30: 30px, );
+
+@each $pixel, $px in $pixels {
+    .mt-#{$pixel} {
+        margin-top: $px;
+    }
+    .mb-#{$pixel} {
+        margin-bottom: $px;
+    }
+    .ml-#{$pixel} {
+        margin-left: $px;
+    }
+    .mr-#{$pixel} {
+        margin-right: $px;
+    }
+    .m-#{$pixel} {
+        margin: $px;
+    }
+}

@@ -1,0 +1,17 @@
+<mat-form-field [floatLabel]="floatLabel && 'always'" [appearance]="appearance">
+    <mat-label *ngIf="label && floatLabel !== 'never'">{{ label | translate: translateParams }}</mat-label>
+    <input
+        #inputElement
+        #input="ngForm"
+        matInput
+        label=""
+        [placeholder]="placeholder | translate: translateParams"
+        [formControl]="control"
+        [maxLength]="maxLength"
+        [name]="name"
+        [required]="required"/>
+    <mat-icon matPrefix color="primary">person</mat-icon>
+    <mat-error *ngIf="hasError('required')">{{ 'COMMON.REQUIRED' | translate: translateParams }}</mat-error>
+    <mat-error *ngIf="hasError('max')">{{ 'ERROR.NUMERIC.MAX' | translate }}</mat-error>
+    <mat-error *ngIf="hasError('min')">{{ 'ERROR.NUMERIC.MIN' | translate }}</mat-error>
+</mat-form-field>

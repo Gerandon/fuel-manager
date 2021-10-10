@@ -1,0 +1,17 @@
+{
+    "COMMON": {
+        "REQUIRED": "'{{field}}' meztő kitöltése kötelező!"
+    },
+    "LOGIN": {
+        "TITLE": "Bejelentkezés",
+        "USERNAME": {
+            "LABEL": "Felhasználónév",
+            "PLACEHOLDER": "Adjon meg egy felhasználónevet!"
+        },
+        "PASSWORD": {
+            "LABEL": "Jelszó",
+            "PLACEHOLDER": "Adja meg jelszavát!"
+        },
+        "LOGIN_BUTTON": "Bejelentkezés"
+    }
+}

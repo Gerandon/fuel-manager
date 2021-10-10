@@ -1,23 +1,28 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {VendorModule} from "./vendor.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CheckFormDirective} from './directives/check-form.directive';
+import { BasicInputComponent } from './widgets/basic-input/basic-input.component';
 
 
 @NgModule({
     declarations: [
-        CheckFormDirective
+        CheckFormDirective,
+        BasicInputComponent,
     ],
     imports: [
         CommonModule,
         VendorModule,
         FormsModule,
+        ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'always' }),
     ],
     exports: [
         VendorModule,
         FormsModule,
-        CheckFormDirective
+        ReactiveFormsModule,
+        CheckFormDirective,
+        BasicInputComponent
     ]
 })
 export class AppCommonModule {
