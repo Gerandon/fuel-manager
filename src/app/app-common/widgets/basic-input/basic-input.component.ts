@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, forwardRef, Injector, OnInit, ViewEncapsulation} from '@angular/core';
-import {BaseInput} from "../base-input/base.input";
+import {BaseInput} from "../core/base.input";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
