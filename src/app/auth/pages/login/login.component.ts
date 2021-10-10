@@ -1,4 +1,7 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
+import {tap} from "rxjs/operators";
 
 @Component({
     selector: 'app-login',
@@ -7,12 +10,21 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-    public user: { userName?: string; password?: string; } = {};
+    public user: { username?: string; password?: string; } = {};
 
-    constructor(public cdr: ChangeDetectorRef) {
+    constructor(private router: Router, public authService: AuthService) {
     }
 
     ngOnInit(): void {
+    }
+
+    login() {
+        this.authService.authenticate(this.user).pipe(
+            tap(() => {
+                console.log('bumm');
+                this.router.navigate([''])
+            })
+        ).subscribe();
     }
 
 }

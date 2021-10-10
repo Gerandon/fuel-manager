@@ -9,7 +9,7 @@
                     <div class="open-panel" fxLayout="column" fxFlex="90" fxFlexOffset="5">
                         <div fxLayout="column" class="mb-15">
                             <basic-input name="username"
-                                         [(ngModel)]="user.userName"
+                                         [(ngModel)]="user.username"
                                          [required]="true"
                                          [translateParams]="{field: 'LOGIN.USERNAME.LABEL'}"
                                          label="LOGIN.USERNAME.LABEL"
@@ -26,6 +26,7 @@
                         <div class="buttons" fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button color="primary"
                                     translate="LOGIN.LOGIN_BUTTON"
+                                    (click)="login()"
                                     [disabled]="loginForm.invalid"></button>
                         </div>
                     </div>
