@@ -10,6 +10,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import * as _ from 'lodash';
 import {TranslateModule} from "@ngx-translate/core";
 import {HttpClientModule} from "@angular/common/http";
+import {MatTableModule} from "@angular/material/table";
 
 export const lodash = _;
 
@@ -24,6 +25,7 @@ export const lodash = _;
         MatCardModule,
         MatDividerModule,
         FlexLayoutModule,
+        MatTableModule
     ],
     exports: [
         MatExpansionModule,
@@ -33,6 +35,7 @@ export const lodash = _;
         MatCardModule,
         MatDividerModule,
         FlexLayoutModule,
+        MatTableModule,
         TranslateModule,
         HttpClientModule,
     ]

@@ -3,18 +3,19 @@
     min-height: 100%;
     height: 100%;
     box-sizing: border-box;
-    .background {
+    .content {
+        margin: 20px;
+    }
+    /*.background {
         position: absolute;
         opacity: 0.7;
-        background: url('../assets/images/background.jpg');
         filter: blur(8px);
         -webkit-filter: blur(4px);
         height: 100%;
         width:100%;
-        background-position: center;
-        background-repeat: no-repeat;
+        background: url('../assets/images/background.jpg') no-repeat center;
         background-size: cover;
-    }
+    }*/
     .content {
         height: 100%;
     }

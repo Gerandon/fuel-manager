@@ -1,0 +1,63 @@
+<div class="booking-list">
+    <div>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title translate="Szűrés"></mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div fxLayout="row">
+                <basic-input name="username"
+                             [required]="true"
+                             [translateParams]="{field: 'LOGIN.USERNAME.LABEL'}"
+                             label="LOGIN.USERNAME.LABEL"
+                             placeholder="LOGIN.USERNAME.PLACEHOLDER">
+                </basic-input>
+            </div>
+        </mat-expansion-panel>
+    </div>
+    <br>
+    <div fxLayout="row">
+        <table mat-table [dataSource]="bookingListSource" class="mat-elevation-z8">
+            <!-- Position Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef>Dátum</th>
+                <td mat-cell *matCellDef="let element">{{element.date | date}}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="distance">
+                <th mat-header-cell *matHeaderCellDef>Megtett táv (km)</th>
+                <td mat-cell *matCellDef="let element">{{element.distance}}</td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="route">
+                <th mat-header-cell *matHeaderCellDef>Útvonal</th>
+                <td mat-cell *matCellDef="let element">{{element.route}}</td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="amountSpent">
+                <th mat-header-cell *matHeaderCellDef>Elköltött összeg</th>
+                <td mat-cell *matCellDef="let element"> {{element.amountSpent}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="amountPaid">
+                <th mat-header-cell *matHeaderCellDef>Térített összeg</th>
+                <td mat-cell *matCellDef="let element"> {{element.amountPaid}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="fullSpent">
+                <th mat-header-cell *matHeaderCellDef>Különbözet</th>
+                <td mat-cell *matCellDef="let element"> {{element.fullSpent}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+    </div>
+</div>
