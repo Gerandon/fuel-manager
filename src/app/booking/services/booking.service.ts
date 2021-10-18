@@ -25,4 +25,8 @@ export class BookingService implements IBookingService {
     addToList(addItem: BookingListType): void {
         this._bookingService.addToList(addItem);
     }
+
+    removeItem(item: BookingListType) {
+        this._bookingService.removeItem(item);
+    }
 }
