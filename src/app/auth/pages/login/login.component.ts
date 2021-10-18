@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
     login() {
         this.authService.authenticate(this.user).pipe(
             tap(() => {
-                console.log('bumm');
                 this.router.navigate([''])
             })
         ).subscribe();

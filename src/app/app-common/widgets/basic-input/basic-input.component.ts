@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, forwardRef, Injector, OnInit, ViewEncapsulation} from '@angular/core';
-import {BaseInput} from "../core/base.input";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {BaseTextInput} from "../core/base-text.input";
 
 @Component({
     selector: 'basic-input',
@@ -11,7 +11,7 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BasicInputComponent), multi: true },
     ],
 })
-export class BasicInputComponent extends BaseInput<string> implements OnInit {
+export class BasicInputComponent extends BaseTextInput<string> implements OnInit {
 
     constructor(protected injector: Injector, protected cdr: ChangeDetectorRef) {
         super(cdr, injector);

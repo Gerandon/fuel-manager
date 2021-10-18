@@ -3,9 +3,17 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {AuthModule} from "./auth/auth.module";
 import {AppCommonModule} from "./app-common/app-common.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NgxWebstorageModule} from "ngx-webstorage";
+import {MissingTranslationHandler, TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {HttpClient} from "@angular/common/http";
+import {MissingTranslationService} from "./app-common/services/missing-translations.service";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+}
 
 @NgModule({
     declarations: [
@@ -15,8 +23,22 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         BrowserModule,
         AppCommonModule,
         BrowserAnimationsModule,
-        AuthModule,
         AppRoutingModule,
+        NgxWebstorageModule.forRoot({
+            prefix: 'fuel-manager',
+            caseSensitive: true,
+        }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient],
+            },
+            missingTranslationHandler: {
+                provide: MissingTranslationHandler,
+                useClass: MissingTranslationService,
+            },
+        }),
     ],
     providers: [
     ],
