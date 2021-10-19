@@ -11,6 +11,8 @@ import * as _ from 'lodash';
 import {TranslateModule} from "@ngx-translate/core";
 import {HttpClientModule} from "@angular/common/http";
 import {MatTableModule} from "@angular/material/table";
+import {MatListModule} from "@angular/material/list";
+import {MatDialogModule} from "@angular/material/dialog";
 
 export const lodash = _;
 
@@ -25,7 +27,9 @@ export const lodash = _;
         MatCardModule,
         MatDividerModule,
         FlexLayoutModule,
-        MatTableModule
+        MatTableModule,
+        MatListModule,
+        MatDialogModule
     ],
     exports: [
         MatExpansionModule,
@@ -38,6 +42,8 @@ export const lodash = _;
         MatTableModule,
         TranslateModule,
         HttpClientModule,
+        MatListModule,
+        MatDialogModule
     ]
 })
 export class VendorModule {

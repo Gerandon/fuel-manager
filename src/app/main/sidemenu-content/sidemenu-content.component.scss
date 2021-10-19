@@ -1,0 +1,10 @@
+app-sidemenu-content {
+    mat-selection-list {
+        padding: 0 !important;
+        mat-list-option {
+            .mat-list-text {
+                color: white;
+            }
+        }
+    }
+}

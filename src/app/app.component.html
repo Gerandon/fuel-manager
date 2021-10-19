@@ -1,8 +1,33 @@
-<div class="app">
-    <div class="background"></div>
-    <div class="header"></div>
-    <div class="content">
-        <router-outlet></router-outlet>
+<ng-sidebar-container>
+    <!-- A sidebar -->
+    <ng-sidebar mode="push"
+                [closeOnClickOutside]="true"
+                [(opened)]="_opened">
+        <app-sidemenu-content [menuItems]="[
+            { label: 'Booking list', navigateTo: 'booking/list' },
+            { label: 'User settings', navigateTo: 'auth/settings' }
+        ]"></app-sidemenu-content>
+    </ng-sidebar>
+
+    <!-- Page content -->
+    <div ng-sidebar-content>
+        <div class="app">
+            <div class="background"></div>
+            <app-header>
+                <button fxFlex="5" mat-icon-button (click)="_toggleSidebar()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <div fxFlex="95" fxLayout="row">
+                    <div fxFlex="70" fxFlexOffset="15" fxLayoutAlign="center center">
+                        <h3>Hát sziaaaa</h3>
+                    </div>
+                </div>
+            </app-header>
+            <div class="content">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="footer"></div>
+        </div>
     </div>
-    <div class="footer"></div>
-</div>
+
+</ng-sidebar-container>

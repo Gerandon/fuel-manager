@@ -11,16 +11,17 @@ import {LocalStorageService} from "ngx-webstorage";
 })
 export class LocaleBookingService implements IBookingService {
 
+    private readonly identifier = 'booking-list';
     private list = new BehaviorSubject<BookingListType[]>([]);
 
     constructor(private localStorage: LocalStorageService) {
-        if (!localStorage.retrieve(('booking-list'))) {
-            localStorage.store('booking-list',[
+        if (!localStorage.retrieve((this.identifier))) {
+            localStorage.store(this.identifier,[
                 {id: uuidv4(), date: new Date(), distance: '100', route: 'Othon - Meló', amountSpent: 10000, amountPaid: 5000, fullSpent: 5000},
             ]);
         }
         // @ts-ignore
-        this.list.next(localStorage.retrieve('booking-list').filter(item => item));
+        this.list.next(localStorage.retrieve(this.identifier).filter(item => item));
     }
 
     getList(): Observable<BookingListType[]> {
@@ -33,7 +34,7 @@ export class LocaleBookingService implements IBookingService {
             tap((list) => {
                 const _list: any[] = list || [];
                 _list.push({...addItem, id: uuidv4()});
-                this.localStorage.store('booking-list', _list);
+                this.localStorage.store(this.identifier, _list);
                 this.list.next(_list);
             })
         ).subscribe();
@@ -44,7 +45,7 @@ export class LocaleBookingService implements IBookingService {
             first(),
             tap((list) => {
                 const _list = (list || []).filter(_item => _item.id !== item.id);
-                this.localStorage.store('booking-list', _list);
+                this.localStorage.store(this.identifier, _list);
                 this.list.next(_list);
             })
         ).subscribe();

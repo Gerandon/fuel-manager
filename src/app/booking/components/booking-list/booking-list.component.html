@@ -63,7 +63,7 @@
                     </button>
                 </th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-icon-button color="primary">
+                    <button mat-icon-button (click)="openItem(element)" color="primary">
                         <mat-icon>search</mat-icon>
                     </button>
                     <button mat-icon-button color="warn"

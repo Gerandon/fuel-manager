@@ -10,7 +10,8 @@ import {of} from "rxjs";
 })
 export class AppComponent implements OnInit {
 
-    title = 'fuel-manager';
+    public title = 'fuel-manager';
+    public _opened: boolean = false;
 
     constructor(private translate: TranslateService, private translateLoader: TranslateLoader) {
     }
@@ -28,5 +29,9 @@ export class AppComponent implements OnInit {
                 this.translate.use(initLang);
             })
         ).subscribe();
+    }
+
+    public _toggleSidebar() {
+        this._opened = !this._opened;
     }
 }

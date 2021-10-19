@@ -1,0 +1,31 @@
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {NavigationEnd, Router} from "@angular/router";
+import {filter, map, tap} from "rxjs/operators";
+import {Observable} from "rxjs";
+
+@Component({
+    selector: 'app-sidemenu-content',
+    templateUrl: './sidemenu-content.component.html',
+    styleUrls: ['./sidemenu-content.component.scss'],
+    encapsulation: ViewEncapsulation.None
+})
+export class SidemenuContentComponent implements OnInit {
+
+    @Input() menuItems!: {
+        label: string,
+        icon?: string,
+        navigateTo: string
+    }[];
+    public url: Observable<string>;
+
+    constructor(private router: Router) {
+        this.url = router.events.pipe(
+            filter((event: any) => event instanceof NavigationEnd),
+            map(item => item.url),
+        );
+    }
+
+    ngOnInit(): void {
+    }
+
+}

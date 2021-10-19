@@ -10,6 +10,8 @@ import {MissingTranslationHandler, TranslateLoader, TranslateModule} from "@ngx-
 import {HttpClient} from "@angular/common/http";
 import {MissingTranslationService} from "./app-common/services/missing-translations.service";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {SidebarModule} from "ng-sidebar";
+import {MainModule} from "./main/main.module";
 
 function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -39,6 +41,8 @@ function createTranslateLoader(http: HttpClient) {
                 useClass: MissingTranslationService,
             },
         }),
+        SidebarModule.forRoot(),
+        MainModule,
     ],
     providers: [
     ],

@@ -1,3 +1,5 @@
+@import 'theme';
+
 html,
 body {
     min-height: 100%;
@@ -10,6 +12,22 @@ body {
     font-family: Roboto, Arial, Helvetica, sans-serif;
     table {
         width: 100%;
+    }
+    .mat-icon-button, h3 {
+        color: $app-font-color;
+    }
+}
+
+.card-outlined {
+    border: 1px solid $app-primary-color;
+    @extend .mat-elevation-z0;
+    &__title {
+        width: auto;
+        position: absolute;
+        margin: 0;
+        top: -10px;
+        background: white;
+        padding: 0 5px;
     }
 }
 

@@ -11,6 +11,7 @@
                             <basic-input name="username"
                                          [(ngModel)]="user.username"
                                          [required]="true"
+                                         icon="person"
                                          [translateParams]="{field: 'LOGIN.USERNAME.LABEL'}"
                                          label="LOGIN.USERNAME.LABEL"
                                          placeholder="LOGIN.USERNAME.PLACEHOLDER">
@@ -19,6 +20,7 @@
                                          [(ngModel)]="user.password"
                                          [required]="true"
                                          type="password"
+                                         icon="lock"
                                          [translateParams]="{field: 'LOGIN.PASSWORD.LABEL'}"
                                          label="LOGIN.PASSWORD.LABEL"
                                          placeholder="LOGIN.PASSWORD.PLACEHOLDER">
