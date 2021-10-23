@@ -1,7 +1,9 @@
 <ng-sidebar-container>
     <!-- A sidebar -->
     <ng-sidebar mode="push"
+                *showOnAuthenticated="changeAnimatedState.bind(this)"
                 [closeOnClickOutside]="true"
+                [animate]="animated"
                 [(opened)]="_opened">
         <app-sidemenu-content [menuItems]="[
             { label: 'Booking list', navigateTo: 'booking/list' },
@@ -10,10 +12,9 @@
     </ng-sidebar>
 
     <!-- Page content -->
-    <div ng-sidebar-content>
+    <div ng-sidebar-content [style.height]="(isAuthenticated | async) ? 'unset' : '97%'">
         <div class="app">
-            <div class="background"></div>
-            <app-header>
+            <app-header *showOnAuthenticated>
                 <button fxFlex="5" mat-icon-button (click)="_toggleSidebar()">
                     <mat-icon>menu</mat-icon>
                 </button>

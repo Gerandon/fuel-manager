@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateLoader, TranslateService} from "@ngx-translate/core";
 import {catchError, first, map, tap} from "rxjs/operators";
-import {of} from "rxjs";
+import {Observable, of} from "rxjs";
+import {AuthService} from "./auth/services/auth.service";
 
 @Component({
     selector: 'app-root',
@@ -12,8 +13,13 @@ export class AppComponent implements OnInit {
 
     public title = 'fuel-manager';
     public _opened: boolean = false;
+    public animated: boolean = false;
+    public isAuthenticated: Observable<boolean>;
 
-    constructor(private translate: TranslateService, private translateLoader: TranslateLoader) {
+    constructor(private translate: TranslateService,
+                private translateLoader: TranslateLoader,
+                private authService: AuthService) {
+        this.isAuthenticated = authService.isAuthenticated();
     }
 
     ngOnInit() {
@@ -29,6 +35,15 @@ export class AppComponent implements OnInit {
                 this.translate.use(initLang);
             })
         ).subscribe();
+        this.changeAnimatedState();
+    }
+
+    changeAnimatedState() {
+        this.animated = false;
+        setTimeout(() => {
+            console.log('show');
+            this.animated = true;
+        })
     }
 
     public _toggleSidebar() {

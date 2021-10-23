@@ -2,6 +2,7 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
 import {filter, map, tap} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {AuthService} from "../../auth/services/auth.service";
 
 @Component({
     selector: 'app-sidemenu-content',
@@ -18,7 +19,8 @@ export class SidemenuContentComponent implements OnInit {
     }[];
     public url: Observable<string>;
 
-    constructor(private router: Router) {
+    constructor(private router: Router,
+                public authService: AuthService) {
         this.url = router.events.pipe(
             filter((event: any) => event instanceof NavigationEnd),
             map(item => item.url),

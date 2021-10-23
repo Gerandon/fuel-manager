@@ -24,4 +24,9 @@ export class AuthService implements IAuthService {
     isAuthenticated(): Observable<boolean> {
         return this._authService.isAuthenticated();
     }
+
+    logout() {
+        this._authService.logout();
+        window.location.reload();
+    }
 }

@@ -17,4 +17,7 @@ export class RemoteAuthService implements IAuthService {
     isAuthenticated(): Observable<boolean> {
         return of(false);
     }
+
+    logout(): void {
+    }
 }

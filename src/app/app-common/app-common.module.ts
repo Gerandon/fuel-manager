@@ -4,12 +4,14 @@ import {VendorModule} from "./vendor.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CheckFormDirective} from './directives/check-form.directive';
 import { BasicInputComponent } from './widgets/basic-input/basic-input.component';
+import { ShowOnAuthenticatedDirective } from './directives/show-on-authenticated.directive';
 
 
 @NgModule({
     declarations: [
         CheckFormDirective,
         BasicInputComponent,
+        ShowOnAuthenticatedDirective,
     ],
     imports: [
         CommonModule,
@@ -22,7 +24,8 @@ import { BasicInputComponent } from './widgets/basic-input/basic-input.component
         FormsModule,
         ReactiveFormsModule,
         CheckFormDirective,
-        BasicInputComponent
+        BasicInputComponent,
+        ShowOnAuthenticatedDirective
     ]
 })
 export class AppCommonModule {

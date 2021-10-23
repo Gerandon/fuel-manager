@@ -11,6 +11,7 @@ import {tap} from "rxjs/operators";
 export class LoginComponent implements OnInit {
 
     public user: { username?: string; password?: string; } = {};
+    public useLocally?: boolean;
 
     constructor(private router: Router, public authService: AuthService) {
     }

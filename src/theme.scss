@@ -3,12 +3,13 @@
 @import '~@angular/material/theming';
 
 @include mat.core();
-$app-white: mat.define-palette(mat.$brown-palette, 50);
-$app-primary: mat.define-palette(mat.$brown-palette, 500);
-$app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$app-white: mat.define-palette(mat.$blue-grey-palette, 50);
+$app-primary: mat.define-palette(mat.$blue-grey-palette, 500);
+$app-accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
 
 $app-font-color: mat-color($app-white);
 $app-primary-color: mat-color($app-primary);
+$app-primary-transparent-color: mat-color($app-primary, 0.5);
 
 $app-theme: mat.define-light-theme((
     color: (
@@ -26,7 +27,11 @@ ng-sidebar {
     aside {
         width: 200px;
         padding-top: 50px;
-        background: mat-color($app-primary);
+        background: $app-primary-transparent-color;
         color: $app-font-color;
     }
+}
+ng-sidebar-container {
+    background: url('assets/images/background.jpg') no-repeat center;
+    background-size: cover;
 }

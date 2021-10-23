@@ -1,5 +1,5 @@
 <div>
-    <mat-selection-list #shoes [multiple]="false">
+    <mat-selection-list #shoes [multiple]="false" fxLayout="column">
         <mat-list-option *ngFor="let item of menuItems"
                          [selected]="(url | async)?.includes(item.navigateTo)"
                          [routerLink]="['/'+item.navigateTo]"
@@ -7,4 +7,10 @@
             {{item.label}}
         </mat-list-option>
     </mat-selection-list>
+    <div class="m-10">
+        <button fxLayout="row"
+                fxFlex
+                (click)="authService.logout()"
+                mat-raised-button>Kijelentkezés</button>
+    </div>
 </div>

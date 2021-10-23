@@ -5,7 +5,7 @@ import {LoginRequiredGuard} from "./app-common/guards/login-required.guard";
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'booking/list',
         pathMatch: 'full',
     },
     {

@@ -1,28 +1,36 @@
 import {Injectable} from '@angular/core';
 import {IAuthService} from "../../app-common/interfaces/auth-service.interface";
-import {Observable, of} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
+import {LocalStorageService, SessionStorage, SessionStorageService} from "ngx-webstorage";
 
 @Injectable({
     providedIn: 'root'
 })
 export class LocaleAuthService implements IAuthService{
 
+    @SessionStorage('user')
     private user: any;
+    private _isAuthenticated = new BehaviorSubject<boolean>(false);
 
-    constructor() {
+    constructor(private localStorage: LocalStorageService,
+                private sessionStorage: SessionStorageService,) {
+        this._isAuthenticated.next(!!this.user);
     }
 
     authenticate({username, password}: any): Observable<boolean> {
-        const sStorageUser = sessionStorage.getItem('user');
-        if (sStorageUser) {
-            this.user = JSON.parse(sStorageUser);
-        } else {
-            sessionStorage.setItem('user', JSON.stringify({username, password}))
+        if (!this.user) {
+            this.user = {username, password};
         }
+        this._isAuthenticated.next(true);
         return of(true);
     }
 
     isAuthenticated(): Observable<boolean> {
-        return of(!!sessionStorage.getItem('user'));
+        return this._isAuthenticated.asObservable();
+    }
+
+    logout(): void {
+        this.sessionStorage.clear('user');
+        this._isAuthenticated.next(false);
     }
 }

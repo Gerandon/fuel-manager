@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatTableModule} from "@angular/material/table";
 import {MatListModule} from "@angular/material/list";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 export const lodash = _;
 
@@ -29,7 +30,8 @@ export const lodash = _;
         FlexLayoutModule,
         MatTableModule,
         MatListModule,
-        MatDialogModule
+        MatDialogModule,
+        MatCheckboxModule
     ],
     exports: [
         MatExpansionModule,
@@ -43,7 +45,8 @@ export const lodash = _;
         TranslateModule,
         HttpClientModule,
         MatListModule,
-        MatDialogModule
+        MatDialogModule,
+        MatCheckboxModule
     ]
 })
 export class VendorModule {
