@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatExpansionModule} from "@angular/material/expansion";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
@@ -14,6 +13,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatListModule} from "@angular/material/list";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {NgChartsModule} from "ng2-charts";
 
 export const lodash = _;
 
@@ -31,7 +32,8 @@ export const lodash = _;
         MatTableModule,
         MatListModule,
         MatDialogModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        NgChartsModule
     ],
     exports: [
         MatExpansionModule,
@@ -46,7 +48,8 @@ export const lodash = _;
         HttpClientModule,
         MatListModule,
         MatDialogModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        NgChartsModule
     ]
 })
 export class VendorModule {

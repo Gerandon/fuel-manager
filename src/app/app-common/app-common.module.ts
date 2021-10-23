@@ -3,8 +3,9 @@ import {CommonModule} from '@angular/common';
 import {VendorModule} from "./vendor.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CheckFormDirective} from './directives/check-form.directive';
-import { BasicInputComponent } from './widgets/basic-input/basic-input.component';
-import { ShowOnAuthenticatedDirective } from './directives/show-on-authenticated.directive';
+import {BasicInputComponent} from './widgets/basic-input/basic-input.component';
+import {ShowOnAuthenticatedDirective} from './directives/show-on-authenticated.directive';
+import {LineChartComponent} from './components/line-chart/line-chart.component';
 
 
 @NgModule({
@@ -12,12 +13,13 @@ import { ShowOnAuthenticatedDirective } from './directives/show-on-authenticated
         CheckFormDirective,
         BasicInputComponent,
         ShowOnAuthenticatedDirective,
+        LineChartComponent,
     ],
     imports: [
         CommonModule,
         VendorModule,
         FormsModule,
-        ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'always' }),
+        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'always'}),
     ],
     exports: [
         VendorModule,
@@ -25,7 +27,8 @@ import { ShowOnAuthenticatedDirective } from './directives/show-on-authenticated
         ReactiveFormsModule,
         CheckFormDirective,
         BasicInputComponent,
-        ShowOnAuthenticatedDirective
+        ShowOnAuthenticatedDirective,
+        LineChartComponent
     ]
 })
 export class AppCommonModule {
