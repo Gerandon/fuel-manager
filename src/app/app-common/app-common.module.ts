@@ -6,6 +6,8 @@ import {CheckFormDirective} from './directives/check-form.directive';
 import {BasicInputComponent} from './widgets/basic-input/basic-input.component';
 import {ShowOnAuthenticatedDirective} from './directives/show-on-authenticated.directive';
 import {LineChartComponent} from './components/line-chart/line-chart.component';
+import { SelectComponent } from './widgets/select/select.component';
+import {NumberInputComponent} from "./widgets/number-input/number-input.component";
 
 
 @NgModule({
@@ -14,6 +16,8 @@ import {LineChartComponent} from './components/line-chart/line-chart.component';
         BasicInputComponent,
         ShowOnAuthenticatedDirective,
         LineChartComponent,
+        SelectComponent,
+        NumberInputComponent,
     ],
     imports: [
         CommonModule,
@@ -27,8 +31,10 @@ import {LineChartComponent} from './components/line-chart/line-chart.component';
         ReactiveFormsModule,
         CheckFormDirective,
         BasicInputComponent,
+        SelectComponent,
         ShowOnAuthenticatedDirective,
-        LineChartComponent
+        LineChartComponent,
+        NumberInputComponent
     ]
 })
 export class AppCommonModule {

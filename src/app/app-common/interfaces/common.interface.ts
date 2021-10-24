@@ -3,7 +3,7 @@ export interface RouteFuelPropertiesType {
     fuelType: string;
     currentFuelPrice: number;
 }
-export interface CarDataType {
+export interface VehicleDataType {
     brand: string;
     type: string;
     engineType: ('Diesel' | 'Gasoline')
@@ -18,6 +18,6 @@ export interface BookingListType {
     amountSpent?: number;
     amountPaid?: number;
     fullSpent: number;
-    car?: CarDataType;
+    vehicle?: VehicleDataType;
     routeFuelProps?: RouteFuelPropertiesType;
 }

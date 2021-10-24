@@ -10,6 +10,7 @@ import {BaseInput} from "./base.input";
 export class BaseTextInput<T> extends BaseInput<T> implements OnInit {
 
     @Input() public type: ('text' | 'password') = 'text';
+    @Input() public maxLength?: number = 512;
 
     constructor(protected cdr: ChangeDetectorRef,
                 protected injector: Injector) {

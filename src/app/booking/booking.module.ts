@@ -7,6 +7,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {BookingListComponent} from './components/booking-list/booking-list.component';
 import {AppCommonModule} from "../app-common/app-common.module";
+import {MeansOfTransportModule} from "../means-of-transport/means-of-transport.module";
 
 function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -24,6 +25,7 @@ function createTranslateLoader(http: HttpClient) {
         TranslateModule.forChild({
             loader: {provide: TranslateLoader, useFactory: (createTranslateLoader), deps: [HttpClient]}
         }),
+        MeansOfTransportModule,
     ]
 })
 export class BookingModule {

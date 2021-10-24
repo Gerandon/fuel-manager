@@ -17,12 +17,12 @@ export class CheckFormDirective implements OnInit, DoCheck {
     /**
      * Külön Opcionális input, osztály szintű CDR átadáshoz
      */
-    @Input() inputCdr: ChangeDetectorRef;
-    @Input() boFormGroup: FormGroup;
+    @Input() inputCdr?: ChangeDetectorRef;
+    @Input() boFormGroup?: FormGroup;
 
-    private _cdr: ChangeDetectorRef;
+    private _cdr!: ChangeDetectorRef;
 
-    private lastControlsState: {
+    private lastControlsState!: {
         controls: string[],
         errors: (ValidationErrors | null)[],
         controlStatuses: string[]

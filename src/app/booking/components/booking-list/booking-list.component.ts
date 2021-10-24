@@ -6,7 +6,7 @@ import {v4} from "uuid";
 import {MatDialog} from "@angular/material/dialog";
 import {BookMilageComponent} from "../book-milage/book-milage.component";
 import {fullSizeDialogConfig} from "../../../app-common/common";
-import {filter, map, switchMap, tap} from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 
 @Component({
     selector: 'app-booking-list',
@@ -25,13 +25,18 @@ export class BookingListComponent implements OnInit {
 
     ngOnInit(): void {
         this.bookingListSource = this.bookingService.getList();
-        this.amountSpent = this.bookingService.getList().pipe(
-            map(item => item.map(acc => {
+        this.amountSpent = this.getChartDataByValue('amountSpent');
+    }
+
+    getChartDataByValue(valueProp: string, withoutZero?: boolean) {
+        return this.bookingService.getList().pipe(
+            map(item => item.filter(acc => acc[valueProp] !== '0')),
+            map(arr => arr.map(acc => {
                 const _date = new Date(acc.date);
                 return {
-                    month: (<Date>_date).getMonth()||1,
-                    day: (<Date>_date).getDay()||1,
-                    value: acc.amountSpent || -1
+                    month: (<Date>_date).getMonth()+1,
+                    day: (<Date>_date).getDate(),
+                    value: acc[valueProp] || -1
                 };
             }).sort((a, b) => Number(`${a.month}.${a.day}`)  - Number(`${b.month}.${b.day}`))),
         );

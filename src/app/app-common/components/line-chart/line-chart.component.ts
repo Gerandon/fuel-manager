@@ -62,7 +62,7 @@ export class LineChartComponent implements OnChanges {
      */
 
     public scatterChartData: ChartData<'scatter'> = {
-        datasets: []
+        datasets: [],
     };
     private labels = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'];
     public chartOptions: ChartOptions<'scatter'> = {
@@ -71,10 +71,8 @@ export class LineChartComponent implements OnChanges {
             x: {
                 ticks: {
                     stepSize: 1,
-                    // @ts-ignore
                     callback: (value: any) => {
-                        // @ts-ignore
-                        return this.labels[value];
+                        return this.labels[+value.toString().split(',')[0]-1];
                     }
                 },
             },
@@ -86,7 +84,7 @@ export class LineChartComponent implements OnChanges {
                         const _labels = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'];
                         const _splitted = tooltipItem.raw.x.toString().split('.');
                         return [
-                            `Rögzítve: ${_labels[_splitted[0]]} ${_splitted[1]}`,
+                            `Rögzítve: ${_labels[_splitted[0]-1]} ${_splitted[1]}`,
                             `Érték: ${tooltipItem.formattedValue}`
                         ];
                     }
@@ -106,12 +104,11 @@ export class LineChartComponent implements OnChanges {
                 pointRadius: 6,
                 pointHoverRadius: 8,
                 showLine: true,
-                tension: 0.3,
+                tension: 0.1,
                 fill: false,
                 borderColor: 'rgba(200, 0, 0, 1)'
             }));
             this.scatterChartData.datasets = [...array];
-            console.log(array);
             this.chart?.update();
         }
     }

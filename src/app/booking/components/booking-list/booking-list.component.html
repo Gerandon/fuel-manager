@@ -81,5 +81,8 @@
 </div>
 <br>
 <div fxLayout="row">
-    <app-line-chart [dataSetList]="[{label: 'Elköltött', numbers: (amountSpent | async)}]"></app-line-chart>
+    <app-line-chart [dataSetList]="[
+        {label: 'Elköltött', numbers: (amountSpent | async)},
+        {label: 'Különbözet', numbers: (getChartDataByValue('amountPaid') | async)}
+    ]"></app-line-chart>
 </div>

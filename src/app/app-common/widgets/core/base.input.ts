@@ -19,7 +19,6 @@ export class BaseInput<T> implements ControlValueAccessor, OnInit {
     @ViewChild('inputElement') inputElement!: ElementRef;
     @ViewChild('input', { static: true }) input!: NgControl;
 
-    @Input() public maxLength?: number = 512;
     @Input() public name!: string;
     @Input() public label!: string;
     @Input() public translateParams?: any;
@@ -29,6 +28,7 @@ export class BaseInput<T> implements ControlValueAccessor, OnInit {
     @Input() public floatLabel?: FloatLabelType;
     @Input() public appearance?: MatFormFieldAppearance = 'outline';
     @Input() public icon?: string;
+    @Input() public suffix?: string;
 
     public control!: FormControl;
 

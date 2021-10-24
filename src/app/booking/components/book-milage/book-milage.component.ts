@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {BookingListType} from "../../../app-common/interfaces/common.interface";
+import {BookingListType, VehicleDataType} from "../../../app-common/interfaces/common.interface";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {transition, trigger, useAnimation} from "@angular/animations";
 
@@ -17,8 +17,10 @@ export class BookMilageComponent implements OnInit {
     ngOnInit(): void {
         // empty object init
         this.model = {
+            vehicle: {} as VehicleDataType,
             ...this.model
         }
+        this.model.date = this.model.date || new Date();
     }
 
     calculateFullSpent() {
