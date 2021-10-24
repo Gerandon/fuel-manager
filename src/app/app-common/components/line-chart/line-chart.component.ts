@@ -1,6 +1,9 @@
-import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
 import {BaseChartDirective} from "ng2-charts";
-import {ChartConfiguration, ChartEvent, ChartType} from 'chart.js';
+import {
+    ChartData, ChartDataset,
+    ChartOptions,
+} from 'chart.js';
 
 @Component({
     selector: 'app-line-chart',
@@ -8,7 +11,15 @@ import {ChartConfiguration, ChartEvent, ChartType} from 'chart.js';
     styleUrls: ['./line-chart.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class LineChartComponent {
+export class LineChartComponent implements OnChanges {
+
+    @Input() public dataSetList: {
+        numbers: {month: number, day: number, value: number}[],
+        label: string,
+    }[] = [];
+    @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+
+    /* example
     public lineChartData: ChartConfiguration['data'] = {
         datasets: [
             {
@@ -48,89 +59,60 @@ export class LineChartComponent {
         ],
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
     };
+     */
 
-    public lineChartOptions: ChartConfiguration['options'] = {
-        elements: {
-            line: {
-                tension: 0.5
-            }
-        },
+    public scatterChartData: ChartData<'scatter'> = {
+        datasets: []
+    };
+    private labels = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'];
+    public chartOptions: ChartOptions<'scatter'> = {
+        responsive: true,
         scales: {
-            // We use this empty structure as a placeholder for dynamic theming.
-            x: {},
-            'y-axis-0':
-                {
-                    position: 'left',
-                },
-            'y-axis-1': {
-                position: 'right',
-                grid: {
-                    color: 'rgba(255,0,0,0.3)',
-                },
+            x: {
                 ticks: {
-                    color: 'red'
+                    stepSize: 1,
+                    // @ts-ignore
+                    callback: (value: any) => {
+                        // @ts-ignore
+                        return this.labels[value];
+                    }
+                },
+            },
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label(tooltipItem: any): string | string[] {
+                        const _labels = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'];
+                        const _splitted = tooltipItem.raw.x.toString().split('.');
+                        return [
+                            `Rögzítve: ${_labels[_splitted[0]]} ${_splitted[1]}`,
+                            `Érték: ${tooltipItem.formattedValue}`
+                        ];
+                    }
                 }
             }
-        },
-
-        plugins: {
-            legend: {display: true},
         }
     };
 
-    public lineChartType: ChartType = 'line';
-
-    @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
-
-    private static generateNumber(i: number): number {
-        return Math.floor((Math.random() * (i < 2 ? 100 : 1000)) + 1);
+    constructor() {
     }
 
-    public randomize(): void {
-        for (let i = 0; i < this.lineChartData.datasets.length; i++) {
-            for (let j = 0; j < this.lineChartData.datasets[i].data.length; j++) {
-                this.lineChartData.datasets[i].data[j] = LineChartComponent.generateNumber(i);
-            }
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.dataSetList) {
+            const array = this.dataSetList.map((acc) => ({
+                data: acc.numbers?.map(item => ({x: Number(`${item.month}.${item.day}`), y: item.value})),
+                label: acc.label,
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                showLine: true,
+                tension: 0.3,
+                fill: false,
+                borderColor: 'rgba(200, 0, 0, 1)'
+            }));
+            this.scatterChartData.datasets = [...array];
+            console.log(array);
+            this.chart?.update();
         }
-        this.chart?.update();
-    }
-
-    // events
-    public chartClicked({event, active}: { event?: ChartEvent, active?: {}[] }): void {
-        console.log(event, active);
-    }
-
-    public chartHovered({event, active}: { event?: ChartEvent, active?: {}[] }): void {
-        console.log(event, active);
-    }
-
-    public hideOne(): void {
-        const isHidden = this.chart?.isDatasetHidden(1);
-        this.chart?.hideDataset(1, !isHidden);
-    }
-
-    public pushOne(): void {
-        this.lineChartData.datasets.forEach((x, i) => {
-            const num = LineChartComponent.generateNumber(i);
-            x.data.push(num);
-        });
-        this.lineChartData?.labels?.push(`Label ${this.lineChartData.labels.length}`);
-
-        this.chart?.update();
-    }
-
-    public changeColor(): void {
-        this.lineChartData.datasets[2].borderColor = 'green';
-        this.lineChartData.datasets[2].backgroundColor = `rgba(0, 255, 0, 0.3)`;
-
-        this.chart?.update();
-    }
-
-    public changeLabel(): void {
-        if (this.lineChartData.labels) {
-            this.lineChartData.labels[2] = ['1st Line', '2nd Line'];
-        }
-
-        this.chart?.update();
     }
 }

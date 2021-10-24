@@ -23,7 +23,7 @@
         "@angular/router": "~12.2.0",
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
-        "chart.js": "^3.5.1",
+        "chart.js": "^3.6.0",
         "chartjs-plugin-annotation": "^1.0.2",
         "lodash": "^4.17.21",
         "ng-sidebar": "^9.4.2",
