@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {BookMilageComponent} from "../book-milage/book-milage.component";
 import {fullSizeDialogConfig} from "../../../app-common/common";
 import {filter, map} from "rxjs/operators";
+import {SessionStorage} from "ngx-webstorage";
 
 @Component({
     selector: 'app-booking-list',
@@ -15,8 +16,12 @@ import {filter, map} from "rxjs/operators";
 })
 export class BookingListComponent implements OnInit {
 
+    @SessionStorage('currentDisplayStyle')
+    public currentDisplayStyle!: string;
+
     public bookingListSource!: Observable<BookingListType[]>;
     public amountSpent!: Observable<any[]>;
+    public amountPaid!: Observable<any[]>;
     public displayedColumns: string[] = ['date', 'distance', 'route', 'amountSpent', 'amountPaid', 'fullSpent', 'action'];
 
     constructor(public bookingService: BookingService,
@@ -26,6 +31,7 @@ export class BookingListComponent implements OnInit {
     ngOnInit(): void {
         this.bookingListSource = this.bookingService.getList();
         this.amountSpent = this.getChartDataByValue('amountSpent');
+        this.amountPaid = this.getChartDataByValue('amountPaid');
     }
 
     getChartDataByValue(valueProp: string, withoutZero?: boolean) {
@@ -42,10 +48,13 @@ export class BookingListComponent implements OnInit {
         );
     }
 
-    openItem(item: BookingListType) {
+    openItem(item: BookingListType, toEdit: boolean) {
         this.dialog.open(BookMilageComponent, {
             ...fullSizeDialogConfig,
-            data: item
+            data: {
+                model: item,
+                editMode: toEdit,
+            }
         }).afterClosed().subscribe((data) => {
             if(data) {
                 this.bookingService.addToList({
@@ -57,7 +66,10 @@ export class BookingListComponent implements OnInit {
     }
 
     addToList() {
-        this.dialog.open(BookMilageComponent, fullSizeDialogConfig).afterClosed().subscribe((data) => {
+        this.dialog.open(BookMilageComponent, {
+            ...fullSizeDialogConfig,
+            data: { editMode: true}
+        }).afterClosed().subscribe((data) => {
             if(data) {
                 this.bookingService.addToList({
                     id: v4(),

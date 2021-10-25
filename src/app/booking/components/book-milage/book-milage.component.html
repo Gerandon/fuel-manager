@@ -7,6 +7,7 @@
                     <mat-label>Válasszon egy dátumot</mat-label>
                     <input matInput
                            name="date"
+                           [disabled]="!editMode"
                            [(ngModel)]="model.date"
                            [matDatepicker]="picker">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -16,6 +17,7 @@
                               fxFlex="auto"
                               [(ngModel)]="model.distance"
                               [required]="true"
+                              [disabled]="!editMode"
                               [unmask]="true"
                               suffix="(Km)"
                               label="Megtett táv"
@@ -24,6 +26,7 @@
                 <basic-input name="route"
                              fxFlex="auto"
                              [(ngModel)]="model.route"
+                             [disabled]="!editMode"
                              [required]="true"
                              label="Útvonal"
                              placeholder="LOGIN.USERNAME.PLACEHOLDER">
@@ -31,6 +34,7 @@
                 <number-input name="amountSpent"
                               fxFlex="auto"
                               [(ngModel)]="model.amountSpent"
+                              [disabled]="!editMode"
                               suffix="(HUF)"
                               [unmask]="true"
                               [required]="true"
@@ -42,6 +46,7 @@
                               fxFlex="auto"
                               suffix="(HUF)"
                               [unmask]="true"
+                              [disabled]="!editMode"
                               [(ngModel)]="model.amountPaid"
                               (ngModelChange)="calculateFullSpent()"
                               [required]="true"
@@ -51,6 +56,7 @@
                 <number-input name="fullSpent"
                               fxFlex="auto"
                               suffix="(HUF)"
+                              [disabled]="!editMode"
                               [ngModel]="model.fullSpent"
                               floatLabel="always"
                               disabled="true"
@@ -59,7 +65,7 @@
             </mat-card-content>
         </mat-card>
         <div fxFlex="5" fxLayoutAlign="center start">
-            <button mat-icon-button [mat-dialog-close]="model"
+            <button *ngIf="editMode" mat-icon-button [mat-dialog-close]="model"
                     [disabled]="addForm.invalid"
                     [color]="'primary'">
                 <mat-icon>save</mat-icon>
@@ -75,7 +81,7 @@
         <app-add-transport-type fxFlex [vehicle]="model.vehicle"></app-add-transport-type>
     </div>
     <br>
-    <div fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">
+    <div *ngIf="editMode" fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">
         <div fxFlex="50">
             <button mat-raised-button [mat-dialog-close]="model"
                     [disabled]="addForm.invalid"

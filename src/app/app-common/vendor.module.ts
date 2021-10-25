@@ -19,6 +19,9 @@ import {MatSelectModule} from "@angular/material/select";
 import {IMaskModule} from "angular-imask";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatMenuModule} from "@angular/material/menu";
 
 export const lodash = _;
 
@@ -41,7 +44,10 @@ export const lodash = _;
         NgChartsModule,
         IMaskModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatButtonToggleModule,
+        MatTooltipModule,
+        MatMenuModule,
     ],
     exports: [
         MatExpansionModule,
@@ -61,7 +67,10 @@ export const lodash = _;
         NgChartsModule,
         IMaskModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatButtonToggleModule,
+        MatTooltipModule,
+        MatMenuModule
     ]
 })
 export class VendorModule {

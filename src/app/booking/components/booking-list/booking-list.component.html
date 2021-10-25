@@ -17,8 +17,21 @@
         </mat-expansion-panel>
     </div>
     <br>
-    <div fxLayout="row">
-        <table mat-table [dataSource]="bookingListSource" class="mat-elevation-z8">
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
+        <button mat-raised-button (click)="addToList()">Hozzáadás</button>
+        <mat-button-toggle-group [(ngModel)]="currentDisplayStyle" #group="matButtonToggleGroup">
+            <mat-button-toggle value="together" aria-label="Text align left">
+                <mat-icon>format_align_left</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="separate" aria-label="Text align center">
+                <mat-icon>format_align_center</mat-icon>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <br>
+    <div fxLayout="row wrap">
+        <table [fxFlex]="currentDisplayStyle === 'together' ? 50 : 100"
+               mat-table [dataSource]="bookingListSource" class="mat-elevation-z8">
             <!-- Position Column -->
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef>Dátum</th>
@@ -40,13 +53,13 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="amountSpent">
                 <th mat-header-cell *matHeaderCellDef>Elköltött összeg</th>
-                <td mat-cell *matCellDef="let element"> {{element.amountSpent}} </td>
+                <td mat-cell *matCellDef="let element"> {{(element.amountSpent | currency: ' ') + ' HUF'}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="amountPaid">
                 <th mat-header-cell *matHeaderCellDef>Térített összeg</th>
-                <td mat-cell *matCellDef="let element"> {{element.amountPaid}} </td>
+                <td mat-cell *matCellDef="let element"> {{(element.amountPaid | currency: ' ') + ' HUF'}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
@@ -56,33 +69,43 @@
             </ng-container>
 
             <!-- Symbol Column -->
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef>
-                    <button mat-icon-button [color]="'primary'" (click)="addToList()">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                </th>
+            <ng-container matColumnDef="action" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-icon-button (click)="openItem(element)" color="primary">
-                        <mat-icon>search</mat-icon>
+                    <button mat-icon-button color="primary"
+                            [matMenuTriggerFor]="menu">
+                        <mat-icon>list</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn"
-                            (click)="bookingService.removeItem(element)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-icon-button
+                                matTooltip="Megnyitás"
+                                color="primary"
+                                (click)="openItem(element, false)">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                        <button mat-icon-button
+                                matTooltip="Másolat készítése"
+                                (click)="openItem(element, true)" color="primary">
+                            <mat-icon>content_copy</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn"
+                                matTooltip="Elem törlése"
+                                (click)="bookingService.removeItem(element)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-menu>
                 </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-
+        <br *ngIf="currentDisplayStyle === 'separate'">
+        <app-line-chart [style.margin-top]="currentDisplayStyle === 'separate' ? '15px' : ''"
+                        [fxFlex]="currentDisplayStyle === 'together' ? 50 : 100"
+                        [dataSetList]="[
+            {label: 'Elköltött', numbers: (amountSpent | async)},
+            {label: 'Különbözet', numbers: (amountPaid | async)}
+        ]"></app-line-chart>
     </div>
-</div>
-<br>
-<div fxLayout="row">
-    <app-line-chart [dataSetList]="[
-        {label: 'Elköltött', numbers: (amountSpent | async)},
-        {label: 'Különbözet', numbers: (getChartDataByValue('amountPaid') | async)}
-    ]"></app-line-chart>
 </div>

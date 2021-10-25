@@ -11,16 +11,21 @@ import {transition, trigger, useAnimation} from "@angular/animations";
 })
 export class BookMilageComponent implements OnInit {
 
-    constructor(@Inject(MAT_DIALOG_DATA) public model: BookingListType) {
+    public editMode: boolean = true;
+    public model!: BookingListType;
+
+    constructor(@Inject(MAT_DIALOG_DATA) private item: {model: BookingListType, editMode: boolean}) {
     }
 
     ngOnInit(): void {
+        this.model = this.item?.model || {};
         // empty object init
         this.model = {
             vehicle: {} as VehicleDataType,
             ...this.model
         }
         this.model.date = this.model.date || new Date();
+        this.editMode = !!this.item?.editMode;
     }
 
     calculateFullSpent() {
