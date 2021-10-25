@@ -17,6 +17,10 @@ const routes: Routes = [
         loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule)
     },
     {
+        path: 'means-of-transport',
+        loadChildren: () => import('./means-of-transport/means-of-transport.module').then(m => m.MeansOfTransportModule)
+    },
+    {
         path: '**',
         redirectTo: '',
         canActivate: [LoginRequiredGuard]

@@ -41,7 +41,6 @@ export class AppComponent implements OnInit {
     changeAnimatedState() {
         this.animated = false;
         setTimeout(() => {
-            console.log('show');
             this.animated = true;
         })
     }

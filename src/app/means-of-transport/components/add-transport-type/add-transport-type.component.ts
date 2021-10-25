@@ -1,6 +1,6 @@
 import {Component, Host, Input, OnInit} from '@angular/core';
-import {VehicleDataType} from "../../app-common/interfaces/common.interface";
-import {BaseFormComponent} from "../../app-common/widgets/core/base-form.component";
+import {VehicleDataType} from "../../../app-common/interfaces/common.interface";
+import {BaseFormComponent} from "../../../app-common/widgets/core/base-form.component";
 import {NgForm} from "@angular/forms";
 
 @Component({
