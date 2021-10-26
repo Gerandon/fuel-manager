@@ -18,6 +18,9 @@ export class RemoteBookingService implements IBookingService {
     addToList(): void {
     }
 
+    editItem(item: BookingListType) {
+    }
+
     removeItem(item: BookingListType) {
     }
 }

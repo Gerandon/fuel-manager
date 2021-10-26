@@ -1,9 +1,11 @@
 export interface RouteFuelPropertiesType {
+    id?: string;
     carAvgConsumption: number;
     fuelType: string;
     currentFuelPrice: number;
 }
 export interface VehicleDataType {
+    id?: string;
     brand: string;
     type: string;
     engineType: ('Diesel' | 'Gasoline')

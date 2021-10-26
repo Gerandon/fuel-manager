@@ -1,8 +1,5 @@
-import {Injectable} from '@angular/core';
-import {LocaleAuthService} from "./locale-auth.service";
-import {RemoteAuthService} from "./remote-auth.service";
-import {IAuthService} from "../../app-common/interfaces/auth-service.interface";
-import {environment} from "../../../environments/environment";
+import {Inject, Injectable} from '@angular/core';
+import {AUTH_SERVICE, IAuthService} from "../../app-common/interfaces/auth-service.interface";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -10,11 +7,7 @@ import {Observable} from "rxjs";
 })
 export class AuthService implements IAuthService {
 
-    private _authService!: IAuthService;
-
-    constructor(private localService: LocaleAuthService,
-                private remoteService: RemoteAuthService) {
-        this._authService = !environment.remote ? localService : remoteService;
+    constructor(@Inject(AUTH_SERVICE) private _authService: IAuthService) {
     }
 
     authenticate(user: any): Observable<boolean> {

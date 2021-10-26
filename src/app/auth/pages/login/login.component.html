@@ -26,7 +26,8 @@
                                          label="LOGIN.PASSWORD.LABEL"
                                          placeholder="LOGIN.PASSWORD.PLACEHOLDER">
                             </basic-input>
-                            <mat-checkbox [(ngModel)]="useLocally"
+                            <mat-checkbox [ngModel]="useLocally"
+                                          (ngModelChange)="changeLocalRemote($event)"
                                           color="primary"
                                           name="uselocally">Lokális használat</mat-checkbox>
                         </div>

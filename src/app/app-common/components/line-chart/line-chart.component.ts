@@ -98,16 +98,22 @@ export class LineChartComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.dataSetList) {
-            const array = this.dataSetList.map((acc) => ({
-                data: acc.numbers?.map(item => ({x: Number(`${item.month}.${item.day}`), y: item.value})),
-                label: acc.label,
-                pointRadius: 6,
-                pointHoverRadius: 8,
-                showLine: true,
-                tension: 0.1,
-                fill: false,
-                borderColor: 'rgba(200, 0, 0, 1)'
-            }));
+            const array = this.dataSetList.map((acc) => {
+                const randColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+                return {
+                    data: acc.numbers?.map(item => ({x: Number(`${item.month}.${item.day}`), y: item.value})),
+                    label: acc.label,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    showLine: true,
+                    tension: 0.1,
+                    fill: false,
+                    borderColor: randColor,
+                    pointBackgroundColor: randColor,
+                    backgroundColor: randColor,
+                    pointBorderColor: '#000000'
+                }
+            });
             this.scatterChartData.datasets = [...array];
             this.chart?.update();
         }

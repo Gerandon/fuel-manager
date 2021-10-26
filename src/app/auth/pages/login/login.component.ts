@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {tap} from "rxjs/operators";
+import {SessionStorage} from "ngx-webstorage";
+import { isEmpty } from 'traversal-handler';
+import {environment} from "../../../../environments/environment";
 
 @Component({
     selector: 'app-login',
@@ -11,12 +14,17 @@ import {tap} from "rxjs/operators";
 export class LoginComponent implements OnInit {
 
     public user: { username?: string; password?: string; } = {};
-    public useLocally?: boolean;
+    @SessionStorage('local')
+    public useLocally!: boolean;
 
-    constructor(private router: Router, public authService: AuthService) {
+    constructor(private router: Router,
+                public authService: AuthService) {
     }
 
     ngOnInit(): void {
+        if (isEmpty(this.useLocally)) {
+            this.useLocally = false;
+        }
     }
 
     login() {
@@ -27,4 +35,8 @@ export class LoginComponent implements OnInit {
         ).subscribe();
     }
 
+    changeLocalRemote(event: any) {
+        this.useLocally = event;
+        window.location.reload();
+    }
 }

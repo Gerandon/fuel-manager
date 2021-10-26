@@ -22,6 +22,7 @@ export class BookingListComponent implements OnInit {
     public bookingListSource!: Observable<BookingListType[]>;
     public amountSpent!: Observable<any[]>;
     public amountPaid!: Observable<any[]>;
+    public fullSpent!: Observable<any[]>;
     public displayedColumns: string[] = ['date', 'distance', 'route', 'amountSpent', 'amountPaid', 'fullSpent', 'action'];
 
     constructor(public bookingService: BookingService,
@@ -31,33 +32,34 @@ export class BookingListComponent implements OnInit {
     ngOnInit(): void {
         this.bookingListSource = this.bookingService.getList();
         this.amountSpent = this.getChartDataByValue('amountSpent');
-        this.amountPaid = this.getChartDataByValue('amountPaid');
+        this.amountPaid = this.getChartDataByValue('amountPaid', true);
+        this.fullSpent = this.getChartDataByValue('fullSpent', false);
     }
 
-    getChartDataByValue(valueProp: string, withoutZero?: boolean) {
+    getChartDataByValue(valueProp: string, withZero?: boolean) {
         return this.bookingService.getList().pipe(
-            map(item => item.filter(acc => acc[valueProp] !== '0')),
+            map(item => withZero ? item : item.filter(acc => !['0', 0].includes(acc[valueProp]))),
             map(arr => arr.map(acc => {
                 const _date = new Date(acc.date);
                 return {
                     month: (<Date>_date).getMonth()+1,
                     day: (<Date>_date).getDate(),
-                    value: acc[valueProp] || -1
+                    value: acc[valueProp]
                 };
             }).sort((a, b) => Number(`${a.month}.${a.day}`)  - Number(`${b.month}.${b.day}`))),
         );
     }
 
-    openItem(item: BookingListType, toEdit: boolean) {
+    openItem(item: BookingListType, mode: ('edit' | 'copy' | 'detail')) {
         this.dialog.open(BookMilageComponent, {
             ...fullSizeDialogConfig,
             data: {
                 model: item,
-                editMode: toEdit,
+                editMode: ['edit', 'copy'].includes(mode),
             }
         }).afterClosed().subscribe((data) => {
             if(data) {
-                this.bookingService.addToList({
+                this.bookingService[mode === 'edit' ? 'editItem' : 'addToList']({
                     id: v4(),
                     ...data,
                 });

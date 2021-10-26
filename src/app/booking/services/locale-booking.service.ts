@@ -40,6 +40,22 @@ export class LocaleBookingService implements IBookingService {
         ).subscribe();
     }
 
+    editItem(item: BookingListType) {
+        this.getList().pipe(
+            first(),
+            tap((list) => {
+                const _tempList = list.map(acc => {
+                    if (acc.id === item.id) {
+                        return item;
+                    }
+                    return acc;
+                });
+                this.localStorage.store(this.identifier, _tempList);
+                this.list.next(_tempList);
+            })
+        ).subscribe();
+    }
+
     removeItem(item: BookingListType): void {
         this.getList().pipe(
             first(),

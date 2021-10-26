@@ -1,6 +1,6 @@
 <div class="booking-list">
     <div>
-        <mat-expansion-panel>
+        <mat-expansion-panel [expanded]="true">
             <mat-expansion-panel-header>
                 <mat-panel-title translate="Szűrés"></mat-panel-title>
                 <mat-panel-description>
@@ -8,7 +8,6 @@
             </mat-expansion-panel-header>
             <div fxLayout="row">
                 <basic-input name="username"
-                             [required]="true"
                              [translateParams]="{field: 'LOGIN.USERNAME.LABEL'}"
                              label="LOGIN.USERNAME.LABEL"
                              placeholder="LOGIN.USERNAME.PLACEHOLDER">
@@ -41,7 +40,7 @@
             <!-- Name Column -->
             <ng-container matColumnDef="distance">
                 <th mat-header-cell *matHeaderCellDef>Megtett táv (km)</th>
-                <td mat-cell *matCellDef="let element">{{element.distance}}</td>
+                <td mat-cell *matCellDef="let element">{{(element.distance | number: '1.0-0') + ' Km'}}</td>
             </ng-container>
 
             <!-- Weight Column -->
@@ -53,19 +52,19 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="amountSpent">
                 <th mat-header-cell *matHeaderCellDef>Elköltött összeg</th>
-                <td mat-cell *matCellDef="let element"> {{(element.amountSpent | currency: ' ') + ' HUF'}} </td>
+                <td mat-cell *matCellDef="let element"> {{(element.amountSpent | currency: ' ':'symbol':'1.0-0') + ' HUF'}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="amountPaid">
                 <th mat-header-cell *matHeaderCellDef>Térített összeg</th>
-                <td mat-cell *matCellDef="let element"> {{(element.amountPaid | currency: ' ') + ' HUF'}} </td>
+                <td mat-cell *matCellDef="let element"> {{(element.amountPaid | currency: ' ':'symbol':'1.0-0') + ' HUF'}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="fullSpent">
                 <th mat-header-cell *matHeaderCellDef>Különbözet</th>
-                <td mat-cell *matCellDef="let element"> {{element.fullSpent}} </td>
+                <td mat-cell *matCellDef="let element"> {{(element.fullSpent | currency: ' ':'symbol':'1.0-0') + ' HUF'}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
@@ -80,12 +79,17 @@
                         <button mat-icon-button
                                 matTooltip="Megnyitás"
                                 color="primary"
-                                (click)="openItem(element, false)">
+                                (click)="openItem(element, 'detail')">
                             <mat-icon>search</mat-icon>
                         </button>
                         <button mat-icon-button
+                                matTooltip="Szerkesztés"
+                                (click)="openItem(element, 'edit')" color="primary">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button
                                 matTooltip="Másolat készítése"
-                                (click)="openItem(element, true)" color="primary">
+                                (click)="openItem(element, 'copy')" color="primary">
                             <mat-icon>content_copy</mat-icon>
                         </button>
                         <button mat-icon-button color="warn"
@@ -105,7 +109,8 @@
                         [fxFlex]="currentDisplayStyle === 'together' ? 50 : 100"
                         [dataSetList]="[
             {label: 'Elköltött', numbers: (amountSpent | async)},
-            {label: 'Különbözet', numbers: (amountPaid | async)}
+            {label: 'Térített', numbers: (amountPaid | async)},
+            {label: 'Különbözet', numbers: (fullSpent | async)}
         ]"></app-line-chart>
     </div>
 </div>

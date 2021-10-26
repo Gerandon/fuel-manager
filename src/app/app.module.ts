@@ -1,21 +1,19 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AppCommonModule} from "./app-common/app-common.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {NgxWebstorageModule} from "ngx-webstorage";
+import {LocalStorageService, NgxWebstorageModule, SessionStorageService} from "ngx-webstorage";
 import {MissingTranslationHandler, TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
 import {MissingTranslationService} from "./app-common/services/missing-translations.service";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {SidebarModule} from "ng-sidebar";
 import {MainModule} from "./main/main.module";
+import {BOOKING_SERVICE} from "./app-common/interfaces/booking-service.interface";
+import {AUTH_SERVICE} from "./app-common/interfaces/auth-service.interface";
+import {authServiceFactory, bookingServiceFactory, createTranslateLoader} from "./app-common/common";
 
-function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
-}
 
 @NgModule({
     declarations: [
@@ -45,6 +43,16 @@ function createTranslateLoader(http: HttpClient) {
         MainModule,
     ],
     providers: [
+        {
+            provide: BOOKING_SERVICE,
+            useFactory: bookingServiceFactory,
+            deps: [SessionStorageService, LocalStorageService]
+        },
+        {
+            provide: AUTH_SERVICE,
+            useFactory: authServiceFactory,
+            deps: [SessionStorageService, LocalStorageService]
+        }
     ],
     bootstrap: [AppComponent]
 })
