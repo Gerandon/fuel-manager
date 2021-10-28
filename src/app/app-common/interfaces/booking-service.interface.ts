@@ -1,11 +1,13 @@
 import {Observable} from "rxjs";
-import {BookingListType} from "./common.interface";
+import {FuelCostDiaryType, TravelDiaryType} from "./common.interface";
 import {InjectionToken} from "@angular/core";
 
 export interface IBookingService {
-    getList(): Observable<any[]>;
-    addToList(addItem: BookingListType): void;
-    removeItem(item: BookingListType): void;
-    editItem(item: BookingListType): void;
+    getTravelDiaryList(): Observable<TravelDiaryType[]>;
+    getFuelCostDiaryList(): Observable<FuelCostDiaryType[]>;
+
+    addToList(addItem: any): void;
+    removeItem(item: any): void;
+    editItem(item: any): void;
 }
 export let BOOKING_SERVICE = new InjectionToken<IBookingService>('IBookingService injection token');

@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {IBookingService} from "../../app-common/interfaces/booking-service.interface";
 import {BehaviorSubject, Observable} from "rxjs";
 import {first, tap} from "rxjs/operators";
-import {BookingListType} from "../../app-common/interfaces/common.interface";
-import { v4 as uuidv4 } from 'uuid';
+import {FuelCostDiaryType, TravelDiaryType} from "../../app-common/interfaces/common.interface";
+import {v4 as uuidv4} from 'uuid';
 import {LocalStorageService} from "ngx-webstorage";
 
 @Injectable({
@@ -11,37 +11,51 @@ import {LocalStorageService} from "ngx-webstorage";
 })
 export class LocaleBookingService implements IBookingService {
 
-    private readonly identifier = 'booking-list';
-    private list = new BehaviorSubject<BookingListType[]>([]);
+    private readonly travelIdentifier = 'booking-list';
+    private readonly fuelIdentifier = 'fuel-cost-list';
+    private travelDiaryList = new BehaviorSubject<TravelDiaryType[]>([]);
+    private fuelCostDiaryList = new BehaviorSubject<FuelCostDiaryType[]>([]);
 
     constructor(private localStorage: LocalStorageService) {
-        if (!localStorage.retrieve((this.identifier))) {
-            localStorage.store(this.identifier,[
-                {id: uuidv4(), date: new Date(), distance: '100', route: 'Othon - Meló', amountSpent: 10000, amountPaid: 5000, fullSpent: 5000},
+        /*if (!localStorage.retrieve((this.travelIdentifier))) {
+            localStorage.store(this.travelIdentifier, [
+                {
+                    id: uuidv4(),
+                    date: new Date(),
+                    distance: '100',
+                    route: 'Othon - Meló',
+                    amountSpent: 10000,
+                    amountPaid: 5000,
+                    fullSpent: 5000
+                },
             ]);
-        }
-        // @ts-ignore
-        this.list.next(localStorage.retrieve(this.identifier).filter(item => item));
+        }*/
+        this.travelDiaryList.next(localStorage.retrieve(this.travelIdentifier)?.filter(item => item));
+        this.fuelCostDiaryList.next(localStorage.retrieve(this.fuelIdentifier)?.filter(item => item));
     }
 
-    getList(): Observable<BookingListType[]> {
-        return this.list.asObservable();
+    getTravelDiaryList(): Observable<TravelDiaryType[]> {
+        return this.travelDiaryList.asObservable();
     }
 
-    addToList(addItem: BookingListType): void {
-        this.getList().pipe(
+    getFuelCostDiaryList(): Observable<FuelCostDiaryType[]> {
+        return this.fuelCostDiaryList.asObservable();
+    }
+
+    addToList(addItem: any): void {
+        this.getTravelDiaryList().pipe(
             first(),
             tap((list) => {
                 const _list: any[] = list || [];
                 _list.push({...addItem, id: uuidv4()});
-                this.localStorage.store(this.identifier, _list);
-                this.list.next(_list);
+                this.localStorage.store(this.travelIdentifier, _list);
+                this.travelDiaryList.next(_list);
             })
         ).subscribe();
     }
 
-    editItem(item: BookingListType) {
-        this.getList().pipe(
+    editItem(item: any) {
+        this.getTravelDiaryList().pipe(
             first(),
             tap((list) => {
                 const _tempList = list.map(acc => {
@@ -50,19 +64,19 @@ export class LocaleBookingService implements IBookingService {
                     }
                     return acc;
                 });
-                this.localStorage.store(this.identifier, _tempList);
-                this.list.next(_tempList);
+                this.localStorage.store(this.travelIdentifier, _tempList);
+                this.travelDiaryList.next(_tempList);
             })
         ).subscribe();
     }
 
-    removeItem(item: BookingListType): void {
-        this.getList().pipe(
+    removeItem(item: any): void {
+        this.getTravelDiaryList().pipe(
             first(),
             tap((list) => {
                 const _list = (list || []).filter(_item => _item.id !== item.id);
-                this.localStorage.store(this.identifier, _list);
-                this.list.next(_list);
+                this.localStorage.store(this.travelIdentifier, _list);
+                this.travelDiaryList.next(_list);
             })
         ).subscribe();
     }

@@ -1,0 +1,64 @@
+<div fxFlex="100">
+    <table mat-table [dataSource]="travelDiarySource" class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>Dátum</th>
+            <td mat-cell *matCellDef="let element">{{element.creationDate | date}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="distance">
+            <th mat-header-cell *matHeaderCellDef>Megtett táv (km)</th>
+            <td mat-cell *matCellDef="let element">{{(element.distance | number: '1.0-0') + ' Km'}}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="routeFrom">
+            <th mat-header-cell *matHeaderCellDef>Indulás innen</th>
+            <td mat-cell *matCellDef="let element">{{element.route?.from}}</td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="routeTo">
+            <th mat-header-cell *matHeaderCellDef>Érkezés ide</th>
+            <td mat-cell *matCellDef="let element">{{element.route?.to}}</td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="action" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary"
+                        [matMenuTriggerFor]="menu">
+                    <mat-icon>list</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-icon-button
+                            matTooltip="Megnyitás"
+                            color="primary"
+                            (click)="openItem(element, 'detail')">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <button mat-icon-button
+                            matTooltip="Szerkesztés"
+                            (click)="openItem(element, 'edit')" color="primary">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button
+                            matTooltip="Másolat készítése"
+                            (click)="openItem(element, 'copy')" color="primary">
+                        <mat-icon>content_copy</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn"
+                            matTooltip="Elem törlése"
+                            (click)="bookingService.removeItem(element)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

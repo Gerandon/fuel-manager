@@ -12,14 +12,24 @@ export interface VehicleDataType {
     engineVolume: string;
     avgConsumption: number;
 }
-export interface BookingListType {
-    id?: string;
-    date: Date;
-    distance: number;
-    route?: string;
+export interface FuelCostDiaryType extends BaseType {
     amountSpent?: number;
     amountPaid?: number;
     fullSpent: number;
+}
+export interface TravelDiaryType extends BaseType {
+    distance: number;
+    route: RouteType;
     vehicle?: VehicleDataType;
     routeFuelProps?: RouteFuelPropertiesType;
+}
+
+export interface RouteType {
+    from: string;
+    to: string;
+}
+
+interface BaseType {
+    id?: string;
+    creationDate: Date;
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {IBookingService} from "../../app-common/interfaces/booking-service.interface";
 import {Observable, of} from "rxjs";
-import {BookingListType} from "../../app-common/interfaces/common.interface";
+import {FuelCostDiaryType, TravelDiaryType} from "../../app-common/interfaces/common.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -11,16 +11,20 @@ export class RemoteBookingService implements IBookingService {
     constructor() {
     }
 
-    getList(): Observable<any[]> {
+    getTravelDiaryList(): Observable<TravelDiaryType[]> {
+        return of([]);
+    }
+
+    getFuelCostDiaryList(): Observable<FuelCostDiaryType[]> {
         return of([]);
     }
 
     addToList(): void {
     }
 
-    editItem(item: BookingListType) {
+    editItem(item: any) {
     }
 
-    removeItem(item: BookingListType) {
+    removeItem(item: any) {
     }
 }

@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {BookingListType, VehicleDataType} from "../../../app-common/interfaces/common.interface";
+import {VehicleDataType} from "../../../app-common/interfaces/common.interface";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {transition, trigger, useAnimation} from "@angular/animations";
 
 @Component({
     selector: 'app-book-milage',
@@ -12,9 +11,9 @@ import {transition, trigger, useAnimation} from "@angular/animations";
 export class BookMilageComponent implements OnInit {
 
     public editMode: boolean = true;
-    public model!: BookingListType;
+    public model!: any;
 
-    constructor(@Inject(MAT_DIALOG_DATA) private item: {model: BookingListType, editMode: boolean}) {
+    constructor(@Inject(MAT_DIALOG_DATA) private item: {model: any, editMode: boolean}) {
     }
 
     ngOnInit(): void {

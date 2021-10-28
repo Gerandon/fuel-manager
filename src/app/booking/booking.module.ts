@@ -10,6 +10,8 @@ import {AppCommonModule} from "../app-common/app-common.module";
 import {MeansOfTransportModule} from "../means-of-transport/means-of-transport.module";
 import {LocaleBookingService} from "./services/locale-booking.service";
 import {BOOKING_SERVICE} from "../app-common/interfaces/booking-service.interface";
+import { TravelDiaryComponent } from './components/booking-list/travel-diary/travel-diary.component';
+import { FuelCostDiaryComponent } from './components/booking-list/fuel-cost-diary/fuel-cost-diary.component';
 
 function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -18,7 +20,9 @@ function createTranslateLoader(http: HttpClient) {
 @NgModule({
     declarations: [
         BookMilageComponent,
-        BookingListComponent
+        BookingListComponent,
+        TravelDiaryComponent,
+        FuelCostDiaryComponent
     ],
     imports: [
         CommonModule,

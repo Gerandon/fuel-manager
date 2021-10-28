@@ -22,6 +22,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatMenuModule} from "@angular/material/menu";
+import {MatTabsModule} from "@angular/material/tabs";
 
 export const lodash = _;
 
@@ -48,6 +49,7 @@ export const lodash = _;
         MatButtonToggleModule,
         MatTooltipModule,
         MatMenuModule,
+        MatTabsModule
     ],
     exports: [
         MatExpansionModule,
@@ -70,7 +72,8 @@ export const lodash = _;
         MatNativeDateModule,
         MatButtonToggleModule,
         MatTooltipModule,
-        MatMenuModule
+        MatMenuModule,
+        MatTabsModule
     ]
 })
 export class VendorModule {
