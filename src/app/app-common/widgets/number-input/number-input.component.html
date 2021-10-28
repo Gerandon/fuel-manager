@@ -1,0 +1,18 @@
+<mat-form-field fxFlex [floatLabel]="floatLabel && 'always'" [appearance]="appearance">
+    <mat-label *ngIf="label && floatLabel !== 'never'">{{ label | translate: translateParams }}</mat-label>
+    <input
+        matInput
+        label=""
+        #inputElement
+        #input="ngForm"
+        [formControl]="control"
+        [imask]="customImask"
+        [unmask]="unmask"
+        [maxLength]="maxLength"
+        [name]="name"
+        [required]="required"/>
+    <span *ngIf="suffix" matSuffix>{{suffix}}</span>
+    <mat-error *ngIf="hasError('required')">{{ 'COMMON.REQUIRED' | translate: translateParams }}</mat-error>
+    <mat-error *ngIf="hasError('max')">{{ 'ERROR.NUMERIC.MAX' | translate }}</mat-error>
+    <mat-error *ngIf="hasError('min')">{{ 'ERROR.NUMERIC.MIN' | translate }}</mat-error>
+</mat-form-field>

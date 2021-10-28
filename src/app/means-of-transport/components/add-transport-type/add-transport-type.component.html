@@ -1,0 +1,52 @@
+<form #ownForm="ngForm" appCheckForm fxLayout="row">
+    <mat-card fxFlex="100" class="card-outlined">
+        <p class="card-outlined__title">Jármű adatok</p>
+        <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
+            <basic-input name="brand"
+                         fxFlex="auto"
+                         [(ngModel)]="vehicle.brand"
+                         [required]="true"
+                         label="TRANSPORT_TYPE.BRAND"
+                         placeholder="TRANSPORT_TYPE.BRAND">
+            </basic-input>
+            <basic-input name="type"
+                         fxFlex="auto"
+                         [(ngModel)]="vehicle.type"
+                         [required]="true"
+                         label="TRANSPORT_TYPE.TYPE"
+                         placeholder="TRANSPORT_TYPE.TYPE">
+            </basic-input>
+            <app-select
+                fxFlex="auto"
+                [options]="[
+                    { value: 'Diesel', label: 'Diesel'},
+                    { value: 'Gasoline', label: 'Benzin'}
+                ]"
+                [required]="true"
+                label="TRANSPORT_TYPE.ENGINE_TYPE"
+                name="engineType"
+                [(ngModel)]="vehicle.engineType">
+            </app-select>
+            <number-input name="engineVolume"
+                          fxFlex="auto"
+                          [(ngModel)]="vehicle.engineVolume"
+                          [required]="true"
+                          [unmask]="true"
+                          [maxLength]="15"
+                          suffix="(ccm)"
+                          label="TRANSPORT_TYPE.ENGINE_VOLUME"
+                          placeholder="TRANSPORT_TYPE.ENGINE_VOLUME">
+            </number-input>
+            <number-input name="avgConsumption"
+                          fxFlex="auto"
+                          [(ngModel)]="vehicle.avgConsumption"
+                          [required]="true"
+                          [unmask]="true"
+                          type="number"
+                          suffix="(Liter)"
+                          label="TRANSPORT_TYPE.AVERAGE_CONSUMPTION"
+                          placeholder="TRANSPORT_TYPE.AVERAGE_CONSUMPTION">
+            </number-input>
+        </mat-card-content>
+    </mat-card>
+</form>

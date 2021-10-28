@@ -1,0 +1,15 @@
+<mat-form-field fxFlex [floatLabel]="floatLabel && 'always'" [appearance]="appearance">
+    <mat-label *ngIf="label && floatLabel !== 'never'">{{ label | translate: translateParams }}</mat-label>
+    <mat-select
+                #inputElement
+                #input="ngForm"
+                [attr.disabled]="disabled"
+                [placeholder]="placeholder | translate: translateParams"
+                [formControl]="control">
+        <mat-option *ngIf="!required" [value]="null">-</mat-option>
+        <mat-option *ngFor="let option of options"
+                    [value]="option.value">
+            {{option.label | translate: translateParams}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

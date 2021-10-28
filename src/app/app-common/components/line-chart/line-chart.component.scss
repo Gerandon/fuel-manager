@@ -1,0 +1,18 @@
+app-line-chart {
+    background: white;
+    width: 100%;
+    canvas {
+        max-height: 400px;
+    }
+    .flex {
+        display: flex;
+    }
+
+    .flex-item {
+        flex-basis: 50%;
+    }
+
+    tr.line-2 {
+        color: red;
+    }
+}

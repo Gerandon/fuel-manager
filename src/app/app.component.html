@@ -1,7 +1,35 @@
-<div class="app">
-    <div class="header"></div>
-    <div class="content">
-        <router-outlet></router-outlet>
+<ng-sidebar-container>
+    <!-- A sidebar -->
+    <ng-sidebar mode="push"
+                *showOnAuthenticated="changeAnimatedState.bind(this)"
+                [closeOnClickOutside]="true"
+                [animate]="animated"
+                [(opened)]="_opened">
+        <app-sidemenu-content [menuItems]="[
+            { label: 'Könyvelések', navigateTo: 'booking/list' },
+            { label: 'Saját járműveim', navigateTo: 'means-of-transport/my-vehicles' },
+            { label: 'Felhasználói beállítások', navigateTo: 'auth/settings' },
+        ]"></app-sidemenu-content>
+    </ng-sidebar>
+
+    <!-- Page content -->
+    <div ng-sidebar-content [style.height]="(isAuthenticated | async) ? 'unset' : '97%'">
+        <div class="app">
+            <app-header *showOnAuthenticated>
+                <button fxFlex="5" mat-icon-button (click)="_toggleSidebar()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <div fxFlex="95" fxLayout="row">
+                    <div fxFlex="70" fxFlexOffset="15" fxLayoutAlign="center center">
+                        <h3>Hát sziaaaa</h3>
+                    </div>
+                </div>
+            </app-header>
+            <div class="content">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="footer"></div>
+        </div>
     </div>
-    <div class="footer"></div>
-</div>
+
+</ng-sidebar-container>
