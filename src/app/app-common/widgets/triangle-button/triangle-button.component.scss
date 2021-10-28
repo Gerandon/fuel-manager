@@ -1,0 +1,69 @@
+app-triangle-button {
+    /* Radio*/
+    input[type=radio] {
+        appearance: none;
+        width: 0;
+        height: 0;
+        border-left: 50px dashed transparent;
+        border-right: 50px dashed transparent;
+        border-bottom: 60px dashed #666;
+        margin-left: 5px;
+        border-radius: 15px;
+    }
+
+    label {
+        border-radius: 10px;
+        width: 0;
+        height: 0;
+        border-left: 50px dashed transparent;
+        border-right: 50px dashed transparent;
+        border-bottom: 60px dashed #ccc;
+        position: absolute;
+        margin: -4px -101px;
+        transition: margin .1s ease, border .3s ease;
+
+    }
+
+    label:before {
+        display: block;
+        content: '';
+        width: 90px;
+        height: 0.04em;
+        box-shadow: 0px -5px 2px 1px #999;
+        position: absolute;
+        margin: 64px -45px;
+    }
+
+    label:after {
+        display: block;
+        content: '';
+        width: 90px;
+        height: 0.04em;
+        box-shadow: 5px 5px 10px 1px #333, 5px 5px 10px 1px #333;
+        position: absolute;
+        margin: 58px -55px;
+    }
+
+    label:last-child {
+        margin-left: -97px;
+    }
+
+    .triangle-input__clicked + .triangle-input-label {
+        margin: 2px -106px;
+        border-left: 50px dashed transparent;
+        border-right: 50px dashed transparent;
+        border-bottom: 58px dashed #a8a8a8;
+    }
+
+    .triangle-input__clicked + .triangle-input-label:after {
+        box-shadow: 2px 2px 8px #000;
+        margin: 26px -56px;
+        transform: rotate(-50deg);
+        width: 70px;
+    }
+
+    input:checked + label:before {
+        box-shadow: 0 0 0;
+    }
+
+}

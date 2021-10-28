@@ -6,9 +6,9 @@ import {CheckFormDirective} from './directives/check-form.directive';
 import {BasicInputComponent} from './widgets/basic-input/basic-input.component';
 import {ShowOnAuthenticatedDirective} from './directives/show-on-authenticated.directive';
 import {LineChartComponent} from './components/line-chart/line-chart.component';
-import { SelectComponent } from './widgets/select/select.component';
+import {SelectComponent} from './widgets/select/select.component';
 import {NumberInputComponent} from "./widgets/number-input/number-input.component";
-
+import {TriangleButtonComponent} from './widgets/triangle-button/triangle-button.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +18,7 @@ import {NumberInputComponent} from "./widgets/number-input/number-input.componen
         LineChartComponent,
         SelectComponent,
         NumberInputComponent,
+        TriangleButtonComponent,
     ],
     imports: [
         CommonModule,
@@ -34,7 +35,8 @@ import {NumberInputComponent} from "./widgets/number-input/number-input.componen
         SelectComponent,
         ShowOnAuthenticatedDirective,
         LineChartComponent,
-        NumberInputComponent
+        NumberInputComponent,
+        TriangleButtonComponent
     ]
 })
 export class AppCommonModule {
