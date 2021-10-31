@@ -1,15 +1,13 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BookingRoutingModule} from "./routing/booking-routing.module";
-import {BookMilageComponent} from './components/book-milage/book-milage.component';
+import {BookTravelComponent} from './components/book-travel/book-travel.component';
 import {HttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {BookingListComponent} from './components/booking-list/booking-list.component';
 import {AppCommonModule} from "../app-common/app-common.module";
 import {MeansOfTransportModule} from "../means-of-transport/means-of-transport.module";
-import {LocaleBookingService} from "./services/locale-booking.service";
-import {BOOKING_SERVICE} from "../app-common/interfaces/booking-service.interface";
 import { TravelDiaryComponent } from './components/booking-list/travel-diary/travel-diary.component';
 import { FuelCostDiaryComponent } from './components/booking-list/fuel-cost-diary/fuel-cost-diary.component';
 
@@ -19,7 +17,7 @@ function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
     declarations: [
-        BookMilageComponent,
+        BookTravelComponent,
         BookingListComponent,
         TravelDiaryComponent,
         FuelCostDiaryComponent

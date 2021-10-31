@@ -24,9 +24,15 @@ export interface TravelDiaryType extends BaseType {
     routeFuelProps?: RouteFuelPropertiesType;
 }
 
+export interface UserType {
+    username: string;
+    password: string;
+}
+
 export interface RouteType {
-    from: string;
-    to: string;
+    from?: string;
+    to?: string;
+    retour?: boolean;
 }
 
 interface BaseType {

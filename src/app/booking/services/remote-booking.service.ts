@@ -11,20 +11,30 @@ export class RemoteBookingService implements IBookingService {
     constructor() {
     }
 
+    addTravelDiary(addItem: TravelDiaryType): void {
+        throw new Error('Method not implemented.');
+    }
+    removeTravelDiary(item: TravelDiaryType): void {
+        throw new Error('Method not implemented.');
+    }
+    editTravelDiary(item: TravelDiaryType): TravelDiaryType {
+        throw new Error('Method not implemented.');
+    }
+    addFuelCost(addItem: FuelCostDiaryType): void {
+        throw new Error('Method not implemented.');
+    }
+    removeFuelCost(item: FuelCostDiaryType): void {
+        throw new Error('Method not implemented.');
+    }
+    editFuelCost(item: FuelCostDiaryType): FuelCostDiaryType {
+        throw new Error('Method not implemented.');
+    }
+
     getTravelDiaryList(): Observable<TravelDiaryType[]> {
         return of([]);
     }
 
     getFuelCostDiaryList(): Observable<FuelCostDiaryType[]> {
         return of([]);
-    }
-
-    addToList(): void {
-    }
-
-    editItem(item: any) {
-    }
-
-    removeItem(item: any) {
     }
 }

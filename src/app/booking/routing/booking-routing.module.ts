@@ -2,13 +2,13 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {LoginRequiredGuard} from "../../app-common/guards/login-required.guard";
-import {BookMilageComponent} from "../components/book-milage/book-milage.component";
+import {BookTravelComponent} from "../components/book-travel/book-travel.component";
 import {BookingListComponent} from "../components/booking-list/booking-list.component";
 
 const routes: Routes = [
     {
         path: 'add',
-        component: BookMilageComponent,
+        component: BookTravelComponent,
         canActivate: [LoginRequiredGuard]
     },
     {

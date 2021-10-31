@@ -13,6 +13,7 @@ import {MainModule} from "./main/main.module";
 import {BOOKING_SERVICE} from "./app-common/interfaces/booking-service.interface";
 import {AUTH_SERVICE} from "./app-common/interfaces/auth-service.interface";
 import {authServiceFactory, bookingServiceFactory, createTranslateLoader} from "./app-common/common";
+import {AuthService} from "./auth/services/auth.service";
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import {authServiceFactory, bookingServiceFactory, createTranslateLoader} from "
         {
             provide: BOOKING_SERVICE,
             useFactory: bookingServiceFactory,
-            deps: [SessionStorageService, LocalStorageService]
+            deps: [SessionStorageService, LocalStorageService, AuthService]
         },
         {
             provide: AUTH_SERVICE,

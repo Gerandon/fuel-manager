@@ -5,6 +5,7 @@ import {LocaleAuthService} from "../auth/services/locale-auth.service";
 import {RemoteAuthService} from "../auth/services/remote-auth.service";
 import {HttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {AuthService} from "../auth/services/auth.service";
 
 export const fullSizeDialogConfig = {
     height: '90%',
@@ -38,9 +39,11 @@ export interface MaskType {
 export const createTranslateLoader = (http: HttpClient) => {
     return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
-export const bookingServiceFactory = (sStorage: SessionStorageService, lStorage: LocalStorageService) => {
+export const bookingServiceFactory = (sStorage: SessionStorageService,
+                                      lStorage: LocalStorageService,
+                                      authService: AuthService) => {
     if (sStorage.retrieve('local')) {
-        return new LocaleBookingService(lStorage);
+        return new LocaleBookingService(lStorage, authService);
     }
     return new RemoteBookingService();
 }

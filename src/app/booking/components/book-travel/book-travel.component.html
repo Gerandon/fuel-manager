@@ -1,6 +1,6 @@
 <form #addForm="ngForm" class="book-milage" fxLayout="column">
     <div fxLayout="row">
-        <mat-card fxFlex="(100/2)-5" class="card-outlined">
+        <mat-card fxFlex="100" class="card-outlined">
             <p class="card-outlined__title">Utazási napló</p>
             <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
                 <mat-form-field fxFlex="auto" appearance="outline">
@@ -8,7 +8,7 @@
                     <input matInput
                            name="date"
                            [disabled]="!editMode"
-                           [(ngModel)]="model.date"
+                           [(ngModel)]="model.creationDate"
                            [matDatepicker]="picker">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -25,60 +25,30 @@
                 </number-input>
                 <basic-input name="route"
                              fxFlex="auto"
-                             [(ngModel)]="model.route"
+                             [(ngModel)]="model.route.from"
                              [disabled]="!editMode"
                              [required]="true"
-                             label="Útvonal"
+                             label="Innen"
                              placeholder="LOGIN.USERNAME.PLACEHOLDER">
                 </basic-input>
-                <number-input name="amountSpent"
+                <basic-input name="amountSpent"
                               fxFlex="auto"
-                              [(ngModel)]="model.amountSpent"
+                              [(ngModel)]="model.route.to"
                               [disabled]="!editMode"
-                              suffix="(HUF)"
-                              [unmask]="true"
                               [required]="true"
-                              (ngModelChange)="calculateFullSpent()"
-                              label="Elköltött összeg"
+                              label="Ide"
                               placeholder="LOGIN.USERNAME.PLACEHOLDER">
-                </number-input>
-                <number-input name="amountPaid"
-                              fxFlex="auto"
-                              suffix="(HUF)"
-                              [unmask]="true"
-                              [disabled]="!editMode"
-                              [(ngModel)]="model.amountPaid"
-                              (ngModelChange)="calculateFullSpent()"
-                              [required]="true"
-                              label="Térített összeg"
-                              placeholder="LOGIN.USERNAME.PLACEHOLDER">
-                </number-input>
-                <number-input name="fullSpent"
-                              fxFlex="auto"
-                              suffix="(HUF)"
-                              [disabled]="!editMode"
-                              [ngModel]="model.fullSpent"
-                              floatLabel="always"
-                              disabled="true"
-                              label="Különbözet">
-                </number-input>
+                </basic-input>
+                <div fxFlex="auto" class="mat-form-field">
+                    <mat-checkbox [(ngModel)]="model.route.retour"
+                                  [disabled]="!editMode"
+                                  color="primary"
+                                  name="retour">
+                        Retour
+                    </mat-checkbox>
+                </div>
             </mat-card-content>
         </mat-card>
-        <div fxFlex="5" fxLayoutAlign="center start">
-            <button *ngIf="editMode" mat-icon-button [mat-dialog-close]="model"
-                    [disabled]="addForm.invalid"
-                    [color]="'primary'">
-                <mat-icon>save</mat-icon>
-            </button>
-        </div>
-        <mat-card fxFlex="(100/2)-5" class="card-outlined">
-            <p class="card-outlined__title">Útvonal adatok</p>
-
-        </mat-card>
-    </div>
-    <br>
-    <div fxLayout="row">
-        <app-add-transport-type fxFlex [vehicle]="model.vehicle"></app-add-transport-type>
     </div>
     <br>
     <div *ngIf="editMode" fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">

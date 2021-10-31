@@ -14,7 +14,7 @@
     </div>
     <br>
     <div fxLayout="row">
-        <mat-tab-group fxFlex="100" style="background: white">
+        <mat-tab-group #tabGroup fxFlex="100" style="background: white">
             <mat-tab label="Útinapló">
                 <app-travel-diary></app-travel-diary>
             </mat-tab>
@@ -23,7 +23,7 @@
             </mat-tab>
             <mat-tab disabled>
                 <ng-template mat-tab-label>
-                    <button mat-icon-button>
+                    <button mat-icon-button (click)="addToList()">
                         <mat-icon>add_circle</mat-icon>
                     </button>
                 </ng-template>

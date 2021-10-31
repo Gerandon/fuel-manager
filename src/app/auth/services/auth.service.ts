@@ -1,6 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {AUTH_SERVICE, IAuthService} from "../../app-common/interfaces/auth-service.interface";
 import {Observable} from "rxjs";
+import {UserType} from "../../app-common/interfaces/common.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -8,6 +9,10 @@ import {Observable} from "rxjs";
 export class AuthService implements IAuthService {
 
     constructor(@Inject(AUTH_SERVICE) private _authService: IAuthService) {
+    }
+
+    getUserData(): UserType {
+        return this._authService.getUserData();
     }
 
     authenticate(user: any): Observable<boolean> {

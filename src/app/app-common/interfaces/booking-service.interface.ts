@@ -6,8 +6,12 @@ export interface IBookingService {
     getTravelDiaryList(): Observable<TravelDiaryType[]>;
     getFuelCostDiaryList(): Observable<FuelCostDiaryType[]>;
 
-    addToList(addItem: any): void;
-    removeItem(item: any): void;
-    editItem(item: any): void;
+    addTravelDiary(addItem: TravelDiaryType): void;
+    removeTravelDiary(item: TravelDiaryType): void;
+    editTravelDiary(item: TravelDiaryType): TravelDiaryType;
+
+    addFuelCost(addItem: FuelCostDiaryType): void;
+    removeFuelCost(item: FuelCostDiaryType): void;
+    editFuelCost(item: FuelCostDiaryType): FuelCostDiaryType;
 }
 export let BOOKING_SERVICE = new InjectionToken<IBookingService>('IBookingService injection token');

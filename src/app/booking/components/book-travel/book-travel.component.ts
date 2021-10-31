@@ -1,17 +1,17 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {VehicleDataType} from "../../../app-common/interfaces/common.interface";
+import {TravelDiaryType, VehicleDataType} from "../../../app-common/interfaces/common.interface";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-book-milage',
-    templateUrl: './book-milage.component.html',
-    styleUrls: ['./book-milage.component.scss'],
+    templateUrl: './book-travel.component.html',
+    styleUrls: ['./book-travel.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class BookMilageComponent implements OnInit {
+export class BookTravelComponent implements OnInit {
 
     public editMode: boolean = true;
-    public model!: any;
+    public model!: TravelDiaryType;
 
     constructor(@Inject(MAT_DIALOG_DATA) private item: {model: any, editMode: boolean}) {
     }
@@ -21,13 +21,10 @@ export class BookMilageComponent implements OnInit {
         // empty object init
         this.model = {
             vehicle: {} as VehicleDataType,
-            ...this.model
+            route: { from: '', to: '', retour: false },
+            ...this.model as any,
         }
-        this.model.date = this.model.date || new Date();
+        this.model.creationDate = this.model.creationDate || new Date();
         this.editMode = !!this.item?.editMode;
-    }
-
-    calculateFullSpent() {
-        this.model.fullSpent = (this.model.amountSpent || 0) - (this.model.amountPaid || 0);
     }
 }

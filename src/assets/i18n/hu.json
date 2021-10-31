@@ -1,4 +1,6 @@
 {
+    "true": "Igen",
+    "false": "Nem",
     "COMMON": {
         "REQUIRED": "'{{field}}' meztő kitöltése kötelező!",
         "CHOOSE_OPTION": "Válasszon egy lehetőséget!"

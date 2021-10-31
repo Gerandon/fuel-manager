@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BookMilageComponent} from "../../book-milage/book-milage.component";
+import {BookTravelComponent} from "../../book-travel/book-travel.component";
 import {fullSizeDialogConfig} from "../../../../app-common/common";
 import {v4} from "uuid";
 import {MatDialog} from "@angular/material/dialog";
@@ -15,7 +15,7 @@ import {TravelDiaryType} from "../../../../app-common/interfaces/common.interfac
 export class TravelDiaryComponent implements OnInit {
 
     public travelDiarySource!: Observable<TravelDiaryType[]>;
-    public displayedColumns: string[] = ['creationDate', 'distance', 'routeFrom', 'routeTo', 'action'];
+    public displayedColumns: string[] = ['creationDate', 'distance', 'routeFrom', 'routeTo', 'retour', 'action'];
 
     constructor(private dialog: MatDialog,
                 public bookingService: BookingService) {
@@ -26,7 +26,7 @@ export class TravelDiaryComponent implements OnInit {
     }
 
     openItem(item: TravelDiaryType, mode: ('edit' | 'copy' | 'detail')) {
-        this.dialog.open(BookMilageComponent, {
+        this.dialog.open(BookTravelComponent, {
             ...fullSizeDialogConfig,
             data: {
                 model: item,

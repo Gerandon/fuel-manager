@@ -17,6 +17,10 @@ export class LocaleAuthService implements IAuthService{
         this._isAuthenticated.next(!!this.user);
     }
 
+    getUserData(): any {
+        return this.user;
+    }
+
     authenticate({username, password}: any): Observable<boolean> {
         if (!this.user) {
             this.user = {username, password};
