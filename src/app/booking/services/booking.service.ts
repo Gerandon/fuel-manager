@@ -3,6 +3,7 @@ import {BOOKING_SERVICE, IBookingService} from "../../app-common/interfaces/book
 import {Observable} from "rxjs";
 import {FuelCostDiaryType, TravelDiaryType} from "../../app-common/interfaces/common.interface";
 import {map} from "rxjs/operators";
+import {v4} from "uuid";
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +14,7 @@ export class BookingService implements IBookingService {
     }
 
     addTravelDiary(addItem: TravelDiaryType): void {
-        this._bookingService.addTravelDiary(addItem);
+        this._bookingService.addTravelDiary({...addItem, id: v4()});
     }
     removeTravelDiary(item: TravelDiaryType): void {
         this._bookingService.removeTravelDiary(item);
@@ -22,7 +23,7 @@ export class BookingService implements IBookingService {
         return this._bookingService.editTravelDiary(item);
     }
     addFuelCost(addItem: FuelCostDiaryType): void {
-        this._bookingService.addFuelCost(addItem);
+        this._bookingService.addFuelCost({...addItem, id: v4()});
     }
     removeFuelCost(item: FuelCostDiaryType): void {
         this._bookingService.removeFuelCost(item);

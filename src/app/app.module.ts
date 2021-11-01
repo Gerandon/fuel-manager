@@ -14,6 +14,10 @@ import {BOOKING_SERVICE} from "./app-common/interfaces/booking-service.interface
 import {AUTH_SERVICE} from "./app-common/interfaces/auth-service.interface";
 import {authServiceFactory, bookingServiceFactory, createTranslateLoader} from "./app-common/common";
 import {AuthService} from "./auth/services/auth.service";
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireDatabase, AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import {environment} from "../environments/environment";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 
 @NgModule({
@@ -24,6 +28,8 @@ import {AuthService} from "./auth/services/auth.service";
         BrowserModule,
         AppCommonModule,
         BrowserAnimationsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule,
         AppRoutingModule,
         NgxWebstorageModule.forRoot({
             prefix: 'fuel-manager',
@@ -47,12 +53,12 @@ import {AuthService} from "./auth/services/auth.service";
         {
             provide: BOOKING_SERVICE,
             useFactory: bookingServiceFactory,
-            deps: [SessionStorageService, LocalStorageService, AuthService]
+            deps: [SessionStorageService, LocalStorageService, AngularFireDatabase, AuthService]
         },
         {
             provide: AUTH_SERVICE,
             useFactory: authServiceFactory,
-            deps: [SessionStorageService, LocalStorageService]
+            deps: [SessionStorageService, LocalStorageService, AngularFireAuth]
         }
     ],
     bootstrap: [AppComponent]

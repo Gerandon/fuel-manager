@@ -6,6 +6,8 @@ import {RemoteAuthService} from "../auth/services/remote-auth.service";
 import {HttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {AuthService} from "../auth/services/auth.service";
+import {AngularFireDatabase} from "@angular/fire/compat/database";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 export const fullSizeDialogConfig = {
     height: '90%',
@@ -41,16 +43,19 @@ export const createTranslateLoader = (http: HttpClient) => {
 }
 export const bookingServiceFactory = (sStorage: SessionStorageService,
                                       lStorage: LocalStorageService,
+                                      db: AngularFireDatabase,
                                       authService: AuthService) => {
     if (sStorage.retrieve('local')) {
         return new LocaleBookingService(lStorage, authService);
     }
-    return new RemoteBookingService();
+    return new RemoteBookingService(db);
 }
 
-export const authServiceFactory = (sStorage: SessionStorageService, lStorage: LocalStorageService) => {
+export const authServiceFactory = (sStorage: SessionStorageService,
+                                   lStorage: LocalStorageService,
+                                   afAuth: AngularFireAuth) => {
     if (sStorage.retrieve('local')) {
         return new LocaleAuthService(lStorage, sStorage);
     }
-    return new RemoteAuthService();
+    return new RemoteAuthService(afAuth);
 }

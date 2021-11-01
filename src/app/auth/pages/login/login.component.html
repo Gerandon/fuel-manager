@@ -9,6 +9,7 @@
                     <div class="open-panel" fxLayout="column" fxFlex="90" fxFlexOffset="5">
                         <div fxLayout="column" class="mb-15">
                             <basic-input name="username"
+                                         *ngIf="useLocally"
                                          [(ngModel)]="user.username"
                                          [required]="true"
                                          icon="person"
@@ -17,7 +18,7 @@
                                          placeholder="LOGIN.USERNAME.PLACEHOLDER">
                             </basic-input>
                             <basic-input name="password"
-                                         *ngIf="!useLocally"
+                                         *ngIf="false && !useLocally"
                                          [(ngModel)]="user.password"
                                          [required]="true"
                                          type="password"
@@ -33,9 +34,9 @@
                         </div>
                         <div class="buttons" fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button color="primary"
-                                    translate="LOGIN.LOGIN_BUTTON"
                                     (click)="login()"
                                     [disabled]="loginForm.invalid">
+                                {{(useLocally ? 'LOGIN.LOGIN_BUTTON' : 'Bejelentkezés Google használatával') | translate}}
                             </button>
                         </div>
                     </div>

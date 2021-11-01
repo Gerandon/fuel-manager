@@ -16,10 +16,10 @@
     <div fxLayout="row">
         <mat-tab-group #tabGroup fxFlex="100" style="background: white">
             <mat-tab label="Útinapló">
-                <app-travel-diary></app-travel-diary>
+                <ng-template matTabContent><app-travel-diary></app-travel-diary></ng-template>
             </mat-tab>
             <mat-tab label="Utazási költségek">
-                <app-fuel-cost-diary></app-fuel-cost-diary>
+                <ng-template matTabContent><app-fuel-cost-diary></app-fuel-cost-diary></ng-template>
             </mat-tab>
             <mat-tab disabled>
                 <ng-template mat-tab-label>

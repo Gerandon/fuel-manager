@@ -3,7 +3,6 @@ import {IBookingService} from "../../app-common/interfaces/booking-service.inter
 import {BehaviorSubject, Observable} from "rxjs";
 import {first, tap} from "rxjs/operators";
 import {FuelCostDiaryType, TravelDiaryType} from "../../app-common/interfaces/common.interface";
-import {v4 as uuidv4} from 'uuid';
 import {LocalStorageService} from "ngx-webstorage";
 import {AuthService} from "../../auth/services/auth.service";
 
@@ -12,17 +11,22 @@ import {AuthService} from "../../auth/services/auth.service";
 })
 export class LocaleBookingService implements IBookingService {
 
-    private readonly travelIdentifier;
-    private readonly fuelIdentifier;
+    private travelIdentifier;
+    private fuelIdentifier;
     private travelDiaryList = new BehaviorSubject<TravelDiaryType[]>([]);
     private fuelCostDiaryList = new BehaviorSubject<FuelCostDiaryType[]>([]);
 
     constructor(private localStorage: LocalStorageService,
                 private authService: AuthService) {
-        this.travelIdentifier = `${authService.getUserData().username}-|travel-diary`;
-        this.fuelIdentifier = `${authService.getUserData().username}-|fuel-cost-list`;
-        this.travelDiaryList.next(localStorage.retrieve(this.travelIdentifier)?.filter(item => item));
-        this.fuelCostDiaryList.next(localStorage.retrieve(this.fuelIdentifier)?.filter(item => item));
+        authService.getUserData().pipe(
+            first(),
+            tap(({username}) => {
+                this.travelIdentifier = `${username}-|travel-diary`;
+                this.fuelIdentifier = `${username}-|fuel-cost-list`;
+                this.travelDiaryList.next(localStorage.retrieve(this.travelIdentifier)?.filter(item => item));
+                this.fuelCostDiaryList.next(localStorage.retrieve(this.fuelIdentifier)?.filter(item => item));
+            })
+        ).subscribe();
     }
 
     addTravelDiary(addItem: TravelDiaryType): void {
@@ -30,7 +34,7 @@ export class LocaleBookingService implements IBookingService {
             first(),
             tap((list) => {
                 const _list: any[] = list || [];
-                _list.push({...addItem, id: uuidv4()});
+                _list.push({...addItem});
                 this.localStorage.store(this.travelIdentifier, _list);
                 this.travelDiaryList.next(_list);
             })
@@ -67,7 +71,7 @@ export class LocaleBookingService implements IBookingService {
             first(),
             tap((list) => {
                 const _list: any[] = list || [];
-                _list.push({...addItem, id: uuidv4()});
+                _list.push({...addItem});
                 this.localStorage.store(this.fuelIdentifier, _list);
                 this.fuelCostDiaryList.next(_list);
             })
