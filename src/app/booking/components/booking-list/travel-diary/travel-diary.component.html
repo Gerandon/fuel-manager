@@ -1,84 +1,96 @@
 <div fxFlex="100">
-    <table mat-table [dataSource]="travelDiarySource" class="mat-elevation-z8">
-        <!-- Create Date Column -->
-        <ng-container matColumnDef="creationDate">
-            <th mat-header-cell *matHeaderCellDef>Dátum</th>
-            <td mat-cell *matCellDef="let element">{{element.creationDate | date}}</td>
-        </ng-container>
+    <div *ngIf="travelDiarySource | withLoading | async as obs">
+        <div *ngIf="obs.loading"
+             fxLayout="row"
+             fxLayoutAlign="center center" class="m-20">
+            <mat-progress-spinner color="primary"
+                                  mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
+        <table *ngIf="!obs.loading" mat-table [dataSource]="obs.value" class="mat-elevation-z8">
+            <!-- Create Date Column -->
+            <ng-container matColumnDef="creationDate">
+                <th mat-header-cell *matHeaderCellDef>Dátum</th>
+                <td mat-cell *matCellDef="let element">{{element.creationDate | date}}</td>
+            </ng-container>
 
-        <!-- Distance Column -->
-        <ng-container matColumnDef="distance">
-            <th mat-header-cell *matHeaderCellDef>Megtett táv (km)</th>
-            <td mat-cell *matCellDef="let element">{{(element.distance | number: '1.0-0') + ' Km'}}</td>
-        </ng-container>
+            <!-- Distance Column -->
+            <ng-container matColumnDef="distance">
+                <th mat-header-cell *matHeaderCellDef>Megtett táv (km)</th>
+                <td mat-cell *matCellDef="let element">{{(element.distance | number: '1.0-0') + ' Km'}}</td>
+            </ng-container>
 
-        <!-- RouteFrom Column -->
-        <ng-container matColumnDef="routeFrom">
-            <th mat-header-cell *matHeaderCellDef>Indulás innen</th>
-            <td mat-cell *matCellDef="let element">{{element.route?.from}}</td>
-        </ng-container>
+            <!-- RouteFrom Column -->
+            <ng-container matColumnDef="routeFrom">
+                <th mat-header-cell *matHeaderCellDef>Indulás innen</th>
+                <td mat-cell *matCellDef="let element">{{element.route?.from}}</td>
+            </ng-container>
 
-        <!-- RouteTo Column -->
-        <ng-container matColumnDef="routeTo">
-            <th mat-header-cell *matHeaderCellDef>Érkezés ide</th>
-            <td mat-cell *matCellDef="let element">{{element.route?.to}}</td>
-        </ng-container>
+            <!-- RouteTo Column -->
+            <ng-container matColumnDef="routeTo">
+                <th mat-header-cell *matHeaderCellDef>Érkezés ide</th>
+                <td mat-cell *matCellDef="let element">{{element.route?.to}}</td>
+            </ng-container>
 
-        <!-- Retour Column -->
-        <ng-container matColumnDef="retour">
-            <th mat-header-cell *matHeaderCellDef>Retour</th>
-            <td mat-cell *matCellDef="let element">
-                <div *ngIf="element.route?.retour" fxLayout="row grid">
-                    <mat-icon fxFlex="100" color="primary">redo</mat-icon>
-                    <mat-icon color="primary" style="transform: rotate(180deg) scaleX(-1);margin-top:-10px">undo</mat-icon>
-                </div>
-            </td>
-        </ng-container>
+            <!-- Retour Column -->
+            <ng-container matColumnDef="retour">
+                <th mat-header-cell *matHeaderCellDef>Retour</th>
+                <td mat-cell *matCellDef="let element">
+                    <div *ngIf="element.route?.retour" fxLayout="row grid">
+                        <mat-icon fxFlex="100" color="primary">redo</mat-icon>
+                        <mat-icon color="primary" style="transform: rotate(180deg) scaleX(-1);margin-top:-10px">undo</mat-icon>
+                    </div>
+                </td>
+            </ng-container>
 
-        <!-- Action Column -->
-        <ng-container matColumnDef="action" stickyEnd>
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
-                <button mat-icon-button color="primary"
-                        [matMenuTriggerFor]="menu">
-                    <mat-icon>list</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-icon-button
-                            matTooltip="Megnyitás"
-                            color="primary"
-                            (click)="openItem(element, 'detail')">
-                        <mat-icon>search</mat-icon>
+            <!-- Action Column -->
+            <ng-container matColumnDef="action" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="primary"
+                            [matMenuTriggerFor]="menu">
+                        <mat-icon>list</mat-icon>
                     </button>
-                    <button mat-icon-button
-                            matTooltip="Szerkesztés"
-                            (click)="openItem(element, 'edit')" color="primary">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button
-                            matTooltip="Másolat készítése"
-                            (click)="openItem(element, 'copy')" color="primary">
-                        <mat-icon>content_copy</mat-icon>
-                    </button>
-                    <button mat-icon-button color="warn"
-                            (click)="bookingService.removeTravelDiary(element)"
-                            matTooltip="Elem törlése">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </mat-menu>
-            </td>
-        </ng-container>
+                    <mat-menu #menu="matMenu">
+                        <button mat-icon-button
+                                matTooltip="Megnyitás"
+                                color="primary"
+                                (click)="openItem(element, 'detail')">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                        <button mat-icon-button
+                                matTooltip="Szerkesztés"
+                                (click)="openItem(element, 'edit')" color="primary">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button
+                                matTooltip="Másolat készítése"
+                                (click)="openItem(element, 'copy')" color="primary">
+                            <mat-icon>content_copy</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn"
+                                (click)="bookingService.removeTravelDiary(element)"
+                                matTooltip="Elem törlése">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-menu>
+                </td>
+            </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-
-    <br>
-
-    <div fxLayout="row wrap">
-        <app-line-chart [fxFlex]="'100'"
-                        [dataSetList]="[
-            {label: 'Megtett táv', numbers: (distance | async)},
-    ]"></app-line-chart>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="9999" style="text-align: center">{{ 'COMMON.TABLE.NO_RESULT' | translate }}</td>
+            </tr>
+        </table>
+        <div *ngIf="!obs.loading && obs.value?.length">
+            <br>
+            <div fxLayout="row wrap">
+                <app-line-chart [fxFlex]="'100'"
+                                [dataSetList]="[
+                        {label: 'Megtett táv', numbers: (distance | async)},
+                ]"></app-line-chart>
+            </div>
+        </div>
     </div>
 </div>

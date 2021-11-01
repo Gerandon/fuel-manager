@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {VendorModule} from "./vendor.module";
+import {VendorModule} from "./vendor/vendor.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CheckFormDirective} from './directives/check-form.directive';
 import {BasicInputComponent} from './widgets/basic-input/basic-input.component';
@@ -9,6 +9,7 @@ import {LineChartComponent} from './components/line-chart/line-chart.component';
 import {SelectComponent} from './widgets/select/select.component';
 import {NumberInputComponent} from "./widgets/number-input/number-input.component";
 import {TriangleButtonComponent} from './widgets/triangle-button/triangle-button.component';
+import { WithLoadingPipe } from './pipes/with-loading.pipe';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import {TriangleButtonComponent} from './widgets/triangle-button/triangle-button
         SelectComponent,
         NumberInputComponent,
         TriangleButtonComponent,
+        WithLoadingPipe,
     ],
     imports: [
         CommonModule,
@@ -36,7 +38,8 @@ import {TriangleButtonComponent} from './widgets/triangle-button/triangle-button
         ShowOnAuthenticatedDirective,
         LineChartComponent,
         NumberInputComponent,
-        TriangleButtonComponent
+        TriangleButtonComponent,
+        WithLoadingPipe
     ]
 })
 export class AppCommonModule {

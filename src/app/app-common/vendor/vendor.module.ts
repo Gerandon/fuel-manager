@@ -23,6 +23,7 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTabsModule} from "@angular/material/tabs";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 export const lodash = _;
 
@@ -49,7 +50,8 @@ export const lodash = _;
         MatButtonToggleModule,
         MatTooltipModule,
         MatMenuModule,
-        MatTabsModule
+        MatTabsModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         MatExpansionModule,
@@ -73,7 +75,8 @@ export const lodash = _;
         MatButtonToggleModule,
         MatTooltipModule,
         MatMenuModule,
-        MatTabsModule
+        MatTabsModule,
+        MatProgressSpinnerModule
     ]
 })
 export class VendorModule {
