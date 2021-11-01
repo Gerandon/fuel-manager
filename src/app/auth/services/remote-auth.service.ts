@@ -38,7 +38,7 @@ export class RemoteAuthService implements IAuthService {
             this.afAuth.authState.pipe(map(item => !!item))
         ]).pipe(
             map(([userData, authenticated]) => {
-                this.userId = (<any>userData)._delegate.uid;
+                this.userId = (<any>userData)?._delegate?.uid;
                 return authenticated;
             })
         );
