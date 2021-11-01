@@ -18,21 +18,20 @@ export class RemoteBookingService implements IBookingService {
     private fuelIdentifierList!: AngularFireList<any>;
 
     constructor(private firebaseDb: AngularFireDatabase) {
-        this.travelIdentifierList = firebaseDb.list(`/travel-diary-list-${this.uid}`);
-        this.fuelIdentifierList = firebaseDb.list(`/fuel-cost-list-${this.uid}`);
+        this.travelIdentifierList = firebaseDb.list(`/travel-diary-list/${this.uid}`);
+        this.fuelIdentifierList = firebaseDb.list(`/fuel-cost-list/${this.uid}`);
     }
 
     addTravelDiary(addItem: TravelDiaryType): void {
-        this.travelIdentifierList.push(addItem);
+        this.travelIdentifierList.push({
+            ...addItem,
+            creationDate: addItem.creationDate.getTime()
+        });
     }
     removeTravelDiary(item: TravelDiaryType): void {
         this.travelIdentifierList.snapshotChanges().pipe(
             first(),
-            map(changes =>
-                changes.map(c =>
-                    ({ key: c.payload.key, ...c.payload.val() })
-                )
-            ),
+            map(changes => changes.map(c =>({ key: c.payload.key, ...c.payload.val() }))),
             tap(items => {
                 const removable = items.find(_item => _item.id === item.id);
                 if (removable) {
@@ -45,7 +44,10 @@ export class RemoteBookingService implements IBookingService {
         throw new Error('Method not implemented.');
     }
     addFuelCost(addItem: FuelCostDiaryType): void {
-        this.fuelIdentifierList.push(addItem);
+        this.fuelIdentifierList.push({
+            ...addItem,
+            creationDate: addItem.creationDate.getTime()
+        });
     }
     removeFuelCost(item: FuelCostDiaryType): void {
         throw new Error('Method not implemented.');
@@ -56,21 +58,21 @@ export class RemoteBookingService implements IBookingService {
 
     getTravelDiaryList(): Observable<TravelDiaryType[]> {
         return this.travelIdentifierList.snapshotChanges().pipe(
-            map(changes =>
-                changes.map(c =>
-                    ({ key: c.payload.key, ...c.payload.val() })
-                )
-            )
+            map(changes => changes.map(c => ({
+                key: c.payload.key,
+                ...c.payload.val() ,
+                creationDate: new Date(c.payload.val().creationDate)
+            })))
         );
     }
 
     getFuelCostDiaryList(): Observable<FuelCostDiaryType[]> {
         return this.fuelIdentifierList.snapshotChanges().pipe(
-            map(changes =>
-                changes.map(c =>
-                    ({ key: c.payload.key, ...c.payload.val() })
-                )
-            )
+            map(changes => changes.map(c => ({
+                key: c.payload.key,
+                ...c.payload.val() ,
+                creationDate: new Date(c.payload.val().creationDate)
+            })))
         );
     }
 }
