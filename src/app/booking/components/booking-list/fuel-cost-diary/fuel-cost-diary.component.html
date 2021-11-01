@@ -1,30 +1,36 @@
 <div fxFlex="100">
     <table mat-table [dataSource]="fuelCostDiarySource" class="mat-elevation-z8">
-        <!-- Position Column -->
+        <!-- Creation date Column -->
         <ng-container matColumnDef="creationDate">
             <th mat-header-cell *matHeaderCellDef>Dátum</th>
             <td mat-cell *matCellDef="let element">{{element.creationDate | date}}</td>
         </ng-container>
 
-        <!-- Name Column -->
+        <!-- Quantity Column -->
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef>Mennyiség</th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} L</td>
+        </ng-container>
+
+        <!-- Amount spent Column -->
         <ng-container matColumnDef="amountSpent">
             <th mat-header-cell *matHeaderCellDef>Teljes elköltött összeg</th>
             <td mat-cell *matCellDef="let element"> {{(element.amountSpent | currency: ' ':'symbol':'1.0-0') + ' HUF'}} </td>
         </ng-container>
 
-        <!-- Weight Column -->
+        <!-- Amount Paid Column -->
         <ng-container matColumnDef="amountPaid">
             <th mat-header-cell *matHeaderCellDef>Térített összeg</th>
             <td mat-cell *matCellDef="let element"> {{(element.amountPaid | currency: ' ':'symbol':'1.0-0') + ' HUF'}} </td>
         </ng-container>
 
-        <!-- Symbol Column -->
+        <!-- Full Spent Column -->
         <ng-container matColumnDef="fullSpent">
             <th mat-header-cell *matHeaderCellDef>Teljes kiadás levonásokkal</th>
             <td mat-cell *matCellDef="let element"> {{(element.fullSpent | currency: ' ':'symbol':'1.0-0') + ' HUF'}} </td>
         </ng-container>
 
-        <!-- Symbol Column -->
+        <!-- Action Column -->
         <ng-container matColumnDef="action" stickyEnd>
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">

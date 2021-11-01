@@ -6,6 +6,7 @@ import {BookTravelComponent} from "../book-travel/book-travel.component";
 import {fullSizeDialogConfig} from "../../../app-common/common";
 import {map} from "rxjs/operators";
 import {MatTabGroup} from "@angular/material/tabs";
+import {BookFuelComponent} from "../book-fuel/book-fuel.component";
 
 @Component({
     selector: 'app-booking-list',
@@ -29,24 +30,11 @@ export class BookingListComponent implements OnInit {
     ngOnInit(): void {
         this.tabIndexComponent = [
             { index: 0, addComponent: BookTravelComponent, service: this.bookingService, addMethod: 'addTravelDiary'},
+            { index: 1, addComponent: BookFuelComponent, service: this.bookingService, addMethod: 'addFuelCost'},
         ]
-        this.amountSpent = this.getChartDataByValue('amountSpent');
-        this.amountPaid = this.getChartDataByValue('amountPaid', true);
-        this.fullSpent = this.getChartDataByValue('fullSpent', false);
-    }
-
-    getChartDataByValue(valueProp: string, withZero?: boolean) {
-        return this.bookingService.getTravelDiaryList().pipe(
-            map(item => withZero ? item : item.filter(acc => !['0', 0].includes(acc[valueProp]))),
-            map(arr => arr.map(acc => {
-                const _date = new Date(acc.creationDate);
-                return {
-                    month: (<Date>_date).getMonth()+1,
-                    day: (<Date>_date).getDate(),
-                    value: acc[valueProp]
-                };
-            }).sort((a, b) => Number(`${a.month}.${a.day}`)  - Number(`${b.month}.${b.day}`))),
-        );
+        this.amountSpent = this.bookingService.getChartDataByValue('amountSpent');
+        this.amountPaid = this.bookingService.getChartDataByValue('amountPaid', true);
+        this.fullSpent = this.bookingService.getChartDataByValue('fullSpent', false);
     }
 
     addToList() {

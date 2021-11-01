@@ -61,8 +61,7 @@
                         <mat-icon>content_copy</mat-icon>
                     </button>
                     <button mat-icon-button color="warn"
-                            matTooltip="Elem törlése"
-                            (click)="bookingService.removeItem(element)">
+                            matTooltip="Elem törlése">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </mat-menu>
@@ -72,4 +71,13 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <br>
+
+    <div fxLayout="row wrap">
+        <app-line-chart [fxFlex]="'100'"
+                        [dataSetList]="[
+            {label: 'Megtett táv', numbers: (distance | async)},
+    ]"></app-line-chart>
+    </div>
 </div>

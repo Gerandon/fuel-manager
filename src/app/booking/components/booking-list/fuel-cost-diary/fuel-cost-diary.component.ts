@@ -12,7 +12,7 @@ import {BookingService} from "../../../services/booking.service";
 export class FuelCostDiaryComponent implements OnInit {
 
     public fuelCostDiarySource!: Observable<FuelCostDiaryType[]>;
-    public displayedColumns: string[] = ['creationDate', 'amountSpent', 'amountPaid', 'fullSpent', 'action'];
+    public displayedColumns: string[] = ['creationDate', 'quantity', 'amountSpent', 'amountPaid', 'fullSpent', 'action'];
 
     constructor(private dialog: MatDialog,
                 public bookingService: BookingService) {

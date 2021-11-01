@@ -16,6 +16,7 @@ export interface FuelCostDiaryType extends BaseType {
     amountSpent?: number;
     amountPaid?: number;
     fullSpent: number;
+    quantity: number;
 }
 export interface TravelDiaryType extends BaseType {
     distance: number;

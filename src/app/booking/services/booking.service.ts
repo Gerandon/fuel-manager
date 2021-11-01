@@ -2,6 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {BOOKING_SERVICE, IBookingService} from "../../app-common/interfaces/booking-service.interface";
 import {Observable} from "rxjs";
 import {FuelCostDiaryType, TravelDiaryType} from "../../app-common/interfaces/common.interface";
+import {map} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root',
@@ -36,5 +37,19 @@ export class BookingService implements IBookingService {
 
     getFuelCostDiaryList(): Observable<FuelCostDiaryType[]> {
         return this._bookingService.getFuelCostDiaryList();
+    }
+
+    getChartDataByValue(valueProp: string, withZero?: boolean) {
+        return this.getTravelDiaryList().pipe(
+            map(item => withZero ? item : item.filter(acc => !['0', 0].includes(acc[valueProp]))),
+            map(arr => arr.map(acc => {
+                const _date = new Date(acc.creationDate);
+                return {
+                    month: (<Date>_date).getMonth()+1,
+                    day: (<Date>_date).getDate(),
+                    value: acc[valueProp]
+                };
+            }).sort((a, b) => Number(`${a.month}.${a.day}`)  - Number(`${b.month}.${b.day}`))),
+        );
     }
 }

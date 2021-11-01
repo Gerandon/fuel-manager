@@ -15,11 +15,13 @@ import {TravelDiaryType} from "../../../../app-common/interfaces/common.interfac
 export class TravelDiaryComponent implements OnInit {
 
     public travelDiarySource!: Observable<TravelDiaryType[]>;
+    public distance!: Observable<any[]>;
     public displayedColumns: string[] = ['creationDate', 'distance', 'routeFrom', 'routeTo', 'retour', 'action'];
 
     constructor(private dialog: MatDialog,
                 public bookingService: BookingService) {
         this.travelDiarySource = this.bookingService.getTravelDiaryList();
+        this.distance = this.bookingService.getChartDataByValue('distance', true);
     }
 
     ngOnInit(): void {

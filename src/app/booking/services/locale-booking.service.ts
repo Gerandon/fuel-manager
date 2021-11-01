@@ -21,8 +21,6 @@ export class LocaleBookingService implements IBookingService {
                 private authService: AuthService) {
         this.travelIdentifier = `${authService.getUserData().username}-|travel-diary`;
         this.fuelIdentifier = `${authService.getUserData().username}-|fuel-cost-list`;
-        console.log(this.travelIdentifier);
-        console.log(localStorage.retrieve(this.travelIdentifier));
         this.travelDiaryList.next(localStorage.retrieve(this.travelIdentifier)?.filter(item => item));
         this.fuelCostDiaryList.next(localStorage.retrieve(this.fuelIdentifier)?.filter(item => item));
     }
@@ -65,7 +63,15 @@ export class LocaleBookingService implements IBookingService {
         return item;
     }
     addFuelCost(addItem: FuelCostDiaryType): void {
-        throw new Error('Method not implemented.');
+        this.getFuelCostDiaryList().pipe(
+            first(),
+            tap((list) => {
+                const _list: any[] = list || [];
+                _list.push({...addItem, id: uuidv4()});
+                this.localStorage.store(this.fuelIdentifier, _list);
+                this.fuelCostDiaryList.next(_list);
+            })
+        ).subscribe();
     }
     removeFuelCost(item: FuelCostDiaryType): void {
         throw new Error('Method not implemented.');
