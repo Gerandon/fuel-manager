@@ -26,5 +26,13 @@
         "ENGINE_TYPE": "Üzemanyag típusa",
         "ENGINE_VOLUME": "Hengerűrtartalom",
         "AVERAGE_CONSUMPTION": "Átlag fogyasztás"
+    },
+    "USER_SETTINGS": {
+        "COMMON_DATA": "Általános adatok",
+        "METADATA": {
+            "LABEL": "Metaadatok",
+            "CREATION_DATE": "Létrehozás dátuma",
+            "LAST_LOGIN": "Utolsó bejelentkezés"
+        }
     }
 }

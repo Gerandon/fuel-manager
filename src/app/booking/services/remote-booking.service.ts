@@ -5,6 +5,7 @@ import {FuelCostDiaryType, TravelDiaryType} from "../../app-common/interfaces/co
 import {first, map, tap} from "rxjs/operators";
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/database";
 import {SessionStorage} from "ngx-webstorage";
+import { lodash as _ } from 'src/app/app-common/vendor/vendor.module';
 
 @Injectable({
     providedIn: 'root',
@@ -23,10 +24,10 @@ export class RemoteBookingService implements IBookingService {
     }
 
     addTravelDiary(addItem: TravelDiaryType): void {
-        this.travelIdentifierList.push({
+        this.travelIdentifierList.push(_.omit({
             ...addItem,
             creationDate: addItem.creationDate.getTime()
-        });
+        }, ['key']));
     }
     removeTravelDiary(item: TravelDiaryType): void {
         this.travelIdentifierList.snapshotChanges().pipe(

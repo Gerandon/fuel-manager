@@ -32,4 +32,7 @@ export class SidemenuContentComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    navigateToProfile() {
+        this.router.navigate(['auth/settings']);
+    }
 }

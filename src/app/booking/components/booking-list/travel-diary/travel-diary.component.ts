@@ -29,7 +29,6 @@ export class TravelDiaryComponent implements OnInit {
 
     openItem(item: TravelDiaryType, mode: ('edit' | 'copy' | 'detail')) {
         this.dialog.open(BookTravelComponent, {
-            ...fullSizeDialogConfig,
             data: {
                 model: item,
                 editMode: ['edit', 'copy'].includes(mode),

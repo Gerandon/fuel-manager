@@ -25,7 +25,7 @@ export class RemoteAuthService implements IAuthService {
     }
 
     getUserData(): any {
-        return this.afAuth.user.pipe(map((user:any) => user._delegate));
+        return this.afAuth.user.pipe(map((user:any) => user?._delegate));
     }
 
     authenticate(): Observable<boolean> {

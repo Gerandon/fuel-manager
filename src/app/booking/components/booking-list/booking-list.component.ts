@@ -41,7 +41,6 @@ export class BookingListComponent implements OnInit {
         const tabData = this.tabIndexComponent.find(item => item.index === this.tab.selectedIndex);
         if (tabData?.addComponent) {
             this.dialog.open(tabData.addComponent, {
-                ...fullSizeDialogConfig,
                 data: { editMode: true}
             }).afterClosed().subscribe((data) => {
                 if(data) {

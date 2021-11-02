@@ -1,1 +1,48 @@
-<p>user-settings works!</p>
+<div>
+    <mat-card>
+        <mat-card-content>
+            <h2>Hi, {{(userData | async)?.displayName}}</h2>
+            <br>
+            <div fxLayout="row wrap" fxLayoutGap="15px grid">
+                <div fxFlex="auto">
+                    <mat-card *ngIf="userData | async as user" class="card-outlined">
+                        <p class="card-outlined__title">Felhasználói adatok</p>
+                        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px grid">
+                            <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+                                <img style="border-radius: 50px;" src="{{user.photoURL}}">
+                            </div>
+                            <div fxFlex="70">
+                                <p style="font-weight:bold">{{'USER_SETTINGS.COMMON_DATA' | translate}}</p>
+                                <hr>
+                                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                                    <mat-icon>person</mat-icon>
+                                    <p class="m-0">{{user.displayName}}</p>
+                                </div>
+                                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                                    <mat-icon>email</mat-icon>
+                                    <p class="m-0">{{user.email}}</p>
+                                </div>
+                                <p style="font-weight: bold">{{'USER_SETTINGS.METADATA.LABEL' | translate}}</p>
+                                <hr>
+                                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                                    <p class="m-0">{{'USER_SETTINGS.METADATA.CREATION_DATE' | translate}}:</p>
+                                    <p class="m-0">{{user.metadata.lastLoginAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
+                                </div>
+                                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                                    <p class="m-0">{{'USER_SETTINGS.METADATA.LAST_LOGIN' | translate}}:</p>
+                                    <p class="m-0">{{user.metadata.createdAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+                <div fxFlex="auto">
+                    <mat-card class="card-outlined">
+                        <p class="card-outlined__title">Oldal szintű adatok</p>
+                    </mat-card>
+                </div>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</div>
