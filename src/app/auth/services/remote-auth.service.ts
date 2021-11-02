@@ -25,7 +25,7 @@ export class RemoteAuthService implements IAuthService {
     }
 
     getUserData(): any {
-        return this.afAuth.user;
+        return this.afAuth.user.pipe(map((user:any) => user._delegate));
     }
 
     authenticate(): Observable<boolean> {
@@ -38,7 +38,7 @@ export class RemoteAuthService implements IAuthService {
             this.afAuth.authState.pipe(map(item => !!item))
         ]).pipe(
             map(([userData, authenticated]) => {
-                this.userId = (<any>userData)?._delegate?.uid;
+                this.userId = (<any>userData)?.uid;
                 return authenticated;
             })
         );

@@ -1,4 +1,27 @@
 <div>
+    <div class="m-10" *ngIf="userData | async as user">
+        <mat-card>
+            <mat-card-content>
+                <div *ngIf="user.photoURL" fxLayout="row" fxLayoutAlign="center center">
+                    <img src="{{user.photoURL}}" style="border-radius: 50px" width="50" height="50">
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+                    <mat-icon color="primary">person</mat-icon>
+                    <p class="ellipsis">{{ user.displayName }}</p>
+                </div>
+                <div fxLayout="row"
+                     fxLayoutAlign="start center"
+                     fxLayoutGap="15px" [matTooltip]="user.email">
+                    <mat-icon color="primary">email</mat-icon>
+                    <p class="ellipsis">{{ user.email }}</p>
+                </div>
+                <div fxLayout="row"
+                     fxLayoutAlign="center center">
+                    <button mat-raised-button color="primary" routerLink="auth/settings">Profil Beállítások</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
     <mat-selection-list #shoes [multiple]="false" fxLayout="column">
         <mat-list-option *ngFor="let item of menuItems"
                          [selected]="(url | async)?.includes(item.navigateTo)"

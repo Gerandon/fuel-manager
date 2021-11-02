@@ -36,7 +36,7 @@ export class TravelDiaryComponent implements OnInit {
             }
         }).afterClosed().subscribe((data) => {
             if(data) {
-                this.bookingService[mode === 'edit' ? 'editItem' : 'addToList']({
+                this.bookingService[mode === 'edit' ? 'editTravelDiary' : 'addTravelDiary']({
                     id: v4(),
                     ...data,
                 });

@@ -41,7 +41,20 @@ export class RemoteBookingService implements IBookingService {
         ).subscribe();
     }
     editTravelDiary(item: TravelDiaryType): TravelDiaryType {
-        throw new Error('Method not implemented.');
+        this.travelIdentifierList.snapshotChanges().pipe(
+            first(),
+            map(changes => changes.map(c =>({ key: c.payload.key, ...c.payload.val() }))),
+            tap(items => {
+                const editable = items.find(_item => _item.id === item.id);
+                if (editable) {
+                    this.travelIdentifierList.update(editable.key, {
+                        ...item,
+                        creationDate: item.creationDate.getTime()
+                    });
+                }
+            })
+        ).subscribe();
+        return item;
     }
     addFuelCost(addItem: FuelCostDiaryType): void {
         this.fuelIdentifierList.push({

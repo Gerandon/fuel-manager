@@ -26,7 +26,6 @@ $primary-palette: map.get($color-config, 'primary');
 ng-sidebar {
     aside {
         width: 200px;
-        padding-top: 50px;
         background: $app-primary-transparent-color;
         color: $app-font-color;
     }

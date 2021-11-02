@@ -24,6 +24,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {GoogleMapsModule} from "@angular/google-maps";
 
 export const lodash = _;
 
@@ -51,7 +52,8 @@ export const lodash = _;
         MatTooltipModule,
         MatMenuModule,
         MatTabsModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        GoogleMapsModule,
     ],
     exports: [
         MatExpansionModule,
@@ -76,7 +78,8 @@ export const lodash = _;
         MatTooltipModule,
         MatMenuModule,
         MatTabsModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        GoogleMapsModule,
     ]
 })
 export class VendorModule {

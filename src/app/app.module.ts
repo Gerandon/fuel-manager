@@ -19,7 +19,6 @@ import {AngularFireDatabase, AngularFireDatabaseModule} from "@angular/fire/comp
 import {environment} from "../environments/environment";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 
-
 @NgModule({
     declarations: [
         AppComponent

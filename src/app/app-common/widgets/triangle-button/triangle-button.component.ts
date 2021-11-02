@@ -24,7 +24,6 @@ export class TriangleButtonComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.inputRef);
     }
 
     inputClicked() {

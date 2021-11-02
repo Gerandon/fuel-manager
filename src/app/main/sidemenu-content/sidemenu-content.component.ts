@@ -18,6 +18,7 @@ export class SidemenuContentComponent implements OnInit {
         navigateTo: string
     }[];
     public url: Observable<string>;
+    public userData: Observable<any>
 
     constructor(private router: Router,
                 public authService: AuthService) {
@@ -25,6 +26,7 @@ export class SidemenuContentComponent implements OnInit {
             filter((event: any) => event instanceof NavigationEnd),
             map(item => item.url),
         );
+        this.userData = this.authService.getUserData();
     }
 
     ngOnInit(): void {
