@@ -4,13 +4,17 @@ export interface RouteFuelPropertiesType {
     fuelType: string;
     currentFuelPrice: number;
 }
-export interface VehicleDataType {
-    id?: string;
+export interface OwnerVehicleDataType {
+    since: Date;
+    boughtMilage: number;
+}
+export interface VehicleDataType extends BaseType {
     brand: string;
     type: string;
     engineType: ('Diesel' | 'Gasoline')
     engineVolume: string;
     avgConsumption: number;
+    ownerData?: OwnerVehicleDataType;
 }
 export interface FuelCostDiaryType extends BaseType {
     amountSpent?: number;
@@ -35,8 +39,7 @@ export interface RouteType {
     to?: string;
     retour?: boolean;
 }
-
-interface BaseType {
+export interface BaseType {
     id?: string;
     creationDate: Date;
 }

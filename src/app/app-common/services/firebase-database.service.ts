@@ -1,33 +1,66 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/database";
+import {SessionStorage} from "ngx-webstorage";
+import {first, map, tap} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {BaseType} from "../interfaces/common.interface";
+import {v4} from "uuid";
+import {lodash as _} from 'src/app/app-common/vendor/vendor.module';
 
-@Injectable({
-    providedIn: 'root'
-})
-export class FirebaseDatabaseService {
+@Injectable()
+export class FirebaseDatabaseService<ITEM extends BaseType> {
 
-    private dbPath!: string;
-    private tutorialsRef!: AngularFireList<any>;
+    @SessionStorage('uid')
+    private uid!: string;
+    private tutorialsRef!: AngularFireList<ITEM>;
 
-    constructor(private db: AngularFireDatabase) {
-        this.dbPath = `test`;
-        this.tutorialsRef = this.db.list(this.dbPath);
+    constructor(private db: AngularFireDatabase, private dbPath: string) {
+        this.tutorialsRef = this.db.list(`${this.uid}/${this.dbPath}`);
     }
 
-    getAll(): AngularFireList<any> {
-        return this.tutorialsRef;
+    getAll(): Observable<any> {
+        return this.tutorialsRef.snapshotChanges().pipe(
+            map(changes => changes.map(c => ({
+                key: c.payload.key,
+                ...c.payload.val() ,
+                creationDate: new Date(c.payload.val()!.creationDate)
+            })))
+        );
     }
 
     create(tutorial: any): any {
-        return this.tutorialsRef.push(tutorial);
+        return this.tutorialsRef.push(_.omit({
+            ...tutorial,
+            id: v4(),
+            creationDate: tutorial.creationDate.getTime(),
+        }, ['key']));
     }
 
-    update(key: string, value: any): Promise<void> {
-        return this.tutorialsRef.update(key, value);
+    update(item: ITEM): Observable<ITEM[]>{
+        return this.getAll().pipe(
+            first(),
+            tap(items => {
+                const editable = items.find(_item => _item.id === item.id);
+                if (editable) {
+                    this.tutorialsRef.update(editable['key'], {
+                        ...item,
+                        creationDate: item.creationDate.getTime()
+                    });
+                }
+            })
+        );
     }
 
-    delete(key: string): Promise<void> {
-        return this.tutorialsRef.remove(key);
+    delete(item: ITEM): Observable<any> {
+        return this.getAll().pipe(
+            first(),
+            tap(items => {
+                const removable = items.find(_item => _item.id === item.id);
+                if (removable) {
+                    this.tutorialsRef.remove(removable.key);
+                }
+            })
+        );
     }
 
     deleteAll(): Promise<void> {

@@ -1,15 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AddTransportTypeComponent} from './components/add-transport-type/add-transport-type.component';
+import {TransportTypeComponent} from './components/transport-type/transport-type.component';
 import {AppCommonModule} from "../app-common/app-common.module";
 import {MyVehiclesComponent} from './components/my-vehicles/my-vehicles.component';
 import {MeansOfTransportRoutingModule} from "./router-module/means-of-transport-routing.module";
-
+import {VehicleTileComponent} from './components/vehicle-tile/vehicle-tile.component';
+import { AddTransportTypeDialogComponent } from './components/dialogs/add-transport-type-dialog/add-transport-type-dialog.component';
 
 @NgModule({
     declarations: [
-        AddTransportTypeComponent,
-        MyVehiclesComponent
+        TransportTypeComponent,
+        MyVehiclesComponent,
+        VehicleTileComponent,
+        AddTransportTypeDialogComponent
     ],
     imports: [
         CommonModule,
@@ -17,7 +20,7 @@ import {MeansOfTransportRoutingModule} from "./router-module/means-of-transport-
         MeansOfTransportRoutingModule
     ],
     exports: [
-        AddTransportTypeComponent
+        TransportTypeComponent
     ]
 })
 export class MeansOfTransportModule {

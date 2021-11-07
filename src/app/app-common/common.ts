@@ -8,6 +8,8 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {AuthService} from "../auth/services/auth.service";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {LocalVehiclesService} from "../means-of-transport/services/vehicles/local-vehicles.service";
+import {RemoteVehiclesService} from "../means-of-transport/services/vehicles/remote-vehicles.service";
 
 export const fullSizeDialogConfig = {
     height: '90%',
@@ -58,4 +60,12 @@ export const authServiceFactory = (sStorage: SessionStorageService,
         return new LocaleAuthService(lStorage, sStorage);
     }
     return new RemoteAuthService(afAuth);
+}
+export const vehiclesServiceFactory = (sStorage: SessionStorageService,
+                                       lStorage: LocalStorageService,
+                                       db: AngularFireDatabase) => {
+    if (sStorage.retrieve('local')) {
+        return new LocalVehiclesService();
+    }
+    return new RemoteVehiclesService(db);
 }

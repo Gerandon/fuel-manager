@@ -1,0 +1,27 @@
+<mat-card fxFlex.lg="calc(33% - 16px)"
+          fxFlex.lt-lg="calc(50% - 16px)"
+          fxFlex.xs="calc(100% - 16px)">
+    <mat-card-header>
+        <mat-card-title>{{ vehicle.brand }} {{vehicle.type}}</mat-card-title>
+        <mat-card-subtitle>{{ vehicle.engineVolume }} ccm</mat-card-subtitle>
+    </mat-card-header>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <img
+             style="height:100px"
+             [src]="'https://kep.cdn.index.hu/1/0/3975/39757/397573/39757307_3033467_cff894add5cbd8a2ad2248bcd9cec88b_wm.jpg'"
+             class="card-image">
+    </div>
+    <mat-card-content>
+        <div fxLayout="row" class="mt-15">
+            <mat-card fxFlex="100" class="card-outlined">
+                <p class="card-outlined__title">Adatok</p>
+                <mat-card-content>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card-content>
+    <mat-card-actions align="start">
+        <a mat-button color="primary" (click)="onUpdate.emit(vehicle)">Szerkesztés</a>
+        <a mat-button color="primary">Szervízkönyv</a>
+    </mat-card-actions>
+</mat-card>

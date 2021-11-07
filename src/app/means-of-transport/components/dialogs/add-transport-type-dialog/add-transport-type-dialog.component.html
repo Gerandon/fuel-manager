@@ -1,0 +1,16 @@
+<form #addForm="ngForm" class="book-milage" fxLayout="column">
+    <div fxLayout="row">
+        <app-transport-type [vehicle]="model"></app-transport-type>
+    </div>
+    <div *ngIf="editMode" fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">
+        <div fxFlex="50">
+            <button mat-raised-button [mat-dialog-close]="model"
+                    [disabled]="addForm.invalid"
+                    [color]="'primary'">Hozzáadás
+            </button>
+        </div>
+        <div fxFlex="50" fxLayoutAlign="end center">
+            <button mat-button mat-dialog-close [color]="'primary'">Mégse</button>
+        </div>
+    </div>
+</form>

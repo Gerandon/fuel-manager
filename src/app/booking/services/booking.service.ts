@@ -23,7 +23,7 @@ export class BookingService implements IBookingService {
         return this._bookingService.editTravelDiary(item);
     }
     addFuelCost(addItem: FuelCostDiaryType): void {
-        this._bookingService.addFuelCost({...addItem, id: v4()});
+        this._bookingService.addFuelCost(addItem);
     }
     removeFuelCost(item: FuelCostDiaryType): void {
         this._bookingService.removeFuelCost(item);
