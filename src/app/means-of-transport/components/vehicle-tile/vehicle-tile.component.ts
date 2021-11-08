@@ -11,6 +11,7 @@ export class VehicleTileComponent implements OnInit {
 
     @Input() vehicle!: VehicleDataType;
     @Output() onUpdate = new EventEmitter<VehicleDataType>();
+    @Output() onDelete = new EventEmitter<VehicleDataType>();
 
     constructor() {
     }

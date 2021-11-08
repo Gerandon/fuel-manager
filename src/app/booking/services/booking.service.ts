@@ -13,6 +13,10 @@ export class BookingService implements IBookingService {
     constructor(@Inject(BOOKING_SERVICE) private _bookingService: IBookingService) {
     }
 
+    searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string}): Observable<TravelDiaryType[]> {
+        return this._bookingService.searchInTravelDiary(queryParams);
+    }
+
     addTravelDiary(addItem: TravelDiaryType): void {
         this._bookingService.addTravelDiary({...addItem, id: v4()});
     }

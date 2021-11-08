@@ -2,7 +2,19 @@
           fxFlex.lt-lg="calc(50% - 16px)"
           fxFlex.xs="calc(100% - 16px)">
     <mat-card-header>
-        <mat-card-title>{{ vehicle.brand }} {{vehicle.type}}</mat-card-title>
+        <mat-card-title>
+            <div fxLayout="row" fxLayoutGap="15px">
+                <div fxLayoutAlign="start center">{{ vehicle.brand }} {{vehicle.type}}</div>
+                <div fxLayoutAlign="end center">
+                    <button mat-icon-button color="warn"
+                            (click)="onDelete.emit(vehicle)"
+                            matTooltip="Elem törlése">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+        </mat-card-title>
         <mat-card-subtitle>{{ vehicle.engineVolume }} ccm</mat-card-subtitle>
     </mat-card-header>
     <div fxLayout="row" fxLayoutAlign="center center">

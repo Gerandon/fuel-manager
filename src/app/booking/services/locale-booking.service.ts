@@ -29,6 +29,10 @@ export class LocaleBookingService implements IBookingService {
         ).subscribe();
     }
 
+    searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string}): Observable<TravelDiaryType[]> {
+        throw new Error('Method not implemented.');
+    }
+
     addTravelDiary(addItem: TravelDiaryType): void {
         this.getTravelDiaryList().pipe(
             first(),

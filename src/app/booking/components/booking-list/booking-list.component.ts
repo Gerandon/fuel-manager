@@ -3,10 +3,10 @@ import {Observable} from "rxjs";
 import {BookingService} from "../../services/booking.service";
 import {MatDialog} from "@angular/material/dialog";
 import {BookTravelComponent} from "../book-travel/book-travel.component";
-import {fullSizeDialogConfig} from "../../../app-common/common";
-import {map} from "rxjs/operators";
 import {MatTabGroup} from "@angular/material/tabs";
 import {BookFuelComponent} from "../book-fuel/book-fuel.component";
+import {TravelDiaryType} from "../../../app-common/interfaces/common.interface";
+import {first} from "rxjs/operators";
 
 @Component({
     selector: 'app-booking-list',
@@ -20,6 +20,23 @@ export class BookingListComponent implements OnInit {
     public amountSpent!: Observable<any[]>;
     public amountPaid!: Observable<any[]>;
     public fullSpent!: Observable<any[]>;
+    public travelQueryParams?: { key: keyof TravelDiaryType, value: string};
+    public fuelQueryParams?: { key: keyof TravelDiaryType, value: string};
+    public monthTabIndex = 0;
+    public months = [
+        'Január',
+        'Február',
+        'Március',
+        'Április',
+        'Május',
+        'Június',
+        'Július',
+        'Augusztus',
+        'Szeptember',
+        'Október',
+        'November',
+        'December',
+    ];
 
     private tabIndexComponent;
 
@@ -35,6 +52,12 @@ export class BookingListComponent implements OnInit {
         this.amountSpent = this.bookingService.getChartDataByValue('amountSpent');
         this.amountPaid = this.bookingService.getChartDataByValue('amountPaid', true);
         this.fullSpent = this.bookingService.getChartDataByValue('fullSpent', false);
+
+        this.monthTabIndex = new Date().getMonth();
+    }
+
+    monthTabChange(event) {
+        this.travelQueryParams = this.fuelQueryParams = { key: 'creationDate', value: event.index.toString()};
     }
 
     addToList() {

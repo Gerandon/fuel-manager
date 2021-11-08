@@ -26,7 +26,7 @@ export class RemoteVehiclesService implements IVehiclesService {
     }
 
     removeVehicle(item: VehicleDataType): void {
-        throw new Error('Method not implemented.');
+        this.fbService.delete(item).subscribe();
     }
 
     editVehicle(item: VehicleDataType): VehicleDataType {

@@ -25,6 +25,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {GoogleMapsModule} from "@angular/google-maps";
+import {NgxContentLoadingModule} from "ngx-content-loading";
 
 export const lodash = _;
 
@@ -54,6 +55,7 @@ export const lodash = _;
         MatTabsModule,
         MatProgressSpinnerModule,
         GoogleMapsModule,
+        NgxContentLoadingModule,
     ],
     exports: [
         MatExpansionModule,
@@ -80,6 +82,7 @@ export const lodash = _;
         MatTabsModule,
         MatProgressSpinnerModule,
         GoogleMapsModule,
+        NgxContentLoadingModule,
     ]
 })
 export class VendorModule {

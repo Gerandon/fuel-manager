@@ -43,6 +43,10 @@ export class MyVehiclesComponent implements OnInit {
         });
     }
 
+    delete(item: VehicleDataType) {
+        this.vService.removeVehicle(item);
+    }
+
     update(item: VehicleDataType) {
         this.dialog.open(AddTransportTypeDialogComponent, {
             data: {

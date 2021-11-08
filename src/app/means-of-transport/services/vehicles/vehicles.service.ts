@@ -18,7 +18,7 @@ export class VehiclesService implements IVehiclesService {
         this._vehiclesService.addVehicle(addItem);
     }
     removeVehicle(item: VehicleDataType): void {
-        throw new Error('Method not implemented.');
+        this._vehiclesService.removeVehicle(item);
     }
     editVehicle(item: VehicleDataType): VehicleDataType {
         return this._vehiclesService.editVehicle(item);

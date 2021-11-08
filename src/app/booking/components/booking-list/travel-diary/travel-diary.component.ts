@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {BookTravelComponent} from "../../book-travel/book-travel.component";
-import {fullSizeDialogConfig} from "../../../../app-common/common";
 import {v4} from "uuid";
 import {MatDialog} from "@angular/material/dialog";
 import {BookingService} from "../../../services/booking.service";
@@ -12,7 +11,9 @@ import {TravelDiaryType} from "../../../../app-common/interfaces/common.interfac
     templateUrl: './travel-diary.component.html',
     styleUrls: ['./travel-diary.component.scss']
 })
-export class TravelDiaryComponent implements OnInit {
+export class TravelDiaryComponent implements OnInit, OnChanges {
+
+    @Input() queryParams?: {key: keyof TravelDiaryType, value: string};
 
     public travelDiarySource!: Observable<TravelDiaryType[]>;
     public distance!: Observable<any[]>;
@@ -20,11 +21,16 @@ export class TravelDiaryComponent implements OnInit {
 
     constructor(private dialog: MatDialog,
                 public bookingService: BookingService) {
-        this.travelDiarySource = this.bookingService.getTravelDiaryList();
         this.distance = this.bookingService.getChartDataByValue('distance', true);
     }
 
     ngOnInit(): void {
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.queryParams) {
+            this.travelDiarySource = this.bookingService.searchInTravelDiary(this.queryParams);
+        }
     }
 
     openItem(item: TravelDiaryType, mode: ('edit' | 'copy' | 'detail')) {

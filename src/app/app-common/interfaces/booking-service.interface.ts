@@ -5,6 +5,7 @@ import {InjectionToken} from "@angular/core";
 export interface IBookingService {
     getTravelDiaryList(): Observable<TravelDiaryType[]>;
     getFuelCostDiaryList(): Observable<FuelCostDiaryType[]>;
+    searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string}): Observable<TravelDiaryType[]>
 
     addTravelDiary(addItem: TravelDiaryType): void;
     removeTravelDiary(item: TravelDiaryType): void;

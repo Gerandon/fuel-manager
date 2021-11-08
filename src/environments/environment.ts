@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    remote: false,
     production: false,
     firebase: {
+        mode: 'dev',
         apiKey: "AIzaSyBZzDTCWnNHWI1gLumqgJZStkepAj2dMR8",
         authDomain: "fuel-manager-1b801.firebaseapp.com",
         databaseURL: "https://fuel-manager-1b801-default-rtdb.firebaseio.com",

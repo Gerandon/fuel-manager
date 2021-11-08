@@ -1,25 +1,43 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/database";
 import {SessionStorage} from "ngx-webstorage";
-import {first, map, tap} from "rxjs/operators";
+import {filter, first, map, tap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {BaseType} from "../interfaces/common.interface";
 import {v4} from "uuid";
 import {lodash as _} from 'src/app/app-common/vendor/vendor.module';
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class FirebaseDatabaseService<ITEM extends BaseType> {
 
     @SessionStorage('uid')
     private uid!: string;
-    private tutorialsRef!: AngularFireList<ITEM>;
+    private dbRef!: AngularFireList<ITEM>;
 
     constructor(private db: AngularFireDatabase, private dbPath: string) {
-        this.tutorialsRef = this.db.list(`${this.uid}/${this.dbPath}`);
+        this.dbRef = this.db.list(`${environment.firebase.mode}/${this.uid}/${this.dbPath}`);
+    }
+
+    search(queryParams?: {key: keyof ITEM, value: string}): Observable<ITEM[]> {
+        const { key, value } = queryParams || { key: null, value: null };
+        // Not the best way, 'cause we're using the whole list to search in it
+        return this.getAll().pipe(
+            map((array) => array.filter(item => {
+                if (!queryParams) {
+                    return true;
+                }
+                // Should be more generic
+                if ((`'${key}'`).includes('Date')) {
+                    return (<Date>item[key]).getMonth() === Number(value);
+                }
+                return item[key].includes(value);
+            }))
+        );
     }
 
     getAll(): Observable<any> {
-        return this.tutorialsRef.snapshotChanges().pipe(
+        return this.dbRef.snapshotChanges().pipe(
             map(changes => changes.map(c => ({
                 key: c.payload.key,
                 ...c.payload.val() ,
@@ -29,7 +47,7 @@ export class FirebaseDatabaseService<ITEM extends BaseType> {
     }
 
     create(tutorial: any): any {
-        return this.tutorialsRef.push(_.omit({
+        return this.dbRef.push(_.omit({
             ...tutorial,
             id: v4(),
             creationDate: tutorial.creationDate.getTime(),
@@ -42,7 +60,7 @@ export class FirebaseDatabaseService<ITEM extends BaseType> {
             tap(items => {
                 const editable = items.find(_item => _item.id === item.id);
                 if (editable) {
-                    this.tutorialsRef.update(editable['key'], {
+                    this.dbRef.update(editable['key'], {
                         ...item,
                         creationDate: item.creationDate.getTime()
                     });
@@ -57,13 +75,13 @@ export class FirebaseDatabaseService<ITEM extends BaseType> {
             tap(items => {
                 const removable = items.find(_item => _item.id === item.id);
                 if (removable) {
-                    this.tutorialsRef.remove(removable.key);
+                    this.dbRef.remove(removable.key);
                 }
             })
         );
     }
 
     deleteAll(): Promise<void> {
-        return this.tutorialsRef.remove();
+        return this.dbRef.remove();
     }
 }

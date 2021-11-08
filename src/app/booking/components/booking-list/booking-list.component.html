@@ -1,22 +1,12 @@
 <div class="booking-list">
-    <div fxLayout="row" fxLayoutGap="15px">
-        <mat-card fxFlex="80">
-            <mat-card-content>
-                <div fxLayout="row">
-                    <basic-input name="username"
-                                 [translateParams]="{field: 'LOGIN.USERNAME.LABEL'}"
-                                 label="LOGIN.USERNAME.LABEL"
-                                 placeholder="LOGIN.USERNAME.PLACEHOLDER">
-                    </basic-input>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <br>
+    <mat-tab-group [selectedIndex]="monthTabIndex" style="background: white"
+                   (selectedTabChange)="monthTabChange($event)">
+        <mat-tab *ngFor="let month of months" [label]="month"></mat-tab>
+    </mat-tab-group>
     <div fxLayout="row">
         <mat-tab-group #tabGroup fxFlex="100" style="background: white">
             <mat-tab label="Útinapló">
-                <ng-template matTabContent><app-travel-diary></app-travel-diary></ng-template>
+                <ng-template matTabContent><app-travel-diary [queryParams]="travelQueryParams"></app-travel-diary></ng-template>
             </mat-tab>
             <mat-tab label="Utazási költségek">
                 <ng-template matTabContent><app-fuel-cost-diary></app-fuel-cost-diary></ng-template>
