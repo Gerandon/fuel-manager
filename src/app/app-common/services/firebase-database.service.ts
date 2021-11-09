@@ -21,7 +21,9 @@ export class FirebaseDatabaseService<ITEM extends BaseType> {
 
     search(queryParams?: {key: keyof ITEM, value: string}): Observable<ITEM[]> {
         const { key, value } = queryParams || { key: null, value: null };
+        // return this.dbRef.query.orderByChild(key).equalTo(value);
         // Not the best way, 'cause we're using the whole list to search in it
+        // Should use query
         return this.getAll().pipe(
             map((array) => array.filter(item => {
                 if (!queryParams) {
@@ -67,6 +69,16 @@ export class FirebaseDatabaseService<ITEM extends BaseType> {
                 }
             })
         );
+    }
+
+    updateAll(item: ITEM): Observable<ITEM[]> {
+        return this.getAll().pipe(
+            first(),
+            tap(items => items.forEach(_item => this.dbRef.update(_item['key'], {
+                ..._item,
+                ...item,
+            })))
+        )
     }
 
     delete(item: ITEM): Observable<any> {

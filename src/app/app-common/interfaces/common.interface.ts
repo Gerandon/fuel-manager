@@ -5,8 +5,9 @@ export interface RouteFuelPropertiesType {
     currentFuelPrice: number;
 }
 export interface OwnerVehicleDataType {
-    since: Date;
-    boughtMilage: number;
+    since?: Date;
+    isMain?: boolean;
+    boughtMilage?: number;
 }
 export interface VehicleDataType extends BaseType {
     brand: string;

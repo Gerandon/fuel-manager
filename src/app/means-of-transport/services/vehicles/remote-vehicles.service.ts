@@ -33,4 +33,8 @@ export class RemoteVehiclesService implements IVehiclesService {
         this.fbService.update(item).subscribe();
         return item;
     }
+
+    editMultiple(item: VehicleDataType) {
+        return this.fbService.updateAll(item);
+    }
 }

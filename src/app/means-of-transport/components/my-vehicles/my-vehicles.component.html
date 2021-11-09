@@ -7,6 +7,7 @@
         <div fxLayout="row wrap" fxLayoutGap="15px grid">
             <app-vehicle-tile *ngFor="let vehicle of vehiclesObs.value"
                               [vehicle]="vehicle"
+                              (click)="setAsMainVehicle($event, vehicle)"
                               (onDelete)="delete($event)"
                               (onUpdate)="update($event)">
             </app-vehicle-tile>

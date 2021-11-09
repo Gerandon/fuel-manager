@@ -1,4 +1,8 @@
 @import './src/theme';
 app-vehicle-tile {
     cursor: pointer;
+
+    .main-background {
+        background: $app-primary-color;
+    }
 }

@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddTransportTypeDialogComponent} from "../dialogs/add-transport-type-dialog/add-transport-type-dialog.component";
 import {Observable} from "rxjs";
 import {v4} from "uuid";
+import {tap} from "rxjs/operators";
 
 @Component({
     selector: 'app-my-vehicles',
@@ -45,6 +46,23 @@ export class MyVehiclesComponent implements OnInit {
 
     delete(item: VehicleDataType) {
         this.vService.removeVehicle(item);
+    }
+
+    setAsMainVehicle(event, item: VehicleDataType) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.vService.editMultiple({
+            ownerData: { isMain: false }
+        } as VehicleDataType).pipe(
+            tap(() => {
+                this.vService.editVehicle({
+                    ...item,
+                    ownerData: {
+                        isMain: true,
+                    }
+                });
+            })
+        ).subscribe();
     }
 
     update(item: VehicleDataType) {
