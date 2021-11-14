@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {VehicleDataType} from "../../../app-common/interfaces/common.interface";
+import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
 
 @Component({
     selector: 'app-vehicle-tile',

@@ -5,8 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {BookTravelComponent} from "../book-travel/book-travel.component";
 import {MatTabGroup} from "@angular/material/tabs";
 import {BookFuelComponent} from "../book-fuel/book-fuel.component";
-import {TravelDiaryType} from "../../../app-common/interfaces/common.interface";
-import {first} from "rxjs/operators";
+import {TravelDiaryType} from "../../../app-common/interfaces/travel-diary.interface";
 
 @Component({
     selector: 'app-booking-list',

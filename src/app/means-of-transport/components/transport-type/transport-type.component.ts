@@ -1,7 +1,7 @@
 import {Component, Host, Input, OnInit, Optional} from '@angular/core';
-import {VehicleDataType} from "../../../app-common/interfaces/common.interface";
 import {BaseFormComponent} from "../../../app-common/widgets/core/base-form.component";
 import {NgForm} from "@angular/forms";
+import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
 
 @Component({
     selector: 'app-transport-type',

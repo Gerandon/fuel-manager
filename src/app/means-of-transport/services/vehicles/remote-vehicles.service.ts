@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {VehicleDataType} from 'src/app/app-common/interfaces/common.interface';
 import {IVehiclesService} from "../../../app-common/interfaces/vehicles-service.interface";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {FirebaseDatabaseService} from "../../../app-common/services/firebase-database.service";
-import {v4} from "uuid";
+import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
 
 @Injectable({
     providedIn: 'root'

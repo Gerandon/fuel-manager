@@ -2,9 +2,10 @@ import {Injectable} from '@angular/core';
 import {IBookingService} from "../../app-common/interfaces/booking-service.interface";
 import {BehaviorSubject, Observable} from "rxjs";
 import {first, tap} from "rxjs/operators";
-import {FuelCostDiaryType, TravelDiaryType} from "../../app-common/interfaces/common.interface";
 import {LocalStorageService} from "ngx-webstorage";
 import {AuthService} from "../../auth/services/auth.service";
+import {TravelDiaryType} from "../../app-common/interfaces/travel-diary.interface";
+import {FuelCostDiaryType} from "../../app-common/interfaces/fuel-cost.interface";
 
 @Injectable({
     providedIn: 'root'

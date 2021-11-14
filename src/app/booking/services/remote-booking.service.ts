@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {IBookingService} from "../../app-common/interfaces/booking-service.interface";
 import {Observable} from "rxjs";
-import {FuelCostDiaryType, TravelDiaryType} from "../../app-common/interfaces/common.interface";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
-import {lodash as _} from 'src/app/app-common/vendor/vendor.module';
 import {FirebaseDatabaseService} from "../../app-common/services/firebase-database.service";
+import {TravelDiaryType} from "../../app-common/interfaces/travel-diary.interface";
+import {FuelCostDiaryType} from 'src/app/app-common/interfaces/fuel-cost.interface';
 
 @Injectable({
     providedIn: 'root',
@@ -19,7 +19,7 @@ export class RemoteBookingService implements IBookingService {
         this.fuelFbService = new FirebaseDatabaseService(firebaseDb, 'fuel-cost-list');
     }
 
-    searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string}): Observable<TravelDiaryType[]> {
+    searchInTravelDiary(queryParams?: { key: keyof TravelDiaryType, value: string }): Observable<TravelDiaryType[]> {
         return this.travelFbService.search(queryParams);
     }
 
