@@ -26,6 +26,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {GoogleMapsModule} from "@angular/google-maps";
 import {NgxContentLoadingModule} from "ngx-content-loading";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 export const lodash = _;
 
@@ -53,6 +54,7 @@ export const lodash = _;
         MatTooltipModule,
         MatMenuModule,
         MatTabsModule,
+        MatGridListModule,
         MatProgressSpinnerModule,
         GoogleMapsModule,
         NgxContentLoadingModule,
@@ -80,6 +82,7 @@ export const lodash = _;
         MatTooltipModule,
         MatMenuModule,
         MatTabsModule,
+        MatGridListModule,
         MatProgressSpinnerModule,
         GoogleMapsModule,
         NgxContentLoadingModule,

@@ -1,0 +1,23 @@
+<div fxLayout="column" fxFlex fxLayoutAlign="center center">
+    <div fxLayout="row wrap" fxLayoutGap="15px grid">
+        <div *ngFor="let menuItem of menu" [routerLink]="['/'+menuItem.navigateTo]">
+            <div class="content"
+                 fxFlex.lg="calc(33% - 16px)"
+                 fxFlex.lt-lg="calc(50% - 16px)"
+                 fxFlex.xs="calc(100% - 16px)" fxLayout="column">
+                <div fxLayoutAlign="center center"><span>{{menuItem.label}}</span></div>
+                <div *ngIf="menuItem.icon" fxFlex fxLayoutAlign="center center">
+                    <mat-icon>{{menuItem.icon}}</mat-icon>
+                </div>
+                <!--
+                <resolve-request #resolveReq
+                                 [url]="menuItem.imageUrl">
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <img [src]="resolveReq.value" style="height: 100px"/>
+                    </div>
+                </resolve-request>
+                -->
+            </div>
+        </div>
+    </div>
+</div>

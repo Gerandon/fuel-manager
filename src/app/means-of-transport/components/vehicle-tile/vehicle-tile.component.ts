@@ -19,4 +19,8 @@ export class VehicleTileComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    prevent(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
 }

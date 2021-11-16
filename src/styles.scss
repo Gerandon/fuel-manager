@@ -12,6 +12,14 @@ body {
     font-family: Roboto, Arial, Helvetica, sans-serif;
     table {
         width: 100%;
+        overflow-x: auto;
+        display: block;
+        th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+            min-width: 200px;
+            &.mat-table-sticky {
+                max-width: 50px;
+            }
+        }
     }
     h3 {
         color: $app-font-color;

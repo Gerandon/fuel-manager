@@ -69,3 +69,39 @@ export const vehiclesServiceFactory = (sStorage: SessionStorageService,
     }
     return new RemoteVehiclesService(db);
 }
+
+export const Config = {
+    menu: [
+        {
+            label: 'Profil',
+            navigateTo: 'auth/settings',
+            showAsTile: true,
+            showAsMenu: false,
+            imageUrl: '',
+            icon: 'person_rounded'
+        },
+        {
+            label: 'Kezdőlap',
+            navigateTo: 'home',
+            showAsTile: false,
+            showAsMenu: true,
+            imageUrl: '',
+        },
+        {
+            label: 'Könyvelések',
+            navigateTo: 'booking/list',
+            showAsTile: true,
+            showAsMenu: true,
+            imageUrl: 'https://kep.cdn.index.hu/1/0/3975/39757/397573/39757307_3033467_cff894add5cbd8a2ad2248bcd9cec88b_wm.jpg',
+            icon: 'menu_book_rounded'
+        },
+        {
+            label: 'Saját járműveim',
+            navigateTo: 'means-of-transport/my-vehicles',
+            showAsTile: true,
+            showAsMenu: true,
+            imageUrl: 'https://image.pngaaa.com/84/510084-middle.png',
+            icon: 'directions_car_rounded'
+        }
+    ]
+}

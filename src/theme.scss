@@ -11,6 +11,8 @@ $app-font-color: mat-color($app-white);
 $app-primary-color: mat-color($app-primary);
 $app-primary-transparent-color: mat-color($app-primary, 0.5);
 
+$app-accent-color: mat-color($app-accent);
+
 $app-theme: mat.define-light-theme((
     color: (
         primary: $app-primary,

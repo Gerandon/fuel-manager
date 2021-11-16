@@ -2,7 +2,25 @@
 app-vehicle-tile {
     cursor: pointer;
 
-    .main-background {
+    .mat-button {
+        color: $app-primary-color;
+    }
+
+    .main {
         background: $app-primary-color;
+        mat-card-subtitle {
+            color: white;
+        }
+        color: white;
+        mat-card {
+            background: $app-accent-color;
+        }
+        .mat-button {
+            color: $app-accent-color;
+        }
+        .card-outlined__title {
+            background: $app-primary-color;
+            color: white;
+        }
     }
 }
