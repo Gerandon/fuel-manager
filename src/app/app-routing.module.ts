@@ -1,12 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginRequiredGuard} from "./app-common/guards/login-required.guard";
+import {HomeComponent} from "./main/home/home.component";
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'booking/list',
+        redirectTo: 'home',
         pathMatch: 'full',
+    },
+    {
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [LoginRequiredGuard]
     },
     {
         path: 'auth',

@@ -1,22 +1,37 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/database";
 import {SessionStorage} from "ngx-webstorage";
-import {filter, first, map, tap} from "rxjs/operators";
+import {first, map, tap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {BaseType} from "../interfaces/common.interface";
 import {v4} from "uuid";
 import {lodash as _} from 'src/app/app-common/vendor/vendor.module';
 import {environment} from "../../../environments/environment";
+import firebase from "firebase/compat";
+import {DatabaseReference} from "@angular/fire/compat/database/interfaces";
+import Query = firebase.database.Query;
+import ThenableReference = firebase.database.ThenableReference;
+
+interface _BaseType extends BaseType {
+    [key: string]: any;
+    key?: string;
+}
 
 @Injectable()
-export class FirebaseDatabaseService<ITEM extends BaseType> {
+export class FirebaseDatabaseService<ITEM extends _BaseType> {
 
     @SessionStorage('uid')
     private uid!: string;
-    private dbRef!: AngularFireList<ITEM>;
+
+    private readonly path;
+    private dbRef!: (query?: (ref: DatabaseReference) => Query) => AngularFireList<ITEM>;
 
     constructor(private db: AngularFireDatabase, private dbPath: string) {
-        this.dbRef = this.db.list(`${environment.firebase.mode}/${this.uid}/${this.dbPath}`);
+        this.path = `${environment.firebase.mode}/${this.uid}/${this.dbPath}`;
+        this.dbRef = (query?: (ref: DatabaseReference) => Query) => query
+            ? this.db.list(this.path, query)
+            : this.db.list(this.path);
+            // : this.db.list(this.path, ref => ref.orderByChild('creationDate'));
     }
 
     search(queryParams?: {key: keyof ITEM, value: string}): Observable<ITEM[]> {
@@ -24,36 +39,39 @@ export class FirebaseDatabaseService<ITEM extends BaseType> {
         // return this.dbRef.query.orderByChild(key).equalTo(value);
         // Not the best way, 'cause we're using the whole list to search in it
         // Should use query
-        return this.getAll().pipe(
+
+        return this.getAll(true).pipe(
             map((array) => array.filter(item => {
                 if (!queryParams) {
                     return true;
                 }
                 // Should be more generic
                 if ((`'${key}'`).includes('Date')) {
+                    // @ts-ignore
                     return (<Date>item[key]).getMonth() === Number(value);
                 }
+                // @ts-ignore
                 return item[key].includes(value);
             }))
         );
     }
 
-    getAll(): Observable<any> {
-        return this.dbRef.snapshotChanges().pipe(
+    getAll(ordered?): Observable<ITEM[]> {
+        return this.dbRef(ordered ? (ref => ref.orderByChild('creationDate')) : undefined).snapshotChanges().pipe(
             map(changes => changes.map(c => ({
-                key: c.payload.key,
+                ...{key: c.payload.key} as any,
                 ...c.payload.val() ,
                 creationDate: new Date(c.payload.val()!.creationDate)
-            })))
+            }) as ITEM))
         );
     }
 
-    create(tutorial: any): any {
-        return this.dbRef.push(_.omit({
-            ...tutorial,
+    create(item: ITEM): ThenableReference {
+        return this.dbRef().push(_.omit({
+            ...item,
             id: v4(),
-            creationDate: tutorial.creationDate.getTime(),
-        }, ['key']));
+            creationDate: item.creationDate.getTime(),
+        }, ['key']) as ITEM);
     }
 
     update(item: ITEM): Observable<ITEM[]>{
@@ -62,7 +80,8 @@ export class FirebaseDatabaseService<ITEM extends BaseType> {
             tap(items => {
                 const editable = items.find(_item => _item.id === item.id);
                 if (editable) {
-                    this.dbRef.update(editable['key'], {
+                    // @ts-ignore
+                    this.dbRef().update(editable.key, {
                         ...item,
                         creationDate: item.creationDate.getTime()
                     });
@@ -74,7 +93,8 @@ export class FirebaseDatabaseService<ITEM extends BaseType> {
     updateAll(item: ITEM): Observable<ITEM[]> {
         return this.getAll().pipe(
             first(),
-            tap(items => items.forEach(_item => this.dbRef.update(_item['key'], {
+            // @ts-ignore
+            tap(items => items.forEach(_item => this.dbRef().update(_item.key, {
                 ..._item,
                 ...item,
             })))
@@ -87,13 +107,13 @@ export class FirebaseDatabaseService<ITEM extends BaseType> {
             tap(items => {
                 const removable = items.find(_item => _item.id === item.id);
                 if (removable) {
-                    this.dbRef.remove(removable.key);
+                    this.dbRef().remove(removable.key);
                 }
             })
         );
     }
 
     deleteAll(): Promise<void> {
-        return this.dbRef.remove();
+        return this.dbRef().remove();
     }
 }

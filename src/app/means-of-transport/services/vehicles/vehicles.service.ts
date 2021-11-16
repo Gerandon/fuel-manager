@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
-import { VehicleDataType } from 'src/app/app-common/interfaces/common.interface';
 import {IVehiclesService, VEHICLES_SERVICE} from "../../../app-common/interfaces/vehicles-service.interface";
+import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
 
 @Injectable({
     providedIn: 'root'

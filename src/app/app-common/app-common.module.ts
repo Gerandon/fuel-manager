@@ -10,6 +10,7 @@ import {SelectComponent} from './widgets/select/select.component';
 import {NumberInputComponent} from "./widgets/number-input/number-input.component";
 import {TriangleButtonComponent} from './widgets/triangle-button/triangle-button.component';
 import { WithLoadingPipe } from './pipes/with-loading.pipe';
+import { ResolveRequestComponent } from './components/resolve-request/resolve-request.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { WithLoadingPipe } from './pipes/with-loading.pipe';
         NumberInputComponent,
         TriangleButtonComponent,
         WithLoadingPipe,
+        ResolveRequestComponent,
     ],
     imports: [
         CommonModule,
@@ -39,7 +41,8 @@ import { WithLoadingPipe } from './pipes/with-loading.pipe';
         LineChartComponent,
         NumberInputComponent,
         TriangleButtonComponent,
-        WithLoadingPipe
+        WithLoadingPipe,
+        ResolveRequestComponent
     ]
 })
 export class AppCommonModule {

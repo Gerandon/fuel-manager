@@ -1,13 +1,13 @@
 <mat-card fxFlex.lg="calc(33% - 16px)"
           fxFlex.lt-lg="calc(50% - 16px)"
-          fxFlex.xs="calc(100% - 16px)" [class.main-background]="vehicle.ownerData?.isMain">
+          fxFlex.xs="calc(100% - 16px)" [class.main]="vehicle.ownerData?.isMain">
     <mat-card-header>
         <mat-card-title>
             <div fxLayout="row" fxLayoutGap="15px">
                 <div fxLayoutAlign="start center">{{ vehicle.brand }} {{vehicle.type}}</div>
                 <div fxLayoutAlign="end center">
                     <button mat-icon-button color="warn"
-                            (click)="$event.preventDefault();$event.stopPropagation();onDelete.emit(vehicle)"
+                            (click)="prevent($event);onDelete.emit(vehicle)"
                             matTooltip="Elem törlése">
                         <mat-icon>delete</mat-icon>
                     </button>
@@ -33,8 +33,7 @@
         </div>
     </mat-card-content>
     <mat-card-actions align="start">
-        <a mat-button [color]="vehicle.ownerData?.isMain ? 'accent' : 'primary'"
-           (click)="$event.preventDefault();$event.stopPropagation();onUpdate.emit(vehicle)">Szerkesztés</a>
-        <a mat-button [color]="vehicle.ownerData?.isMain ? 'accent' : 'primary'">Szervízkönyv</a>
+        <a mat-button (click)="prevent($event);onUpdate.emit(vehicle)">Szerkesztés</a>
+        <a mat-button (click)="prevent($event)">Szervízkönyv</a>
     </mat-card-actions>
 </mat-card>

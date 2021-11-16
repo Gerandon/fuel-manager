@@ -1,0 +1,31 @@
+@import './src/theme.scss';
+
+app-home {
+    height: 100%;
+    .content {
+        min-width: 200px !important;
+        min-height: 150px;
+        padding: 10px;
+        background: $app-primary-color;
+        border: 5px solid $app-accent-color;
+        border-radius: 10px;
+        color: $app-accent-color;
+        cursor: pointer;
+
+        span {
+            font-size: 20px;
+        }
+
+        &:hover {
+            background-color: $app-accent-color;
+            color: $app-primary-color;
+        }
+        mat-icon {
+            height: 50px;
+            width: 50px;
+            font-size: 50px;
+        }
+
+        transition: background-color 0.3s;
+    }
+}

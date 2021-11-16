@@ -1,6 +1,7 @@
 import {Observable} from "rxjs";
-import {FuelCostDiaryType, TravelDiaryType} from "./common.interface";
 import {InjectionToken} from "@angular/core";
+import { TravelDiaryType } from "./travel-diary.interface";
+import {FuelCostDiaryType} from "./fuel-cost.interface";
 
 export interface IBookingService {
     getTravelDiaryList(): Observable<TravelDiaryType[]>;

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
-import { VehicleDataType } from 'src/app/app-common/interfaces/common.interface';
+import { VehicleDataType } from 'src/app/app-common/interfaces/vehicle.interface';
 import {IVehiclesService} from "../../../app-common/interfaces/vehicles-service.interface";
 
 @Injectable({

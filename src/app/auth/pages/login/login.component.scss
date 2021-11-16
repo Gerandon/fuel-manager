@@ -1,3 +1,5 @@
+@import './src/theme.scss';
+
 .login {
     height:100%;
     mat-card {
@@ -5,5 +7,8 @@
         mat-card-content {
             margin-top: 10px;
         }
+    }
+    h3, span {
+        color: $app-primary-color;
     }
 }

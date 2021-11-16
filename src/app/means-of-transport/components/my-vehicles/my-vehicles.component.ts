@@ -1,11 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {VehicleDataType} from "../../../app-common/interfaces/common.interface";
 import {VehiclesService} from "../../services/vehicles/vehicles.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AddTransportTypeDialogComponent} from "../dialogs/add-transport-type-dialog/add-transport-type-dialog.component";
 import {Observable} from "rxjs";
-import {v4} from "uuid";
 import {tap} from "rxjs/operators";
+import { VehicleDataType } from 'src/app/app-common/interfaces/vehicle.interface';
 
 @Component({
     selector: 'app-my-vehicles',

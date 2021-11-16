@@ -4,7 +4,7 @@ import {v4} from "uuid";
 import {MatDialog} from "@angular/material/dialog";
 import {BookingService} from "../../../services/booking.service";
 import {Observable} from "rxjs";
-import {TravelDiaryType} from "../../../../app-common/interfaces/common.interface";
+import {TravelDiaryType} from "../../../../app-common/interfaces/travel-diary.interface";
 
 @Component({
     selector: 'app-travel-diary',

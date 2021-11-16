@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {VehicleDataType} from "../../../../app-common/interfaces/common.interface";
+import {VehicleDataType} from "../../../../app-common/interfaces/vehicle.interface";
 
 @Component({
     selector: 'app-add-transport-type-dialog',

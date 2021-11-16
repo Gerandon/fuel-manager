@@ -3,6 +3,7 @@ import {TranslateLoader, TranslateService} from "@ngx-translate/core";
 import {catchError, first, map, tap} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {AuthService} from "./auth/services/auth.service";
+import {Config} from "./app-common/common";
 
 @Component({
     selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
     public _opened: boolean = false;
     public animated: boolean = false;
     public isAuthenticated: Observable<boolean>;
+    public menu = Config.menu.filter(item => item.showAsMenu);
 
     constructor(private translate: TranslateService,
                 private translateLoader: TranslateLoader,

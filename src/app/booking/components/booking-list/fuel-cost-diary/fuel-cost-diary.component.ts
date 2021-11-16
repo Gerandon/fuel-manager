@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {FuelCostDiaryType} from "../../../../app-common/interfaces/common.interface";
 import {MatDialog} from "@angular/material/dialog";
 import {BookingService} from "../../../services/booking.service";
+import {FuelCostDiaryType} from "../../../../app-common/interfaces/fuel-cost.interface";
 
 @Component({
     selector: 'app-fuel-cost-diary',

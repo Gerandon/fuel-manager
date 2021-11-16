@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {TravelDiaryType, VehicleDataType} from "../../../app-common/interfaces/common.interface";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {TravelDiaryType} from "../../../app-common/interfaces/travel-diary.interface";
+import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
 
 @Component({
     selector: 'app-book-milage',

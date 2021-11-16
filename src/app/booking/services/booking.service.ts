@@ -1,9 +1,10 @@
 import {Inject, Injectable} from '@angular/core';
 import {BOOKING_SERVICE, IBookingService} from "../../app-common/interfaces/booking-service.interface";
 import {Observable} from "rxjs";
-import {FuelCostDiaryType, TravelDiaryType} from "../../app-common/interfaces/common.interface";
 import {map} from "rxjs/operators";
 import {v4} from "uuid";
+import { TravelDiaryType } from 'src/app/app-common/interfaces/travel-diary.interface';
+import {FuelCostDiaryType} from "../../app-common/interfaces/fuel-cost.interface";
 
 @Injectable({
     providedIn: 'root',
