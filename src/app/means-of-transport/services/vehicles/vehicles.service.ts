@@ -11,6 +11,10 @@ export class VehiclesService implements IVehiclesService {
     constructor(@Inject(VEHICLES_SERVICE) private _vehiclesService: IVehiclesService) {
     }
 
+    getVehicle(id: string): Observable<VehicleDataType> {
+        return this._vehiclesService.getVehicle(id);
+    }
+
     getVehiclesList(): Observable<VehicleDataType[]> {
         return this._vehiclesService.getVehiclesList();
     }
@@ -23,7 +27,7 @@ export class VehiclesService implements IVehiclesService {
     editVehicle(item: VehicleDataType): VehicleDataType {
         return this._vehiclesService.editVehicle(item);
     }
-    editMultiple(item: VehicleDataType) {
-        return this._vehiclesService['editMultiple'](item);
+    editMultiple({property, value}, itemIds?: string): Observable<VehicleDataType[]> {
+        return this._vehiclesService['editMultiple']({property, value}, itemIds);
     }
 }

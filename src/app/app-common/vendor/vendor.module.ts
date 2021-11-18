@@ -6,7 +6,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
-import * as _ from 'lodash';
+import * as lodash from 'lodash';
 import {TranslateModule} from "@ngx-translate/core";
 import {HttpClientModule} from "@angular/common/http";
 import {MatTableModule} from "@angular/material/table";
@@ -28,7 +28,10 @@ import {GoogleMapsModule} from "@angular/google-maps";
 import {NgxContentLoadingModule} from "ngx-content-loading";
 import {MatGridListModule} from "@angular/material/grid-list";
 
-export const lodash = _;
+export const _ = {
+    ...lodash,
+    set2: (object, prop, value) => lodash.set(object, prop.split('.'), value),
+};
 
 @NgModule({
     declarations: [],

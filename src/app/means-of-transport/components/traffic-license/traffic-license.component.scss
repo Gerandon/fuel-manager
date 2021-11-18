@@ -1,0 +1,26 @@
+app-traffic-license {
+    p {
+        font-size: 1.2vw;
+        position: absolute;
+        &.creation-date {
+            margin-top: 16.5%;
+            margin-left: 5%;
+        }
+        &.brand {
+            margin-top: 19.4%;
+            margin-left: 6%;
+        }
+        &.type {
+            margin-top: 22%;
+            margin-left: 6%;
+        }
+        &.engine-volume {
+            margin-top: 27.5%;
+            margin-left: 6%;
+        }
+        &.kilowatt {
+            margin-top: 27.5%;
+            margin-left: 20%;
+        }
+    }
+}

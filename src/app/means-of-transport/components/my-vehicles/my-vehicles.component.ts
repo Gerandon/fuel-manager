@@ -3,8 +3,10 @@ import {VehiclesService} from "../../services/vehicles/vehicles.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AddTransportTypeDialogComponent} from "../dialogs/add-transport-type-dialog/add-transport-type-dialog.component";
 import {Observable} from "rxjs";
-import {tap} from "rxjs/operators";
 import { VehicleDataType } from 'src/app/app-common/interfaces/vehicle.interface';
+import {_} from "../../../app-common/vendor/vendor.module";
+import {first, tap} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-my-vehicles',
@@ -14,21 +16,20 @@ import { VehicleDataType } from 'src/app/app-common/interfaces/vehicle.interface
 })
 export class MyVehiclesComponent implements OnInit {
 
-    public _vehicles: VehicleDataType[] = [
-        { id: '1', brand: 'Honda', type: 'Civic', avgConsumption: 6.6, engineType: 'Gasoline', engineVolume: '1800', creationDate: new Date()},
-        { id: '1', brand: 'Honda', type: 'Civic', avgConsumption: 6.6, engineType: 'Gasoline', engineVolume: '1800', creationDate: new Date()},
-        { id: '1', brand: 'Honda', type: 'Civic', avgConsumption: 6.6, engineType: 'Gasoline', engineVolume: '1800', creationDate: new Date()},
-        { id: '1', brand: 'Honda', type: 'Civic', avgConsumption: 6.6, engineType: 'Gasoline', engineVolume: '1800', creationDate: new Date()},
-        { id: '1', brand: 'Honda', type: 'Civic', avgConsumption: 6.6, engineType: 'Gasoline', engineVolume: '1800', creationDate: new Date()},
-    ];
+    public trackByIdentity = (index: number, item: any) => item;
     public vehicles!: Observable<VehicleDataType[]>;
 
     constructor(private vService: VehiclesService,
-                private dialog: MatDialog) {
+                private dialog: MatDialog,
+                private router: Router) {
         this.vehicles = vService.getVehiclesList();
     }
 
     ngOnInit(): void {
+    }
+
+    showDetail(item: VehicleDataType) {
+        this.router.navigate([`/means-of-transport/vehicle/${item.id}`])
     }
 
     create() {
@@ -50,17 +51,11 @@ export class MyVehiclesComponent implements OnInit {
     setAsMainVehicle(event, item: VehicleDataType) {
         event.preventDefault();
         event.stopPropagation();
-        this.vService.editMultiple({
-            ownerData: { isMain: false }
-        } as VehicleDataType).pipe(
+        this.vService.editMultiple({property: 'ownerData.isMain', value: false}).pipe(
+            first(),
             tap(() => {
-                this.vService.editVehicle({
-                    ...item,
-                    ownerData: {
-                        isMain: true,
-                    }
-                });
-            })
+                this.vService.editVehicle(_.set2(item, 'ownerData.isMain', true));
+            }),
         ).subscribe();
     }
 

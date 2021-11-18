@@ -5,26 +5,28 @@
         <mat-card-title>
             <div fxLayout="row" fxLayoutGap="15px">
                 <div fxLayoutAlign="start center">{{ vehicle.brand }} {{vehicle.type}}</div>
-                <div fxLayoutAlign="end center">
-                    <button mat-icon-button color="warn"
-                            (click)="prevent($event);onDelete.emit(vehicle)"
-                            matTooltip="Elem törlése">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </div>
             </div>
 
         </mat-card-title>
         <mat-card-subtitle>{{ vehicle.engineVolume }} ccm</mat-card-subtitle>
     </mat-card-header>
     <div fxLayout="row" fxLayoutAlign="center center">
+        <resolve-request #resolveReq
+                         style="height:100px"
+                         [url]="vehicle.ownerData?.imageUrl?.trim() || 'assets/images/nocar.jpeg'">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <img [src]="resolveReq.value" style="height: 100px"/>
+            </div>
+        </resolve-request>
+        <!--
         <img
              style="height:100px"
              [src]="'https://kep.cdn.index.hu/1/0/3975/39757/397573/39757307_3033467_cff894add5cbd8a2ad2248bcd9cec88b_wm.jpg'"
              class="card-image">
+        -->
     </div>
     <mat-card-content>
-        <div fxLayout="row" class="mt-15">
+        <div *ngIf="false" fxLayout="row" class="mt-15">
             <mat-card fxFlex="100" class="card-outlined">
                 <p class="card-outlined__title">Adatok</p>
                 <mat-card-content>
@@ -32,8 +34,12 @@
             </mat-card>
         </div>
     </mat-card-content>
-    <mat-card-actions align="start">
-        <a mat-button (click)="prevent($event);onUpdate.emit(vehicle)">Szerkesztés</a>
-        <a mat-button (click)="prevent($event)">Szervízkönyv</a>
+    <mat-card-actions align="center">
+        <div>
+            <button mat-icon-button (click)="prevent($event);detail.emit(vehicle)"><mat-icon>search</mat-icon></button>
+            <button mat-icon-button (click)="prevent($event);onUpdate.emit(vehicle)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button (click)="prevent($event);"><mat-icon>description</mat-icon></button>
+            <button mat-icon-button (click)="prevent($event);onDelete.emit(vehicle)"><mat-icon>delete</mat-icon></button>
+        </div>
     </mat-card-actions>
 </mat-card>

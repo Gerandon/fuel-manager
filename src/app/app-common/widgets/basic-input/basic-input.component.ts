@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, forwardRef, Injector, OnInit, ViewEncapsulation} from '@angular/core';
-import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {AbstractControl, NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors} from "@angular/forms";
 import {BaseTextInput} from "../core/base-text.input";
+import {Observable, of} from "rxjs";
 
 @Component({
     selector: 'basic-input',
@@ -9,6 +10,7 @@ import {BaseTextInput} from "../core/base-text.input";
     encapsulation: ViewEncapsulation.None,
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => BasicInputComponent), multi: true },
+        { provide: NG_ASYNC_VALIDATORS, useExisting: forwardRef(() => BasicInputComponent), multi: true },
     ],
 })
 export class BasicInputComponent extends BaseTextInput<string> implements OnInit {

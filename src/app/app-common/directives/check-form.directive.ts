@@ -7,7 +7,7 @@ import {
     OnInit,
 } from '@angular/core';
 import { FormControl, FormGroup, NgForm, ValidationErrors } from '@angular/forms';
-import { lodash as _ } from 'src/app/app-common/vendor/vendor.module';
+import { _ } from 'src/app/app-common/vendor/vendor.module';
 
 @Directive({
     selector: 'form[appCheckForm]',

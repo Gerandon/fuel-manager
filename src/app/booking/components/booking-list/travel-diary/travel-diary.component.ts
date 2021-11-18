@@ -17,7 +17,7 @@ export class TravelDiaryComponent implements OnInit, OnChanges {
 
     public travelDiarySource!: Observable<TravelDiaryType[]>;
     public distance!: Observable<any[]>;
-    public displayedColumns: string[] = ['creationDate', 'distance', 'routeFrom', 'routeTo', 'retour', 'action'];
+    public displayedColumns: string[] = ['creationDate', 'distance', 'routeFrom', 'routeTo', 'retour', 'ACTION'];
 
     constructor(private dialog: MatDialog,
                 public bookingService: BookingService) {

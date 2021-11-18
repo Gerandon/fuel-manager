@@ -16,6 +16,10 @@ export class RemoteVehiclesService implements IVehiclesService {
         this.fbService = new FirebaseDatabaseService(firebaseDb, 'vehicles-list');
     }
 
+    getVehicle(id: string): Observable<VehicleDataType> {
+        return this.fbService.get(id);
+    }
+
     getVehiclesList(): Observable<VehicleDataType[]> {
         return this.fbService.getAll();
     }
@@ -33,7 +37,7 @@ export class RemoteVehiclesService implements IVehiclesService {
         return item;
     }
 
-    editMultiple(item: VehicleDataType) {
-        return this.fbService.updateAll(item);
+    editMultiple({property, value}, itemIds?: string[]) {
+        return this.fbService.updateMultiple({property, value}, itemIds);
     }
 }

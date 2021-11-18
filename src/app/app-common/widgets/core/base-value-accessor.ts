@@ -1,19 +1,29 @@
-import {ControlValueAccessor, FormControl, NgControl} from "@angular/forms";
+import {
+    AbstractControl,
+    ControlValueAccessor,
+    FormControl,
+    NgControl,
+    ValidationErrors,
+    Validator, ValidatorFn
+} from "@angular/forms";
 import {
     ChangeDetectorRef,
     Directive,
     ElementRef,
     InjectFlags,
-    Injector,
+    Injector, Input,
     OnInit,
     ViewChild
 } from "@angular/core";
+import {Observable, of} from "rxjs";
+import { _ } from 'src/app/app-common/vendor/vendor.module';
 
 @Directive()
-export class BaseValueAccessor<T> implements ControlValueAccessor, OnInit {
+export class BaseValueAccessor<T> implements ControlValueAccessor, OnInit, Validator {
 
     @ViewChild('inputElement') inputElement!: ElementRef;
     @ViewChild('input', { static: true }) input!: NgControl;
+    @Input() public validator: Observable<ValidationErrors> = of({});
 
     public control!: FormControl;
 
@@ -22,11 +32,19 @@ export class BaseValueAccessor<T> implements ControlValueAccessor, OnInit {
     }
 
     protected controlDir?: NgControl;
+    protected readonly _defaultValidate: ValidatorFn = () => null;
+    protected _validate: ValidatorFn = this._defaultValidate;
+
     private onChange = (value: T) => {};
     private onTouched = () => {};
 
     constructor(protected cdr: ChangeDetectorRef,
                 protected injector: Injector) {
+    }
+
+    validate(control: AbstractControl): Observable<ValidationErrors> {
+        control.setErrors({ ...control.errors, pending: true});
+        return this.validator;
     }
 
     ngOnInit() {

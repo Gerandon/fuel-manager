@@ -5,6 +5,8 @@ import {VehicleDataType} from "./vehicle.interface";
 export interface IVehiclesService {
     getVehiclesList(): Observable<VehicleDataType[]>;
 
+    getVehicle(id: string): Observable<VehicleDataType>;
+
     addVehicle(addItem: VehicleDataType): void;
 
     removeVehicle(item: VehicleDataType): void;

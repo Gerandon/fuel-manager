@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {VehicleDataType} from "../../../../app-common/interfaces/vehicle.interface";
+import {defaultVehicle} from "../../../../app-common/common";
+import {_} from "../../../../app-common/vendor/vendor.module";
 
 @Component({
     selector: 'app-add-transport-type-dialog',
@@ -12,11 +14,11 @@ export class AddTransportTypeDialogComponent implements OnInit {
     public editMode: boolean = true;
     public model!: VehicleDataType;
 
-    constructor(@Inject(MAT_DIALOG_DATA) private item: {model: any, editMode: boolean}) {
+    constructor(@Inject(MAT_DIALOG_DATA) private item: {model: VehicleDataType, editMode: boolean}) {
     }
 
     ngOnInit(): void {
-        this.model = this.item?.model || {};
+        this.model = this.item?.model || _.cloneDeep(defaultVehicle);
         // empty object init
         this.model = {
             ...this.model as any,

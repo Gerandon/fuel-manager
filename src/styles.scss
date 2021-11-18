@@ -1,4 +1,5 @@
 @import 'theme';
+@import 'mixin.scss';
 
 html,
 body {
@@ -10,15 +11,33 @@ body {
     width: 100%;
     height: 100%;
     font-family: Roboto, Arial, Helvetica, sans-serif;
-    table {
+    .mat-tab-body-content {
+        overflow: hidden;
+    }
+    .table-wrapper {
+        overflow: auto;
+    }
+    .mat-table {
         width: 100%;
         overflow-x: auto;
-        display: block;
-        th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
-            min-width: 200px;
-            &.mat-table-sticky {
-                max-width: 50px;
-            }
+        .mat-row.mat-row,
+        .mat-header-row.mat-header-row {
+            width: fit-content;
+            min-width: 100%;
+        }
+
+        .mat-sort-header-position-before {
+            justify-content: flex-end;
+        }
+
+        .mat-cell,
+        .mat-header-cell {
+            @include column-width(24px);
+        }
+
+        .mat-cell:not(.mat-column-ACTION):not(.mat-column-SELECT),
+        .mat-header-cell:not(.mat-column-ACTION):not(.mat-column-SELECT) {
+            @include column-width(200px);
         }
     }
     h3 {

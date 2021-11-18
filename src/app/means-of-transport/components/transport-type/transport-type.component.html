@@ -31,7 +31,6 @@
                           fxFlex="auto"
                           [(ngModel)]="vehicle.engineVolume"
                           [required]="true"
-                          [unmask]="true"
                           [maxLength]="15"
                           suffix="(ccm)"
                           label="TRANSPORT_TYPE.ENGINE_VOLUME"
@@ -42,11 +41,16 @@
                           [(ngModel)]="vehicle.avgConsumption"
                           [required]="true"
                           [unmask]="true"
-                          type="number"
                           suffix="(Liter)"
                           label="TRANSPORT_TYPE.AVERAGE_CONSUMPTION"
                           placeholder="TRANSPORT_TYPE.AVERAGE_CONSUMPTION">
             </number-input>
+            <basic-input name="image"
+                         fxFlex="auto"
+                         [(ngModel)]="vehicle.ownerData!.imageUrl"
+                         label="Kép URL"
+                         placeholder="Kép elérési út">
+            </basic-input>
         </mat-card-content>
     </mat-card>
 </form>

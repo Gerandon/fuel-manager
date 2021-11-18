@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/database";
 import {SessionStorage} from "ngx-webstorage";
-import {first, map, tap} from "rxjs/operators";
+import {distinctUntilChanged, filter, first, map, tap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {BaseType} from "../interfaces/common.interface";
 import {v4} from "uuid";
-import {lodash as _} from 'src/app/app-common/vendor/vendor.module';
+import {_} from 'src/app/app-common/vendor/vendor.module';
 import {environment} from "../../../environments/environment";
 import firebase from "firebase/compat";
-import {DatabaseReference} from "@angular/fire/compat/database/interfaces";
+import {DatabaseReference, FirebaseOperation} from "@angular/fire/compat/database/interfaces";
 import Query = firebase.database.Query;
 import ThenableReference = firebase.database.ThenableReference;
 
@@ -56,13 +56,23 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
         );
     }
 
+    get(id: string): Observable<ITEM> {
+        // @ts-ignore
+        return this.getAll().pipe(
+            map(list => list.find(item => item.id === id)),
+        );
+    }
+
     getAll(ordered?): Observable<ITEM[]> {
         return this.dbRef(ordered ? (ref => ref.orderByChild('creationDate')) : undefined).snapshotChanges().pipe(
-            map(changes => changes.map(c => ({
-                ...{key: c.payload.key} as any,
-                ...c.payload.val() ,
-                creationDate: new Date(c.payload.val()!.creationDate)
-            }) as ITEM))
+            distinctUntilChanged(),
+            map(changes => changes.map(c => {
+                return {
+                    ...{key: c.payload.key} as any,
+                    ...c.payload.val() ,
+                    creationDate: new Date(c.payload.val()!.creationDate)
+                }
+            }))
         );
     }
 
@@ -70,7 +80,7 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
         return this.dbRef().push(_.omit({
             ...item,
             id: v4(),
-            creationDate: item.creationDate.getTime(),
+            creationDate: new Date().getTime(),
         }, ['key']) as ITEM);
     }
 
@@ -81,24 +91,21 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
                 const editable = items.find(_item => _item.id === item.id);
                 if (editable) {
                     // @ts-ignore
-                    this.dbRef().update(editable.key, {
-                        ...item,
-                        creationDate: item.creationDate.getTime()
-                    });
+                    this.dbRef().update(editable.key, _.omit(item, 'creationDate'));
                 }
             })
         );
     }
 
-    updateAll(item: ITEM): Observable<ITEM[]> {
+    updateMultiple({property, value}, itemIds?: string[]): Observable<ITEM[]> {
         return this.getAll().pipe(
             first(),
-            // @ts-ignore
-            tap(items => items.forEach(_item => this.dbRef().update(_item.key, {
-                ..._item,
-                ...item,
-            })))
-        )
+            tap(items => items.forEach((_item: ITEM) => {
+                if (!itemIds?.length || itemIds.includes(<string>_item.id)) {
+                    this.dbRef().update(<FirebaseOperation>_item.key, _.set2(_item, property, value));
+                }
+            })
+        ));
     }
 
     delete(item: ITEM): Observable<any> {
