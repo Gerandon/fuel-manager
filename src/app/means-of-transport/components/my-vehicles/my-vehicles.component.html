@@ -1,16 +1,18 @@
 <div class="app-my-vehicles" fxFlex fxLayout="column"
      fxLayoutGap="15px">
-    <div fxLayout="row">
-        <button mat-raised-button color="primary" (click)="create()">Hozzáadás</button>
-    </div>
     <div *ngIf="vehicles | withLoading | async as vehiclesObs">
         <div fxLayout="row wrap" fxLayoutGap="15px grid">
             <app-vehicle-tile *ngFor="let vehicle of vehiclesObs.value; trackBy: trackByIdentity"
                               [vehicle]="vehicle"
                               (click)="setAsMainVehicle($event, vehicle)"
                               (onDelete)="delete($event)"
-                              (onUpdate)="update($event)">
+                              (onUpdate)="update($event)"
+                              (detail)="showDetail($event)">
             </app-vehicle-tile>
+            <button *ngIf="!vehiclesObs.loading && vehiclesObs.value?.length"
+                    class="add-icon" mat-icon-button color="accent" (click)="create()">
+                <mat-icon>add_circle</mat-icon>
+            </button>
         </div>
         <ngx-content-loading
             *ngIf="!vehiclesObs.value && vehiclesObs.loading"
@@ -21,10 +23,15 @@
             <svg:g ngx-rect width="210" height="10" y="70" x="0" rx="5" ry="5"></svg:g>
             <svg:g ngx-rect width="240" height="10" y="100" x="0" rx="5" ry="5"></svg:g>
         </ngx-content-loading>
-        <mat-card *ngIf="!vehiclesObs.loading && !vehiclesObs.value?.length">
-            <mat-card-content>
-                Jelenleg még nincs hozzáadott járműved! Ha szeretnél rögzíteni egyet, kattints a "Hozzáadás" gombra!
-            </mat-card-content>
-        </mat-card>
+        <div *ngIf="!vehiclesObs.loading && !vehiclesObs.value?.length">
+            <mat-card>
+                <mat-card-content>
+                    Jelenleg még nincs hozzáadott járműved! Ha szeretnél rögzíteni egyet, kattints a "Hozzáadás" gombra!
+                </mat-card-content>
+            </mat-card>
+            <button class="add-icon" mat-icon-button color="accent" (click)="create()">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
     </div>
 </div>

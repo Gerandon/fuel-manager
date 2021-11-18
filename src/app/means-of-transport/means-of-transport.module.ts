@@ -6,13 +6,17 @@ import {MyVehiclesComponent} from './components/my-vehicles/my-vehicles.componen
 import {MeansOfTransportRoutingModule} from "./router-module/means-of-transport-routing.module";
 import {VehicleTileComponent} from './components/vehicle-tile/vehicle-tile.component';
 import { AddTransportTypeDialogComponent } from './components/dialogs/add-transport-type-dialog/add-transport-type-dialog.component';
+import { VehicleDetailComponent } from './components/vehicle-detail/vehicle-detail.component';
+import { TrafficLicenseComponent } from './components/traffic-license/traffic-license.component';
 
 @NgModule({
     declarations: [
         TransportTypeComponent,
         MyVehiclesComponent,
         VehicleTileComponent,
-        AddTransportTypeDialogComponent
+        AddTransportTypeDialogComponent,
+        VehicleDetailComponent,
+        TrafficLicenseComponent
     ],
     imports: [
         CommonModule,

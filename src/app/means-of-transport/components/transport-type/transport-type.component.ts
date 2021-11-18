@@ -7,6 +7,7 @@ import {Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {catchError, debounceTime, map, startWith, switchMap, tap} from "rxjs/operators";
 import {BasicInputComponent} from "../../../app-common/widgets/basic-input/basic-input.component";
+import {_} from "../../../app-common/vendor/vendor.module";
 
 @Component({
     selector: 'app-transport-type',
@@ -15,7 +16,7 @@ import {BasicInputComponent} from "../../../app-common/widgets/basic-input/basic
 })
 export class TransportTypeComponent extends BaseFormComponent implements OnInit, AfterViewInit {
 
-    @Input() public vehicle: VehicleDataType = defaultVehicle;
+    @Input() public vehicle: VehicleDataType = _.cloneDeep(defaultVehicle);
 
     public wrongImageValidator!: Observable<ValidationErrors>;
 
@@ -31,7 +32,6 @@ export class TransportTypeComponent extends BaseFormComponent implements OnInit,
         this.wrongImageValidator = of(this.vehicle.ownerData).pipe(
             switchMap((resp: any) => {
                 const { imageUrl } = resp || { imageUrl: '' };
-                console.log(imageUrl);
                 return this.http.get(imageUrl, { responseType: 'blob' }).pipe(
                     map((resp) => {
                         return resp;

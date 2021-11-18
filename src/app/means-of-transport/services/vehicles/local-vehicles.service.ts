@@ -11,6 +11,10 @@ export class LocalVehiclesService implements IVehiclesService {
     constructor() {
     }
 
+    getVehicle(id: string): Observable<VehicleDataType> {
+        throw new Error('Method not implemented.');
+    }
+
     getVehiclesList(): Observable<VehicleDataType[]> {
         throw new Error('Method not implemented.');
     }

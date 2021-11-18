@@ -1,2 +1,13 @@
 app-my-vehicles {
+    .add-icon {
+        height: 100px;
+        width: 100px;
+        align-self: center;
+        .mat-icon {
+            height: 100px;
+            width: 100px;
+            font-size: 100px;
+            padding-top: 40px;
+        }
+    }
 }

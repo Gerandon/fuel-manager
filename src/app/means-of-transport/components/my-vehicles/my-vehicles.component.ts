@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import { VehicleDataType } from 'src/app/app-common/interfaces/vehicle.interface';
 import {_} from "../../../app-common/vendor/vendor.module";
 import {first, tap} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-my-vehicles',
@@ -19,11 +20,16 @@ export class MyVehiclesComponent implements OnInit {
     public vehicles!: Observable<VehicleDataType[]>;
 
     constructor(private vService: VehiclesService,
-                private dialog: MatDialog) {
+                private dialog: MatDialog,
+                private router: Router) {
         this.vehicles = vService.getVehiclesList();
     }
 
     ngOnInit(): void {
+    }
+
+    showDetail(item: VehicleDataType) {
+        this.router.navigate([`/means-of-transport/vehicle/${item.id}`])
     }
 
     create() {

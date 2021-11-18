@@ -53,6 +53,8 @@ export class BookingListComponent implements OnInit {
         this.fullSpent = this.bookingService.getChartDataByValue('fullSpent', false);
 
         this.monthTabIndex = new Date().getMonth();
+
+        this.monthTabChange({index: this.monthTabIndex });
     }
 
     monthTabChange(event) {

@@ -8,7 +8,7 @@ app-vehicle-tile {
         border: 5px solid $app-primary-color;
     }
 
-    .mat-button {
+    .mat-button, .mat-icon-button {
         color: $app-primary-color;
     }
 
@@ -24,7 +24,7 @@ app-vehicle-tile {
         mat-card {
             background: $app-accent-color;
         }
-        .mat-button {
+        .mat-button, .mat-icon-button {
             color: $app-accent-color;
         }
         .card-outlined__title {

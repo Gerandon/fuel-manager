@@ -1,0 +1,8 @@
+<div *ngIf="vehicle | async as veh" fxLayout="row wrap">
+    <div fxFlex="50">
+        <app-traffic-license></app-traffic-license>
+    </div>
+    <div fxFlex="50">
+        <app-transport-type [vehicle]="veh"></app-transport-type>
+    </div>
+</div>

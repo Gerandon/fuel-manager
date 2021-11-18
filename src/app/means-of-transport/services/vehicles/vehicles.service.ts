@@ -11,6 +11,10 @@ export class VehiclesService implements IVehiclesService {
     constructor(@Inject(VEHICLES_SERVICE) private _vehiclesService: IVehiclesService) {
     }
 
+    getVehicle(id: string): Observable<VehicleDataType> {
+        return this._vehiclesService.getVehicle(id);
+    }
+
     getVehiclesList(): Observable<VehicleDataType[]> {
         return this._vehiclesService.getVehiclesList();
     }

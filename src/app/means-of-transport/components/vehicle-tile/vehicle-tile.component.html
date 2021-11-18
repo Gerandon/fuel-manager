@@ -5,13 +5,6 @@
         <mat-card-title>
             <div fxLayout="row" fxLayoutGap="15px">
                 <div fxLayoutAlign="start center">{{ vehicle.brand }} {{vehicle.type}}</div>
-                <div fxLayoutAlign="end center">
-                    <button mat-icon-button color="warn"
-                            (click)="prevent($event);onDelete.emit(vehicle)"
-                            matTooltip="Elem törlése">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </div>
             </div>
 
         </mat-card-title>
@@ -41,8 +34,12 @@
             </mat-card>
         </div>
     </mat-card-content>
-    <mat-card-actions align="start">
-        <a mat-button (click)="prevent($event);onUpdate.emit(vehicle)">Szerkesztés</a>
-        <a mat-button (click)="prevent($event)">Szervízkönyv</a>
+    <mat-card-actions align="center">
+        <div>
+            <button mat-icon-button (click)="prevent($event);detail.emit(vehicle)"><mat-icon>search</mat-icon></button>
+            <button mat-icon-button (click)="prevent($event);onUpdate.emit(vehicle)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button (click)="prevent($event);"><mat-icon>description</mat-icon></button>
+            <button mat-icon-button (click)="prevent($event);onDelete.emit(vehicle)"><mat-icon>delete</mat-icon></button>
+        </div>
     </mat-card-actions>
 </mat-card>
