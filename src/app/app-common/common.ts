@@ -10,6 +10,8 @@ import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {LocalVehiclesService} from "../means-of-transport/services/vehicles/local-vehicles.service";
 import {RemoteVehiclesService} from "../means-of-transport/services/vehicles/remote-vehicles.service";
+import {VehicleDataType} from "./interfaces/vehicle.interface";
+import {_} from "./vendor/vendor.module";
 
 export const fullSizeDialogConfig = {
     height: '90%',
@@ -70,6 +72,18 @@ export const vehiclesServiceFactory = (sStorage: SessionStorageService,
     return new RemoteVehiclesService(db);
 }
 
+export const defaultVehicle: VehicleDataType = {
+    creationDate: new Date(),
+    brand: '',
+    type: '',
+    engineType: 'Gasoline',
+    engineVolume: null,
+    avgConsumption: null,
+    ownerData: {
+        imageUrl: '',
+    }
+}
+
 export const Config = {
     menu: [
         {
@@ -104,4 +118,24 @@ export const Config = {
             icon: 'directions_car_rounded'
         }
     ]
+}
+
+/**
+ * Modifies given (every) property in any depth
+ * @param object
+ * @param prop
+ * @param newValue
+ */
+export const modProp = <T extends any>(object: T, prop: keyof T | any, newValue: any) => {
+    // @ts-ignore
+    return _.transform(object, (acc: any, _value: any, key: keyof T) => {
+        if (key === prop) {
+            acc[key] = newValue;
+        } else if (_.isObject(_value)) {
+            acc[key] = modProp(_value, prop, newValue);
+        } else {
+            acc[key] = _value;
+        }
+        return acc;
+    });
 }

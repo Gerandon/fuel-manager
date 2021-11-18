@@ -2,12 +2,21 @@
 app-vehicle-tile {
     cursor: pointer;
 
+    img {
+        height: 100px;
+        border-radius: 50%;
+        border: 5px solid $app-primary-color;
+    }
+
     .mat-button {
         color: $app-primary-color;
     }
 
     .main {
         background: $app-primary-color;
+        img {
+            border: 5px solid $app-accent-color;
+        }
         mat-card-subtitle {
             color: white;
         }
