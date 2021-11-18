@@ -1,8 +1,11 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
-import {filter, map, tap} from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {AuthService} from "../../auth/services/auth.service";
+import {environment} from "../../../environments/environment";
+// @ts-ignore
+import packageJson from '../../../../package.json';
 
 @Component({
     selector: 'app-sidemenu-content',
@@ -18,7 +21,8 @@ export class SidemenuContentComponent implements OnInit {
         navigateTo: string
     }[];
     public url: Observable<string>;
-    public userData: Observable<any>
+    public userData: Observable<any>;
+    public version = packageJson.version;
 
     constructor(private router: Router,
                 public authService: AuthService) {
