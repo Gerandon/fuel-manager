@@ -1,6 +1,7 @@
 @import './src/theme';
 app-vehicle-tile {
     cursor: pointer;
+    min-width:250px;
 
     img {
         height: 100px;

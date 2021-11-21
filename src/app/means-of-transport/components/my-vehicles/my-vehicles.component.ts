@@ -51,10 +51,10 @@ export class MyVehiclesComponent implements OnInit {
     setAsMainVehicle(event, item: VehicleDataType) {
         event.preventDefault();
         event.stopPropagation();
-        this.vService.editMultiple({property: 'ownerData.isMain', value: false}).pipe(
+        this.vService.editMultiple({property: 'ownerData.isMain', value: false}, [], [item.id]).pipe(
             first(),
             tap(() => {
-                this.vService.editVehicle(_.set2(item, 'ownerData.isMain', true));
+                this.vService.editVehicle(_.set2(item, 'ownerData.isMain', !item.ownerData?.isMain));
             }),
         ).subscribe();
     }

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/database";
 import {SessionStorage} from "ngx-webstorage";
-import {distinctUntilChanged, filter, first, map, tap} from "rxjs/operators";
-import {Observable} from "rxjs";
+import {distinctUntilChanged, first, map, tap} from "rxjs/operators";
+import {Observable, of} from "rxjs";
 import {BaseType} from "../interfaces/common.interface";
 import {v4} from "uuid";
 import {_} from 'src/app/app-common/vendor/vendor.module';
@@ -13,7 +13,6 @@ import Query = firebase.database.Query;
 import ThenableReference = firebase.database.ThenableReference;
 
 interface _BaseType extends BaseType {
-    [key: string]: any;
     key?: string;
 }
 
@@ -65,7 +64,11 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
 
     getAll(ordered?): Observable<ITEM[]> {
         return this.dbRef(ordered ? (ref => ref.orderByChild('creationDate')) : undefined).snapshotChanges().pipe(
-            distinctUntilChanged(),
+            distinctUntilChanged((prev,curr) => {
+                const prevMapped = prev.map(_curr => _curr.payload.val());
+                const currMapped = curr.map(_curr => _curr.payload.val());
+                return prevMapped.every((_curr, index) => _.isEqual(_curr, currMapped[index]));
+            }),
             map(changes => changes.map(c => {
                 return {
                     ...{key: c.payload.key} as any,
@@ -85,24 +88,22 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
     }
 
     update(item: ITEM): Observable<ITEM[]>{
-        return this.getAll().pipe(
-            first(),
-            tap(items => {
-                const editable = items.find(_item => _item.id === item.id);
-                if (editable) {
-                    // @ts-ignore
-                    this.dbRef().update(editable.key, _.omit(item, 'creationDate'));
-                }
-            })
-        );
+        // @ts-ignore
+        this.dbRef().update(item.key, _.omit(item, 'creationDate'));
+        return of([]);
     }
 
-    updateMultiple({property, value}, itemIds?: string[]): Observable<ITEM[]> {
+    updateMultiple({property, value}, itemIds?: string[], omitIds?: string[]): Observable<ITEM[]> {
         return this.getAll().pipe(
             first(),
             tap(items => items.forEach((_item: ITEM) => {
-                if (!itemIds?.length || itemIds.includes(<string>_item.id)) {
-                    this.dbRef().update(<FirebaseOperation>_item.key, _.set2(_item, property, value));
+                if (!itemIds?.length || itemIds.includes(<string>_item.id) && !omitIds?.includes(_item.id)) {
+                    const dummyOldDiff = _.set({}, property.split('.')[0], _item[property.split('.')[0]]);
+                    const dummyNewDiff = _.set({}, property.split('.'), value);
+                    // Update only those that value changed
+                    if (!_.isEqual(_.get(dummyOldDiff, property.split('.')), _.get(dummyNewDiff, property.split('.')))) {
+                        this.dbRef().update(<FirebaseOperation>_item.key,_.set({}, property.split('.'), value));
+                    }
                 }
             })
         ));
