@@ -1,26 +1,26 @@
 app-traffic-license {
-    p {
-        font-size: 1.2vw;
-        position: absolute;
-        &.creation-date {
-            margin-top: 16.5%;
-            margin-left: 5%;
+    .license-container {
+        background-image: url('../../../../assets/images/forgalmi.jpg');
+        background-size: cover;
+        max-height:300px;
+        max-width:430px;
+    }
+    .small-input-row {
+        height:25px
+    }
+    .small-input {
+        .mat-form-field-wrapper {
+            padding-bottom: 0px;
         }
-        &.brand {
-            margin-top: 19.4%;
-            margin-left: 6%;
+        .mat-form-field-infix {
+            border: 0;
+            padding: 0;
         }
-        &.type {
-            margin-top: 22%;
-            margin-left: 6%;
+        .mat-form-field-label-wrapper {
+            padding-top: 0;
         }
-        &.engine-volume {
-            margin-top: 27.5%;
-            margin-left: 6%;
-        }
-        &.kilowatt {
-            margin-top: 27.5%;
-            margin-left: 20%;
+        .mat-form-field-underline {
+            top: 18px;
         }
     }
 }

@@ -1,8 +1,107 @@
 <div>
-    <p class="creation-date">1998.12.15</p>
-    <p class="brand">Honda</p>
-    <p class="type">Civic</p>
-    <p class="engine-volume">1800 ccm</p>
-    <p class="kilowatt">103 kw</p>
-    <img src="assets/images/forgalmi.jpg" alt="traffic-license" style="height: 100%;width:100%">
+    <div fxHide fxShow.lt-sm>
+        <button mat-raised-button color="primary" (click)="download()">Forgalmi engedély letöltése</button>
+        <div id="download">
+            <img #canvas style="display: none">
+            <a #downloadLink></a>
+        </div>
+    </div>
+    <div #screen fxLayout="column" class="license-container"
+         [style.transform]="'scale('+scale+')'"
+         [ngStyle.lt-sm]="'display: none'">
+        <div [style.height]="'120px'"></div>
+        <div fxLayout="row" class="small-input-row">
+            <!-- A -->
+            <basic-input name="username"
+                         class="small-input ml-40"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+        </div>
+        <div fxLayout="row" class="small-input-row">
+            <!-- B -->
+            <basic-input name="since"
+                         [(ngModel)]="vehicle.ownerData.since"
+                         class="small-input ml-40"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+        </div>
+        <div fxLayout="row" class="small-input-row">
+            <!-- D.1 -->
+            <basic-input name="brand"
+                         [(ngModel)]="vehicle.brand"
+                         class="small-input ml-55"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+        </div>
+        <div fxLayout="row" class="small-input-row">
+            <!-- D.2 -->
+            <basic-input name="type"
+                         [(ngModel)]="vehicle.type"
+                         class="small-input ml-55"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+        </div>
+        <div fxLayout="row" class="small-input-row">
+            <!-- D.3 -->
+            <basic-input name="unknown"
+                         class="small-input ml-55"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+            <!-- E -->
+            <basic-input name="frameNumber"
+                         [(ngModel)]="vehicle.frameNumber"
+                         style="width: 130px"
+                         class="small-input ml-55"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+        </div>
+        <div fxLayout="row" class="small-input-row">
+            <!-- P.1 -->
+            <basic-input name="engineVolume"
+                         [(ngModel)]="vehicle.engineVolume"
+                         [style.width]="'70px'"
+                         class="small-input ml-55"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+            <!-- P.2 -->
+            <basic-input name="kilowatt"
+                         [(ngModel)]="vehicle.kilowatt"
+                         [style.width]="'70px'"
+                         class="small-input ml-55"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+            <!-- P.3 -->
+            <basic-input name="engineType"
+                         [(ngModel)]="vehicle.engineType"
+                         [style.width]="'120px'"
+                         class="small-input ml-55"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+        </div>
+        <div fxLayout="row" class="small-input-row">
+            <!-- P.5 -->
+            <basic-input name="motorCode"
+                         [(ngModel)]="vehicle.motorCode"
+                         class="small-input ml-55"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+            <!-- J -->
+            <basic-input name="username"
+                         style="width: 130px"
+                         class="small-input ml-55"
+                         [disabled]="!edit"
+                         [appearance]="edit ? 'legacy' : 'none'">
+            </basic-input>
+        </div>
+    </div>
 </div>

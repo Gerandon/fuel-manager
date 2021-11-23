@@ -9,7 +9,7 @@ $app-accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
 
 $app-font-color: mat-color($app-white);
 $app-primary-color: mat-color($app-primary);
-$app-primary-transparent-color: mat-color($app-primary, 0.5);
+$app-primary-transparent-color: mat-color($app-primary, 0.9);
 
 $app-accent-color: mat-color($app-accent);
 

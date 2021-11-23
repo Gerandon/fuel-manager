@@ -1,4 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
+import {defaultVehicle} from "../../../app-common/common";
+import {_} from "../../../app-common/vendor/vendor.module";
+import html2canvas from "html2canvas";
 
 @Component({
     selector: 'app-traffic-license',
@@ -8,10 +12,33 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class TrafficLicenseComponent implements OnInit {
 
-    constructor() {
+    @Input() public vehicle: VehicleDataType = _.cloneDeep(defaultVehicle);
+    @Input() public scale:  number = 1;
+    @Input() public edit = true;
+
+    @ViewChild('screen') screen!: ElementRef;
+    @ViewChild('canvas') canvas!: ElementRef;
+    @ViewChild('downloadLink') downloadLink!: ElementRef;
+
+    constructor(private cdr: ChangeDetectorRef) {
     }
 
     ngOnInit(): void {
     }
 
+    download() {
+        this.edit = false;
+        this.cdr.detectChanges();
+        html2canvas(this.screen.nativeElement,{
+            onclone: (clonedDoc) => {
+                // @ts-ignore
+                clonedDoc?.getElementsByClassName('license-container')[0]?.style?.display = 'block';
+            }
+        }).then(canvas => {
+            this.canvas.nativeElement.src = canvas.toDataURL();
+            this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+            this.downloadLink.nativeElement.download = 'marble-diagram.png';
+            this.downloadLink.nativeElement.click();
+        });
+    }
 }
