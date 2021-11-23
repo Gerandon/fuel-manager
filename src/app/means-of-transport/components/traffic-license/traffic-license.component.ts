@@ -14,7 +14,7 @@ export class TrafficLicenseComponent implements OnInit {
 
     @Input() public vehicle: VehicleDataType = _.cloneDeep(defaultVehicle);
     @Input() public scale:  number = 1;
-    @Input() public edit = true;
+    @Input() public edit = false;
 
     @ViewChild('screen') screen!: ElementRef;
     @ViewChild('canvas') canvas!: ElementRef;

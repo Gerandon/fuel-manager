@@ -1,13 +1,18 @@
-<mat-card>
-    <mat-card-content>
-        <resolve-request [observable]="this.vehicle">
-            <div *ngIf="vehicle | async as veh" fxLayout="row wrap" fxLayoutGap="15px grid">
-                <app-traffic-license fxFlex="50" fxFlex.lt-md="auto" [vehicle]="veh" (click)="onLicenseClick()">
-                </app-traffic-license>
-                <div fxFlex="50" fxFlex.lt-md="auto">
-                    <app-transport-type [vehicle]="veh"></app-transport-type>
+<div>
+    <resolve-request [observable]="this.vehicle" *ngIf="vehicle | async as veh">
+        <div class="ml-30" fxLayout="row wrap" fxLayoutAlign="start center">
+            <h2>{{ veh.brand }} {{ veh.type }}</h2>
+        </div>
+        <mat-card>
+            <mat-card-content>
+                <div fxLayout="row wrap" fxLayoutGap="15px grid">
+                    <app-traffic-license fxFlex="50" fxFlex.lt-md="auto" [vehicle]="veh" (click)="onLicenseClick()">
+                    </app-traffic-license>
+                    <div fxFlex="50" fxFlex.lt-md="auto">
+                        <app-transport-type [vehicle]="veh"></app-transport-type>
+                    </div>
                 </div>
-            </div>
-        </resolve-request>
-    </mat-card-content>
-</mat-card>
+            </mat-card-content>
+        </mat-card>
+    </resolve-request>
+</div>
