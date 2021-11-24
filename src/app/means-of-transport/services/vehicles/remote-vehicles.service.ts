@@ -37,7 +37,7 @@ export class RemoteVehiclesService implements IVehiclesService {
         return item;
     }
 
-    editMultiple({property, value}, itemIds?: string[]) {
-        return this.fbService.updateMultiple({property, value}, itemIds);
+    editMultiple({property, value}, itemIds?: string[], omitIds?: string[]) {
+        return this.fbService.updateMultiple({property, value}, itemIds, omitIds);
     }
 }

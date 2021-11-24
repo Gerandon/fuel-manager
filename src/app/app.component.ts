@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
     public isAuthenticated: Observable<boolean>;
     public menu = Config.menu.filter(item => item.showAsMenu);
 
+    public themeModel = '';
+
     constructor(private translate: TranslateService,
                 private translateLoader: TranslateLoader,
                 private authService: AuthService) {
@@ -49,5 +51,12 @@ export class AppComponent implements OnInit {
 
     public _toggleSidebar() {
         this._opened = !this._opened;
+    }
+
+    public changeTheme(event) {
+        document.documentElement.classList.remove('brownish-theme');
+        if (event) {
+            document.documentElement.classList.add(event);
+        }
     }
 }

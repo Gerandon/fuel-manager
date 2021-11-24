@@ -27,7 +27,7 @@ export class VehiclesService implements IVehiclesService {
     editVehicle(item: VehicleDataType): VehicleDataType {
         return this._vehiclesService.editVehicle(item);
     }
-    editMultiple({property, value}, itemIds?: string): Observable<VehicleDataType[]> {
-        return this._vehiclesService['editMultiple']({property, value}, itemIds);
+    editMultiple({property, value}, itemIds?: string[], omitIds?: string[]): Observable<VehicleDataType[]> {
+        return this._vehiclesService['editMultiple']({property, value}, itemIds, omitIds);
     }
 }

@@ -1,0 +1,7 @@
+@import './src/theme.scss';
+
+app-vehicle-detail {
+    h2 {
+        @extend .accent-color;
+    }
+}

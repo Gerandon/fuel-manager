@@ -27,6 +27,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {GoogleMapsModule} from "@angular/google-maps";
 import {NgxContentLoadingModule} from "ngx-content-loading";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatRadioModule} from "@angular/material/radio";
 
 export const _ = {
     ...lodash,
@@ -61,6 +62,7 @@ export const _ = {
         MatProgressSpinnerModule,
         GoogleMapsModule,
         NgxContentLoadingModule,
+        MatRadioModule,
     ],
     exports: [
         MatExpansionModule,
@@ -89,6 +91,7 @@ export const _ = {
         MatProgressSpinnerModule,
         GoogleMapsModule,
         NgxContentLoadingModule,
+        MatRadioModule
     ]
 })
 export class VendorModule {

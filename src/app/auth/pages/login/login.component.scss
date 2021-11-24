@@ -9,6 +9,6 @@
         }
     }
     h3, span {
-        color: $app-primary-color;
+        @extend .primary-color;
     }
 }

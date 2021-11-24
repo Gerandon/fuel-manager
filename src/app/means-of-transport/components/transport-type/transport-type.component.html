@@ -51,6 +51,30 @@
                          label="Kép URL"
                          placeholder="Kép elérési út">
             </basic-input>
+            <basic-input name="since"
+                         fxFlex="auto"
+                         [(ngModel)]="vehicle.ownerData!.since"
+                         label="Birtokba vétel ideje"
+                         placeholder="Birtokba vétel ideje">
+            </basic-input>
+            <basic-input name="frameNumber"
+                         fxFlex="auto"
+                         [(ngModel)]="vehicle.frameNumber"
+                         label="Alvázsszám"
+                         placeholder="Alvázsszám">
+            </basic-input>
+            <basic-input name="motorCode"
+                         fxFlex="auto"
+                         [(ngModel)]="vehicle.motorCode"
+                         label="Motorkód"
+                         placeholder="Motorkód">
+            </basic-input>
+            <basic-input name="kilowatt"
+                         fxFlex="auto"
+                         [(ngModel)]="vehicle.kilowatt"
+                         label="Kilowatt"
+                         placeholder="Kilowatt">
+            </basic-input>
         </mat-card-content>
     </mat-card>
 </form>

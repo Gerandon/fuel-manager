@@ -6,10 +6,10 @@ app-home {
         min-width: 200px !important;
         min-height: 150px;
         padding: 10px;
-        background: $app-primary-color;
-        border: 5px solid $app-accent-color;
+        @extend .primary-background;
+        @extend .accent-border-color;
         border-radius: 10px;
-        color: $app-accent-color;
+        @extend .accent-color;
         cursor: pointer;
 
         span {
@@ -17,8 +17,8 @@ app-home {
         }
 
         &:hover {
-            background-color: $app-accent-color;
-            color: $app-primary-color;
+            @extend .accent-background;
+            @extend .primary-color;
         }
         mat-icon {
             height: 50px;

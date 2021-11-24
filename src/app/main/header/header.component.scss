@@ -4,5 +4,6 @@ app-header {
     .header-div {
         padding: 10px;
         //background: $app-primary-transparent-color;
+        @extend .primary-background-trans;
     }
 }

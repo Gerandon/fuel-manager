@@ -10,7 +10,6 @@ export class WithLoadingPipe implements PipeTransform {
     transform(_value: any, ...args: any[]): any {
         return isObservable(_value)
             ? _value.pipe(
-                debounceTime(100),
                 map((value: any) => ({ loading: false, value })),
                 startWith({ loading: true }),
                 catchError(error => of({ loading: false, error }))

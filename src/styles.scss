@@ -41,12 +41,15 @@ body {
         }
     }
     h3 {
-        color: $app-font-color;
+        @extend .accent-color;
+    }
+    .mat-tab-header-pagination {
+        z-index: 0;
     }
 }
 
 .card-outlined {
-    border: 1px solid $app-primary-color;
+    @extend .primary-border-color;
     @extend .mat-elevation-z0;
     &__title {
         width: auto;
@@ -58,7 +61,7 @@ body {
     }
 }
 
-$pixels: (0: 0px, 5: 5px, 10: 10px, 15: 15px, 20: 20px, 25: 25px, 30: 30px, );
+$pixels: (0: 0px, 5: 5px, 10: 10px, 15: 15px, 20: 20px, 25: 25px, 30: 30px, 35:35px, 40:40px, 45:45px, 50:50px, 55: 55px );
 
 @each $pixel, $px in $pixels {
     .mt-#{$pixel} {

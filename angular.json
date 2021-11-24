@@ -31,6 +31,7 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "src/mixin.scss",
                             "src/styles.scss",
                             "src/theme.scss"
                         ],
@@ -100,6 +101,7 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "src/mixin.scss",
                             "src/styles.scss"
                         ],
                         "scripts": []

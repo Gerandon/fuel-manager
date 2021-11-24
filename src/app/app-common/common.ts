@@ -73,6 +73,7 @@ export const vehiclesServiceFactory = (sStorage: SessionStorageService,
 }
 
 export const defaultVehicle: VehicleDataType = {
+    id: '0',
     creationDate: new Date(),
     brand: '',
     type: '',
