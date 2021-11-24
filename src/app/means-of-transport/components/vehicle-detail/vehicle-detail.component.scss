@@ -2,6 +2,6 @@
 
 app-vehicle-detail {
     h2 {
-        color: $app-accent-color;
+        @extend .accent-color;
     }
 }

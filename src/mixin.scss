@@ -2,3 +2,48 @@
     min-width: $width;
     max-width: $width;
 }
+
+// Define a custom mixin that takes in the current theme
+@mixin theme-color-grabber($theme) {
+    // Parse the theme and create variables for each color in the pallete
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $prim-colored: mat-color($primary);
+    $accent-colored: mat-color($accent);
+
+    // Create theme specfic styles
+    .primary-background-trans {
+        background-color: mat-color($primary, 0.9);
+    }
+    .primary-background {
+        background-color: mat-color($primary);
+    }
+    .accent-background-trans {
+        background-color: mat-color($accent, 0.9);
+    }
+    .accent-background {
+        background-color: mat-color($accent);
+    }
+    .warn-background {
+        background-color: mat-color($warn);
+    }
+    .primary-color {
+        color: mat-color($primary);
+    }
+    .accent-color {
+        color: mat-color($accent);
+    }
+    .warn-color {
+        color: mat-color($warn);
+    }
+    .primary-border-color {
+        border-color: mat-color($primary);
+    }
+    .accent-border-color {
+        border-color: mat-color($accent);
+    }
+    .warn-border-color {
+        border-color: mat-color($warn);
+    }
+}

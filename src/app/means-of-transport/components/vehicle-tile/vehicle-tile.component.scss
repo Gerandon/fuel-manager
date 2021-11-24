@@ -6,30 +6,32 @@ app-vehicle-tile {
     img {
         height: 100px;
         border-radius: 50%;
-        border: 5px solid $app-primary-color;
+        border: 5px solid;
+        @extend .primary-border-color;
     }
 
     .mat-button, .mat-icon-button {
-        color: $app-primary-color;
+        @extend .primary-color;
     }
 
     .main {
-        background: $app-primary-color;
+        @extend .primary-background;
         img {
-            border: 5px solid $app-accent-color;
+            border: 5px solid;
+            @extend .accent-border-color;
         }
         mat-card-subtitle {
             color: white;
         }
         color: white;
         mat-card {
-            background: $app-accent-color;
+            @extend .accent-background;
         }
         .mat-button, .mat-icon-button {
-            color: $app-accent-color;
+            @extend .accent-color;
         }
         .card-outlined__title {
-            background: $app-primary-color;
+            @extend .primary-background;
             color: white;
         }
     }

@@ -41,7 +41,7 @@ body {
         }
     }
     h3 {
-        color: $app-font-color;
+        @extend .accent-color;
     }
     .mat-tab-header-pagination {
         z-index: 0;
@@ -49,7 +49,7 @@ body {
 }
 
 .card-outlined {
-    border: 1px solid $app-primary-color;
+    @extend .primary-border-color;
     @extend .mat-elevation-z0;
     &__title {
         width: auto;
