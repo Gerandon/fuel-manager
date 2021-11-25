@@ -6,4 +6,5 @@ export interface UserType {
 export interface BaseType {
     id: string;
     creationDate: Date;
+    modificationDate?: Date;
 }

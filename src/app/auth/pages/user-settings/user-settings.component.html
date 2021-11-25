@@ -4,8 +4,8 @@
             <h2>Hi, {{(userData | async)?.displayName}}</h2>
             <br>
             <div fxLayout="row wrap" fxLayoutGap="15px grid">
-                <div fxFlex="auto">
-                    <mat-card *ngIf="userData | async as user" class="card-outlined">
+                <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="column">
+                    <mat-card *ngIf="userData | async as user" class="card-outlined" fxFlex>
                         <p class="card-outlined__title">Felhasználói adatok</p>
                         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px grid">
                             <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
@@ -15,18 +15,18 @@
                                 <p style="font-weight:bold">{{'USER_SETTINGS.COMMON_DATA' | translate}}</p>
                                 <hr>
                                 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-                                    <mat-icon>person</mat-icon>
+                                    <mat-icon color="primary">person</mat-icon>
                                     <p class="m-0">{{user.displayName}}</p>
                                 </div>
                                 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-                                    <mat-icon>email</mat-icon>
+                                    <mat-icon color="primary">email</mat-icon>
                                     <p class="m-0">{{user.email}}</p>
                                 </div>
                                 <p style="font-weight: bold">{{'USER_SETTINGS.METADATA.LABEL' | translate}}</p>
                                 <hr>
                                 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-                                    <p class="m-0">{{'Felhasználó azonosító' | translate}}:</p>
-                                    <p class="m-0 ml-5">{{user.uid}}</p>
+                                    <p class="m-0" [style.min-width]="'150px'">{{'Felhasználó azonosító' | translate}}:</p>
+                                    <p class="m-0 ml-5 of-ellipsis" [matTooltip]="user.uid">{{user.uid}}</p>
                                 </div>
                                 <div class="mt-5" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
                                     <p class="m-0">{{'USER_SETTINGS.METADATA.CREATION_DATE' | translate}}:</p>
@@ -40,9 +40,11 @@
                         </div>
                     </mat-card>
                 </div>
-                <div fxFlex="auto">
-                    <mat-card class="card-outlined">
+                <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="column">
+                    <mat-card class="card-outlined" fxFlex>
                         <p class="card-outlined__title">Oldal szintű adatok</p>
+                        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px grid">
+                        </div>
                     </mat-card>
                 </div>
             </div>

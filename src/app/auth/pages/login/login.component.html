@@ -28,6 +28,8 @@
                                          placeholder="LOGIN.PASSWORD.PLACEHOLDER">
                             </basic-input>
                             <mat-checkbox [ngModel]="useLocally"
+                                          [disabled]="true"
+                                          matTooltip="Jelenleg szünetel"
                                           (ngModelChange)="changeLocalRemote($event)"
                                           color="primary"
                                           name="uselocally">Lokális használat</mat-checkbox>

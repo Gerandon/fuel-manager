@@ -17,7 +17,7 @@
         background-color: mat-color($primary, 0.9);
     }
     .primary-background {
-        background-color: mat-color($primary);
+        background: mat-color($primary);
     }
     .accent-background-trans {
         background-color: mat-color($accent, 0.9);

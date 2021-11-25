@@ -1,28 +1,31 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TranslateLoader, TranslateService} from "@ngx-translate/core";
-import {catchError, first, map, tap} from "rxjs/operators";
-import {Observable, of} from "rxjs";
+import {catchError, filter, first, map, tap} from "rxjs/operators";
+import {Observable, of, Subscription} from "rxjs";
 import {AuthService} from "./auth/services/auth.service";
 import {Config} from "./app-common/common";
+import {NavigationEnd, NavigationStart, Router} from "@angular/router";
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
     public title = 'fuel-manager';
     public _opened: boolean = false;
     public animated: boolean = false;
     public isAuthenticated: Observable<boolean>;
     public menu = Config.menu.filter(item => item.showAsMenu);
-
     public themeModel = '';
+
+    private routingChangedSubscription!: Subscription;
 
     constructor(private translate: TranslateService,
                 private translateLoader: TranslateLoader,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private router: Router) {
         this.isAuthenticated = authService.isAuthenticated();
     }
 
@@ -40,6 +43,15 @@ export class AppComponent implements OnInit {
             })
         ).subscribe();
         this.changeAnimatedState();
+
+        this.routingChangedSubscription = this.router.events.pipe(
+            filter((event: any) => event instanceof NavigationStart),
+            tap(() => {
+                if (this._opened) {
+                    this._opened = !this._opened;
+                }
+            })
+        ).subscribe();
     }
 
     changeAnimatedState() {
@@ -58,5 +70,9 @@ export class AppComponent implements OnInit {
         if (event) {
             document.documentElement.classList.add(event);
         }
+    }
+
+    ngOnDestroy() {
+        this.routingChangedSubscription?.unsubscribe();
     }
 }

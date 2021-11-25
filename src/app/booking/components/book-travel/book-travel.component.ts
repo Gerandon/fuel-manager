@@ -25,7 +25,7 @@ export class BookTravelComponent implements OnInit {
             route: { from: '', to: '', retour: false },
             ...this.model as any,
         }
-        this.model.creationDate = this.model.creationDate || new Date();
+        this.model.date = this.model.date || new Date();
         this.editMode = !!this.item?.editMode;
     }
 }
