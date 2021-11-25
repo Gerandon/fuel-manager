@@ -67,12 +67,14 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
             distinctUntilChanged((prev,curr) => {
                 const prevMapped = prev.map(_curr => _curr.payload.val());
                 const currMapped = curr.map(_curr => _curr.payload.val());
-                return prevMapped.every((_curr, index) => _.isEqual(_curr, currMapped[index]));
+                return prevMapped.length === currMapped.length &&
+                    prevMapped.every((_curr, index) => _.isEqual(_curr, currMapped[index]));
             }),
             map(changes => changes.map(c => {
                 return {
                     ...{key: c.payload.key} as any,
                     ...c.payload.val() ,
+                    ...( c.payload.val()!['date'] ? {date: new Date(c.payload.val()!['date'])} : {}),
                     creationDate: new Date(c.payload.val()!.creationDate)
                 }
             }))
@@ -83,13 +85,17 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
         return this.dbRef().push(_.omit({
             ...item,
             id: v4(),
+            ...(item['date'] ? { date: item['date'].getTime() } : {}),
             creationDate: new Date().getTime(),
         }, ['key']) as ITEM);
     }
 
     update(item: ITEM): Observable<ITEM[]>{
         // @ts-ignore
-        this.dbRef().update(item.key, _.omit(item, 'creationDate'));
+        this.dbRef().update(item.key, {
+            ..._.omit(item, 'creationDate'),
+            modificationDate: new Date().getTime()
+        });
         return of([]);
     }
 

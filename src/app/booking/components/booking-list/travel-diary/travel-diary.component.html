@@ -12,7 +12,7 @@
                 <!-- Create Date Column -->
                 <ng-container matColumnDef="creationDate">
                     <th mat-header-cell *matHeaderCellDef>Dátum</th>
-                    <td mat-cell *matCellDef="let element">{{element.creationDate | date: 'YYYY.MM.dd' }}</td>
+                    <td mat-cell *matCellDef="let element">{{element.date | date: 'YYYY.MM.dd' }}</td>
                 </ng-container>
 
                 <!-- Distance Column -->
@@ -80,10 +80,10 @@
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" colspan="9999" style="text-align: center">{{ 'COMMON.TABLE.NO_RESULT' | translate }}</td>
-                </tr>
             </table>
+            <div *ngIf="!obs.value?.length" class="list-not-found-wrapper">
+                <p class="not-found">{{'COMMON.TABLE.NO_RESULT' | translate}}</p>
+            </div>
         </div>
         <div *ngIf="!obs.loading && obs.value?.length">
             <div fxLayout="row wrap">

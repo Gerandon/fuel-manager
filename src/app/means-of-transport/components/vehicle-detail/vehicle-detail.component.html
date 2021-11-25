@@ -3,16 +3,53 @@
         <div class="ml-30" fxLayout="row wrap" fxLayoutAlign="start center">
             <h2>{{ veh.brand }} {{ veh.type }}</h2>
         </div>
-        <mat-card>
-            <mat-card-content>
-                <div fxLayout="row wrap" fxLayoutGap="15px grid">
-                    <app-traffic-license fxFlex="50" fxFlex.lt-md="auto" [vehicle]="veh" (click)="onLicenseClick()">
-                    </app-traffic-license>
-                    <div fxFlex="50" fxFlex.lt-md="auto">
-                        <app-transport-type [vehicle]="veh"></app-transport-type>
-                    </div>
-                </div>
-            </mat-card-content>
-        </mat-card>
+        <div fxLayout="row wrap" fxLayoutGap="15px grid">
+            <app-traffic-license fxFlex="50"
+                                 fxFlex.gt-md="35"
+                                 fxFlex.lt-md="auto"
+                                 [vehicle]="veh" (click)="onLicenseClick()">
+            </app-traffic-license>
+            <div fxFlex="50"
+                 fxFlex.gt-md="65"
+                 fxFlex.lt-md="auto" fxLayout="column" fxLayoutGap="15px">
+                <mat-accordion>
+                    <mat-expansion-panel class="mb-10">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Jármű adatok</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <app-transport-type [vehicle]="veh" [showContainer]="false"></app-transport-type>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Szervízkönyv</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div fxLayout="row wrap" fxLayoutGap="15px grid">
+                            <div class="custom-tile">
+                                <mat-card fxFlex.lg="calc(33% - 16px)"
+                                          fxFlex.lt-lg="calc(50% - 16px)"
+                                          fxFlex.xs="calc(100% - 16px)" fxLayout="column">
+                                    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                                        <span>Olajcsere</span>
+                                        <span>2021.11.12.</span>
+                                        <span class="mt-5">15.000 HUF</span>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                            <div class="custom-tile">
+                                <mat-card fxFlex.lg="calc(33% - 16px)"
+                                          fxFlex.lt-lg="calc(50% - 16px)"
+                                          fxFlex.xs="calc(100% - 16px)" fxLayout="column">
+                                    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                                        <span>Mittudoménmi</span>
+                                        <span>2021.11.12.</span>
+                                        <span class="mt-5">15.000 HUF</span>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
     </resolve-request>
 </div>

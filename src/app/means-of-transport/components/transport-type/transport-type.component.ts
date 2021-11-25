@@ -17,6 +17,7 @@ import {_} from "../../../app-common/vendor/vendor.module";
 export class TransportTypeComponent extends BaseFormComponent implements OnInit, AfterViewInit {
 
     @Input() public vehicle: VehicleDataType = _.cloneDeep(defaultVehicle);
+    @Input() public showContainer = true;
 
     public wrongImageValidator!: Observable<ValidationErrors>;
 

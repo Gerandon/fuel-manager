@@ -4,4 +4,17 @@ app-vehicle-detail {
     h2 {
         @extend .accent-color;
     }
+    .mat-expansion-panel-header:not(.mat-expanded) {
+        @extend .primary-background;
+        mat-panel-title {
+            @extend .accent-color;
+        }
+    }
+    .custom-tile {
+        .mat-card {
+            @extend .primary-background;
+            @extend .accent-color;
+            width: 123px;
+        }
+    }
 }
