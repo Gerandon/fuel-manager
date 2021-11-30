@@ -1,6 +1,6 @@
 {
     "name": "fuel-manager",
-    "version": "2.0.5-SNAPSHOT",
+    "version": "2.1.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
