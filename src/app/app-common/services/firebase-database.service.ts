@@ -26,6 +26,7 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
     private dbRef!: (query?: (ref: DatabaseReference) => Query) => AngularFireList<ITEM>;
 
     constructor(private db: AngularFireDatabase, private dbPath: string) {
+        console.log(dbPath);
         this.path = `${environment.firebase.mode}/${this.uid}/${this.dbPath}`;
         this.dbRef = (query?: (ref: DatabaseReference) => Query) => query
             ? this.db.list(this.path, query)

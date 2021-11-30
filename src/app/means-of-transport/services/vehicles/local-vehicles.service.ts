@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
-import { VehicleDataType } from 'src/app/app-common/interfaces/vehicle.interface';
+import { ServiceReportType, VehicleDataType} from 'src/app/app-common/interfaces/vehicle.interface';
 import {IVehiclesService} from "../../../app-common/interfaces/vehicles-service.interface";
 
 @Injectable({
@@ -9,6 +9,17 @@ import {IVehiclesService} from "../../../app-common/interfaces/vehicles-service.
 export class LocalVehiclesService implements IVehiclesService {
 
     constructor() {
+    }
+
+    getServiceReports(): Observable<ServiceReportType[]> {
+        throw new Error('Method not implemented.');
+    }
+
+    addServiceReport(item: ServiceReportType): void {
+        throw new Error('Method not implemented.');
+    }
+    removeServiceReport(serviceReportId: string): void {
+        throw new Error('Method not implemented.');
     }
 
     getVehicle(id: string): Observable<VehicleDataType> {

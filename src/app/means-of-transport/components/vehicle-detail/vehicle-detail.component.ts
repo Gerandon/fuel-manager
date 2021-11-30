@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {VehiclesService} from "../../services/vehicles/vehicles.service";
-import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
+import {ServiceReportType, VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
 import {Observable} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {TrafficLicenseComponent} from "../traffic-license/traffic-license.component";
@@ -16,6 +16,7 @@ import {AddServiceReportComponent} from "../dialogs/add-service-report/add-servi
 export class VehicleDetailComponent implements OnInit {
 
     public vehicle!: Observable<VehicleDataType>;
+    public serviceReports!: Observable<ServiceReportType[]>;
     private vehicleId: string;
 
     constructor(private activatedRoute: ActivatedRoute,
@@ -26,6 +27,7 @@ export class VehicleDetailComponent implements OnInit {
 
     ngOnInit(): void {
         this.vehicle = this.vService.getVehicle(this.vehicleId);
+        this.serviceReports = this.vService.getServiceReports(this.vehicleId);
     }
 
     addServiceReport() {
@@ -33,7 +35,11 @@ export class VehicleDetailComponent implements OnInit {
             data: {
                 vehicleId: this.vehicleId
             }
-        }).afterClosed().subscribe();
+        }).afterClosed().subscribe(data => {
+            if (data) {
+                this.vService.addServiceReport(data);
+            }
+        });
     }
 
     onLicenseClick() {
