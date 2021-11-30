@@ -1,17 +1,17 @@
 @import './src/theme.scss';
 
-app-vehicle-detail {
+.vehicle-detail {
     h2 {
         @extend .accent-color;
     }
     .mat-expansion-panel-header {
         &:not(.mat-expanded) {
             @extend .primary-background;
-            mat-panel-title {
+            mat-panel-title, mat-panel-description {
                 @extend .accent-color;
             }
         }
-        .mat-content {
+        mat-panel-title, mat-panel-description {
             align-items: center;
         }
     }
@@ -22,4 +22,10 @@ app-vehicle-detail {
             width: 123px;
         }
     }
+}
+::ng-deep .theme-tooltip {
+    @extend .primary-background;
+    @extend .accent-color;
+    white-space: pre-line;
+    font-size: 20px;
 }
