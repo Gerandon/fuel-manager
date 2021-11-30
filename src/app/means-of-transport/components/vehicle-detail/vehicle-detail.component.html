@@ -20,8 +20,12 @@
                         <app-transport-type [vehicle]="veh" [showContainer]="false"></app-transport-type>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
-                        <mat-expansion-panel-header>
+                        <mat-expansion-panel-header fxLayout="row" fxLayoutGap="15px">
                             <mat-panel-title>Szervízkönyv</mat-panel-title>
+                            <button mat-raised-button color="accent"
+                                    (click)="$event.stopPropagation();addServiceReport()">
+                                Hozzáadás
+                            </button>
                         </mat-expansion-panel-header>
                         <div fxLayout="row wrap" fxLayoutGap="15px grid">
                             <div class="custom-tile">

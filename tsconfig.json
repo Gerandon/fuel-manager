@@ -20,7 +20,8 @@
         "lib": [
             "es2018",
             "dom"
-        ]
+        ],
+        "strictNullChecks": false,
     },
     "angularCompilerOptions": {
         "strictPropertyInitialization": false,

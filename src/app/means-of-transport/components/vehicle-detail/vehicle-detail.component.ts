@@ -5,6 +5,7 @@ import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface"
 import {Observable} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {TrafficLicenseComponent} from "../traffic-license/traffic-license.component";
+import {AddServiceReportComponent} from "../dialogs/add-service-report/add-service-report.component";
 
 @Component({
     selector: 'app-vehicle-detail',
@@ -25,6 +26,14 @@ export class VehicleDetailComponent implements OnInit {
 
     ngOnInit(): void {
         this.vehicle = this.vService.getVehicle(this.vehicleId);
+    }
+
+    addServiceReport() {
+        this.dialog.open(AddServiceReportComponent, {
+            data: {
+                vehicleId: this.vehicleId
+            }
+        }).afterClosed().subscribe();
     }
 
     onLicenseClick() {

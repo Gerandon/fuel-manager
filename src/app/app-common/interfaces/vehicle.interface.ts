@@ -28,5 +28,19 @@ export interface OwnerVehicleDataType {
     imageUrl?: string;
     isMain?: boolean;
     boughtMilage?: number;
-    serviceBook?: any;
+}
+
+export interface ServiceReportType extends BaseType {
+    /** Jármű azonosítója */
+    vehicleId: string;
+    /** Szervíz időpontja */
+    date: Date;
+    /** Rövid leírás */
+    shortDescription: string;
+    /** Leírás */
+    description?: string;
+    /** Összeg */
+    amount: number;
+    /** Helyszín */
+    location: string;
 }
