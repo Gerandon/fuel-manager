@@ -1,0 +1,60 @@
+<form #addForm="ngForm" class="add-service-report" fxLayout="column">
+    <div fxLayout="row wrap">
+        <div fxLayout="row wrap" fxFlex="100">
+            <mat-form-field fxFlex="25" fxFlex.lt-md="50" fxFlex.lt-sm="100" appearance="outline">
+                <mat-label>Szervíz időpontja</mat-label>
+                <input matInput
+                       name="date"
+                       [(ngModel)]="model.date"
+                       [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <mat-card fxLayout="row" fxFlex="100" class="card-outlined">
+            <p class="card-outlined__title">Szervíz adatok</p>
+            <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
+                <basic-input name="shortDescription"
+                             fxFlex="auto"
+                             [(ngModel)]="model.shortDescription"
+                             [required]="true"
+                             label="Rövid leírás"
+                             placeholder="Rövid leírás">
+                </basic-input>
+                <number-input name="amount"
+                              fxFlex="auto"
+                              [(ngModel)]="model.amount"
+                              [required]="true"
+                              [maxLength]="15"
+                              suffix="(HUF)"
+                              label="Javítás összege"
+                              placeholder="Összeg">
+                </number-input>
+                <basic-input name="location"
+                             fxFlex="auto"
+                             [(ngModel)]="model.location"
+                             [required]="true"
+                             label="Javítás helyszíne"
+                             placeholder="Helyszín">
+                </basic-input>
+                <basic-input name="description"
+                             fxFlex="100"
+                             [(ngModel)]="model.description"
+                             label="Leírás"
+                             placeholder="Leírás">
+                </basic-input>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">
+        <div fxFlex="50">
+            <button mat-raised-button [mat-dialog-close]="model"
+                    [disabled]="addForm.invalid"
+                    [color]="'primary'">Hozzáadás
+            </button>
+        </div>
+        <div fxFlex="50" fxLayoutAlign="end center">
+            <button mat-button mat-dialog-close [color]="'primary'">Mégse</button>
+        </div>
+    </div>
+</form>

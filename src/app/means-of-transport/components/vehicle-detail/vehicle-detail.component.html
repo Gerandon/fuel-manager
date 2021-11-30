@@ -1,4 +1,4 @@
-<div>
+<div class="vehicle-detail">
     <resolve-request [observable]="this.vehicle" *ngIf="vehicle | async as veh">
         <div class="ml-30" fxLayout="row wrap" fxLayoutAlign="start center">
             <h2>{{ veh.brand }} {{ veh.type }}</h2>
@@ -20,32 +20,35 @@
                         <app-transport-type [vehicle]="veh" [showContainer]="false"></app-transport-type>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
-                        <mat-expansion-panel-header>
+                        <mat-expansion-panel-header fxLayout="row" fxLayoutGap="15px">
                             <mat-panel-title>Szervízkönyv</mat-panel-title>
+                            <mat-panel-description *ngIf="sumAmount | async as sum">
+                                Összesen elköltött: {{(sum | currency: ' ':'symbol':'1.0-0') + ' HUF'}}
+                            </mat-panel-description>
+                            <button mat-raised-button color="accent"
+                                    (click)="$event.stopPropagation();addServiceReport()">
+                                Hozzáadás
+                            </button>
                         </mat-expansion-panel-header>
                         <div fxLayout="row wrap" fxLayoutGap="15px grid">
-                            <div class="custom-tile">
+                            <div class="custom-tile" *ngFor="let report of serviceReports | async">
                                 <mat-card fxFlex.lg="calc(33% - 16px)"
                                           fxFlex.lt-lg="calc(50% - 16px)"
-                                          fxFlex.xs="calc(100% - 16px)" fxLayout="column">
+                                          fxFlex.xs="calc(100% - 16px)" fxLayout="column"
+                                          [matTooltip]="['Helyszín:', report.location, '', 'Leírás:',report.description] | multiLine"
+                                          matTooltipClass="theme-tooltip">
                                     <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-                                        <span>Olajcsere</span>
-                                        <span>2021.11.12.</span>
-                                        <span class="mt-5">15.000 HUF</span>
+                                        <span>{{report.shortDescription}}</span>
+                                        <span>{{report.date | date: 'YYYY.MM.dd'}}</span>
+                                        <span class="mt-5">{{(report.amount | currency: ' ':'symbol':'1.0-0') + ' HUF'}}</span>
                                     </mat-card-content>
                                 </mat-card>
                             </div>
-                            <div class="custom-tile">
-                                <mat-card fxFlex.lg="calc(33% - 16px)"
-                                          fxFlex.lt-lg="calc(50% - 16px)"
-                                          fxFlex.xs="calc(100% - 16px)" fxLayout="column">
-                                    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-                                        <span>Mittudoménmi</span>
-                                        <span>2021.11.12.</span>
-                                        <span class="mt-5">15.000 HUF</span>
-                                    </mat-card-content>
-                                </mat-card>
-                            </div>
+                        </div>
+                        <div *ngIf="!(serviceReports | async)?.length">
+                            <span>
+                                Jelenleg még nincs hozzáadott szervíz naplózásod! Ha szeretnél rögzíteni egyet, kattints a "Hozzáadás" gombra!
+                            </span>
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>

@@ -23,7 +23,7 @@
         background-color: mat-color($accent, 0.9);
     }
     .accent-background {
-        background-color: mat-color($accent);
+        background: mat-color($accent);
     }
     .warn-background {
         background-color: mat-color($warn);

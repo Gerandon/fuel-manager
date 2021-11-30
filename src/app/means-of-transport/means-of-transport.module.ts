@@ -8,6 +8,7 @@ import {VehicleTileComponent} from './components/vehicle-tile/vehicle-tile.compo
 import { AddTransportTypeDialogComponent } from './components/dialogs/add-transport-type-dialog/add-transport-type-dialog.component';
 import { VehicleDetailComponent } from './components/vehicle-detail/vehicle-detail.component';
 import { TrafficLicenseComponent } from './components/traffic-license/traffic-license.component';
+import { AddServiceReportComponent } from './components/dialogs/add-service-report/add-service-report.component';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { TrafficLicenseComponent } from './components/traffic-license/traffic-li
         VehicleTileComponent,
         AddTransportTypeDialogComponent,
         VehicleDetailComponent,
-        TrafficLicenseComponent
+        TrafficLicenseComponent,
+        AddServiceReportComponent
     ],
     imports: [
         CommonModule,

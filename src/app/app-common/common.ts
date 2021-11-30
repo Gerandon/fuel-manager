@@ -10,7 +10,7 @@ import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {LocalVehiclesService} from "../means-of-transport/services/vehicles/local-vehicles.service";
 import {RemoteVehiclesService} from "../means-of-transport/services/vehicles/remote-vehicles.service";
-import {VehicleDataType} from "./interfaces/vehicle.interface";
+import {ServiceReportType, VehicleDataType} from "./interfaces/vehicle.interface";
 import {_} from "./vendor/vendor.module";
 
 export const fullSizeDialogConfig = {
@@ -83,6 +83,17 @@ export const defaultVehicle: VehicleDataType = {
     ownerData: {
         imageUrl: '',
     }
+}
+
+export const defaultServiceReport: ServiceReportType = {
+    id: null,
+    creationDate: null,
+    vehicleId: null,
+    date: null,
+    shortDescription: null,
+    description: null,
+    location: null,
+    amount: null
 }
 
 export const Config = {
