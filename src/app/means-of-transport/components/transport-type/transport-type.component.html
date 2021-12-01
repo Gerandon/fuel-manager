@@ -5,6 +5,7 @@
         <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
             <basic-input name="brand"
                          fxFlex="auto"
+                         fxFlex.lt-sm="100"
                          [(ngModel)]="vehicle.brand"
                          [required]="true"
                          label="TRANSPORT_TYPE.BRAND"
@@ -12,6 +13,7 @@
             </basic-input>
             <basic-input name="type"
                          fxFlex="auto"
+                         fxFlex.lt-sm="100"
                          [(ngModel)]="vehicle.type"
                          [required]="true"
                          label="TRANSPORT_TYPE.TYPE"
@@ -19,6 +21,7 @@
             </basic-input>
             <app-select
                 fxFlex="auto"
+                fxFlex.lt-sm="100"
                 [options]="[
                     { value: 'Diesel', label: 'Diesel'},
                     { value: 'Gasoline', label: 'Benzin'}
@@ -30,6 +33,7 @@
             </app-select>
             <number-input name="engineVolume"
                           fxFlex="auto"
+                          fxFlex.lt-sm="100"
                           [(ngModel)]="vehicle.engineVolume"
                           [required]="true"
                           [maxLength]="15"
@@ -39,6 +43,7 @@
             </number-input>
             <number-input name="avgConsumption"
                           fxFlex="auto"
+                          fxFlex.lt-sm="100"
                           [(ngModel)]="vehicle.avgConsumption"
                           [required]="true"
                           [unmask]="true"
@@ -48,30 +53,39 @@
             </number-input>
             <basic-input name="image"
                          fxFlex="auto"
+                         fxFlex.lt-sm="100"
                          [(ngModel)]="vehicle.ownerData!.imageUrl"
                          label="Kép URL"
                          placeholder="Kép elérési út">
             </basic-input>
             <basic-input name="since"
                          fxFlex="auto"
+                         fxFlex.lt-sm="100"
+                         [required]="true"
                          [(ngModel)]="vehicle.ownerData!.since"
                          label="Birtokba vétel ideje"
                          placeholder="Birtokba vétel ideje">
             </basic-input>
             <basic-input name="frameNumber"
                          fxFlex="auto"
+                         fxFlex.lt-sm="100"
+                         [required]="true"
                          [(ngModel)]="vehicle.frameNumber"
                          label="Alvázsszám"
                          placeholder="Alvázsszám">
             </basic-input>
             <basic-input name="motorCode"
                          fxFlex="auto"
+                         fxFlex.lt-sm="100"
+                         [required]="true"
                          [(ngModel)]="vehicle.motorCode"
                          label="Motorkód"
                          placeholder="Motorkód">
             </basic-input>
             <basic-input name="kilowatt"
                          fxFlex="auto"
+                         fxFlex.lt-sm="100"
+                         [required]="true"
                          [(ngModel)]="vehicle.kilowatt"
                          label="Kilowatt"
                          placeholder="Kilowatt">

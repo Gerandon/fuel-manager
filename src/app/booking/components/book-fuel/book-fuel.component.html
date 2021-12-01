@@ -3,7 +3,7 @@
         <mat-card fxFlex="100" class="card-outlined">
             <p class="card-outlined__title">Üzemanyag költség</p>
             <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
-                <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
                     <mat-label>Válasszon egy dátumot</mat-label>
                     <input matInput
                            name="date"
@@ -15,6 +15,7 @@
                 </mat-form-field>
                 <number-input name="quantity"
                               fxFlex="auto"
+                              fxFlex.lt-sm="100"
                               [(ngModel)]="model.quantity"
                               [required]="true"
                               [disabled]="!editMode"
@@ -25,6 +26,7 @@
                 </number-input>
                 <number-input name="amountSpent"
                               fxFlex="auto"
+                              fxFlex.lt-sm="100"
                               [(ngModel)]="model.amountSpent"
                               [required]="true"
                               [disabled]="!editMode"
@@ -35,6 +37,7 @@
                 </number-input>
                 <number-input name="amountPaid"
                               fxFlex="auto"
+                              fxFlex.lt-sm="100"
                               [(ngModel)]="model.amountPaid"
                               [required]="true"
                               [disabled]="!editMode"
@@ -45,6 +48,7 @@
                 </number-input>
                 <number-input name="fullSpent"
                               fxFlex="auto"
+                              fxFlex.lt-sm="100"
                               [(ngModel)]="model.fullSpent"
                               [required]="true"
                               [disabled]="!editMode"

@@ -1,10 +1,10 @@
-<mat-form-field fxFlex [floatLabel]="floatLabel && 'always'" [appearance]="appearance">
+<mat-form-field [floatLabel]="floatLabel && 'always'" [appearance]="appearance">
     <mat-label *ngIf="label && floatLabel !== 'never'">{{ label | translate: translateParams }}</mat-label>
     <input
-        matInput
-        label=""
         #inputElement
         #input="ngForm"
+        matInput
+        label=""
         [formControl]="control"
         [imask]="customImask"
         [unmask]="unmask"

@@ -12,7 +12,7 @@ import {FuelCostDiaryType} from "../../../../app-common/interfaces/fuel-cost.int
 export class FuelCostDiaryComponent implements OnInit {
 
     public fuelCostDiarySource!: Observable<FuelCostDiaryType[]>;
-    public displayedColumns: string[] = ['creationDate', 'quantity', 'amountSpent', 'amountPaid', 'fullSpent', 'action'];
+    public displayedColumns: string[] = ['creationDate', 'quantity', 'amountSpent', 'amountPaid', 'fullSpent', 'ACTION'];
 
     constructor(private dialog: MatDialog,
                 public bookingService: BookingService) {

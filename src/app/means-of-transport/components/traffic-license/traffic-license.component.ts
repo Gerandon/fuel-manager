@@ -3,6 +3,8 @@ import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface"
 import {defaultVehicle} from "../../../app-common/common";
 import {_} from "../../../app-common/vendor/vendor.module";
 import html2canvas from "html2canvas";
+import {AuthService} from "../../../auth/services/auth.service";
+import {first, tap} from "rxjs/operators";
 
 @Component({
     selector: 'app-traffic-license',
@@ -20,7 +22,8 @@ export class TrafficLicenseComponent implements OnInit {
     @ViewChild('canvas') canvas!: ElementRef;
     @ViewChild('downloadLink') downloadLink!: ElementRef;
 
-    constructor(private cdr: ChangeDetectorRef) {
+    constructor(private cdr: ChangeDetectorRef,
+                private authService: AuthService) {
     }
 
     ngOnInit(): void {
@@ -35,10 +38,15 @@ export class TrafficLicenseComponent implements OnInit {
                 clonedDoc?.getElementsByClassName('license-container')[0]?.style?.display = 'block';
             }
         }).then(canvas => {
-            this.canvas.nativeElement.src = canvas.toDataURL();
-            this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
-            this.downloadLink.nativeElement.download = 'marble-diagram.png';
-            this.downloadLink.nativeElement.click();
+            this.authService.getUserData().pipe(
+                first(),
+                tap((userData) => {
+                    this.canvas.nativeElement.src = canvas.toDataURL();
+                    this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+                    this.downloadLink.nativeElement.download = `${userData.email.split('@')[0]}_${this.vehicle.brand}_license.png`;
+                    this.downloadLink.nativeElement.click();
+                }),
+            ).subscribe();
         });
     }
 }

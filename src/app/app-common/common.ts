@@ -89,11 +89,12 @@ export const defaultServiceReport: ServiceReportType = {
     id: null,
     creationDate: null,
     vehicleId: null,
-    date: null,
+    date: new Date(),
     shortDescription: null,
     description: null,
     location: null,
-    amount: null
+    amount: null,
+    milage: null,
 }
 
 export const Config = {

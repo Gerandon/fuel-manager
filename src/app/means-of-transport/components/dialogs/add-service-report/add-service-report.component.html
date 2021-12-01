@@ -5,17 +5,19 @@
                 <mat-label>Szervíz időpontja</mat-label>
                 <input matInput
                        name="date"
+                       required="true"
                        [(ngModel)]="model.date"
-                       [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                       [matDatepicker]="pickerOne">
+                <mat-datepicker-toggle matSuffix [for]="pickerOne"></mat-datepicker-toggle>
+                <mat-datepicker #pickerOne></mat-datepicker>
             </mat-form-field>
         </div>
-        <mat-card fxLayout="row" fxFlex="100" class="card-outlined">
+        <mat-card fxFlex="100" class="card-outlined">
             <p class="card-outlined__title">Szervíz adatok</p>
             <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
                 <basic-input name="shortDescription"
                              fxFlex="auto"
+                             fxFlex.lt-sm="100"
                              [(ngModel)]="model.shortDescription"
                              [required]="true"
                              label="Rövid leírás"
@@ -23,6 +25,7 @@
                 </basic-input>
                 <number-input name="amount"
                               fxFlex="auto"
+                              fxFlex.lt-sm="100"
                               [(ngModel)]="model.amount"
                               [required]="true"
                               [maxLength]="15"
@@ -32,13 +35,34 @@
                 </number-input>
                 <basic-input name="location"
                              fxFlex="auto"
+                             fxFlex.lt-sm="100"
                              [(ngModel)]="model.location"
                              [required]="true"
                              label="Javítás helyszíne"
                              placeholder="Helyszín">
                 </basic-input>
+                <number-input name="milage"
+                              fxFlex="auto"
+                              fxFlex.lt-sm="100"
+                              [(ngModel)]="model.milage"
+                              [required]="true"
+                              [maxLength]="15"
+                              suffix="Km"
+                              label="Kilométer óra állása"
+                              placeholder="Kilométer óra állása">
+                </number-input>
+                <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
+                    <mat-label>Következő szervíz időpontja</mat-label>
+                    <input matInput
+                           name="date"
+                           [(ngModel)]="model.nextSimilarServiceData"
+                           [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
                 <basic-input name="description"
                              fxFlex="100"
+                             fxFlex.lt-sm="100"
                              [(ngModel)]="model.description"
                              label="Leírás"
                              placeholder="Leírás">

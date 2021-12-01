@@ -5,12 +5,13 @@ import {ServiceReportType, VehicleDataType} from "../../../app-common/interfaces
 import {Observable} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {AddServiceReportComponent} from "../dialogs/add-service-report/add-service-report.component";
-import {map, reduce} from "rxjs/operators";
+import {map} from "rxjs/operators";
 
 @Component({
     selector: 'app-vehicle-detail',
     templateUrl: './vehicle-detail.component.html',
-    styleUrls: ['./vehicle-detail.component.scss']
+    styleUrls: ['./vehicle-detail.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class VehicleDetailComponent implements OnInit {
 

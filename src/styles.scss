@@ -46,6 +46,9 @@ body {
     .mat-tab-header-pagination {
         z-index: 0;
     }
+    .cdk-overlay-pane {
+        overflow: scroll;
+    }
 }
 
 .card-outlined {
@@ -96,4 +99,11 @@ $pixels: (0: 0px, 5: 5px, 10: 10px, 15: 15px, 20: 20px, 25: 25px, 30: 30px, 35:3
 .of-ellipsis {
     overflow: auto;
     text-overflow: ellipsis;
+}
+
+.theme-tooltip {
+    @extend .primary-background;
+    @extend .accent-color;
+    white-space: pre-line;
+    font-size: 20px !important;
 }

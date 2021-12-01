@@ -3,7 +3,7 @@
         <mat-card fxFlex="100" class="card-outlined">
             <p class="card-outlined__title">Utazási napló</p>
             <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
-                <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
                     <mat-label>Válasszon egy dátumot</mat-label>
                     <input matInput
                            name="date"
@@ -15,6 +15,7 @@
                 </mat-form-field>
                 <number-input name="distance"
                               fxFlex="auto"
+                              fxFlex.lt-sm="100"
                               [(ngModel)]="model.distance"
                               [required]="true"
                               [disabled]="!editMode"
@@ -25,6 +26,7 @@
                 </number-input>
                 <basic-input name="route"
                              fxFlex="auto"
+                             fxFlex.lt-sm="100"
                              [(ngModel)]="model.route.from"
                              [disabled]="!editMode"
                              [required]="true"
@@ -33,6 +35,7 @@
                 </basic-input>
                 <basic-input name="amountSpent"
                               fxFlex="auto"
+                             fxFlex.lt-sm="100"
                               [(ngModel)]="model.route.to"
                               [disabled]="!editMode"
                               [required]="true"
