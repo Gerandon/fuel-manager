@@ -21,13 +21,13 @@
                         </mat-expansion-panel-header>
                         <app-transport-type [vehicle]="veh" [showContainer]="false"></app-transport-type>
                     </mat-expansion-panel>
-                    <mat-expansion-panel>
+                    <mat-expansion-panel #exp>
                         <mat-expansion-panel-header>
                             <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="15px grid" fxLayoutAlign="center center">
                                 <span class="mat-panel-title" fxFlex="calc(100/3)">
                                     Szervízkönyv
                                 </span>
-                                <div fxFlex="calc(100/3)">
+                                <div fxFlex="calc(100/3)" *ngIf="!exp.expanded">
                                     <span *ngIf="sumAmount | async as sum"
                                           class="mat-panel-description">
                                     Összesen elköltött: {{(sum | currency: ' ':'symbol':'1.0-0') + ' HUF'}}
