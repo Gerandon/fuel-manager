@@ -1,7 +1,5 @@
-<form #addForm="ngForm" class="book-milage" fxLayout="column">
-    <div fxLayout="row">
-        <app-transport-type [vehicle]="model"></app-transport-type>
-    </div>
+<form #addForm="ngForm" class="book-milage" fxFlex="100" fxLayout="column">
+    <app-transport-type [vehicle]="model"></app-transport-type>
     <div *ngIf="editMode" fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">
         <div fxFlex="50">
             <button mat-raised-button [mat-dialog-close]="model"

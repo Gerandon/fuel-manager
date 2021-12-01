@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, Injector, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Injector, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {BaseInput} from "../core/base.input";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
@@ -6,6 +6,7 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
     selector: 'app-select',
     templateUrl: './select.component.html',
     styleUrls: ['./select.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => SelectComponent), multi: true },
     ],

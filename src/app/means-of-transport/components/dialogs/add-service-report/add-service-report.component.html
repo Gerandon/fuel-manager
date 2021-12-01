@@ -5,10 +5,11 @@
                 <mat-label>Szervíz időpontja</mat-label>
                 <input matInput
                        name="date"
+                       required="true"
                        [(ngModel)]="model.date"
-                       [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                       [matDatepicker]="pickerOne">
+                <mat-datepicker-toggle matSuffix [for]="pickerOne"></mat-datepicker-toggle>
+                <mat-datepicker #pickerOne></mat-datepicker>
             </mat-form-field>
         </div>
         <mat-card fxLayout="row" fxFlex="100" class="card-outlined">
@@ -37,6 +38,24 @@
                              label="Javítás helyszíne"
                              placeholder="Helyszín">
                 </basic-input>
+                <number-input name="milage"
+                              fxFlex="auto"
+                              [(ngModel)]="model.milage"
+                              [required]="true"
+                              [maxLength]="15"
+                              suffix="Km"
+                              label="Kilométer óra állása"
+                              placeholder="Kilométer óra állása">
+                </number-input>
+                <mat-form-field fxFlex="auto" appearance="outline">
+                    <mat-label>Következő szervíz időpontja</mat-label>
+                    <input matInput
+                           name="date"
+                           [(ngModel)]="model.nextSimilarServiceData"
+                           [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
                 <basic-input name="description"
                              fxFlex="100"
                              [(ngModel)]="model.description"

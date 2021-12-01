@@ -11,7 +11,9 @@
             </app-traffic-license>
             <div fxFlex="50"
                  fxFlex.gt-md="65"
-                 fxFlex.lt-md="auto" fxLayout="column" fxLayoutGap="15px">
+                 fxFlex.lt-md="100"
+                 fxLayout="column"
+                 fxLayoutGap="15px">
                 <mat-accordion>
                     <mat-expansion-panel class="mb-10">
                         <mat-expansion-panel-header>
@@ -20,15 +22,24 @@
                         <app-transport-type [vehicle]="veh" [showContainer]="false"></app-transport-type>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
-                        <mat-expansion-panel-header fxLayout="row" fxLayoutGap="15px">
-                            <mat-panel-title>Szervízkönyv</mat-panel-title>
-                            <mat-panel-description *ngIf="sumAmount | async as sum">
-                                Összesen elköltött: {{(sum | currency: ' ':'symbol':'1.0-0') + ' HUF'}}
-                            </mat-panel-description>
-                            <button mat-raised-button color="accent"
-                                    (click)="$event.stopPropagation();addServiceReport()">
-                                Hozzáadás
-                            </button>
+                        <mat-expansion-panel-header>
+                            <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="15px grid" fxLayoutAlign="center center">
+                                <span class="mat-panel-title" fxFlex="calc(100/3)">
+                                    Szervízkönyv
+                                </span>
+                                <div fxFlex="calc(100/3)">
+                                    <span *ngIf="sumAmount | async as sum"
+                                          class="mat-panel-description">
+                                    Összesen elköltött: {{(sum | currency: ' ':'symbol':'1.0-0') + ' HUF'}}
+                                </span>
+                                </div>
+                                <div fxFlex="calc(100/3)" fxLayoutAlign="center center">
+                                    <button mat-raised-button color="accent"
+                                            (click)="$event.stopPropagation();addServiceReport()">
+                                        Hozzáadás
+                                    </button>
+                                </div>
+                            </div>
                         </mat-expansion-panel-header>
                         <div fxLayout="row wrap" fxLayoutGap="15px grid">
                             <div class="custom-tile" *ngFor="let report of serviceReports | async">

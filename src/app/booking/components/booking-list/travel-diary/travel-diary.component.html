@@ -7,7 +7,7 @@
                                   mode="indeterminate">
             </mat-progress-spinner>
         </div>
-        <div class="table-wrapper" *ngIf="!obs.loading">
+        <div fxFlex="100" class="table-wrapper" *ngIf="!obs.loading">
             <table mat-table [dataSource]="obs.value" >
                 <!-- Create Date Column -->
                 <ng-container matColumnDef="creationDate">

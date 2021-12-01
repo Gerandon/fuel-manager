@@ -1,17 +1,25 @@
 @import './src/theme.scss';
 
-.vehicle-detail {
+app-vehicle-detail {
     h2 {
         @extend .accent-color;
     }
     .mat-expansion-panel-header {
+        height: auto;
+        padding: 15px;
         &:not(.mat-expanded) {
-            @extend .primary-background;
-            mat-panel-title, mat-panel-description {
+            .mat-panel-title,
+            .mat-panel-description,
+            mat-panel-title,
+            mat-panel-description {
                 @extend .accent-color;
             }
+            @extend .primary-background;
         }
-        mat-panel-title, mat-panel-description {
+        .mat-panel-title,
+        .mat-panel-description,
+        mat-panel-title,
+        mat-panel-description {
             align-items: center;
         }
     }
@@ -22,10 +30,4 @@
             width: 123px;
         }
     }
-}
-::ng-deep .theme-tooltip {
-    @extend .primary-background;
-    @extend .accent-color;
-    white-space: pre-line;
-    font-size: 20px;
 }
