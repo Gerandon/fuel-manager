@@ -112,11 +112,12 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
                         ...dummyNewDiff[root]
                     };
                     // Update only those that value changed
-                    if (!_.isEqual(_.get(dummyOldDiff, property.split('.')), _.get(dummyNewDiff, property.split('.')))) {
+                    //if (!_.isEqual(_.get(dummyOldDiff, property.split('.')), _.get(dummyNewDiff, property.split('.')))) {
                         //FIXME it now only updates the child property, but the root too
                         //this.dbRef().update(<FirebaseOperation>_item.key,_.set({}, property.split('.'), value));
-                        this.dbRef().update(<FirebaseOperation>_item.key,merged);
-                    }
+                        // @ts-ignore
+                    this.dbRef().update(<FirebaseOperation>_item.key,{ [root]: {...merged} });
+                    //}
                 }
             })
         ));
