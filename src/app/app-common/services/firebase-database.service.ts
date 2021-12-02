@@ -104,11 +104,18 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
             first(),
             tap(items => items.forEach((_item: ITEM) => {
                 if (!itemIds?.length || itemIds.includes(<string>_item.id) && !omitIds?.includes(_item.id)) {
-                    const dummyOldDiff = _.set({}, property.split('.')[0], _item[property.split('.')[0]]);
+                    const root = property.split('.')[0];
+                    const dummyOldDiff = _.set({}, root, _item[root]);
                     const dummyNewDiff = _.set({}, property.split('.'), value);
+                    const merged = {
+                        ...dummyOldDiff[root],
+                        ...dummyNewDiff[root]
+                    };
                     // Update only those that value changed
                     if (!_.isEqual(_.get(dummyOldDiff, property.split('.')), _.get(dummyNewDiff, property.split('.')))) {
-                        this.dbRef().update(<FirebaseOperation>_item.key,_.set({}, property.split('.'), value));
+                        //FIXME it now only updates the child property, but the root too
+                        //this.dbRef().update(<FirebaseOperation>_item.key,_.set({}, property.split('.'), value));
+                        this.dbRef().update(<FirebaseOperation>_item.key,merged);
                     }
                 }
             })
