@@ -137,7 +137,7 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
         );
     }
 
-    deleteAll(): Promise<void> {
-        return this.dbRef().remove();
+    deleteAll(): void {
+        this.dbRef().remove();
     }
 }

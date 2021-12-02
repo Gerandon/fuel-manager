@@ -35,6 +35,9 @@ export class RemoteVehiclesService implements IVehiclesService {
 
     removeVehicle(item: VehicleDataType): void {
         this.fbVehicleService.delete(item).subscribe();
+        const srService: FirebaseDatabaseService<ServiceReportType> =
+            new FirebaseDatabaseService(this.firebaseDb, `${Services.serviceReportList}/${item.id}`);
+        srService.deleteAll();
     }
 
     editVehicle(item: VehicleDataType): VehicleDataType {
