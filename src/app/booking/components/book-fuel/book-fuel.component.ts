@@ -17,7 +17,7 @@ export class BookFuelComponent implements OnInit {
 
     ngOnInit(): void {
         this.model = this.item?.model || {};
-        this.model.creationDate = this.model.creationDate || new Date();
+        this.model.date = this.model.date || new Date();
         this.editMode = !!this.item?.editMode;
     }
 }

@@ -46,5 +46,5 @@ export interface ServiceReportType extends BaseType {
     /** Kilométer állás a rögzítés időpontjában */
     milage: number;
     /** Következő hasonló szervíz */
-    nextSimilarServiceData?: Date;
+    nextSimilarServiceDate?: Date;
 }

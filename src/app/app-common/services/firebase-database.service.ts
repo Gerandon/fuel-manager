@@ -11,6 +11,7 @@ import firebase from "firebase/compat";
 import {DatabaseReference, FirebaseOperation} from "@angular/fire/compat/database/interfaces";
 import Query = firebase.database.Query;
 import ThenableReference = firebase.database.ThenableReference;
+import {formatObject} from "traversal-handler";
 
 interface _BaseType extends BaseType {
     key?: string;
@@ -71,21 +72,22 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
                     prevMapped.every((_curr, index) => _.isEqual(_curr, currMapped[index]));
             }),
             map(changes => changes.map(c => {
+                const payloadVal = formatObject(c.payload.val(), (object, key, value) =>
+                    key.toLowerCase().endsWith('date') ? new Date(value) : value);
                 return {
                     ...{key: c.payload.key} as any,
-                    ...c.payload.val() ,
-                    ...( c.payload.val()!['date'] ? {date: new Date(c.payload.val()!['date'])} : {}),
-                    creationDate: new Date(c.payload.val()!.creationDate)
+                    ...payloadVal,
                 }
             }))
         );
     }
 
     create(item: ITEM): ThenableReference {
+        const payloadVal = formatObject(item, (object, key, value) =>
+            value instanceof Date ? new Date(value).getTime() : value);
         return this.dbRef().push(_.omit({
-            ...item,
+            ...payloadVal,
             id: v4(),
-            ...(item['date'] ? { date: item['date'].getTime() } : {}),
             creationDate: new Date().getTime(),
         }, ['key']) as ITEM);
     }

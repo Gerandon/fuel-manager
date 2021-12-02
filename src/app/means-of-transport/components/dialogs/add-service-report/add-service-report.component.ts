@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {ServiceReportType} from "../../../../app-common/interfaces/vehicle.interface";
 import {defaultServiceReport} from "../../../../app-common/common";
-import {_} from "../../../../app-common/vendor/vendor.module";
 
 @Component({
     selector: 'app-add-service-report',

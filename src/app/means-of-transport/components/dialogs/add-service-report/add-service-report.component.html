@@ -54,8 +54,8 @@
                 <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
                     <mat-label>Következő szervíz időpontja</mat-label>
                     <input matInput
-                           name="date"
-                           [(ngModel)]="model.nextSimilarServiceData"
+                           name="nextSimilarServiceDate"
+                           [(ngModel)]="model.nextSimilarServiceDate"
                            [matDatepicker]="picker">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
