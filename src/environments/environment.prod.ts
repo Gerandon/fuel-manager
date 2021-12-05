@@ -1,5 +1,6 @@
 export const environment = {
     production: true,
+    buildTimestamp: '{BUILD_TIMESTAMP}',
     firebase: {
         mode: 'prod',
         apiKey: "AIzaSyBZzDTCWnNHWI1gLumqgJZStkepAj2dMR8",
