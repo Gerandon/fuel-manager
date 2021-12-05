@@ -1,0 +1,32 @@
+<div>
+    <button mat-icon-button color="primary"
+            [matMenuTriggerFor]="menu">
+        <mat-icon>list</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button *ngIf="showAll || actions.includes('CREATE')" mat-icon-button
+                matTooltip="Megnyitás"
+                color="primary"
+                (click)="open.emit()">
+            <mat-icon>search</mat-icon>
+        </button>
+        <button *ngIf="showAll || actions.includes('EDIT')"
+                mat-icon-button
+                matTooltip="Szerkesztés"
+                (click)="edit.emit()" color="primary">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="showAll || actions.includes('COPY')"
+                mat-icon-button
+                matTooltip="Másolat készítése"
+                (click)="copy.emit()" color="primary">
+            <mat-icon>content_copy</mat-icon>
+        </button>
+        <button *ngIf="showAll || actions.includes('DELETE')"
+                mat-icon-button color="warn"
+                (click)="delete.emit()"
+                matTooltip="Elem törlése">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-menu>
+</div>

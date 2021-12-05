@@ -19,6 +19,10 @@ export class RemoteBookingService implements IBookingService {
         this.fuelFbService = new FirebaseDatabaseService(firebaseDb, 'fuel-cost-list');
     }
 
+    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string; }): Observable<FuelCostDiaryType[]> {
+        return this.fuelFbService.search(queryParams);
+    }
+
     searchInTravelDiary(queryParams?: { key: keyof TravelDiaryType, value: string }): Observable<TravelDiaryType[]> {
         return this.travelFbService.search(queryParams);
     }
@@ -41,18 +45,19 @@ export class RemoteBookingService implements IBookingService {
     }
 
     removeFuelCost(item: FuelCostDiaryType): void {
-        throw new Error('Method not implemented.');
+        this.fuelFbService.delete(item).subscribe();
     }
 
     editFuelCost(item: FuelCostDiaryType): FuelCostDiaryType {
-        throw new Error('Method not implemented.');
+        this.fuelFbService.update(item).subscribe();
+        return item;
     }
 
     getTravelDiaryList(): Observable<TravelDiaryType[]> {
-        return this.travelFbService.getAll();
+        return this.travelFbService.getAll('date');
     }
 
     getFuelCostDiaryList(): Observable<FuelCostDiaryType[]> {
-        return this.fuelFbService.getAll();
+        return this.fuelFbService.getAll('date');
     }
 }

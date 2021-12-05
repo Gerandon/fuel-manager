@@ -46,7 +46,7 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
                     return true;
                 }
                 // Should be more generic
-                if ((`'${key}'`).includes('Date')) {
+                if ((`'${key}'`).toLocaleLowerCase().includes('date')) {
                     // @ts-ignore
                     return (<Date>item[key]).getMonth() === Number(value);
                 }
@@ -93,9 +93,11 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
     }
 
     update(item: ITEM): Observable<ITEM[]>{
+        const payloadVal = formatObject(item, (object, key, value) =>
+            value instanceof Date ? new Date(value).getTime() : value);
         // @ts-ignore
         this.dbRef().update(item.key, {
-            ..._.omit(item, 'creationDate'),
+            ..._.omit(payloadVal, 'creationDate'),
             modificationDate: new Date().getTime()
         });
         return of([]);

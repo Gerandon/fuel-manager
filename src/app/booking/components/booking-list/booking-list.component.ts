@@ -58,7 +58,7 @@ export class BookingListComponent implements OnInit {
     }
 
     monthTabChange(event) {
-        this.travelQueryParams = this.fuelQueryParams = { key: 'creationDate', value: event.index.toString()};
+        this.travelQueryParams = this.fuelQueryParams = { key: 'date', value: event.index.toString()};
     }
 
     addToList() {

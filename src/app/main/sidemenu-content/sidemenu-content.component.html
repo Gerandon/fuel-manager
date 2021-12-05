@@ -30,7 +30,7 @@
     <div fxLayout="row" fxLayoutAlign="center center">
         <span style="font-size:12px">Version: {{version}}</span>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
+    <div *ngIf="env.buildTimestamp!=='{BUILD_TIMESTAMP}'" fxLayout="row" fxLayoutAlign="center center">
         <span *ngIf="env.buildTimestamp | date: 'yyyy.MM.dd hh:mm' as _timestamp" style="font-size:12px">
             Timestamp: {{_timestamp}}
         </span>

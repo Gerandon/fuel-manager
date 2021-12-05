@@ -48,33 +48,12 @@
                 <ng-container matColumnDef="ACTION" stickyEnd>
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element">
-                        <button mat-icon-button color="primary"
-                                [matMenuTriggerFor]="menu">
-                            <mat-icon>list</mat-icon>
-                        </button>
-                        <mat-menu #menu="matMenu">
-                            <button mat-icon-button
-                                    matTooltip="Megnyitás"
-                                    color="primary"
-                                    (click)="openItem(element, 'detail')">
-                                <mat-icon>search</mat-icon>
-                            </button>
-                            <button mat-icon-button
-                                    matTooltip="Szerkesztés"
-                                    (click)="openItem(element, 'edit')" color="primary">
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                            <button mat-icon-button
-                                    matTooltip="Másolat készítése"
-                                    (click)="openItem(element, 'copy')" color="primary">
-                                <mat-icon>content_copy</mat-icon>
-                            </button>
-                            <button mat-icon-button color="warn"
-                                    (click)="bookingService.removeTravelDiary(element)"
-                                    matTooltip="Elem törlése">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                        </mat-menu>
+                        <app-actions [actions]="['ALL']"
+                                     (open)="openItem(element, 'detail')"
+                                     (edit)="openItem(element, 'edit')"
+                                     (copy)="openItem(element, 'copy')"
+                                     (delete)="bookingService.removeTravelDiary(element)">
+                        </app-actions>
                     </td>
                 </ng-container>
 
