@@ -11,6 +11,7 @@ import firebase from "firebase/compat";
 import {DatabaseReference, FirebaseOperation} from "@angular/fire/compat/database/interfaces";
 import Query = firebase.database.Query;
 import ThenableReference = firebase.database.ThenableReference;
+import {formatObject} from "traversal-handler";
 
 interface _BaseType extends BaseType {
     key?: string;
@@ -45,7 +46,7 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
                     return true;
                 }
                 // Should be more generic
-                if ((`'${key}'`).includes('Date')) {
+                if ((`'${key}'`).toLocaleLowerCase().includes('date')) {
                     // @ts-ignore
                     return (<Date>item[key]).getMonth() === Number(value);
                 }
@@ -71,29 +72,32 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
                     prevMapped.every((_curr, index) => _.isEqual(_curr, currMapped[index]));
             }),
             map(changes => changes.map(c => {
+                const payloadVal = formatObject(c.payload.val(), (object, key, value) =>
+                    key.toLowerCase().endsWith('date') ? new Date(value) : value);
                 return {
                     ...{key: c.payload.key} as any,
-                    ...c.payload.val() ,
-                    ...( c.payload.val()!['date'] ? {date: new Date(c.payload.val()!['date'])} : {}),
-                    creationDate: new Date(c.payload.val()!.creationDate)
+                    ...payloadVal,
                 }
             }))
         );
     }
 
     create(item: ITEM): ThenableReference {
+        const payloadVal = formatObject(item, (object, key, value) =>
+            value instanceof Date ? new Date(value).getTime() : value);
         return this.dbRef().push(_.omit({
-            ...item,
+            ...payloadVal,
             id: v4(),
-            ...(item['date'] ? { date: item['date'].getTime() } : {}),
             creationDate: new Date().getTime(),
         }, ['key']) as ITEM);
     }
 
     update(item: ITEM): Observable<ITEM[]>{
+        const payloadVal = formatObject(item, (object, key, value) =>
+            value instanceof Date ? new Date(value).getTime() : value);
         // @ts-ignore
         this.dbRef().update(item.key, {
-            ..._.omit(item, 'creationDate'),
+            ..._.omit(payloadVal, 'creationDate'),
             modificationDate: new Date().getTime()
         });
         return of([]);
@@ -104,12 +108,20 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
             first(),
             tap(items => items.forEach((_item: ITEM) => {
                 if (!itemIds?.length || itemIds.includes(<string>_item.id) && !omitIds?.includes(_item.id)) {
-                    const dummyOldDiff = _.set({}, property.split('.')[0], _item[property.split('.')[0]]);
+                    const root = property.split('.')[0];
+                    const dummyOldDiff = _.set({}, root, _item[root]);
                     const dummyNewDiff = _.set({}, property.split('.'), value);
+                    const merged = {
+                        ...dummyOldDiff[root],
+                        ...dummyNewDiff[root]
+                    };
                     // Update only those that value changed
-                    if (!_.isEqual(_.get(dummyOldDiff, property.split('.')), _.get(dummyNewDiff, property.split('.')))) {
-                        this.dbRef().update(<FirebaseOperation>_item.key,_.set({}, property.split('.'), value));
-                    }
+                    //if (!_.isEqual(_.get(dummyOldDiff, property.split('.')), _.get(dummyNewDiff, property.split('.')))) {
+                        //FIXME it now only updates the child property, but the root too
+                        //this.dbRef().update(<FirebaseOperation>_item.key,_.set({}, property.split('.'), value));
+                        // @ts-ignore
+                    this.dbRef().update(<FirebaseOperation>_item.key,{ [root]: {...merged} });
+                    //}
                 }
             })
         ));
@@ -127,7 +139,7 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
         );
     }
 
-    deleteAll(): Promise<void> {
-        return this.dbRef().remove();
+    deleteAll(): void {
+        this.dbRef().remove();
     }
 }

@@ -3,9 +3,9 @@ import {NavigationEnd, Router} from "@angular/router";
 import {filter, map} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {AuthService} from "../../auth/services/auth.service";
-import {environment} from "../../../environments/environment";
 // @ts-ignore
 import packageJson from '../../../../package.json';
+import {environment} from "../../../environments/environment";
 
 @Component({
     selector: 'app-sidemenu-content',
@@ -23,6 +23,7 @@ export class SidemenuContentComponent implements OnInit {
     public url: Observable<string>;
     public userData: Observable<any>;
     public version = packageJson.version;
+    public env = environment;
 
     constructor(private router: Router,
                 public authService: AuthService) {

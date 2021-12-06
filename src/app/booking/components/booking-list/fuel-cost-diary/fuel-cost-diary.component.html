@@ -3,7 +3,7 @@
         <!-- Creation date Column -->
         <ng-container matColumnDef="creationDate">
             <th mat-header-cell *matHeaderCellDef>Dátum</th>
-            <td mat-cell *matCellDef="let element">{{element.date | date}}</td>
+            <td mat-cell *matCellDef="let element">{{element.date | date: 'YYYY.MM.dd'}}</td>
         </ng-container>
 
         <!-- Quantity Column -->
@@ -34,6 +34,12 @@
         <ng-container matColumnDef="ACTION" stickyEnd>
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
+                <app-actions [actions]="['ALL']"
+                             (open)="openItem(element, 'detail')"
+                             (edit)="openItem(element, 'edit')"
+                             (copy)="openItem(element, 'copy')"
+                             (delete)="bookingService.removeFuelCost(element)">
+                </app-actions>
             </td>
         </ng-container>
 

@@ -87,7 +87,7 @@ export const defaultVehicle: VehicleDataType = {
 
 export const defaultServiceReport: ServiceReportType = {
     id: null,
-    creationDate: null,
+    creationDate: new Date(),
     vehicleId: null,
     date: new Date(),
     shortDescription: null,
@@ -95,6 +95,7 @@ export const defaultServiceReport: ServiceReportType = {
     location: null,
     amount: null,
     milage: null,
+    nextSimilarServiceDate: null,
 }
 
 export const Config = {

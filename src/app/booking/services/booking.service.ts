@@ -58,4 +58,8 @@ export class BookingService implements IBookingService {
             }).sort((a, b) => Number(`${a.month}.${a.day}`)  - Number(`${b.month}.${b.day}`))),
         );
     }
+
+    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string }): Observable<FuelCostDiaryType[]> {
+        return this._bookingService.searchInFuelCost(queryParams);
+    }
 }

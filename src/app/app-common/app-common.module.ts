@@ -12,6 +12,7 @@ import {TriangleButtonComponent} from './widgets/triangle-button/triangle-button
 import { WithLoadingPipe } from './pipes/with-loading.pipe';
 import { ResolveRequestComponent } from './components/resolve-request/resolve-request.component';
 import { MultiLinePipe } from './pipes/multi-line.pipe';
+import { ActionsComponent } from './components/actions/actions.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { MultiLinePipe } from './pipes/multi-line.pipe';
         WithLoadingPipe,
         ResolveRequestComponent,
         MultiLinePipe,
+        ActionsComponent,
     ],
     imports: [
         CommonModule,
@@ -45,7 +47,8 @@ import { MultiLinePipe } from './pipes/multi-line.pipe';
         TriangleButtonComponent,
         WithLoadingPipe,
         ResolveRequestComponent,
-        MultiLinePipe
+        MultiLinePipe,
+        ActionsComponent
     ]
 })
 export class AppCommonModule {

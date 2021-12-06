@@ -4,6 +4,7 @@
 
 export const environment = {
     production: false,
+    buildTimestamp: '{BUILD_TIMESTAMP}',
     firebase: {
         mode: 'dev',
         apiKey: "AIzaSyBZzDTCWnNHWI1gLumqgJZStkepAj2dMR8",

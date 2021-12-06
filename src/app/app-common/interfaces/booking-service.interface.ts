@@ -7,6 +7,7 @@ export interface IBookingService {
     getTravelDiaryList(): Observable<TravelDiaryType[]>;
     getFuelCostDiaryList(): Observable<FuelCostDiaryType[]>;
     searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string}): Observable<TravelDiaryType[]>
+    searchInFuelCost(queryParams?: {key: keyof FuelCostDiaryType, value: string}): Observable<FuelCostDiaryType[]>
 
     addTravelDiary(addItem: TravelDiaryType): void;
     removeTravelDiary(item: TravelDiaryType): void;

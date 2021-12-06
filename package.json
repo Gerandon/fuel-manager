@@ -4,8 +4,9 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
+        "updateBuild": "node ./replace.build.js",
         "build": "ng build",
-        "build:prod": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --prod",
+        "build:prod": "npm run updateBuild && node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --prod",
         "watch": "ng build --watch --configuration development",
         "test": "ng test"
     },
@@ -57,6 +58,7 @@
         "karma-coverage": "~2.0.3",
         "karma-jasmine": "~4.0.0",
         "karma-jasmine-html-reporter": "~1.7.0",
+        "replace-in-file": "^6.3.2",
         "typescript": "~4.3.5"
     }
 }
