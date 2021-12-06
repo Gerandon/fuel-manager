@@ -1,4 +1,18 @@
 {
+    "MANAGER": {
+        "DESCRIPTION": "Lényegében ez egy nyilvántartó oldal, mely arra szolgál, hogy utazással, járművekkel kapcsolatos adatainkat egy helyen tárolhassuk.",
+        "FUNCTIONALITIES": [
+            {
+                "KEY": "Útvonal naplózása", "VALUE": "Lehetőségünk van nagyobb útvonalaink távjának naplózására"
+            },
+            {
+                "KEY": "Útiköltség naplózása", "VALUE": "Különböző költségeink (pl.: Tankolás) összegeit vezethetjük/láthatjuk egy helyen"
+            },
+            {
+                "KEY": "Gépjármű nyilvántartása", "VALUE": "Kezelhetjük gépjárműveinket és az azokhoz tartozó adatokat (pl.: Szervízkönyv, Forgalmi engedély, stb.)"
+            }
+        ]
+    },
     "true": "Igen",
     "false": "Nem",
     "COMMON": {

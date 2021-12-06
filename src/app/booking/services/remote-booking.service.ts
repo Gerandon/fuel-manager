@@ -11,8 +11,8 @@ import {FuelCostDiaryType} from 'src/app/app-common/interfaces/fuel-cost.interfa
 })
 export class RemoteBookingService implements IBookingService {
 
-    private travelFbService!: FirebaseDatabaseService<TravelDiaryType>
-    private fuelFbService!: FirebaseDatabaseService<FuelCostDiaryType>
+    private travelFbService!: FirebaseDatabaseService<TravelDiaryType>;
+    private fuelFbService!: FirebaseDatabaseService<FuelCostDiaryType>;
 
     constructor(private firebaseDb: AngularFireDatabase) {
         this.travelFbService = new FirebaseDatabaseService(firebaseDb, 'travel-diary-list');

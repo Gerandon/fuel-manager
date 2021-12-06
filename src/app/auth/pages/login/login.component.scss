@@ -1,8 +1,8 @@
 @import './src/theme.scss';
 
 .login {
-    height:100%;
-    mat-card {
+    height: 100%;
+    .login-card {
         max-width: 500px;
         mat-card-content {
             margin-top: 10px;
@@ -10,5 +10,8 @@
     }
     h3, span {
         @extend .primary-color;
+    }
+    .login-button {
+        white-space: pre-wrap;
     }
 }

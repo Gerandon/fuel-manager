@@ -4,7 +4,7 @@ import {catchError, filter, first, map, tap} from "rxjs/operators";
 import {Observable, of, Subscription} from "rxjs";
 import {AuthService} from "./auth/services/auth.service";
 import {Config} from "./app-common/common";
-import {NavigationEnd, NavigationStart, Router} from "@angular/router";
+import {NavigationStart, Router} from "@angular/router";
 
 @Component({
     selector: 'app-root',
@@ -18,9 +18,9 @@ export class AppComponent implements OnInit, OnDestroy {
     public animated: boolean = false;
     public isAuthenticated: Observable<boolean>;
     public menu = Config.menu.filter(item => item.showAsMenu);
-    public themeModel = '';
 
     private routingChangedSubscription!: Subscription;
+    private persSettSubscription: Subscription;
 
     constructor(private translate: TranslateService,
                 private translateLoader: TranslateLoader,
@@ -30,6 +30,17 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.persSettSubscription = this.authService.getPersonalSettings().pipe(
+            tap(settings => {
+                if (settings) {
+                    document.documentElement.classList.remove('brownish-theme');
+                    if (settings?.theme) {
+                        document.documentElement.classList.add(settings.theme);
+                    }
+                }
+            })
+        ).subscribe();
+
         const browserLang = navigator.language.split('-')[0];
         const initLang = sessionStorage.getItem('lang') || browserLang;
         this.translateLoader.getTranslation(initLang).pipe(
@@ -63,13 +74,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     public _toggleSidebar() {
         this._opened = !this._opened;
-    }
-
-    public changeTheme(event) {
-        document.documentElement.classList.remove('brownish-theme');
-        if (event) {
-            document.documentElement.classList.add(event);
-        }
     }
 
     ngOnDestroy() {

@@ -1,3 +1,7 @@
+export interface PersonalSettingsType extends BaseType {
+    theme: string;
+}
+
 export interface UserType {
     username: string;
     password: string;

@@ -4,7 +4,8 @@ import {Router} from "@angular/router";
 import {tap} from "rxjs/operators";
 import {SessionStorage} from "ngx-webstorage";
 import { isEmpty } from 'traversal-handler';
-import {environment} from "../../../../environments/environment";
+import {TranslateService} from "@ngx-translate/core";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'app-login',
@@ -17,14 +18,19 @@ export class LoginComponent implements OnInit {
     @SessionStorage('local')
     public useLocally!: boolean;
 
+    public functionalities: Observable<{ KEY, VALUE }[]>;
+
     constructor(private router: Router,
-                public authService: AuthService) {
+                public authService: AuthService,
+                public translate: TranslateService) {
     }
 
     ngOnInit(): void {
         if (isEmpty(this.useLocally)) {
             this.useLocally = false;
         }
+
+        this.functionalities = this.translate.get('MANAGER.FUNCTIONALITIES');
     }
 
     login() {

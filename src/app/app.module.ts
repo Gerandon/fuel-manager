@@ -63,7 +63,7 @@ import {VEHICLES_SERVICE} from "./app-common/interfaces/vehicles-service.interfa
         {
             provide: AUTH_SERVICE,
             useFactory: authServiceFactory,
-            deps: [SessionStorageService, LocalStorageService, AngularFireAuth]
+            deps: [SessionStorageService, LocalStorageService, AngularFireAuth, AngularFireDatabase]
         },
         {
             provide: VEHICLES_SERVICE,

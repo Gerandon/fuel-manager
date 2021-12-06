@@ -1,6 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {AUTH_SERVICE, IAuthService} from "../../app-common/interfaces/auth-service.interface";
 import {Observable} from "rxjs";
+import { PersonalSettingsType } from 'src/app/app-common/interfaces/common.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -8,6 +9,13 @@ import {Observable} from "rxjs";
 export class AuthService implements IAuthService {
 
     constructor(@Inject(AUTH_SERVICE) private _authService: IAuthService) {
+    }
+
+    getPersonalSettings(): Observable<PersonalSettingsType> {
+        return this._authService.getPersonalSettings();
+    }
+    setPersonalSettings(settings: PersonalSettingsType): void {
+        this._authService.setPersonalSettings(settings);
     }
 
     getUserData(): Observable<any> {
