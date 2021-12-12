@@ -11,6 +11,10 @@ export class AuthService implements IAuthService {
     constructor(@Inject(AUTH_SERVICE) private _authService: IAuthService) {
     }
 
+    initOtherServices() {
+        this._authService['initOtherServices']();
+    }
+
     getPersonalSettings(): Observable<PersonalSettingsType> {
         return this._authService.getPersonalSettings();
     }

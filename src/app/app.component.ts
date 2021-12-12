@@ -1,7 +1,14 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TranslateLoader, TranslateService} from "@ngx-translate/core";
-import {catchError, debounceTime, filter, first, map, switchMap, tap} from "rxjs/operators";
-import {Observable, of, Subscription} from "rxjs";
+import {
+    catchError,
+    filter,
+    first,
+    map,
+    skipWhile,
+    tap
+} from "rxjs/operators";
+import {combineLatest, Observable, of, Subscription} from "rxjs";
 import {AuthService} from "./auth/services/auth.service";
 import {Config, defaultPersonalSettings} from "./app-common/common";
 import {NavigationStart, Router} from "@angular/router";
@@ -37,26 +44,17 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-
-        this.persSettSubscription = this.isAuthenticated.pipe(
-            debounceTime(300),
-            switchMap(() => this.authService.getPersonalSettings()),
-            tap(settings => {
-                if (settings) {
-                    if (settings.backgroundColor !== this.personalSettingsHolder?.backgroundColor) {
-                        this.backgroundColor = settings.backgroundColor;
-                    }
-                    if (settings.theme !== this.personalSettingsHolder?.theme) {
-                        document.documentElement.classList.remove('brownish-theme');
-                        if (settings?.theme) {
-                            document.documentElement.classList.add(settings.theme);
-                        }
-                    }
-                    this.personalSettingsHolder = settings;
-                } else {
-                    this.authService.setPersonalSettings(_.clone(defaultPersonalSettings));
-                }
-            })
+        // FIXME
+        // Subscribe to settingsChange only if authenticated
+        // initialize other fbService of AuthService
+        // Further info on RemoteAuthService.initOtherServices
+        this.isAuthenticated.pipe(
+            skipWhile((authed) => !authed),
+            first(),
+            tap(() => {
+                this.authService.initOtherServices();
+                this.initSettingsChangeSubscription();
+            }),
         ).subscribe();
 
         const browserLang = navigator.language.split('-')[0];
@@ -78,6 +76,32 @@ export class AppComponent implements OnInit, OnDestroy {
             tap(() => {
                 if (this._opened) {
                     this._opened = !this._opened;
+                }
+            })
+        ).subscribe();
+    }
+
+    initSettingsChangeSubscription() {
+        this.persSettSubscription = combineLatest([
+            this.authService.getPersonalSettings(),
+            this.isAuthenticated
+        ]).pipe(
+            tap(([settings, authed]) => {
+                if (authed) {
+                    if (settings) {
+                        if (settings.backgroundColor !== this.personalSettingsHolder?.backgroundColor) {
+                            this.backgroundColor = settings.backgroundColor;
+                        }
+                        if (settings.theme !== this.personalSettingsHolder?.theme) {
+                            document.documentElement.classList.remove('brownish-theme');
+                            if (settings?.theme) {
+                                document.documentElement.classList.add(settings.theme);
+                            }
+                        }
+                        this.personalSettingsHolder = settings;
+                    } else {
+                        this.authService.setPersonalSettings(_.clone(defaultPersonalSettings));
+                    }
                 }
             })
         ).subscribe();
