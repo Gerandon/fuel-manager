@@ -4,14 +4,12 @@ import {combineLatest, Observable, of} from "rxjs";
 import firebase from "firebase/compat/app";
 import auth = firebase.auth;
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {first, map, tap} from "rxjs/operators";
+import {distinctUntilChanged, first, map, tap} from "rxjs/operators";
 import {fromPromise} from "rxjs/internal-compatibility";
 import {SessionStorage} from "ngx-webstorage";
 import { PersonalSettingsType } from 'src/app/app-common/interfaces/common.interface';
 import {FirebaseDatabaseService} from "../../app-common/services/firebase-database.service";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
-import {defaultPersonalSettings} from "../../app-common/common";
-import {_} from "../../app-common/vendor/vendor.module";
 
 @Injectable({
     providedIn: 'root'
@@ -25,20 +23,35 @@ export class RemoteAuthService implements IAuthService {
 
     constructor(public afAuth: AngularFireAuth,
                 private firebaseDb: AngularFireDatabase) {
-        this.personalSettingsFbService = new FirebaseDatabaseService(firebaseDb, 'personal-settings');
+        this.personalSettingsFbService = new FirebaseDatabaseService(firebaseDb, `personal-settings`);
+        // on Auth changed
+        this.afAuth.authState.pipe(
+            distinctUntilChanged(),
+            map(item => !!item),
+            tap((authed) => {
+                if (authed) {
+                    this.personalSettingsFbService = new FirebaseDatabaseService(firebaseDb, `personal-settings`);
+                }
+            })
+        ).subscribe();
     }
 
     getPersonalSettings(): Observable<PersonalSettingsType> {
         return this.personalSettingsFbService.first();
     }
     setPersonalSettings(settings: PersonalSettingsType): void {
-        this.getPersonalSettings().pipe(
+        combineLatest([
+            this.isAuthenticated(),
+            this.getPersonalSettings()
+        ]).pipe(
             first(),
-            tap((first) => {
-                if (first) {
-                    this.personalSettingsFbService.update(settings);
-                } else {
-                    this.personalSettingsFbService.create(settings);
+            tap(([authed, sett]) => {
+                if (authed) {
+                    if (sett) {
+                        this.personalSettingsFbService.update(settings);
+                    } else {
+                        this.personalSettingsFbService.create(settings);
+                    }
                 }
             })
         ).subscribe();

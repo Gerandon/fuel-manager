@@ -1,10 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TranslateLoader, TranslateService} from "@ngx-translate/core";
-import {catchError, filter, first, map, tap} from "rxjs/operators";
+import {catchError, debounceTime, filter, first, map, switchMap, tap} from "rxjs/operators";
 import {Observable, of, Subscription} from "rxjs";
 import {AuthService} from "./auth/services/auth.service";
-import {Config} from "./app-common/common";
+import {Config, defaultPersonalSettings} from "./app-common/common";
 import {NavigationStart, Router} from "@angular/router";
+import {PersonalSettingsType} from "./app-common/interfaces/common.interface";
+import {SidebarContainer} from "ng-sidebar";
+import {_} from "./app-common/vendor/vendor.module";
 
 @Component({
     selector: 'app-root',
@@ -13,11 +16,15 @@ import {NavigationStart, Router} from "@angular/router";
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+    @ViewChild(SidebarContainer) sidebarContainer: SidebarContainer;
+
     public title = 'fuel-manager';
     public _opened: boolean = false;
     public animated: boolean = false;
     public isAuthenticated: Observable<boolean>;
     public menu = Config.menu.filter(item => item.showAsMenu);
+    public backgroundColor = '';
+    public personalSettingsHolder: PersonalSettingsType = _.clone(defaultPersonalSettings);
 
     private routingChangedSubscription!: Subscription;
     private persSettSubscription: Subscription;
@@ -30,13 +37,24 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.persSettSubscription = this.authService.getPersonalSettings().pipe(
+
+        this.persSettSubscription = this.isAuthenticated.pipe(
+            debounceTime(300),
+            switchMap(() => this.authService.getPersonalSettings()),
             tap(settings => {
                 if (settings) {
-                    document.documentElement.classList.remove('brownish-theme');
-                    if (settings?.theme) {
-                        document.documentElement.classList.add(settings.theme);
+                    if (settings.backgroundColor !== this.personalSettingsHolder?.backgroundColor) {
+                        this.backgroundColor = settings.backgroundColor;
                     }
+                    if (settings.theme !== this.personalSettingsHolder?.theme) {
+                        document.documentElement.classList.remove('brownish-theme');
+                        if (settings?.theme) {
+                            document.documentElement.classList.add(settings.theme);
+                        }
+                    }
+                    this.personalSettingsHolder = settings;
+                } else {
+                    this.authService.setPersonalSettings(_.clone(defaultPersonalSettings));
                 }
             })
         ).subscribe();

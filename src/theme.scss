@@ -35,7 +35,9 @@ ng-sidebar {
         color: white;
     }
 }
-ng-sidebar-container {
+.use-background-image {
     background: url('assets/images/background.jpg') no-repeat center;
+}
+ng-sidebar-container {
     background-size: cover;
 }

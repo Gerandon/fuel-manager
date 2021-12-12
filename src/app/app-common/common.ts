@@ -104,7 +104,9 @@ export const defaultServiceReport: ServiceReportType = {
 export const defaultPersonalSettings: PersonalSettingsType = {
     id: v4(),
     creationDate: new Date(),
-    theme: null,
+    theme: '',
+    backgroundColor: null,
+    useStaticBackground: true,
 }
 
 export const Config = {
