@@ -1,6 +1,6 @@
 import {Observable} from "rxjs";
 import {InjectionToken} from "@angular/core";
-import {UserType} from "./common.interface";
+import {PersonalSettingsType, UserType} from "./common.interface";
 import {LoginDataType} from "./user.interface";
 
 export interface IAuthService {
@@ -9,7 +9,7 @@ export interface IAuthService {
     logout(): void;
     getUserData(): Observable<UserType | any>;
 
-    //getTheme(): any;
-    //setTheme(): void;
+    getPersonalSettings(): Observable<PersonalSettingsType>;
+    setPersonalSettings(settings: PersonalSettingsType): void;
 }
 export let AUTH_SERVICE = new InjectionToken<IAuthService>('IAuthService injection token');

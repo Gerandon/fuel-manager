@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/database";
 import {SessionStorage} from "ngx-webstorage";
-import {distinctUntilChanged, first, map, tap} from "rxjs/operators";
-import {Observable, of} from "rxjs";
+import {distinctUntilChanged, first, map, mapTo, take, tap} from "rxjs/operators";
+import {Observable, of, pipe} from "rxjs";
 import {BaseType} from "../interfaces/common.interface";
 import {v4} from "uuid";
 import {_} from 'src/app/app-common/vendor/vendor.module';
@@ -61,6 +61,10 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
         return this.getAll().pipe(
             map(list => list.find(item => item.id === id)),
         );
+    }
+
+    first(): Observable<ITEM> {
+        return this.getAll().pipe(map(arr => arr[0]));
     }
 
     getAll(ordered?): Observable<ITEM[]> {

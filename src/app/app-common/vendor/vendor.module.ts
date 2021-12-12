@@ -28,6 +28,7 @@ import {GoogleMapsModule} from "@angular/google-maps";
 import {NgxContentLoadingModule} from "ngx-content-loading";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatRadioModule} from "@angular/material/radio";
+import {ColorPickerModule} from "ngx-color-picker";
 
 export const _ = {
     ...lodash,
@@ -63,6 +64,7 @@ export const _ = {
         GoogleMapsModule,
         NgxContentLoadingModule,
         MatRadioModule,
+        ColorPickerModule,
     ],
     exports: [
         MatExpansionModule,
@@ -91,7 +93,8 @@ export const _ = {
         MatProgressSpinnerModule,
         GoogleMapsModule,
         NgxContentLoadingModule,
-        MatRadioModule
+        MatRadioModule,
+        ColorPickerModule,
     ]
 })
 export class VendorModule {

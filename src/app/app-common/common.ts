@@ -12,6 +12,8 @@ import {LocalVehiclesService} from "../means-of-transport/services/vehicles/loca
 import {RemoteVehiclesService} from "../means-of-transport/services/vehicles/remote-vehicles.service";
 import {ServiceReportType, VehicleDataType} from "./interfaces/vehicle.interface";
 import {_} from "./vendor/vendor.module";
+import {PersonalSettingsType} from "./interfaces/common.interface";
+import {v4} from "uuid";
 
 export const fullSizeDialogConfig = {
     height: '90%',
@@ -57,11 +59,12 @@ export const bookingServiceFactory = (sStorage: SessionStorageService,
 
 export const authServiceFactory = (sStorage: SessionStorageService,
                                    lStorage: LocalStorageService,
-                                   afAuth: AngularFireAuth) => {
+                                   afAuth: AngularFireAuth,
+                                   db: AngularFireDatabase) => {
     if (sStorage.retrieve('local')) {
         return new LocaleAuthService(lStorage, sStorage);
     }
-    return new RemoteAuthService(afAuth);
+    return new RemoteAuthService(afAuth, db);
 }
 export const vehiclesServiceFactory = (sStorage: SessionStorageService,
                                        lStorage: LocalStorageService,
@@ -96,6 +99,14 @@ export const defaultServiceReport: ServiceReportType = {
     amount: null,
     milage: null,
     nextSimilarServiceDate: null,
+}
+
+export const defaultPersonalSettings: PersonalSettingsType = {
+    id: v4(),
+    creationDate: new Date(),
+    theme: '',
+    backgroundColor: null,
+    useStaticBackground: true,
 }
 
 export const Config = {

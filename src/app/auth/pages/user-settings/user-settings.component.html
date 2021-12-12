@@ -43,7 +43,39 @@
                 <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="column">
                     <mat-card class="card-outlined" fxFlex>
                         <p class="card-outlined__title">Oldal szintű adatok</p>
-                        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px grid">
+                        <div fxLayout="column" fxLayoutGap="15px grid">
+                            <div fxFlex>
+                                <p style="font-weight:bold">{{'Oldal témája' | translate}}</p>
+                                <hr>
+                            </div>
+                            <div fxLayout="row">
+                                <mat-radio-group [(ngModel)]="personalSettings.theme"
+                                                 (ngModelChange)="changeSettings({key: 'theme', value: $event})">
+                                    <mat-radio-button color="accent" value="">
+                                        Kék
+                                    </mat-radio-button>
+                                    <mat-radio-button class="ml-5" color="accent" value="brownish-theme">
+                                        Barna
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div fxFlex>
+                                <p style="font-weight:bold">{{'Oldal témája' | translate}}</p>
+                                <hr>
+                            </div>
+                            <div fxLayout="row">
+                                <mat-checkbox [ngModel]="personalSettings.useStaticBackground"
+                                              matTooltip="Jelenleg szünetel"
+                                              (ngModelChange)="changeSettings({key: 'useStaticBackground', value: $event})"
+                                              color="primary"
+                                              name="uselocally">
+                                    Háttérkép használata
+                                </mat-checkbox>
+                                <input [(colorPicker)]="personalSettings.backgroundColor"
+                                       [style.background]="personalSettings.backgroundColor"
+                                       (colorPickerChange)="changeSettings({key: 'backgroundColor', value: $event})"
+                                       readonly="true" class="ml-10"/>
+                            </div>
                         </div>
                     </mat-card>
                 </div>

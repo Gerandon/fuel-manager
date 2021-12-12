@@ -1,4 +1,5 @@
-<ng-sidebar-container>
+<ng-sidebar-container [style.background-color]="backgroundColor"
+                      [class.use-background-image]="personalSettingsHolder?.useStaticBackground">
     <!-- A sidebar -->
     <ng-sidebar mode="over"
                 *showOnAuthenticated="changeAnimatedState.bind(this)"
@@ -12,25 +13,17 @@
     <div ng-sidebar-content [style.height]="(isAuthenticated | async) ? '100%' : '97%'">
         <div class="app">
             <app-header *showOnAuthenticated>
-                <button fxFlex="5" mat-icon-button (click)="_toggleSidebar()">
-                    <mat-icon [style.color]="'white'">menu</mat-icon>
-                </button>
-                <div fxFlex="75" fxLayout="row">
+                <div fxFlex="5">
+                    <button mat-icon-button (click)="_toggleSidebar()">
+                        <mat-icon [style.color]="'white'">menu</mat-icon>
+                    </button>
+                </div>
+                <div fxFlex="96" fxLayout="row">
                     <div fxFlex="70" fxFlexOffset="15" fxLayoutAlign="center center">
                         <h3>Expense Manager</h3>
                     </div>
                     <img fxHide.xs src="assets/images/under_constr_2.png"
                          style="height: 100px;margin-top:-35px;margin-bottom:-10px"/>
-                </div>
-                <div fxFlex="20" fxLayout="row wrap" style="color: white">
-                    <mat-radio-group [(ngModel)]="themeModel" (ngModelChange)="changeTheme($event)">
-                        <mat-radio-button color="accent" value="">
-                            Kék
-                        </mat-radio-button>
-                        <mat-radio-button class="ml-5" color="accent" value="brownish-theme">
-                            Barna
-                        </mat-radio-button>
-                    </mat-radio-group>
                 </div>
             </app-header>
             <div class="content">
