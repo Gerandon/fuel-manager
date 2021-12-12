@@ -37,6 +37,7 @@ ng-sidebar {
 }
 .use-background-image {
     background: url('assets/images/background.jpg') no-repeat center;
+    background-size: cover;
 }
 ng-sidebar-container {
     background-size: cover;

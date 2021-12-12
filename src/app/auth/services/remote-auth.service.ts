@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {IAuthService} from "../../app-common/interfaces/auth-service.interface";
-import {combineLatest, Observable, of} from "rxjs";
+import {combineLatest, Observable} from "rxjs";
 import firebase from "firebase/compat/app";
 import auth = firebase.auth;
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {distinctUntilChanged, first, map, tap} from "rxjs/operators";
+import {first, map, tap} from "rxjs/operators";
 import {fromPromise} from "rxjs/internal-compatibility";
 import {SessionStorage} from "ngx-webstorage";
 import { PersonalSettingsType } from 'src/app/app-common/interfaces/common.interface';
@@ -23,17 +23,17 @@ export class RemoteAuthService implements IAuthService {
 
     constructor(public afAuth: AngularFireAuth,
                 private firebaseDb: AngularFireDatabase) {
-        this.personalSettingsFbService = new FirebaseDatabaseService(firebaseDb, `personal-settings`);
-        // on Auth changed
-        this.afAuth.authState.pipe(
-            distinctUntilChanged(),
-            map(item => !!item),
-            tap((authed) => {
-                if (authed) {
-                    this.personalSettingsFbService = new FirebaseDatabaseService(firebaseDb, `personal-settings`);
-                }
-            })
-        ).subscribe();
+        this.initOtherServices();
+    }
+
+    /**
+     * FIXME
+     * Needed, because this service is created and referenced before authencitation
+     * and in these cases the UID is null (yet)
+     * It is referenced from appComponent too after init
+     */
+    initOtherServices() {
+        this.personalSettingsFbService = new FirebaseDatabaseService(this.firebaseDb, `personal-settings`);
     }
 
     getPersonalSettings(): Observable<PersonalSettingsType> {
