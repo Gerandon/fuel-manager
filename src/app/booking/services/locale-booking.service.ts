@@ -30,11 +30,11 @@ export class LocaleBookingService implements IBookingService {
         ).subscribe();
     }
 
-    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string; }): Observable<FuelCostDiaryType[]> {
+    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string; }[]): Observable<FuelCostDiaryType[]> {
         throw new Error('Method not implemented.');
     }
 
-    searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string}): Observable<TravelDiaryType[]> {
+    searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string}[]): Observable<TravelDiaryType[]> {
         throw new Error('Method not implemented.');
     }
 

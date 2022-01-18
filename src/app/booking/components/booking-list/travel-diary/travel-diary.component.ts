@@ -13,7 +13,7 @@ import {TravelDiaryType} from "../../../../app-common/interfaces/travel-diary.in
 })
 export class TravelDiaryComponent implements OnInit, OnChanges {
 
-    @Input() queryParams?: {key: keyof TravelDiaryType, value: string};
+    @Input() queryParams?: {key: keyof TravelDiaryType, value: string, operator?: string}[];
 
     public travelDiarySource!: Observable<TravelDiaryType[]>;
     public distance!: Observable<any[]>;

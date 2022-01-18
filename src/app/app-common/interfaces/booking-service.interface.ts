@@ -6,8 +6,8 @@ import {FuelCostDiaryType} from "./fuel-cost.interface";
 export interface IBookingService {
     getTravelDiaryList(): Observable<TravelDiaryType[]>;
     getFuelCostDiaryList(): Observable<FuelCostDiaryType[]>;
-    searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string}): Observable<TravelDiaryType[]>
-    searchInFuelCost(queryParams?: {key: keyof FuelCostDiaryType, value: string}): Observable<FuelCostDiaryType[]>
+    searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string | number, operator?: string}[]): Observable<TravelDiaryType[]>
+    searchInFuelCost(queryParams?: {key: keyof FuelCostDiaryType, value: string | number, operator?: string}[]): Observable<FuelCostDiaryType[]>
 
     addTravelDiary(addItem: TravelDiaryType): void;
     removeTravelDiary(item: TravelDiaryType): void;
