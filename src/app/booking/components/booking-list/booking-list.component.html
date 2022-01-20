@@ -1,8 +1,39 @@
-<div class="booking-list">
-    <mat-tab-group [selectedIndex]="monthTabIndex" style="background: white"
-                   (selectedTabChange)="monthTabChange($event)">
-        <mat-tab *ngFor="let month of months" [label]="month"></mat-tab>
-    </mat-tab-group>
+<div class="booking-list" fxLayout="column" fxLayoutGap="15px">
+    <div fxLayout="row">
+        <mat-expansion-panel fxFlex>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Szűrési feltételek</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div fxLayout="row wrap" fxLayoutGap="15px grid">
+                <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
+                    <mat-label>Dátumtól</mat-label>
+                    <input matInput
+                           name="dateFrom"
+                           [(ngModel)]="dateFilter.dateFrom"
+                           [matDatepicker]="pickerFrom"
+                           (ngModelChange)="onDateChange()">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFrom></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
+                    <mat-label>Dátumig</mat-label>
+                    <input matInput
+                           name="dateTo"
+                           [(ngModel)]="dateFilter.dateTo"
+                           [matDatepicker]="pickerTo"
+                           (ngModelChange)="onDateChange()">
+                    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerTo></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </mat-expansion-panel>
+    </div>
+    <div class="row">
+        <button *ngIf="actualTabLabel"
+                fxFlex.lt-sm="100"
+                (click)="addToList()"
+                mat-raised-button color="primary">{{ '"' + (actualTabLabel | async) + '" hozzáadása' }}</button>
+    </div>
     <div fxLayout="row">
         <mat-tab-group #tabGroup fxFlex="100" style="background: white">
             <mat-tab label="Útinapló">
@@ -10,13 +41,6 @@
             </mat-tab>
             <mat-tab label="Utazási költségek">
                 <ng-template matTabContent><app-fuel-cost-diary [queryParams]="fuelQueryParams"></app-fuel-cost-diary></ng-template>
-            </mat-tab>
-            <mat-tab disabled>
-                <ng-template mat-tab-label>
-                    <button mat-icon-button (click)="addToList()">
-                        <mat-icon>add_circle</mat-icon>
-                    </button>
-                </ng-template>
             </mat-tab>
         </mat-tab-group>
     </div>

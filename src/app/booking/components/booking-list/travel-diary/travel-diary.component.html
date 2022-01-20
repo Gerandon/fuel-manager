@@ -64,7 +64,7 @@
                 <p class="not-found">{{'COMMON.TABLE.NO_RESULT' | translate}}</p>
             </div>
         </div>
-        <div *ngIf="!obs.loading && obs.value?.length">
+        <div *ngIf="!obs.loading && obs.value?.length && false">
             <div fxLayout="row wrap">
                 <app-line-chart [fxFlex]="'100'"
                                 [dataSetList]="[

@@ -1,5 +1,5 @@
 <div fxLayout="column" fxFlex fxLayoutAlign="center center">
-    <div fxLayout="row wrap" fxLayoutGap="15px grid">
+    <div class="item-container" fxLayout="row wrap" fxLayoutGap="15px grid">
         <div *ngFor="let menuItem of menu" [routerLink]="['/'+menuItem.navigateTo]">
             <div class="content"
                  fxFlex.lg="calc(33% - 16px)"

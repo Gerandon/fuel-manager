@@ -13,13 +13,24 @@
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
+                <number-input name="fuelCost"
+                              fxFlex="auto"
+                              fxFlex.lt-sm="100"
+                              [(ngModel)]="currentFuelCost"
+                              (input)="calculateAmountSpentQuantity()"
+                              [required]="true"
+                              [disabled]="!editMode"
+                              suffix="HUF"
+                              label="Üzemanyag ár"
+                              placeholder="Üzemanyag ár">
+                </number-input>
                 <number-input name="quantity"
                               fxFlex="auto"
                               fxFlex.lt-sm="100"
                               [(ngModel)]="model.quantity"
+                              (input)="calculateAmountSpentQuantity()"
                               [required]="true"
                               [disabled]="!editMode"
-                              [unmask]="true"
                               suffix="Liter"
                               label="Mennyiség"
                               placeholder="LOGIN.USERNAME.PLACEHOLDER">
@@ -28,9 +39,9 @@
                               fxFlex="auto"
                               fxFlex.lt-sm="100"
                               [(ngModel)]="model.amountSpent"
+                              (input)="calculateQuantityByPaid()"
                               [required]="true"
                               [disabled]="!editMode"
-                              [unmask]="true"
                               suffix="HUF"
                               label="Elköltve"
                               placeholder="LOGIN.USERNAME.PLACEHOLDER">
@@ -39,9 +50,9 @@
                               fxFlex="auto"
                               fxFlex.lt-sm="100"
                               [(ngModel)]="model.amountPaid"
+                              (ngModelChange)="calculateFullSpent()"
                               [required]="true"
                               [disabled]="!editMode"
-                              [unmask]="true"
                               suffix="HUF"
                               label="Kifizetve"
                               placeholder="LOGIN.USERNAME.PLACEHOLDER">
@@ -49,10 +60,9 @@
                 <number-input name="fullSpent"
                               fxFlex="auto"
                               fxFlex.lt-sm="100"
-                              [(ngModel)]="model.fullSpent"
+                              [ngModel]="model.fullSpent"
                               [required]="true"
-                              [disabled]="!editMode"
-                              [unmask]="true"
+                              [disabled]="true"
                               suffix="HUF"
                               label="Különbözet"
                               placeholder="LOGIN.USERNAME.PLACEHOLDER">

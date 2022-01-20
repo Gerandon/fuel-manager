@@ -14,7 +14,7 @@ export class BookingService implements IBookingService {
     constructor(@Inject(BOOKING_SERVICE) private _bookingService: IBookingService) {
     }
 
-    searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string}): Observable<TravelDiaryType[]> {
+    searchInTravelDiary(queryParams?: {key: keyof TravelDiaryType, value: string | number, operator?: string}[]): Observable<TravelDiaryType[]> {
         return this._bookingService.searchInTravelDiary(queryParams);
     }
 
@@ -59,7 +59,7 @@ export class BookingService implements IBookingService {
         );
     }
 
-    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string }): Observable<FuelCostDiaryType[]> {
+    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string }[]): Observable<FuelCostDiaryType[]> {
         return this._bookingService.searchInFuelCost(queryParams);
     }
 }

@@ -13,7 +13,7 @@ import {BookFuelComponent} from "../../book-fuel/book-fuel.component";
 })
 export class FuelCostDiaryComponent implements OnInit {
 
-    @Input() queryParams?: {key: keyof FuelCostDiaryType, value: string};
+    @Input() queryParams?: {key: keyof FuelCostDiaryType, value: string, operator?: string}[];
 
     public fuelCostDiarySource!: Observable<FuelCostDiaryType[]>;
     public displayedColumns: string[] = ['creationDate', 'quantity', 'amountSpent', 'amountPaid', 'fullSpent', 'ACTION'];

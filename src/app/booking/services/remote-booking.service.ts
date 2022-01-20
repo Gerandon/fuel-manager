@@ -19,11 +19,11 @@ export class RemoteBookingService implements IBookingService {
         this.fuelFbService = new FirebaseDatabaseService(firebaseDb, 'fuel-cost-list');
     }
 
-    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string; }): Observable<FuelCostDiaryType[]> {
+    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string; }[]): Observable<FuelCostDiaryType[]> {
         return this.fuelFbService.search(queryParams);
     }
 
-    searchInTravelDiary(queryParams?: { key: keyof TravelDiaryType, value: string }): Observable<TravelDiaryType[]> {
+    searchInTravelDiary(queryParams?: { key: keyof TravelDiaryType, value: string }[]): Observable<TravelDiaryType[]> {
         return this.travelFbService.search(queryParams);
     }
 

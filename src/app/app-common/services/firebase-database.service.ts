@@ -34,8 +34,7 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
             // : this.db.list(this.path, ref => ref.orderByChild('creationDate'));
     }
 
-    search(queryParams?: {key: keyof ITEM, value: string}): Observable<ITEM[]> {
-        const { key, value } = queryParams || { key: null, value: null };
+    search(queryParams?: {key: keyof ITEM, value: string, operator?}[]): Observable<ITEM[]> {
         // return this.dbRef.query.orderByChild(key).equalTo(value);
         // Not the best way, 'cause we're using the whole list to search in it
         // Should use query
@@ -45,13 +44,12 @@ export class FirebaseDatabaseService<ITEM extends _BaseType> {
                 if (!queryParams) {
                     return true;
                 }
-                // Should be more generic
-                if ((`'${key}'`).toLocaleLowerCase().includes('date')) {
-                    // @ts-ignore
-                    return (<Date>item[key]).getMonth() === Number(value);
-                }
-                // @ts-ignore
-                return item[key].includes(value);
+                const _eval = queryParams.map(param => {
+                    const itemValue = item[param.key];
+                    const comparable = itemValue instanceof Date ? itemValue.getTime() : itemValue;
+                    return `${comparable} ${param.operator || '==='} ${param.value}`;
+                }).join(' && ');
+                return eval(_eval);
             }))
         );
     }
