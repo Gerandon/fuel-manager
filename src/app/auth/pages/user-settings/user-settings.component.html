@@ -8,10 +8,10 @@
                     <mat-card *ngIf="userData | async as user" class="card-outlined" fxFlex>
                         <p class="card-outlined__title">Felhasználói adatok</p>
                         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px grid">
-                            <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+                            <div fxFlex="30" fxFlex.lt-sm="100" fxLayout="row" fxLayoutAlign="center center">
                                 <img style="border-radius: 50px;" src="{{user.photoURL}}">
                             </div>
-                            <div fxFlex="70">
+                            <div fxFlex="70" fxFlex.lt-sm="100">
                                 <p style="font-weight:bold">{{'USER_SETTINGS.COMMON_DATA' | translate}}</p>
                                 <hr>
                                 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
@@ -24,17 +24,17 @@
                                 </div>
                                 <p style="font-weight: bold">{{'USER_SETTINGS.METADATA.LABEL' | translate}}</p>
                                 <hr>
-                                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-                                    <p class="m-0" [style.min-width]="'150px'">{{'Felhasználó azonosító' | translate}}:</p>
-                                    <p class="m-0 ml-5 of-ellipsis" [matTooltip]="user.uid">{{user.uid}}</p>
+                                <div fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="start center">
+                                    <b class="m-0" [style.min-width]="'150px'">{{'Felhasználó azonosító' | translate}}:</b>
+                                    <p class="m-0 of-ellipsis" [matTooltip]="user.uid + ''">{{user.uid}}</p>
                                 </div>
-                                <div class="mt-5" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-                                    <p class="m-0">{{'USER_SETTINGS.METADATA.CREATION_DATE' | translate}}:</p>
+                                <div class="mt-5" fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="start center">
+                                    <b class="m-0">{{'USER_SETTINGS.METADATA.CREATION_DATE' | translate}}:</b>
                                     <p class="m-0 ml-5">{{user.metadata.lastLoginAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
                                 </div>
-                                <div class="mt-5" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-                                    <p class="m-0">{{'USER_SETTINGS.METADATA.LAST_LOGIN' | translate}}:</p>
-                                    <p class="m-0 ml-5">{{user.metadata.createdAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
+                                <div class="mt-5" fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="start center">
+                                    <b class="m-0">{{'USER_SETTINGS.METADATA.LAST_LOGIN' | translate}}:</b>
+                                    <p class="m-0">{{user.metadata.createdAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
                                 </div>
                             </div>
                         </div>
@@ -63,18 +63,17 @@
                                 <p style="font-weight:bold">{{'Oldal témája' | translate}}</p>
                                 <hr>
                             </div>
-                            <div fxLayout="row">
+                            <div fxLayout="row wrap" fxLayoutGap="10px grid">
                                 <mat-checkbox [ngModel]="personalSettings.useStaticBackground"
-                                              matTooltip="Jelenleg szünetel"
                                               (ngModelChange)="changeSettings({key: 'useStaticBackground', value: $event})"
                                               color="primary"
-                                              name="uselocally">
+                                              name="useStaticbackground">
                                     Háttérkép használata
                                 </mat-checkbox>
                                 <input [(colorPicker)]="personalSettings.backgroundColor"
                                        [style.background]="personalSettings.backgroundColor"
                                        (colorPickerChange)="changeSettings({key: 'backgroundColor', value: $event})"
-                                       readonly="true" class="ml-10"/>
+                                       readonly="true"/>
                             </div>
                         </div>
                     </mat-card>
