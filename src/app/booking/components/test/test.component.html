@@ -1,0 +1,36 @@
+<mat-card>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutGap="15px">
+            <div fxLayout="row" fxLayoutGap="15px">
+                <div fxLayout="column">
+                    <basic-input name="testInput"
+                                 [(ngModel)]="testModel.input_one"
+                                 label="Teszt"
+                                 placeholder="Teszt">
+                    </basic-input>
+                    <p>testModel.input_one: {{testModel.input_one || '-'}}</p>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="15px">
+                <div fxLayout="column">
+
+                    <app-not-accessor-input name="testInput2"
+                                            [(ngModel)]="testModel.input_two"
+                                            label="Teszt"
+                                            placeholder="Teszt">
+                    </app-not-accessor-input>
+
+                    <!--
+                    <app-not-accessor-input name="testInput2"
+                                            [value]="testModel.input_two"
+                                            (onWriteValue)="testModel.input_two = $event"
+                                            label="Teszt"
+                                            placeholder="Teszt">
+                    </app-not-accessor-input>
+                    -->
+                    <p>testModel.input_two: {{testModel.input_two || '-'}}</p>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

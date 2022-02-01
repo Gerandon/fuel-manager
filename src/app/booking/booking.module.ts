@@ -10,6 +10,8 @@ import {AppCommonModule} from "../app-common/app-common.module";
 import {TravelDiaryComponent} from './components/booking-list/travel-diary/travel-diary.component';
 import {FuelCostDiaryComponent} from './components/booking-list/fuel-cost-diary/fuel-cost-diary.component';
 import {BookFuelComponent} from './components/book-fuel/book-fuel.component';
+import { TestComponent } from './components/test/test.component';
+import { NotAccessorInputComponent } from './components/test/not-accessor-input/not-accessor-input.component';
 
 function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -21,7 +23,9 @@ function createTranslateLoader(http: HttpClient) {
         BookingListComponent,
         TravelDiaryComponent,
         FuelCostDiaryComponent,
-        BookFuelComponent
+        BookFuelComponent,
+        TestComponent,
+        NotAccessorInputComponent
     ],
     imports: [
         CommonModule,

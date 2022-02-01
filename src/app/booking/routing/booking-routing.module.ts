@@ -4,6 +4,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {LoginRequiredGuard} from "../../app-common/guards/login-required.guard";
 import {BookTravelComponent} from "../components/book-travel/book-travel.component";
 import {BookingListComponent} from "../components/booking-list/booking-list.component";
+import {TestComponent} from "../components/test/test.component";
 
 const routes: Routes = [
     {
@@ -14,6 +15,11 @@ const routes: Routes = [
     {
         path: 'list',
         component: BookingListComponent,
+        canActivate: [LoginRequiredGuard]
+    },
+    {
+        path: 'test',
+        component: TestComponent,
         canActivate: [LoginRequiredGuard]
     },
 ];
