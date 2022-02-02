@@ -48,7 +48,6 @@ export class BaseValueAccessor<T> implements ControlValueAccessor, OnInit, Valid
     }
 
     ngOnInit() {
-        // @ts-ignore
         this.controlDir = this.injector.get<NgControl>(NgControl, null, InjectFlags.Optional | InjectFlags.Self);
         this.control = <FormControl>this.controlDir?.control || new FormControl('');
         // For ng-valid expression changed error workaround purposes

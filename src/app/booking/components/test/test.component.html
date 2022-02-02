@@ -1,36 +1,56 @@
 <mat-card>
     <mat-card-content>
         <div fxLayout="row" fxLayoutGap="15px">
-            <div fxLayout="row" fxLayoutGap="15px">
-                <div fxLayout="column">
-                    <basic-input name="testInput"
-                                 [(ngModel)]="testModel.input_one"
-                                 label="Teszt"
-                                 placeholder="Teszt">
-                    </basic-input>
-                    <p>testModel.input_one: {{testModel.input_one || '-'}}</p>
+            <form #simpleForm="ngForm" fxLayout="row" fxLayoutGap="15px">
+                <div fxLayout="row" fxLayoutGap="15px">
+                    <div fxLayout="column">
+                        <p>Komponens - ControlValueAccessor</p>
+                        <basic-input name="testInput"
+                                     required="true"
+                                     [(ngModel)]="testModel.input_one"
+                                     label="Teszt"
+                                     placeholder="Teszt">
+                        </basic-input>
+                        <p>testModel.input_one: {{testModel.input_one || '-'}}</p>
+                    </div>
                 </div>
-            </div>
-            <div fxLayout="row" fxLayoutGap="15px">
-                <div fxLayout="column">
+                <div fxLayout="row" fxLayoutGap="15px">
+                    <div fxLayout="column">
+                        <p>Komponens - plain</p>
 
-                    <app-not-accessor-input name="testInput2"
-                                            [(ngModel)]="testModel.input_two"
-                                            label="Teszt"
-                                            placeholder="Teszt">
-                    </app-not-accessor-input>
+<!--                        <app-not-accessor-input name="testInput2"-->
+<!--                                                [(ngModel)]="testModel.input_two"-->
+<!--                                                label="Teszt"-->
+<!--                                                placeholder="Teszt">-->
+<!--                        </app-not-accessor-input>-->
 
-                    <!--
-                    <app-not-accessor-input name="testInput2"
-                                            [value]="testModel.input_two"
-                                            (onWriteValue)="testModel.input_two = $event"
-                                            label="Teszt"
-                                            placeholder="Teszt">
-                    </app-not-accessor-input>
-                    -->
-                    <p>testModel.input_two: {{testModel.input_two || '-'}}</p>
+                        <app-not-accessor-input name="testInput2"
+                                                required="true"
+                                                [value]="testModel.input_two"
+                                                (onWriteValue)="testModel.input_two = $event"
+                                                label="Teszt"
+                                                placeholder="Teszt">
+                        </app-not-accessor-input>
+                        <p>testModel.input_two: {{testModel.input_two || '-'}}</p>
+                    </div>
                 </div>
-            </div>
+            </form>
+            <form [formGroup]="formGroup" fxLayout>
+                <div fxLayout="column">
+                    <p>Sima beviteli mező</p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Label</mat-label>
+                        <input
+                            matInput
+                            formControlName="input"
+                            [required]="true"
+                            label=""
+                            type="text"
+                            placeholder="Placeholder"/>
+                        <mat-icon *ngIf="false" matPrefix color="primary">icon</mat-icon>
+                    </mat-form-field>
+                </div>
+            </form>
         </div>
     </mat-card-content>
 </mat-card>

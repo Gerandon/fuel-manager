@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormControl} from "@angular/forms";
 
 @Component({
     selector: 'app-not-accessor-input',
@@ -22,7 +23,12 @@ export class NotAccessorInputComponent implements OnInit {
     @Input() value = '';
     @Output() onWriteValue = new EventEmitter<string>();
 
+    public inputModel = '';
+
+    public input: FormControl;
+
     constructor() {
+        this.input = new FormControl('');
     }
 
     ngOnInit(): void {

@@ -33,7 +33,7 @@
                                                  placeholder="LOGIN.USERNAME.PLACEHOLDER">
                                     </basic-input>
                                     <basic-input name="password"
-                                                 *ngIf="false && !useLocally"
+                                                 *ngIf="!useLocally"
                                                  [(ngModel)]="user.password"
                                                  [required]="true"
                                                  type="password"
@@ -43,8 +43,6 @@
                                                  placeholder="LOGIN.PASSWORD.PLACEHOLDER">
                                     </basic-input>
                                     <mat-checkbox [ngModel]="useLocally"
-                                                  [disabled]="true"
-                                                  matTooltip="Jelenleg szünetel"
                                                   (ngModelChange)="changeLocalRemote($event)"
                                                   color="primary"
                                                   name="uselocally">Lokális használat</mat-checkbox>

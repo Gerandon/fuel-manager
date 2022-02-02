@@ -135,6 +135,13 @@ export const Config = {
             icon: 'menu_book_rounded'
         },
         {
+            label: 'Teszt',
+            navigateTo: 'booking/test',
+            showAsTile: true,
+            showAsMenu: true,
+            icon: 'menu_book_rounded'
+        },
+        {
             label: 'Saját járműveim',
             navigateTo: 'means-of-transport/my-vehicles',
             showAsTile: true,

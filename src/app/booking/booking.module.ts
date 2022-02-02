@@ -12,6 +12,7 @@ import {FuelCostDiaryComponent} from './components/booking-list/fuel-cost-diary/
 import {BookFuelComponent} from './components/book-fuel/book-fuel.component';
 import { TestComponent } from './components/test/test.component';
 import { NotAccessorInputComponent } from './components/test/not-accessor-input/not-accessor-input.component';
+import { ControlValueAccessorEmptyComponent } from './components/test/control-value-accessor-empty/control-value-accessor-empty.component';
 
 function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -25,7 +26,8 @@ function createTranslateLoader(http: HttpClient) {
         FuelCostDiaryComponent,
         BookFuelComponent,
         TestComponent,
-        NotAccessorInputComponent
+        NotAccessorInputComponent,
+        ControlValueAccessorEmptyComponent
     ],
     imports: [
         CommonModule,
