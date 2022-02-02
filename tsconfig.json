@@ -22,9 +22,12 @@
             "dom"
         ],
         "strictNullChecks": false,
+        // FIXME Added because angular fire is supported with typescript 4.4, current is 4.5
+        // instead of reverting typescript package, this line is inserted
+        "skipLibCheck": true
     },
     "angularCompilerOptions": {
         "strictPropertyInitialization": false,
-        "suppressImplicitAnyIndexErrors": true,
+        "suppressImplicitAnyIndexErrors": true
     }
 }

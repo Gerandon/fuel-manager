@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {IAuthService} from "../../app-common/interfaces/auth-service.interface";
-import {combineLatest, Observable} from "rxjs";
+import {Observable, from, combineLatest} from "rxjs";
 import firebase from "firebase/compat/app";
 import auth = firebase.auth;
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {first, map, tap} from "rxjs/operators";
-import {fromPromise} from "rxjs/internal-compatibility";
 import {SessionStorage} from "ngx-webstorage";
 import { PersonalSettingsType } from 'src/app/app-common/interfaces/common.interface';
 import {FirebaseDatabaseService} from "../../app-common/services/firebase-database.service";
@@ -62,12 +61,12 @@ export class RemoteAuthService implements IAuthService {
         return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
     }
 
-    getUserData(): any {
+    getUserData(): Observable<any> {
         return this.afAuth.user.pipe(map((user:any) => user?._delegate));
     }
 
     authenticate(): Observable<boolean> {
-        return fromPromise(this.authLogin());
+        return from(this.authLogin());
     }
 
     isAuthenticated(): Observable<boolean> {
