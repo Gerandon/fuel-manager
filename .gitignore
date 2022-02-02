@@ -50,6 +50,7 @@ projects/vdrbo/src/assets/docs
 .history/*
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
