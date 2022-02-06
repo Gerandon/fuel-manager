@@ -6,6 +6,8 @@ import {AuthService} from "../../auth/services/auth.service";
 // @ts-ignore
 import packageJson from '../../../../package.json';
 import {environment} from "../../../environments/environment";
+import {AppTranslateService} from "../../app-common/services/app-translate.service";
+import {LocalStorageService} from "ngx-webstorage";
 
 @Component({
     selector: 'app-sidemenu-content',
@@ -24,9 +26,12 @@ export class SidemenuContentComponent implements OnInit {
     public userData: Observable<any>;
     public version = packageJson.version;
     public env = environment;
+    public chosenLanguage = '';
 
     constructor(private router: Router,
-                public authService: AuthService) {
+                public authService: AuthService,
+                private appTranslate: AppTranslateService,
+                private localStorage: LocalStorageService) {
         this.url = router.events.pipe(
             filter((event: any) => event instanceof NavigationEnd),
             map(item => item.url),
@@ -35,9 +40,14 @@ export class SidemenuContentComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.chosenLanguage = this.localStorage.retrieve('lang');
     }
 
     navigateToProfile() {
         this.router.navigate(['auth/settings']);
+    }
+
+    chosenLanguageChange() {
+        this.appTranslate.initializeTranslation(this.chosenLanguage);
     }
 }

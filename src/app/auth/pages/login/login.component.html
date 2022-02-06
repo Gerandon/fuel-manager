@@ -51,6 +51,13 @@
                                         {{ 'COMMON.LOCALE_USAGE' | translate }}
                                     </mat-checkbox>
                                 </div>
+                                <div class="mb-20" fxLayout="row" fxLayoutAlign="center center">
+                                    <app-icon-radio-button name="languagePicker"
+                                                           [data]="[{ value: 'hu', icon: 'hungarian' }, { value: 'en', icon: 'english' }]"
+                                                           [(ngModel)]="chosenLanguage"
+                                                           (ngModelChange)="chosenLangChange()">
+                                    </app-icon-radio-button>
+                                </div>
                                 <div class="buttons" fxLayout="row" fxLayoutAlign="center center">
                                     <button mat-raised-button color="primary"
                                             class="login-button"

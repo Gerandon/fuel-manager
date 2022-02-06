@@ -17,6 +17,8 @@ import {SidebarContainer} from "ng-sidebar";
 import {_} from "./app-common/vendor/vendor.module";
 import {DOCUMENT} from "@angular/common";
 import {AppTranslateService} from "./app-common/services/app-translate.service";
+import {DomSanitizer} from "@angular/platform-browser";
+import {MatIconRegistry} from "@angular/material/icon";
 
 @Component({
     selector: 'app-root',
@@ -40,8 +42,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
     constructor(private appTranslate: AppTranslateService,
                 private authService: AuthService,
-                private router: Router) {
+                private router: Router,
+                private domSanitizer: DomSanitizer,
+                private matIconRegistry: MatIconRegistry) {
         this.isAuthenticated = authService.isAuthenticated();
+        this.addCustomIcons();
     }
 
     ngOnInit() {
@@ -58,7 +63,7 @@ export class AppComponent implements OnInit, OnDestroy {
             }),
         ).subscribe();
 
-        this.appTranslate.initializeTranslation('en');
+        this.appTranslate.initializeTranslation();
 
         this.changeAnimatedState();
 
@@ -107,6 +112,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
     public _toggleSidebar() {
         this._opened = !this._opened;
+    }
+
+    addCustomIcons() {
+        const iconsBasePath = 'assets/icons';
+        const sanitize = this.domSanitizer.bypassSecurityTrustResourceUrl;
+        this.matIconRegistry
+            .addSvgIcon('english',sanitize(`${iconsBasePath}/english.svg`));
+        this.matIconRegistry
+            .addSvgIcon('hungarian',sanitize(`${iconsBasePath}/hungarian.svg`));
     }
 
     ngOnDestroy() {

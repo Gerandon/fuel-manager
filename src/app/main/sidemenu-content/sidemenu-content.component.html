@@ -15,6 +15,17 @@
             </mat-card-content>
         </mat-card>
     </div>
+    <div class="m-10" fxLayout="row" fxLayoutAlign="center center">
+        <mat-card fxFlex>
+            <mat-card-content>
+                <app-icon-radio-button name="languagePicker"
+                                       [data]="[{ value: 'hu', icon: 'hungarian' }, { value: 'en', icon: 'english' }]"
+                                       [(ngModel)]="chosenLanguage"
+                                       (ngModelChange)="chosenLanguageChange()">
+                </app-icon-radio-button>
+            </mat-card-content>
+        </mat-card>
+    </div>
     <mat-selection-list #shoes [multiple]="false" fxLayout="column">
         <mat-list-option *ngFor="let item of menuItems"
                          [selected]="(url | async)?.includes(item.navigateTo)"
