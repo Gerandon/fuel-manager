@@ -2,7 +2,7 @@
     <div fxLayout="row wrap">
         <div fxLayout="row wrap" fxFlex="100">
             <mat-form-field fxFlex="25" fxFlex.lt-md="50" fxFlex.lt-sm="100" appearance="outline">
-                <mat-label>Szervíz időpontja</mat-label>
+                <mat-label>{{ 'MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.DATE_OF_SERVICE' | translate }}</mat-label>
                 <input matInput
                        name="date"
                        required="true"
@@ -13,15 +13,14 @@
             </mat-form-field>
         </div>
         <mat-card fxFlex="100" class="card-outlined">
-            <p class="card-outlined__title">Szervíz adatok</p>
+            <p class="card-outlined__title">{{ 'MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.SERVICE_DATA' | translate }}</p>
             <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
                 <basic-input name="shortDescription"
                              fxFlex="auto"
                              fxFlex.lt-sm="100"
                              [(ngModel)]="model.shortDescription"
                              [required]="true"
-                             label="Rövid leírás"
-                             placeholder="Rövid leírás">
+                             label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.SHORT_DESCRIPTION">
                 </basic-input>
                 <number-input name="amount"
                               fxFlex="auto"
@@ -30,16 +29,14 @@
                               [required]="true"
                               [maxLength]="15"
                               suffix="(HUF)"
-                              label="Javítás összege"
-                              placeholder="Összeg">
+                              label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.AMOUNT_OF_FIX">
                 </number-input>
                 <basic-input name="location"
                              fxFlex="auto"
                              fxFlex.lt-sm="100"
                              [(ngModel)]="model.location"
                              [required]="true"
-                             label="Javítás helyszíne"
-                             placeholder="Helyszín">
+                             label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.PLACE_OF_FIX">
                 </basic-input>
                 <number-input name="milage"
                               fxFlex="auto"
@@ -48,11 +45,10 @@
                               [required]="true"
                               [maxLength]="15"
                               suffix="Km"
-                              label="Kilométer óra állása"
-                              placeholder="Kilométer óra állása">
+                              label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.MILAGE_OF_ITEM">
                 </number-input>
                 <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
-                    <mat-label>Következő szervíz időpontja</mat-label>
+                    <mat-label>{{ 'MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.NEXT_SERVICE_DATE' | translate }}</mat-label>
                     <input matInput
                            name="nextSimilarServiceDate"
                            [(ngModel)]="model.nextSimilarServiceDate"
@@ -64,8 +60,7 @@
                              fxFlex="100"
                              fxFlex.lt-sm="100"
                              [(ngModel)]="model.description"
-                             label="Leírás"
-                             placeholder="Leírás">
+                             label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.DESCRIPTION">
                 </basic-input>
             </mat-card-content>
         </mat-card>
@@ -74,11 +69,14 @@
         <div fxFlex="50">
             <button mat-raised-button [mat-dialog-close]="model"
                     [disabled]="addForm.invalid"
-                    [color]="'primary'">Hozzáadás
+                    [color]="'primary'">
+                {{ 'COMMON.BUTTON.ADD' | translate }}
             </button>
         </div>
         <div fxFlex="50" fxLayoutAlign="end center">
-            <button mat-button mat-dialog-close [color]="'primary'">Mégse</button>
+            <button mat-button mat-dialog-close [color]="'primary'">
+                {{ 'COMMON.BUTTON.CANCEL' | translate }}
+            </button>
         </div>
     </div>
 </form>

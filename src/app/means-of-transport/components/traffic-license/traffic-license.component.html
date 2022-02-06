@@ -1,6 +1,8 @@
 <div>
     <div fxHide fxShow.lt-sm>
-        <button mat-raised-button color="primary" (click)="download()">Forgalmi engedély letöltése</button>
+        <button mat-raised-button color="primary" (click)="download()">
+            {{ 'MEANS_OF_TRANSPORT.TRAFFIC_LICENSE.DOWNLOAD_LICENSE' | translate }}
+        </button>
         <div id="download">
             <img #canvas style="display: none">
             <a #downloadLink></a>
@@ -15,7 +17,7 @@
             <basic-input name="username"
                          class="small-input ml-40"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
         </div>
         <div fxLayout="row" class="small-input-row">
@@ -24,7 +26,7 @@
                          [(ngModel)]="vehicle.ownerData.since"
                          class="small-input ml-40"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
         </div>
         <div fxLayout="row" class="small-input-row">
@@ -33,7 +35,7 @@
                          [(ngModel)]="vehicle.brand"
                          class="small-input ml-55"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
         </div>
         <div fxLayout="row" class="small-input-row">
@@ -42,7 +44,7 @@
                          [(ngModel)]="vehicle.type"
                          class="small-input ml-55"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
         </div>
         <div fxLayout="row" class="small-input-row">
@@ -50,7 +52,7 @@
             <basic-input name="unknown"
                          class="small-input ml-55"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
             <!-- E -->
             <basic-input name="frameNumber"
@@ -58,7 +60,7 @@
                          style="width: 130px"
                          class="small-input ml-55"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
         </div>
         <div fxLayout="row" class="small-input-row">
@@ -68,7 +70,7 @@
                          [style.width]="'70px'"
                          class="small-input ml-55"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
             <!-- P.2 -->
             <basic-input name="kilowatt"
@@ -76,7 +78,7 @@
                          [style.width]="'70px'"
                          class="small-input ml-55"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
             <!-- P.3 -->
             <basic-input name="engineType"
@@ -84,7 +86,7 @@
                          [style.width]="'120px'"
                          class="small-input ml-55"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
         </div>
         <div fxLayout="row" class="small-input-row">
@@ -93,14 +95,14 @@
                          [(ngModel)]="vehicle.motorCode"
                          class="small-input ml-55"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
             <!-- J -->
             <basic-input name="username"
                          style="width: 130px"
                          class="small-input ml-55"
                          [disabled]="!edit"
-                         [appearance]="edit ? 'legacy' : 'none'">
+                         [appearance]="appearance">
             </basic-input>
         </div>
     </div>

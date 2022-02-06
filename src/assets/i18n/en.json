@@ -23,7 +23,7 @@
         },
         "CHOOSE_DATE": "Válasszon egy dátumot",
         "BUTTON": {
-            "ADD": "Hozzáadás",
+            "ADD": "Add",
             "SAVE_EDITED": "Felülírás",
             "CANCEL": "Mégse",
             "ITEM_ADD": "\"{{item}}\" hozzáadása"

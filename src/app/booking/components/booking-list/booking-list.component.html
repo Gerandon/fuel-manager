@@ -32,14 +32,16 @@
         <button *ngIf="actualTabLabel"
                 fxFlex.lt-sm="100"
                 (click)="addToList()"
-                mat-raised-button color="primary">{{ '"' + (actualTabLabel | async) + '" hozzáadása' }}</button>
+                mat-raised-button color="primary">
+            {{ 'COMMON.BUTTON.ITEM_ADD' | translate: { item: actualTabLabel | async } }}
+        </button>
     </div>
     <div fxLayout="row">
         <mat-tab-group #tabGroup fxFlex="100" style="background: white">
-            <mat-tab label="Útinapló">
+            <mat-tab label="{{'BOOKING.BOOK_TRAVEL.TITLE' | translate}}">
                 <ng-template matTabContent><app-travel-diary [queryParams]="travelQueryParams"></app-travel-diary></ng-template>
             </mat-tab>
-            <mat-tab label="Utazási költségek">
+            <mat-tab label="{{'BOOKING.BOOK_FUEL.TITLE' | translate}}">
                 <ng-template matTabContent><app-fuel-cost-diary [queryParams]="fuelQueryParams"></app-fuel-cost-diary></ng-template>
             </mat-tab>
         </mat-tab-group>

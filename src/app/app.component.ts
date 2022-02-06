@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TranslateLoader, TranslateService} from "@ngx-translate/core";
 import {
     catchError,
@@ -15,6 +15,7 @@ import {NavigationStart, Router} from "@angular/router";
 import {PersonalSettingsType} from "./app-common/interfaces/common.interface";
 import {SidebarContainer} from "ng-sidebar";
 import {_} from "./app-common/vendor/vendor.module";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
     selector: 'app-root',
@@ -36,7 +37,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private routingChangedSubscription!: Subscription;
     private persSettSubscription: Subscription;
 
-    constructor(private translate: TranslateService,
+    constructor(@Inject(DOCUMENT) private document: Document,
+                private translate: TranslateService,
                 private translateLoader: TranslateLoader,
                 private authService: AuthService,
                 private router: Router) {
@@ -67,6 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 const initLang = sessionStorage.getItem('lang') || lang;
                 this.translate.setDefaultLang(initLang);
                 this.translate.use(initLang);
+                this.document.documentElement.lang = initLang;
             })
         ).subscribe();
         this.changeAnimatedState();

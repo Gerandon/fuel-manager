@@ -17,7 +17,7 @@
                 <mat-accordion>
                     <mat-expansion-panel class="mb-10">
                         <mat-expansion-panel-header>
-                            <mat-panel-title>Jármű adatok</mat-panel-title>
+                            <mat-panel-title>{{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.VEHICLE_DATA' | translate }}</mat-panel-title>
                         </mat-expansion-panel-header>
                         <app-transport-type [vehicle]="veh" [showContainer]="false"></app-transport-type>
                     </mat-expansion-panel>
@@ -25,18 +25,18 @@
                         <mat-expansion-panel-header>
                             <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="15px grid" fxLayoutAlign="center center">
                                 <span class="mat-panel-title" fxFlex="calc(100/3)">
-                                    Szervízkönyv
+                                    {{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.SERVICE_REPORT' | translate }}
                                 </span>
                                 <div fxFlex="calc(100/3)" *ngIf="!exp.expanded">
                                     <span *ngIf="sumAmount | async as sum"
                                           class="mat-panel-description">
-                                    Összesen elköltött: {{(sum | currency: ' ':'symbol':'1.0-0') + ' HUF'}}
+                                        {{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.AMOUNT_SPENT_WITH_VALUE' | translate: { value: (sum | currency: ' ':'symbol':'1.0-0') + ' HUF' } }}
                                 </span>
                                 </div>
                                 <div fxFlex="calc(100/3)" fxLayoutAlign="center center">
                                     <button mat-raised-button color="accent"
                                             (click)="$event.stopPropagation();addServiceReport()">
-                                        Hozzáadás
+                                        {{ 'COMMON.BUTTON.ADD' | translate }}
                                     </button>
                                 </div>
                             </div>
@@ -46,7 +46,11 @@
                                 <mat-card fxFlex.lg="calc(33% - 16px)"
                                           fxFlex.lt-lg="calc(50% - 16px)"
                                           fxFlex.xs="calc(100% - 16px)" fxLayout="column"
-                                          [matTooltip]="['Helyszín:', report.location, '', 'Leírás:',report.description] | multiLine"
+                                          [matTooltip]="[
+                                            'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.LOCATION' | translate, report.location,
+                                            '',
+                                            'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.DESCRIPTION' | translate, report.description
+                                          ] | multiLine"
                                           matTooltipClass="theme-tooltip">
                                     <mat-card-content fxLayout="column" fxLayoutAlign="center center">
                                         <span>{{report.shortDescription}}</span>
@@ -58,7 +62,7 @@
                         </div>
                         <div *ngIf="!(serviceReports | async)?.length">
                             <span>
-                                Jelenleg még nincs hozzáadott szervíz naplózásod! Ha szeretnél rögzíteni egyet, kattints a "Hozzáadás" gombra!
+                                {{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.MISSING_REPORTS' }}
                             </span>
                         </div>
                     </mat-expansion-panel>

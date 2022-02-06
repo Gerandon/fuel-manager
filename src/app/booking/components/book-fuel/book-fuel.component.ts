@@ -10,7 +10,8 @@ import {_} from 'src/app/app-common/vendor/vendor.module';
 })
 export class BookFuelComponent implements OnInit {
 
-    public editMode: boolean = true;
+    public editable: boolean = true;
+    public isNew: boolean = false;
     public model!: FuelCostDiaryType;
     public currentFuelCost: number = 479;
 
@@ -18,12 +19,13 @@ export class BookFuelComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isNew = !this.item?.model;
         this.model = <FuelCostDiaryType>_.omit(this.item?.model || {
             date: new Date(),
             amountPaid: 0,
         }, 'fullSpent');
         this.model.fullSpent = 0; // Forcing calculation
-        this.editMode = !!this.item?.editMode;
+        this.editable = !!this.item?.editMode;
         this.calculateFullSpent();
     }
 

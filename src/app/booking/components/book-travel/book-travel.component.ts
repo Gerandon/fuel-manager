@@ -11,13 +11,15 @@ import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface"
 })
 export class BookTravelComponent implements OnInit {
 
-    public editMode: boolean = true;
+    public editable: boolean = true;
+    public isNew: boolean = false;
     public model!: TravelDiaryType;
 
     constructor(@Inject(MAT_DIALOG_DATA) private item: {model: any, editMode: boolean}) {
     }
 
     ngOnInit(): void {
+        this.isNew = !this.item?.model;
         this.model = this.item?.model || {};
         // empty object init
         this.model = {
@@ -26,6 +28,6 @@ export class BookTravelComponent implements OnInit {
             ...this.model as any,
         }
         this.model.date = this.model.date || new Date();
-        this.editMode = !!this.item?.editMode;
+        this.editable = !!this.item?.editMode;
     }
 }
