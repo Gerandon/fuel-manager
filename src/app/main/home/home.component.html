@@ -5,7 +5,7 @@
                  fxFlex.lg="calc(33% - 16px)"
                  fxFlex.lt-lg="calc(50% - 16px)"
                  fxFlex.xs="calc(100% - 16px)" fxLayout="column">
-                <div fxLayoutAlign="center center"><span>{{menuItem.label}}</span></div>
+                <div fxLayoutAlign="center center"><span>{{menuItem.label | translate}}</span></div>
                 <div *ngIf="menuItem.icon" fxFlex fxLayoutAlign="center center">
                     <mat-icon>{{menuItem.icon}}</mat-icon>
                 </div>

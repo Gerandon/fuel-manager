@@ -112,7 +112,7 @@ export const defaultPersonalSettings: PersonalSettingsType = {
 export const Config = {
     menu: [
         {
-            label: 'Profil',
+            label: 'MENU.PROFILE',
             navigateTo: 'auth/settings',
             showAsTile: true,
             showAsMenu: false,
@@ -120,14 +120,14 @@ export const Config = {
             icon: 'person_rounded'
         },
         {
-            label: 'Kezdőlap',
+            label: 'MENU.STARTING_PAGE',
             navigateTo: 'home',
             showAsTile: false,
             showAsMenu: true,
             imageUrl: '',
         },
         {
-            label: 'Könyvelések',
+            label: 'MENU.VEHICLE_BOOKINGS',
             navigateTo: 'booking/list',
             showAsTile: true,
             showAsMenu: true,
@@ -135,7 +135,7 @@ export const Config = {
             icon: 'menu_book_rounded'
         },
         {
-            label: 'Saját járműveim',
+            label: 'MENU.MY_VEHICLES',
             navigateTo: 'means-of-transport/my-vehicles',
             showAsTile: true,
             showAsMenu: true,

@@ -13,6 +13,13 @@
             }
         ]
     },
+    "MENU": {
+        "PROFILE_SETTINGS": "Profil beállítások",
+        "PROFILE": "Profil",
+        "STARTING_PAGE": "Kezdőlap",
+        "VEHICLE_BOOKINGS": "Jármű könyvelések",
+        "MY_VEHICLES": "Saját járműveim"
+    },
     "true": "Igen",
     "false": "Nem",
     "COMMON": {

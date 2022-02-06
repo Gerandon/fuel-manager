@@ -8,7 +8,9 @@
                 <br>
                 <div fxLayout="row"
                      fxLayoutAlign="center center">
-                    <button mat-raised-button color="primary">Profil Beállítások</button>
+                    <button mat-raised-button color="primary">
+                        {{ 'MENU.PROFILE_SETTINGS' | translate }}
+                    </button>
                 </div>
             </mat-card-content>
         </mat-card>
@@ -17,8 +19,8 @@
         <mat-list-option *ngFor="let item of menuItems"
                          [selected]="(url | async)?.includes(item.navigateTo)"
                          [routerLink]="['/'+item.navigateTo]"
-                         [value]="item.label">
-            {{item.label}}
+                         [value]="item.label | translate">
+            {{item.label | translate}}
         </mat-list-option>
     </mat-selection-list>
     <div class="m-10">
