@@ -30,11 +30,11 @@
                                 </div>
                                 <div class="mt-5" fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="start center">
                                     <b class="m-0">{{'USER_SETTINGS.METADATA.CREATION_DATE' | translate}}:</b>
-                                    <p class="m-0 ml-5">{{user.metadata.lastLoginAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
+                                    <p class="m-0 ml-5">{{user.metadata.createdAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
                                 </div>
                                 <div class="mt-5" fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="start center">
                                     <b class="m-0">{{'USER_SETTINGS.METADATA.LAST_LOGIN' | translate}}:</b>
-                                    <p class="m-0">{{user.metadata.createdAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
+                                    <p class="m-0">{{user.metadata.lastLoginAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
                                 </div>
                             </div>
                         </div>
