@@ -23,6 +23,12 @@
     "true": "Igen",
     "false": "Nem",
     "COMMON": {
+        "DATE_FROM": "Dátumtól",
+        "DATE_TO": "Dátumig",
+        "FILTERING_CONDITIONS": "Szűrési feltételek",
+        "LOCALE_USAGE": "Lokális használat",
+        "LOGIN_GOOGLE_BUTTON": "Bejelentkezés Google használatával",
+        "LOGOUT": "Kijelentkezés",
         "REQUIRED": "'{{field}}' meztő kitöltése kötelező!",
         "CHOOSE_OPTION": "Válasszon egy lehetőséget!",
         "TABLE": {

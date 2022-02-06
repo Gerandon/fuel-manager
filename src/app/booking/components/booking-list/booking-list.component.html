@@ -2,11 +2,11 @@
     <div fxLayout="row">
         <mat-expansion-panel fxFlex>
             <mat-expansion-panel-header>
-                <mat-panel-title>Szűrési feltételek</mat-panel-title>
+                <mat-panel-title>{{ 'COMMON.FILTERING_CONDITIONS' | translate }}</mat-panel-title>
             </mat-expansion-panel-header>
             <div fxLayout="row wrap" fxLayoutGap="15px grid">
                 <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
-                    <mat-label>Dátumtól</mat-label>
+                    <mat-label>{{ 'COMMON.DATE_FROM' | translate }}</mat-label>
                     <input matInput
                            name="dateFrom"
                            [(ngModel)]="dateFilter.dateFrom"
@@ -16,7 +16,7 @@
                     <mat-datepicker #pickerFrom></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
-                    <mat-label>Dátumig</mat-label>
+                    <mat-label>{{ 'COMMON.DATE_TO' | translate }}</mat-label>
                     <input matInput
                            name="dateTo"
                            [(ngModel)]="dateFilter.dateTo"

@@ -1,7 +1,7 @@
 <form #ownForm="ngForm" appCheckForm fxLayout="row">
     <mat-card fxFlex="100"
               [ngClass]="{ 'card-outlined': showContainer, 'mat-elevation-z0': !showContainer }">
-        <p *ngIf="showContainer" class="card-outlined__title">Jármű adatok</p>
+        <p *ngIf="showContainer" class="card-outlined__title">{{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.VEHICLE_DATA' | translate }}</p>
         <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
             <basic-input name="brand"
                          fxFlex="auto"

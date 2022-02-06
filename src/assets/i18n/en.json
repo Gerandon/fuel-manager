@@ -1,147 +1,153 @@
 {
     "MANAGER": {
-        "DESCRIPTION": "Lényegében ez egy nyilvántartó oldal, mely arra szolgál, hogy utazással, járművekkel kapcsolatos adatainkat egy helyen tárolhassuk.",
+        "DESCRIPTION": "Basically, it's a so called Registry page, which serves as a database of the User's traveling and vehicle realted datas.",
         "FUNCTIONALITIES": [
             {
-                "KEY": "Útvonal naplózása", "VALUE": "Lehetőségünk van nagyobb útvonalaink távjának naplózására"
+                "KEY": "Route logging", "VALUE": "We've got the opportunity to log our travel/route specific datas."
             },
             {
-                "KEY": "Útiköltség naplózása", "VALUE": "Különböző költségeink (pl.: Tankolás) összegeit vezethetjük/láthatjuk egy helyen"
+                "KEY": "Travel expense logging", "VALUE": "We could maintain different expenses according to our travel"
             },
             {
-                "KEY": "Gépjármű nyilvántartása", "VALUE": "Kezelhetjük gépjárműveinket és az azokhoz tartozó adatokat (pl.: Szervízkönyv, Forgalmi engedély, stb.)"
+                "KEY": "Vehicle maintenance", "VALUE": "It's possible to register our vehicle(s) and to maintain service reports, etc. about them"
             }
         ]
     },
     "MENU": {
-        "PROFILE_SETTINGS": "Profil beállítások",
-        "PROFILE": "Profil",
-        "STARTING_PAGE": "Kezdőlap",
-        "VEHICLE_BOOKINGS": "Jármű könyvelések",
-        "MY_VEHICLES": "Saját járműveim"
+        "PROFILE_SETTINGS": "Profile settings",
+        "PROFILE": "Profile",
+        "STARTING_PAGE": "Starting page",
+        "VEHICLE_BOOKINGS": "Vehicle loggings",
+        "MY_VEHICLES": "My Vehicles"
     },
-    "true": "Igen",
-    "false": "Nem",
+    "true": "Yes",
+    "false": "No",
     "COMMON": {
-        "REQUIRED": "'{{field}}' meztő kitöltése kötelező!",
-        "CHOOSE_OPTION": "Válasszon egy lehetőséget!",
+        "DATE_FROM": "Date from",
+        "DATE_TO": "Date to",
+        "FILTERING_CONDITIONS": "Filtering conditions",
+        "LOCALE_USAGE": "Local usage",
+        "LOGIN_GOOGLE_BUTTON": "Login with Google",
+        "LOGOUT": "Logout",
+        "REQUIRED": "'{{field}}' field is required!",
+        "CHOOSE_OPTION": "Choose an option!",
         "TABLE": {
-            "NO_RESULT": "A lista üres!"
+            "NO_RESULT": "The list is empty!"
         },
-        "CHOOSE_DATE": "Válasszon egy dátumot",
+        "CHOOSE_DATE": "Choose a date!",
         "BUTTON": {
             "ADD": "Add",
-            "SAVE_EDITED": "Felülírás",
-            "CANCEL": "Mégse",
-            "ITEM_ADD": "\"{{item}}\" hozzáadása"
+            "SAVE_EDITED": "Overwrite",
+            "CANCEL": "Cancel",
+            "ITEM_ADD": "Add new \"{{item}}\""
         }
     },
     "LOGIN": {
-        "TITLE": "Bejelentkezés",
+        "TITLE": "Login",
         "USERNAME": {
-            "LABEL": "Felhasználónév",
-            "PLACEHOLDER": "Adjon meg egy felhasználónevet!"
+            "LABEL": "Username",
+            "PLACEHOLDER": "Add a username!"
         },
         "PASSWORD": {
-            "LABEL": "Jelszó",
-            "PLACEHOLDER": "Adja meg jelszavát!"
+            "LABEL": "Password",
+            "PLACEHOLDER": "Repeat the password!"
         },
-        "LOGIN_BUTTON": "Bejelentkezés"
+        "LOGIN_BUTTON": "Login"
     },
     "USER_SETTINGS": {
-        "WELCOME": "Üdv, {{displayName}}",
-        "USER_DATA": "Felhasználói adatok",
-        "COMMON_DATA": "Általános adatok",
+        "WELCOME": "Welcome, {{displayName}}",
+        "USER_DATA": "User data",
+        "COMMON_DATA": "General information",
         "METADATA": {
-            "USER_IDENTIFIER": "Felhasználó azonosító",
-            "LABEL": "Metaadatok",
-            "CREATION_DATE": "Létrehozás dátuma",
-            "LAST_LOGIN": "Utolsó bejelentkezés"
+            "USER_IDENTIFIER": "User identifier",
+            "LABEL": "Metadatas",
+            "CREATION_DATE": "Creation date",
+            "LAST_LOGIN": "Last login"
         },
         "PAGE_DATA": {
-            "TITLE": "Oldal szintű adatok",
-            "THEME": "Oldal témája",
-            "USE_BACKGROUND_IMAGE": "Háttérkép használata"
+            "TITLE": "Page level data",
+            "THEME": "Page theme",
+            "USE_BACKGROUND_IMAGE": "Use background image!"
         }
     },
     "BOOKING": {
         "BOOK_FUEL": {
-            "TITLE": "Üzemanyag költség",
-            "FUEL_COST": "Üzemanyag ár",
-            "QUANTITY": "Mennyiség",
-            "AMOUNT_SPENT": "Elköltve",
-            "AMOUNT_PAID": "Kifizetve",
-            "FULL_SPENT": "Különbözet"
+            "TITLE": "Fuel cost",
+            "FUEL_COST": "Fuel price",
+            "QUANTITY": "Quantity",
+            "AMOUNT_SPENT": "Amount spent",
+            "AMOUNT_PAID": "Amount paid",
+            "FULL_SPENT": "Difference"
         },
         "BOOK_TRAVEL": {
-            "TITLE": "Útinapló",
-            "DISTANCE": "Megtett táv",
+            "TITLE": "Travel diary",
+            "DISTANCE": "Distance",
             "ROUTE": {
-                "FROM": "Innen",
-                "TO": "Ide"
+                "FROM": "From",
+                "TO": "To"
             },
-            "RETOUR": "Oda-Vissza?"
+            "RETOUR": "Back and forth?"
         },
         "TRAVEL_LIST": {
             "COLUMNS": {
-                "DATE": "Dátum",
-                "DISTANCE": "Megtett táv (km)",
-                "ROUTE_FROM": "Indulás innen",
-                "ROUTE_TO": "Érkezés ide",
-                "RETOUR": "Oda-vissza?"
+                "DATE": "Date",
+                "DISTANCE": "Distance done (km)",
+                "ROUTE_FROM": "Departure from",
+                "ROUTE_TO": "Arrival to",
+                "RETOUR": "Back and forth?"
             }
         },
         "FUEL_LIST": {
             "COLUMNS": {
-                "DATE": "Dátum",
-                "QUANTITY": "Mennyiség",
-                "AMOUNT_SPENT": "Teljes elköltött összeg",
-                "AMOUNT_PAID": "Térített összeg",
-                "FULL_SPENT": "Teljes kiadás levonásokkal"
+                "DATE": "Date",
+                "QUANTITY": "Quantity",
+                "AMOUNT_SPENT": "Full amount spent",
+                "AMOUNT_PAID": "Amount paid",
+                "FULL_SPENT": "Difference"
             }
         }
     },
     "MEANS_OF_TRANSPORT": {
         "DIALOG": {
             "ADD_SERVICE_REPORT": {
-                "DATE_OF_SERVICE": "Szervíz időpontja",
-                "SERVICE_DATA": "Szervíz adatok",
-                "SHORT_DESCRIPTION": "Rövid leírás",
-                "AMOUNT_OF_FIX": "javítás összege",
-                "PLACE_OF_FIX": "Javítás helyszíne",
-                "MILAGE_OF_ITEM": "Kilométer óra állása",
-                "NEXT_SERVICE_DATE": "Következő szervíz időpontja",
-                "DESCRIPTION": "Leírás"
+                "DATE_OF_SERVICE": "Service date",
+                "SERVICE_DATA": "Service data",
+                "SHORT_DESCRIPTION": "Short description",
+                "AMOUNT_OF_FIX": "Amount of fix",
+                "PLACE_OF_FIX": "Place of fix",
+                "MILAGE_OF_ITEM": "Milage of vehicle",
+                "NEXT_SERVICE_DATE": "Next service date",
+                "DESCRIPTION": "Description"
             }
         },
         "MY_VEHICLES": {
-            "NO_VEHICLE": "Jelenleg még nincs hozzáadott járműved! Ha szeretnél rögzíteni egyet, kattints a \"Hozzáadás\" gombra!"
+            "NO_VEHICLE": "Currently you have no added vehicle! If you want to register one, please click on the \"Add\" button!"
         },
         "TRAFFIC_LICENSE": {
-            "DOWNLOAD_LICENSE": "Forgalmi engedély letöltése"
+            "DOWNLOAD_LICENSE": "Download license"
         },
         "TRANSPORT_TYPE": {
-            "BRAND": "Márka",
-            "TYPE": "Típus",
-            "ENGINE_TYPE": "Üzemanyag típusa",
-            "ENGINE_VOLUME": "Hengerűrtartalom",
-            "AVERAGE_CONSUMPTION": "Átlag fogyasztás",
-            "IMAGE": "Kép URL",
-            "SINCE": "Birtokba vétel ideje",
-            "FRAME_NUMBER": "Alvázszám",
-            "MOTOR_CODE": "Motorkód",
+            "BRAND": "Brand",
+            "TYPE": "Type",
+            "ENGINE_TYPE": "Fuel type",
+            "ENGINE_VOLUME": "Engine volume",
+            "AVERAGE_CONSUMPTION": "Average consumption",
+            "IMAGE": "Image URL",
+            "SINCE": "Time of possession",
+            "FRAME_NUMBER": "Frame number",
+            "MOTOR_CODE": "Motor code",
             "KILOWATT": "Kilowatt"
         },
         "VEHICLE_DETAIL": {
-            "VEHICLE_DATA": "Jármű adatok",
-            "SERVICE_REPORT": "Szervízkönyv",
-            "AMOUNT_SPENT_WITH_VALUE": "Összesen elköltött: {{value}}",
-            "LOCATION": "Helyszín",
-            "DESCRIPTION": "Leírás",
-            "MISSING_REPORTS": "Jelenleg még nincs hozzáadott szervíz naplózásod! Ha szeretnél rögzíteni egyet, kattints a \"Hozzáadás\" gombra!"
+            "VEHICLE_DATA": "Vehicle data",
+            "SERVICE_REPORT": "Service report",
+            "AMOUNT_SPENT_WITH_VALUE": "Amount spent: {{value}}",
+            "LOCATION": "Location",
+            "DESCRIPTION": "Description",
+            "MISSING_REPORTS": "Currently, you don't have any service report! If you want to register one, please click on the \"Add\" button!"
         },
         "VEHICLE_TILE": {
-            "DATAS": "Adatok"
+            "DATAS": "Datas"
         }
     }
 }

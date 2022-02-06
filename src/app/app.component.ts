@@ -16,6 +16,7 @@ import {PersonalSettingsType} from "./app-common/interfaces/common.interface";
 import {SidebarContainer} from "ng-sidebar";
 import {_} from "./app-common/vendor/vendor.module";
 import {DOCUMENT} from "@angular/common";
+import {AppTranslateService} from "./app-common/services/app-translate.service";
 
 @Component({
     selector: 'app-root',
@@ -37,9 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private routingChangedSubscription!: Subscription;
     private persSettSubscription: Subscription;
 
-    constructor(@Inject(DOCUMENT) private document: Document,
-                private translate: TranslateService,
-                private translateLoader: TranslateLoader,
+    constructor(private appTranslate: AppTranslateService,
                 private authService: AuthService,
                 private router: Router) {
         this.isAuthenticated = authService.isAuthenticated();
@@ -59,19 +58,8 @@ export class AppComponent implements OnInit, OnDestroy {
             }),
         ).subscribe();
 
-        const browserLang = navigator.language.split('-')[0];
-        const initLang = sessionStorage.getItem('lang') || browserLang;
-        this.translateLoader.getTranslation(initLang).pipe(
-            first(),
-            map(() => initLang),
-            catchError(() => of('hu')),
-            tap((lang) => {
-                const initLang = sessionStorage.getItem('lang') || lang;
-                this.translate.setDefaultLang(initLang);
-                this.translate.use(initLang);
-                this.document.documentElement.lang = initLang;
-            })
-        ).subscribe();
+        this.appTranslate.initializeTranslation('en');
+
         this.changeAnimatedState();
 
         this.routingChangedSubscription = this.router.events.pipe(

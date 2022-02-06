@@ -27,7 +27,9 @@
         <button fxLayout="row"
                 fxFlex
                 (click)="authService.logout()"
-                mat-raised-button>Kijelentkezés</button>
+                mat-raised-button>
+            {{ 'COMMON.LOGOUT' | translate }}
+        </button>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center">
         <span style="font-size:12px">Version: {{version}}</span>
