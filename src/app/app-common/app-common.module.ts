@@ -13,6 +13,7 @@ import { WithLoadingPipe } from './pipes/with-loading.pipe';
 import { ResolveRequestComponent } from './components/resolve-request/resolve-request.component';
 import { MultiLinePipe } from './pipes/multi-line.pipe';
 import { ActionsComponent } from './components/actions/actions.component';
+import { IconRadioButtonComponent } from './components/icon-radio-button/icon-radio-button.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { ActionsComponent } from './components/actions/actions.component';
         ResolveRequestComponent,
         MultiLinePipe,
         ActionsComponent,
+        IconRadioButtonComponent,
     ],
     imports: [
         CommonModule,
@@ -48,7 +50,8 @@ import { ActionsComponent } from './components/actions/actions.component';
         WithLoadingPipe,
         ResolveRequestComponent,
         MultiLinePipe,
-        ActionsComponent
+        ActionsComponent,
+        IconRadioButtonComponent
     ]
 })
 export class AppCommonModule {

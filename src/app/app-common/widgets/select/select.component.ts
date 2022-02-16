@@ -13,7 +13,7 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
 })
 export class SelectComponent extends BaseInput<any> implements OnInit {
 
-    @Input() public options!: {label: string, value: any};
+    @Input() public options!: {label: string, value: any}[];
 
     constructor(protected injector: Injector,
                 protected cdr: ChangeDetectorRef) {

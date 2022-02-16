@@ -1,0 +1,16 @@
+@import './src/theme.scss';
+
+app-icon-radio-button {
+    button {
+        width: 25px;
+        height: 25px;
+        border-radius: 100%;
+    }
+    .selected {
+        border: 1px solid;
+        @extend .accent-border-color;
+    }
+    .mat-button-wrapper, .mat-icon-button {
+        line-height: unset;
+    }
+}

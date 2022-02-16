@@ -11,31 +11,31 @@
             <table mat-table [dataSource]="obs.value" >
                 <!-- Create Date Column -->
                 <ng-container matColumnDef="creationDate">
-                    <th mat-header-cell *matHeaderCellDef>Dátum</th>
+                    <th mat-header-cell *matHeaderCellDef>{{'BOOKING.TRAVEL_LIST.COLUMNS.DATE' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{element.date | date: 'YYYY.MM.dd' }}</td>
                 </ng-container>
 
                 <!-- Distance Column -->
                 <ng-container matColumnDef="distance">
-                    <th mat-header-cell *matHeaderCellDef>Megtett táv (km)</th>
+                    <th mat-header-cell *matHeaderCellDef>{{'BOOKING.TRAVEL_LIST.COLUMNS.DISTANCE' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{(element.distance | number: '1.0-0') + ' Km'}}</td>
                 </ng-container>
 
                 <!-- RouteFrom Column -->
                 <ng-container matColumnDef="routeFrom">
-                    <th mat-header-cell *matHeaderCellDef>Indulás innen</th>
+                    <th mat-header-cell *matHeaderCellDef>{{'BOOKING.TRAVEL_LIST.COLUMNS.ROUTE_FROM' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{element.route?.from}}</td>
                 </ng-container>
 
                 <!-- RouteTo Column -->
                 <ng-container matColumnDef="routeTo">
-                    <th mat-header-cell *matHeaderCellDef>Érkezés ide</th>
+                    <th mat-header-cell *matHeaderCellDef>{{'BOOKING.TRAVEL_LIST.COLUMNS.ROUTE_TO' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{element.route?.to}}</td>
                 </ng-container>
 
                 <!-- Retour Column -->
                 <ng-container matColumnDef="retour">
-                    <th mat-header-cell *matHeaderCellDef>Retour</th>
+                    <th mat-header-cell *matHeaderCellDef>{{'BOOKING.TRAVEL_LIST.COLUMNS.RETOUR' | translate}}</th>
                     <td mat-cell *matCellDef="let element">
                         <div *ngIf="element.route?.retour" fxLayout="row grid">
                             <mat-icon fxFlex="100" color="primary">redo</mat-icon>

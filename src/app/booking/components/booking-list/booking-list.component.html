@@ -2,11 +2,11 @@
     <div fxLayout="row">
         <mat-expansion-panel fxFlex>
             <mat-expansion-panel-header>
-                <mat-panel-title>Szűrési feltételek</mat-panel-title>
+                <mat-panel-title>{{ 'COMMON.FILTERING_CONDITIONS' | translate }}</mat-panel-title>
             </mat-expansion-panel-header>
             <div fxLayout="row wrap" fxLayoutGap="15px grid">
                 <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
-                    <mat-label>Dátumtól</mat-label>
+                    <mat-label>{{ 'COMMON.DATE_FROM' | translate }}</mat-label>
                     <input matInput
                            name="dateFrom"
                            [(ngModel)]="dateFilter.dateFrom"
@@ -16,7 +16,7 @@
                     <mat-datepicker #pickerFrom></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
-                    <mat-label>Dátumig</mat-label>
+                    <mat-label>{{ 'COMMON.DATE_TO' | translate }}</mat-label>
                     <input matInput
                            name="dateTo"
                            [(ngModel)]="dateFilter.dateTo"
@@ -32,14 +32,16 @@
         <button *ngIf="actualTabLabel"
                 fxFlex.lt-sm="100"
                 (click)="addToList()"
-                mat-raised-button color="primary">{{ '"' + (actualTabLabel | async) + '" hozzáadása' }}</button>
+                mat-raised-button color="primary">
+            {{ 'COMMON.BUTTON.ITEM_ADD' | translate: { item: actualTabLabel | async } }}
+        </button>
     </div>
     <div fxLayout="row">
         <mat-tab-group #tabGroup fxFlex="100" style="background: white">
-            <mat-tab label="Útinapló">
+            <mat-tab label="{{'BOOKING.BOOK_TRAVEL.TITLE' | translate}}">
                 <ng-template matTabContent><app-travel-diary [queryParams]="travelQueryParams"></app-travel-diary></ng-template>
             </mat-tab>
-            <mat-tab label="Utazási költségek">
+            <mat-tab label="{{'BOOKING.BOOK_FUEL.TITLE' | translate}}">
                 <ng-template matTabContent><app-fuel-cost-diary [queryParams]="fuelQueryParams"></app-fuel-cost-diary></ng-template>
             </mat-tab>
         </mat-tab-group>

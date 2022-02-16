@@ -1,12 +1,12 @@
 <div>
     <mat-card>
         <mat-card-content>
-            <h2>Hi, {{(userData | async)?.displayName}}</h2>
+            <h2>{{'USER_SETTINGS.WELCOME' | translate: { displayName: (userData | async)?.displayName } }}</h2>
             <br>
             <div fxLayout="row wrap" fxLayoutGap="15px grid">
                 <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="column">
                     <mat-card *ngIf="userData | async as user" class="card-outlined" fxFlex>
-                        <p class="card-outlined__title">Felhasználói adatok</p>
+                        <p class="card-outlined__title">{{ 'USER_SETTINGS.USER_DATA' | translate }}</p>
                         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px grid">
                             <div fxFlex="30" fxFlex.lt-sm="100" fxLayout="row" fxLayoutAlign="center center">
                                 <img style="border-radius: 50px;" src="{{user.photoURL}}">
@@ -25,16 +25,16 @@
                                 <p style="font-weight: bold">{{'USER_SETTINGS.METADATA.LABEL' | translate}}</p>
                                 <hr>
                                 <div fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="start center">
-                                    <b class="m-0" [style.min-width]="'150px'">{{'Felhasználó azonosító' | translate}}:</b>
+                                    <b class="m-0" [style.min-width]="'150px'">{{'USER_SETTINGS.METADATA.USER_IDENTIFIER' | translate}}:</b>
                                     <p class="m-0 of-ellipsis" [matTooltip]="user.uid + ''">{{user.uid}}</p>
                                 </div>
                                 <div class="mt-5" fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="start center">
                                     <b class="m-0">{{'USER_SETTINGS.METADATA.CREATION_DATE' | translate}}:</b>
-                                    <p class="m-0 ml-5">{{user.metadata.lastLoginAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
+                                    <p class="m-0 ml-5">{{user.metadata.createdAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
                                 </div>
                                 <div class="mt-5" fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="start center">
                                     <b class="m-0">{{'USER_SETTINGS.METADATA.LAST_LOGIN' | translate}}:</b>
-                                    <p class="m-0">{{user.metadata.createdAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
+                                    <p class="m-0">{{user.metadata.lastLoginAt | date: 'YYYY.MM.dd HH:mm:ss'}}</p>
                                 </div>
                             </div>
                         </div>
@@ -42,10 +42,10 @@
                 </div>
                 <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="column">
                     <mat-card class="card-outlined" fxFlex>
-                        <p class="card-outlined__title">Oldal szintű adatok</p>
+                        <p class="card-outlined__title">{{ 'USER_SETTINGS.PAGE_DATA.TITLE' | translate }}</p>
                         <div fxLayout="column" fxLayoutGap="15px grid">
                             <div fxFlex>
-                                <p style="font-weight:bold">{{'Oldal témája' | translate}}</p>
+                                <p style="font-weight:bold">{{'USER_SETTINGS.PAGE_DATA.THEME' | translate}}</p>
                                 <hr>
                             </div>
                             <div fxLayout="row">
@@ -60,7 +60,7 @@
                                 </mat-radio-group>
                             </div>
                             <div fxFlex>
-                                <p style="font-weight:bold">{{'Oldal témája' | translate}}</p>
+                                <p style="font-weight:bold">{{'USER_SETTINGS.PAGE_DATA.THEME' | translate}}</p>
                                 <hr>
                             </div>
                             <div fxLayout="row wrap" fxLayoutGap="10px grid">
@@ -68,7 +68,7 @@
                                               (ngModelChange)="changeSettings({key: 'useStaticBackground', value: $event})"
                                               color="primary"
                                               name="useStaticbackground">
-                                    Háttérkép használata
+                                    {{'USER_SETTINGS.PAGE_DATA.USE_BACKGROUND_IMAGE' | translate}}
                                 </mat-checkbox>
                                 <input [(colorPicker)]="personalSettings.backgroundColor"
                                        [style.background]="personalSettings.backgroundColor"

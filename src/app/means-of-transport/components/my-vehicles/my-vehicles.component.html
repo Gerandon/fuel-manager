@@ -26,7 +26,7 @@
         <div *ngIf="!vehiclesObs.loading && !vehiclesObs.value?.length">
             <mat-card>
                 <mat-card-content>
-                    Jelenleg még nincs hozzáadott járműved! Ha szeretnél rögzíteni egyet, kattints a "Hozzáadás" gombra!
+                    {{ 'MEANS_OF_TRANSPORT.MY_VEHICLES.NO_VEHICLE' | translate }}
                 </mat-card-content>
             </mat-card>
             <button class="add-icon" mat-icon-button color="accent" (click)="create()">

@@ -47,14 +47,23 @@
                                                   matTooltip="Jelenleg szünetel"
                                                   (ngModelChange)="changeLocalRemote($event)"
                                                   color="primary"
-                                                  name="uselocally">Lokális használat</mat-checkbox>
+                                                  name="uselocally">
+                                        {{ 'COMMON.LOCALE_USAGE' | translate }}
+                                    </mat-checkbox>
+                                </div>
+                                <div class="mb-20" fxLayout="row" fxLayoutAlign="center center">
+                                    <app-icon-radio-button name="languagePicker"
+                                                           [data]="[{ value: 'hu', icon: 'hungarian' }, { value: 'en', icon: 'english' }]"
+                                                           [(ngModel)]="chosenLanguage"
+                                                           (ngModelChange)="chosenLangChange()">
+                                    </app-icon-radio-button>
                                 </div>
                                 <div class="buttons" fxLayout="row" fxLayoutAlign="center center">
                                     <button mat-raised-button color="primary"
                                             class="login-button"
                                             (click)="login()"
                                             [disabled]="loginForm.invalid">
-                                        {{(useLocally ? 'LOGIN.LOGIN_BUTTON' : 'Bejelentkezés Google használatával') | translate}}
+                                        {{(useLocally ? 'LOGIN.LOGIN_BUTTON' : 'COMMON.LOGIN_GOOGLE_BUTTON') | translate}}
                                     </button>
                                 </div>
                             </div>

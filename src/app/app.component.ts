@@ -1,20 +1,20 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {TranslateLoader, TranslateService} from "@ngx-translate/core";
 import {
-    catchError,
     filter,
     first,
-    map,
     skipWhile,
     tap
 } from "rxjs/operators";
-import {combineLatest, Observable, of, Subscription} from "rxjs";
+import {combineLatest, Observable, Subscription} from "rxjs";
 import {AuthService} from "./auth/services/auth.service";
-import {Config, defaultPersonalSettings} from "./app-common/common";
+import {defaultPersonalSettings, filteredMenu} from "./app-common/common";
 import {NavigationStart, Router} from "@angular/router";
-import {PersonalSettingsType} from "./app-common/interfaces/common.interface";
+import {IMenu, PersonalSettingsType} from "./app-common/interfaces/common.interface";
 import {SidebarContainer} from "ng-sidebar";
 import {_} from "./app-common/vendor/vendor.module";
+import {AppTranslateService} from "./app-common/services/app-translate.service";
+import {DomSanitizer} from "@angular/platform-browser";
+import {MatIconRegistry} from "@angular/material/icon";
 
 @Component({
     selector: 'app-root',
@@ -29,18 +29,21 @@ export class AppComponent implements OnInit, OnDestroy {
     public _opened: boolean = false;
     public animated: boolean = false;
     public isAuthenticated: Observable<boolean>;
-    public menu = Config.menu.filter(item => item.showAsMenu);
+    public menu: IMenu[];
     public backgroundColor = '';
     public personalSettingsHolder: PersonalSettingsType = _.clone(defaultPersonalSettings);
 
     private routingChangedSubscription!: Subscription;
     private persSettSubscription: Subscription;
 
-    constructor(private translate: TranslateService,
-                private translateLoader: TranslateLoader,
+    constructor(private appTranslate: AppTranslateService,
                 private authService: AuthService,
-                private router: Router) {
+                private router: Router,
+                private domSanitizer: DomSanitizer,
+                private matIconRegistry: MatIconRegistry) {
+        this.menu = filteredMenu('showAsMenu');
         this.isAuthenticated = authService.isAuthenticated();
+        this.addCustomIcons();
     }
 
     ngOnInit() {
@@ -57,18 +60,8 @@ export class AppComponent implements OnInit, OnDestroy {
             }),
         ).subscribe();
 
-        const browserLang = navigator.language.split('-')[0];
-        const initLang = sessionStorage.getItem('lang') || browserLang;
-        this.translateLoader.getTranslation(initLang).pipe(
-            first(),
-            map(() => initLang),
-            catchError(() => of('hu')),
-            tap((lang) => {
-                const initLang = sessionStorage.getItem('lang') || lang;
-                this.translate.setDefaultLang(initLang);
-                this.translate.use(initLang);
-            })
-        ).subscribe();
+        this.appTranslate.initializeTranslation();
+
         this.changeAnimatedState();
 
         this.routingChangedSubscription = this.router.events.pipe(
@@ -116,6 +109,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
     public _toggleSidebar() {
         this._opened = !this._opened;
+    }
+
+    addCustomIcons() {
+        const iconsBasePath = 'assets/icons';
+        const sanitize = this.domSanitizer.bypassSecurityTrustResourceUrl;
+        this.matIconRegistry
+            .addSvgIcon('english',sanitize(`${iconsBasePath}/english.svg`));
+        this.matIconRegistry
+            .addSvgIcon('hungarian',sanitize(`${iconsBasePath}/hungarian.svg`));
     }
 
     ngOnDestroy() {

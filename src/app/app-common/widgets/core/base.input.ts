@@ -17,7 +17,7 @@ export class BaseInput<T> extends BaseValueAccessor<T> implements OnInit {
     @Input() public name!: string;
     @Input() public label!: string;
     @Input() public translateParams?: any;
-    @Input() public placeholder?: string;
+    @Input() public placeholder?: string = this.label;
     @Input() public required?: boolean = false;
     @Input() public disabled?: boolean = false;
     @Input() public floatLabel?: FloatLabelType;

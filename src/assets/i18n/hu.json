@@ -13,13 +13,33 @@
             }
         ]
     },
+    "MENU": {
+        "PROFILE_SETTINGS": "Profil beállítások",
+        "PROFILE": "Profil",
+        "STARTING_PAGE": "Kezdőlap",
+        "VEHICLE_BOOKINGS": "Jármű könyvelések",
+        "MY_VEHICLES": "Saját járműveim"
+    },
     "true": "Igen",
     "false": "Nem",
     "COMMON": {
+        "DATE_FROM": "Dátumtól",
+        "DATE_TO": "Dátumig",
+        "FILTERING_CONDITIONS": "Szűrési feltételek",
+        "LOCALE_USAGE": "Lokális használat",
+        "LOGIN_GOOGLE_BUTTON": "Bejelentkezés Google használatával",
+        "LOGOUT": "Kijelentkezés",
         "REQUIRED": "'{{field}}' meztő kitöltése kötelező!",
         "CHOOSE_OPTION": "Válasszon egy lehetőséget!",
         "TABLE": {
             "NO_RESULT": "A lista üres!"
+        },
+        "CHOOSE_DATE": "Válasszon egy dátumot",
+        "BUTTON": {
+            "ADD": "Hozzáadás",
+            "SAVE_EDITED": "Felülírás",
+            "CANCEL": "Mégse",
+            "ITEM_ADD": "\"{{item}}\" hozzáadása"
         }
     },
     "LOGIN": {
@@ -34,19 +54,100 @@
         },
         "LOGIN_BUTTON": "Bejelentkezés"
     },
-    "TRANSPORT_TYPE": {
-        "BRAND": "Márka",
-        "TYPE": "Típus",
-        "ENGINE_TYPE": "Üzemanyag típusa",
-        "ENGINE_VOLUME": "Hengerűrtartalom",
-        "AVERAGE_CONSUMPTION": "Átlag fogyasztás"
-    },
     "USER_SETTINGS": {
+        "WELCOME": "Üdv, {{displayName}}",
+        "USER_DATA": "Felhasználói adatok",
         "COMMON_DATA": "Általános adatok",
         "METADATA": {
+            "USER_IDENTIFIER": "Felhasználó azonosító",
             "LABEL": "Metaadatok",
             "CREATION_DATE": "Létrehozás dátuma",
             "LAST_LOGIN": "Utolsó bejelentkezés"
+        },
+        "PAGE_DATA": {
+            "TITLE": "Oldal szintű adatok",
+            "THEME": "Oldal témája",
+            "USE_BACKGROUND_IMAGE": "Háttérkép használata"
+        }
+    },
+    "BOOKING": {
+        "BOOK_FUEL": {
+            "TITLE": "Üzemanyag költség",
+            "FUEL_COST": "Üzemanyag ár",
+            "QUANTITY": "Mennyiség",
+            "AMOUNT_SPENT": "Elköltve",
+            "AMOUNT_PAID": "Kifizetve",
+            "FULL_SPENT": "Különbözet"
+        },
+        "BOOK_TRAVEL": {
+            "TITLE": "Útinapló",
+            "DISTANCE": "Megtett táv",
+            "ROUTE": {
+                "FROM": "Innen",
+                "TO": "Ide"
+            },
+            "RETOUR": "Oda-Vissza?"
+        },
+        "TRAVEL_LIST": {
+            "COLUMNS": {
+                "DATE": "Dátum",
+                "DISTANCE": "Megtett táv (km)",
+                "ROUTE_FROM": "Indulás innen",
+                "ROUTE_TO": "Érkezés ide",
+                "RETOUR": "Oda-vissza?"
+            }
+        },
+        "FUEL_LIST": {
+            "COLUMNS": {
+                "DATE": "Dátum",
+                "QUANTITY": "Mennyiség",
+                "AMOUNT_SPENT": "Teljes elköltött összeg",
+                "AMOUNT_PAID": "Térített összeg",
+                "FULL_SPENT": "Teljes kiadás levonásokkal"
+            }
+        }
+    },
+    "MEANS_OF_TRANSPORT": {
+        "DIALOG": {
+            "ADD_SERVICE_REPORT": {
+                "DATE_OF_SERVICE": "Szervíz időpontja",
+                "SERVICE_DATA": "Szervíz adatok",
+                "SHORT_DESCRIPTION": "Rövid leírás",
+                "AMOUNT_OF_FIX": "javítás összege",
+                "PLACE_OF_FIX": "Javítás helyszíne",
+                "MILAGE_OF_ITEM": "Kilométer óra állása",
+                "NEXT_SERVICE_DATE": "Következő szervíz időpontja",
+                "DESCRIPTION": "Leírás"
+            }
+        },
+        "MY_VEHICLES": {
+            "NO_VEHICLE": "Jelenleg még nincs hozzáadott járműved! Ha szeretnél rögzíteni egyet, kattints a \"Hozzáadás\" gombra!"
+        },
+        "TRAFFIC_LICENSE": {
+            "DOWNLOAD_LICENSE": "Forgalmi engedély letöltése"
+        },
+        "TRANSPORT_TYPE": {
+            "BRAND": "Márka",
+            "TYPE": "Típus",
+            "ENGINE_TYPE": "Üzemanyag típusa",
+            "ENGINE_VOLUME": "Hengerűrtartalom",
+            "AVERAGE_CONSUMPTION": "Átlag fogyasztás",
+            "IMAGE": "Kép URL",
+            "SINCE": "Birtokba vétel ideje",
+            "FRAME_NUMBER": "Alvázszám",
+            "MOTOR_CODE": "Motorkód",
+            "KILOWATT": "Kilowatt"
+        },
+        "VEHICLE_DETAIL": {
+            "VEHICLE_DATA": "Jármű adatok",
+            "SERVICE_REPORT": "Szervízkönyv",
+            "AMOUNT_SPENT_WITH_VALUE": "Összesen elköltött: {{value}}",
+            "LOCATION": "Helyszín",
+            "DESCRIPTION": "Leírás",
+            "MISSING_REPORTS": "Jelenleg még nincs hozzáadott szervíz naplózásod! Ha szeretnél rögzíteni egyet, kattints a \"Hozzáadás\" gombra!"
+        },
+        "VEHICLE_TILE": {
+            "DATAS": "Adatok"
         }
     }
 }

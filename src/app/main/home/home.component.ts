@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Config} from "../../app-common/common";
+import {Config, filteredMenu} from "../../app-common/common";
+import {IMenu} from "../../app-common/interfaces/common.interface";
 
 @Component({
     selector: 'app-home',
@@ -9,7 +10,7 @@ import {Config} from "../../app-common/common";
 })
 export class HomeComponent implements OnInit {
 
-    public menu = Config.menu.filter(menu => menu.showAsTile);
+    public menu: IMenu[] = filteredMenu('showAsTile');
 
     constructor() {
     }

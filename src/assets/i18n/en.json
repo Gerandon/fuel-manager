@@ -1,0 +1,153 @@
+{
+    "MANAGER": {
+        "DESCRIPTION": "Basically, it's a so called Registry page, which serves as a database of the User's traveling and vehicle realted datas.",
+        "FUNCTIONALITIES": [
+            {
+                "KEY": "Route logging", "VALUE": "We've got the opportunity to log our travel/route specific datas."
+            },
+            {
+                "KEY": "Travel expense logging", "VALUE": "We could maintain different expenses according to our travel"
+            },
+            {
+                "KEY": "Vehicle maintenance", "VALUE": "It's possible to register our vehicle(s) and to maintain service reports, etc. about them"
+            }
+        ]
+    },
+    "MENU": {
+        "PROFILE_SETTINGS": "Profile settings",
+        "PROFILE": "Profile",
+        "STARTING_PAGE": "Starting page",
+        "VEHICLE_BOOKINGS": "Vehicle loggings",
+        "MY_VEHICLES": "My Vehicles"
+    },
+    "true": "Yes",
+    "false": "No",
+    "COMMON": {
+        "DATE_FROM": "Date from",
+        "DATE_TO": "Date to",
+        "FILTERING_CONDITIONS": "Filtering conditions",
+        "LOCALE_USAGE": "Local usage",
+        "LOGIN_GOOGLE_BUTTON": "Login with Google",
+        "LOGOUT": "Logout",
+        "REQUIRED": "'{{field}}' field is required!",
+        "CHOOSE_OPTION": "Choose an option!",
+        "TABLE": {
+            "NO_RESULT": "The list is empty!"
+        },
+        "CHOOSE_DATE": "Choose a date!",
+        "BUTTON": {
+            "ADD": "Add",
+            "SAVE_EDITED": "Overwrite",
+            "CANCEL": "Cancel",
+            "ITEM_ADD": "Add new \"{{item}}\""
+        }
+    },
+    "LOGIN": {
+        "TITLE": "Login",
+        "USERNAME": {
+            "LABEL": "Username",
+            "PLACEHOLDER": "Add a username!"
+        },
+        "PASSWORD": {
+            "LABEL": "Password",
+            "PLACEHOLDER": "Repeat the password!"
+        },
+        "LOGIN_BUTTON": "Login"
+    },
+    "USER_SETTINGS": {
+        "WELCOME": "Welcome, {{displayName}}",
+        "USER_DATA": "User data",
+        "COMMON_DATA": "General information",
+        "METADATA": {
+            "USER_IDENTIFIER": "User identifier",
+            "LABEL": "Metadatas",
+            "CREATION_DATE": "Creation date",
+            "LAST_LOGIN": "Last login"
+        },
+        "PAGE_DATA": {
+            "TITLE": "Page level data",
+            "THEME": "Page theme",
+            "USE_BACKGROUND_IMAGE": "Use background image!"
+        }
+    },
+    "BOOKING": {
+        "BOOK_FUEL": {
+            "TITLE": "Fuel cost",
+            "FUEL_COST": "Fuel price",
+            "QUANTITY": "Quantity",
+            "AMOUNT_SPENT": "Amount spent",
+            "AMOUNT_PAID": "Amount paid",
+            "FULL_SPENT": "Difference"
+        },
+        "BOOK_TRAVEL": {
+            "TITLE": "Travel diary",
+            "DISTANCE": "Distance",
+            "ROUTE": {
+                "FROM": "From",
+                "TO": "To"
+            },
+            "RETOUR": "Back and forth?"
+        },
+        "TRAVEL_LIST": {
+            "COLUMNS": {
+                "DATE": "Date",
+                "DISTANCE": "Distance done (km)",
+                "ROUTE_FROM": "Departure from",
+                "ROUTE_TO": "Arrival to",
+                "RETOUR": "Back and forth?"
+            }
+        },
+        "FUEL_LIST": {
+            "COLUMNS": {
+                "DATE": "Date",
+                "QUANTITY": "Quantity",
+                "AMOUNT_SPENT": "Full amount spent",
+                "AMOUNT_PAID": "Amount paid",
+                "FULL_SPENT": "Difference"
+            }
+        }
+    },
+    "MEANS_OF_TRANSPORT": {
+        "DIALOG": {
+            "ADD_SERVICE_REPORT": {
+                "DATE_OF_SERVICE": "Service date",
+                "SERVICE_DATA": "Service data",
+                "SHORT_DESCRIPTION": "Short description",
+                "AMOUNT_OF_FIX": "Amount of fix",
+                "PLACE_OF_FIX": "Place of fix",
+                "MILAGE_OF_ITEM": "Milage of vehicle",
+                "NEXT_SERVICE_DATE": "Next service date",
+                "DESCRIPTION": "Description"
+            }
+        },
+        "MY_VEHICLES": {
+            "NO_VEHICLE": "Currently you have no added vehicle! If you want to register one, please click on the \"Add\" button!"
+        },
+        "TRAFFIC_LICENSE": {
+            "DOWNLOAD_LICENSE": "Download license"
+        },
+        "TRANSPORT_TYPE": {
+            "BRAND": "Brand",
+            "TYPE": "Type",
+            "ENGINE_TYPE": "Fuel type",
+            "ENGINE_VOLUME": "Engine volume",
+            "AVERAGE_CONSUMPTION": "Average consumption",
+            "IMAGE": "Image URL",
+            "SINCE": "Time of possession",
+            "FRAME_NUMBER": "Frame number",
+            "MOTOR_CODE": "Motor code",
+            "KILOWATT": "Kilowatt"
+        },
+        "VEHICLE_DETAIL": {
+            "VEHICLE_DATA": "Vehicle data",
+            "SERVICE_REPORT": "Service report",
+            "AMOUNT_SPENT_WITH_VALUE": "Amount spent: {{value}}",
+            "LOCATION": "Location",
+            "DESCRIPTION": "Description",
+            "MISSING_REPORTS": "Currently, you don't have any service report! If you want to register one, please click on the \"Add\" button!"
+        },
+        "VEHICLE_TILE": {
+            "DATAS": "Datas"
+        }
+    }
+}

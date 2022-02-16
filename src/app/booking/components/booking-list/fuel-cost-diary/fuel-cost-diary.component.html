@@ -2,31 +2,31 @@
     <table mat-table [dataSource]="fuelCostDiarySource">
         <!-- Creation date Column -->
         <ng-container matColumnDef="creationDate">
-            <th mat-header-cell *matHeaderCellDef>Dátum</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'BOOKING.FUEL_LIST.COLUMNS.DATE' | translate }}</th>
             <td mat-cell *matCellDef="let element">{{element.date | date: 'YYYY.MM.dd'}}</td>
         </ng-container>
 
         <!-- Quantity Column -->
         <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef>Mennyiség</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'BOOKING.FUEL_LIST.COLUMNS.QUANTITY' | translate }}</th>
             <td mat-cell *matCellDef="let element"> {{element.quantity}} L</td>
         </ng-container>
 
         <!-- Amount spent Column -->
         <ng-container matColumnDef="amountSpent">
-            <th mat-header-cell *matHeaderCellDef>Teljes elköltött összeg</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'BOOKING.FUEL_LIST.COLUMNS.AMOUNT_SPENT' | translate }}</th>
             <td mat-cell *matCellDef="let element"> {{(element.amountSpent | currency: ' ':'symbol':'1.0-0') + ' HUF'}} </td>
         </ng-container>
 
         <!-- Amount Paid Column -->
         <ng-container matColumnDef="amountPaid">
-            <th mat-header-cell *matHeaderCellDef>Térített összeg</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'BOOKING.FUEL_LIST.COLUMNS.AMOUNT_PAID' | translate }}</th>
             <td mat-cell *matCellDef="let element"> {{(element.amountPaid | currency: ' ':'symbol':'1.0-0') + ' HUF'}} </td>
         </ng-container>
 
         <!-- Full Spent Column -->
         <ng-container matColumnDef="fullSpent">
-            <th mat-header-cell *matHeaderCellDef>Teljes kiadás levonásokkal</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'BOOKING.FUEL_LIST.COLUMNS.FULL_SPENT' | translate }}</th>
             <td mat-cell *matCellDef="let element"> {{(element.fullSpent | currency: ' ':'symbol':'1.0-0') + ' HUF'}} </td>
         </ng-container>
 

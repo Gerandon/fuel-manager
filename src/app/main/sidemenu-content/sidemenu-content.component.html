@@ -8,24 +8,39 @@
                 <br>
                 <div fxLayout="row"
                      fxLayoutAlign="center center">
-                    <button mat-raised-button color="primary">Profil Beállítások</button>
+                    <button mat-raised-button color="primary">
+                        {{ 'MENU.PROFILE_SETTINGS' | translate }}
+                    </button>
                 </div>
             </mat-card-content>
         </mat-card>
     </div>
-    <mat-selection-list #shoes [multiple]="false" fxLayout="column">
+    <div class="m-10" fxLayout="row" fxLayoutAlign="center center">
+        <mat-card fxFlex>
+            <mat-card-content>
+                <app-icon-radio-button name="languagePicker"
+                                       [data]="[{ value: 'hu', icon: 'hungarian' }, { value: 'en', icon: 'english' }]"
+                                       [(ngModel)]="chosenLanguage"
+                                       (ngModelChange)="chosenLanguageChange()">
+                </app-icon-radio-button>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <mat-selection-list [multiple]="false" fxLayout="column">
         <mat-list-option *ngFor="let item of menuItems"
                          [selected]="(url | async)?.includes(item.navigateTo)"
                          [routerLink]="['/'+item.navigateTo]"
-                         [value]="item.label">
-            {{item.label}}
+                         [value]="item.label | translate">
+            <p>{{item.label | translate}}</p>
         </mat-list-option>
     </mat-selection-list>
     <div class="m-10">
         <button fxLayout="row"
                 fxFlex
                 (click)="authService.logout()"
-                mat-raised-button>Kijelentkezés</button>
+                mat-raised-button>
+            {{ 'COMMON.LOGOUT' | translate }}
+        </button>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center">
         <span style="font-size:12px">Version: {{version}}</span>

@@ -41,7 +41,7 @@
         border-color: mat-color($primary);
     }
     .accent-border-color {
-        border-color: mat-color($accent);
+        border-color: mat-color($accent) !important;
     }
     .warn-border-color {
         border-color: mat-color($warn);

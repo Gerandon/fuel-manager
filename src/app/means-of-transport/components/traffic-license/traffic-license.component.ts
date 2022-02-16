@@ -5,6 +5,7 @@ import {_} from "../../../app-common/vendor/vendor.module";
 import html2canvas from "html2canvas";
 import {AuthService} from "../../../auth/services/auth.service";
 import {first, tap} from "rxjs/operators";
+import {MatFormFieldAppearance} from "@angular/material/form-field/form-field";
 
 @Component({
     selector: 'app-traffic-license',
@@ -22,11 +23,14 @@ export class TrafficLicenseComponent implements OnInit {
     @ViewChild('canvas') canvas!: ElementRef;
     @ViewChild('downloadLink') downloadLink!: ElementRef;
 
+    public appearance: MatFormFieldAppearance = 'legacy';
+
     constructor(private cdr: ChangeDetectorRef,
                 private authService: AuthService) {
     }
 
     ngOnInit(): void {
+        this.appearance = this.edit ? 'legacy' : <MatFormFieldAppearance>'none';
     }
 
     download() {
