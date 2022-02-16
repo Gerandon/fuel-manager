@@ -2,33 +2,34 @@
 
 app-home {
     height: 100%;
+    .item-container {
+        justify-content: center;
+    }
+    .menu-item {
+        width: 210px;
+        height: 170px;
+    }
     .content {
-        min-width: 200px !important;
-        min-height: 150px;
+        &__big {
+            span {
+                font-size: 20px;
+            }
+            mat-icon {
+                height: 50px;
+                width: 50px;
+                font-size: 50px;
+            }
+        }
         padding: 10px;
         @extend .primary-background;
         @extend .accent-border-color;
         border-radius: 10px;
         @extend .accent-color;
         cursor: pointer;
-
-        span {
-            font-size: 20px;
-        }
-
+        transition: background-color 0.3s;
         &:hover {
             @extend .accent-background;
             @extend .primary-color;
         }
-        mat-icon {
-            height: 50px;
-            width: 50px;
-            font-size: 50px;
-        }
-
-        transition: background-color 0.3s;
-    }
-    .item-container {
-        justify-content: center;
     }
 }

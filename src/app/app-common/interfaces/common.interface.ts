@@ -14,3 +14,14 @@ export interface BaseType {
     creationDate: Date;
     modificationDate?: Date;
 }
+
+export interface IMenu {
+    label: string;
+    navigateTo: string;
+    showAsTile: boolean;
+    showAsMenu: boolean;
+    imageUrl: string;
+    icon?: string;
+    submenu?: IMenu[];
+    disabled?: string;
+}

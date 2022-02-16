@@ -26,12 +26,12 @@
             </mat-card-content>
         </mat-card>
     </div>
-    <mat-selection-list #shoes [multiple]="false" fxLayout="column">
+    <mat-selection-list [multiple]="false" fxLayout="column">
         <mat-list-option *ngFor="let item of menuItems"
                          [selected]="(url | async)?.includes(item.navigateTo)"
                          [routerLink]="['/'+item.navigateTo]"
                          [value]="item.label | translate">
-            {{item.label | translate}}
+            <p>{{item.label | translate}}</p>
         </mat-list-option>
     </mat-selection-list>
     <div class="m-10">

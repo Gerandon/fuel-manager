@@ -8,6 +8,7 @@ import packageJson from '../../../../package.json';
 import {environment} from "../../../environments/environment";
 import {AppTranslateService} from "../../app-common/services/app-translate.service";
 import {LocalStorageService} from "ngx-webstorage";
+import {IMenu} from "../../app-common/interfaces/common.interface";
 
 @Component({
     selector: 'app-sidemenu-content',
@@ -17,11 +18,7 @@ import {LocalStorageService} from "ngx-webstorage";
 })
 export class SidemenuContentComponent implements OnInit {
 
-    @Input() menuItems!: {
-        label: string,
-        icon?: string,
-        navigateTo: string
-    }[];
+    @Input() menuItems!: IMenu[];
     public url: Observable<string>;
     public userData: Observable<any>;
     public version = packageJson.version;

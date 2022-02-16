@@ -12,7 +12,7 @@ import {LocalVehiclesService} from "../means-of-transport/services/vehicles/loca
 import {RemoteVehiclesService} from "../means-of-transport/services/vehicles/remote-vehicles.service";
 import {ServiceReportType, VehicleDataType} from "./interfaces/vehicle.interface";
 import {_} from "./vendor/vendor.module";
-import {PersonalSettingsType} from "./interfaces/common.interface";
+import {IMenu, PersonalSettingsType} from "./interfaces/common.interface";
 import {v4} from "uuid";
 
 export const fullSizeDialogConfig = {
@@ -109,7 +109,7 @@ export const defaultPersonalSettings: PersonalSettingsType = {
     useStaticBackground: true,
 }
 
-export const Config = {
+export const Config: { menu: IMenu[] } = {
     menu: [
         {
             label: 'MENU.PROFILE',
@@ -117,7 +117,7 @@ export const Config = {
             showAsTile: true,
             showAsMenu: false,
             imageUrl: '',
-            icon: 'person_rounded'
+            icon: 'person',
         },
         {
             label: 'MENU.STARTING_PAGE',
@@ -132,7 +132,7 @@ export const Config = {
             showAsTile: true,
             showAsMenu: true,
             imageUrl: 'https://kep.cdn.index.hu/1/0/3975/39757/397573/39757307_3033467_cff894add5cbd8a2ad2248bcd9cec88b_wm.jpg',
-            icon: 'menu_book_rounded'
+            icon: 'menu_book'
         },
         {
             label: 'MENU.MY_VEHICLES',
@@ -140,10 +140,22 @@ export const Config = {
             showAsTile: true,
             showAsMenu: true,
             imageUrl: 'https://image.pngaaa.com/84/510084-middle.png',
-            icon: 'directions_car_rounded'
+            icon: 'time_to_leave'
         }
     ]
 }
+
+export const filteredMenu = (filterTo: keyof IMenu) => Config.menu
+    .filter(item => item[filterTo])
+    .map(menu => {
+        if (menu.submenu) {
+            return {
+                ...menu,
+                submenu: menu.submenu.filter(item => item[filterTo])
+            };
+        }
+        return menu;
+    }) as IMenu[];
 
 /**
  * Modifies given (every) property in any depth

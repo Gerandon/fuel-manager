@@ -1,22 +1,32 @@
 <div fxLayout="column" fxFlex fxLayoutAlign="center center">
-    <div class="item-container" fxLayout="row wrap" fxLayoutGap="15px grid">
-        <div *ngFor="let menuItem of menu" [routerLink]="['/'+menuItem.navigateTo]">
-            <div class="content"
-                 fxFlex.lg="calc(33% - 16px)"
-                 fxFlex.lt-lg="calc(50% - 16px)"
-                 fxFlex.xs="calc(100% - 16px)" fxLayout="column">
+    <div class="item-container"
+         fxLayout="row wrap"
+         fxLayoutGap="15px grid"
+         fxLayoutAlign="center center">
+        <div *ngFor="let menuItem of menu"
+             class="menu-item"
+             fxLayout="column"
+             fxLayoutGap="10px"
+             [routerLink]="['/'+menuItem.navigateTo]">
+            <div class="content content__big"
+                 fxLayout="column"
+                 fxFlex="auto">
                 <div fxLayoutAlign="center center"><span>{{menuItem.label | translate}}</span></div>
-                <div *ngIf="menuItem.icon" fxFlex fxLayoutAlign="center center">
+                <div *ngIf="menuItem.icon" class="mat-icon-container" fxFlex fxLayoutAlign="center center">
                     <mat-icon>{{menuItem.icon}}</mat-icon>
                 </div>
-                <!--
-                <resolve-request #resolveReq
-                                 [url]="menuItem.imageUrl">
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                        <img [src]="resolveReq.value" style="height: 100px"/>
+            </div>
+            <div *ngIf="menuItem.submenu?.length"
+                 fxLayout="row"
+                 fxLayoutGap="10px">
+                <div *ngFor="let submenu of menuItem.submenu"
+                     [routerLink]="['/'+submenu.navigateTo]"
+                     class="content" fxLayout="column" fxFlex
+                     [matTooltip]="(submenu.disabled || submenu.label) | translate">
+                    <div *ngIf="submenu.icon" fxFlex fxLayoutAlign="center center">
+                        <mat-icon>{{submenu.icon}}</mat-icon>
                     </div>
-                </resolve-request>
-                -->
+                </div>
             </div>
         </div>
     </div>

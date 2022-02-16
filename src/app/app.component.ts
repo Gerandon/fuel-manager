@@ -1,21 +1,17 @@
-import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {TranslateLoader, TranslateService} from "@ngx-translate/core";
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
-    catchError,
     filter,
     first,
-    map,
     skipWhile,
     tap
 } from "rxjs/operators";
-import {combineLatest, Observable, of, Subscription} from "rxjs";
+import {combineLatest, Observable, Subscription} from "rxjs";
 import {AuthService} from "./auth/services/auth.service";
-import {Config, defaultPersonalSettings} from "./app-common/common";
+import {defaultPersonalSettings, filteredMenu} from "./app-common/common";
 import {NavigationStart, Router} from "@angular/router";
-import {PersonalSettingsType} from "./app-common/interfaces/common.interface";
+import {IMenu, PersonalSettingsType} from "./app-common/interfaces/common.interface";
 import {SidebarContainer} from "ng-sidebar";
 import {_} from "./app-common/vendor/vendor.module";
-import {DOCUMENT} from "@angular/common";
 import {AppTranslateService} from "./app-common/services/app-translate.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {MatIconRegistry} from "@angular/material/icon";
@@ -33,7 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
     public _opened: boolean = false;
     public animated: boolean = false;
     public isAuthenticated: Observable<boolean>;
-    public menu = Config.menu.filter(item => item.showAsMenu);
+    public menu: IMenu[];
     public backgroundColor = '';
     public personalSettingsHolder: PersonalSettingsType = _.clone(defaultPersonalSettings);
 
@@ -45,6 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private domSanitizer: DomSanitizer,
                 private matIconRegistry: MatIconRegistry) {
+        this.menu = filteredMenu('showAsMenu');
         this.isAuthenticated = authService.isAuthenticated();
         this.addCustomIcons();
     }
