@@ -1,0 +1,24 @@
+<div class="timeline">
+    <mat-card>
+        <mat-card-content>
+            <table>
+                <thead>
+                    <tr>
+                        <th *ngFor="let day of dayColumns">{{day}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-row" *ngFor="let row of calendarMatrix">
+                        <td *ngFor="let calendarItem of row">
+                            <timeline-day-item fxLayout="column"
+                                               [date]="calendarItem.date"
+                                               [disabled]="!calendarItem.inCurrentMonth"
+                                               [recordings]="getRecording(calendarItem.date)">
+                            </timeline-day-item>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>

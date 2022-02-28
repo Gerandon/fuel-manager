@@ -1,0 +1,18 @@
+<div fxLayout="column"
+     fxLayoutGap="3px"
+     fxFlex="100"
+     class="day-item-main" [class.disabled]="disabled">
+    <div fxLayout="row" fxLayoutAlign="end top">
+        <p>{{date | date: 'MMMM dd'}}</p>
+    </div>
+    <div *ngFor="let record of recordings"
+         [style.background]="record.color.background"
+         [style.color]="record.color.foreground"
+         fxLayout="row-wrap"
+         class="item-row">
+        <div *ngFor="let prop of record.props; let last = last">
+            <span>{{prop.value}}</span>
+            <span *ngIf="!last" class="separator">{{record.separator}}</span>
+        </div>
+    </div>
+</div>
