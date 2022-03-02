@@ -6,7 +6,7 @@ import {BookTravelComponent} from "../book-travel/book-travel.component";
 import {MatTabGroup} from "@angular/material/tabs";
 import {BookFuelComponent} from "../book-fuel/book-fuel.component";
 import {TravelDiaryType} from "../../../app-common/interfaces/travel-diary.interface";
-import {map, startWith} from "rxjs/operators";
+import {debounceTime, map, startWith, tap} from "rxjs/operators";
 import {TimelineData} from "../../../app-common/modules/calendar/interfaces/calendar-common";
 import * as moment from "moment";
 
@@ -59,6 +59,7 @@ export class BookingListComponent implements OnInit, AfterViewInit {
             this.bookingService.getTravelDiaryList(),
             this.timelineDate
         ]).pipe(
+            debounceTime(300),
             map(([diaryList, timelineDate]) => diaryList.filter(acc => {
                 const onConcreteDate = compare(acc.date, timelineDate);
                 const beforeMonth = compare(acc.date, dateString(moment(timelineDate).subtract(1, 'month').toDate()));

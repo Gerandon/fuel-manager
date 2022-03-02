@@ -3,7 +3,7 @@
      fxFlex="100"
      class="day-item-main" [class.disabled]="disabled">
     <div fxLayout="row" fxLayoutAlign="end center">
-        <p class="m-0" style="font-size: large; color: grey">{{date | date: 'dd'}}</p>
+        <p class="m-0" style="font-size: large; color: grey">{{date | date: 'd'}}</p>
     </div>
     <div *ngFor="let record of recordings"
          [style.background]="record.color.background"

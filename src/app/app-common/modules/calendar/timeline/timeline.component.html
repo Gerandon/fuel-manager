@@ -11,7 +11,7 @@
                     </button>
                 </div>
                 <div fxLayout="row" fxFlex="60" fxLayoutAlign="center center">
-                    <h2>{{'CALENDAR_TIMELINE.MONTHS.' + months[date.getMonth()].toUpperCase() | translate}}</h2>
+                    <h2>{{date | date: 'yyyy'}} {{'CALENDAR_TIMELINE.MONTHS.' + months[date.getMonth()].toUpperCase() | translate}}</h2>
                 </div>
                 <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center">
                     <button mat-raised-button fxFlex color="primary" (click)="onMove('right')">
