@@ -46,7 +46,9 @@
             </mat-tab>
         </mat-tab-group>
     </div>
-    <timeline *ngIf="false" [date]="dateFilter.dateFrom"></timeline>
+    <timeline [date]="timelineDate | async"
+              [timelineData]="timelineData | async"
+              (onIntervalChanged)="timelineDate.next($event)"></timeline>
     <!--
     <br>
     <div fxLayout="row wrap">

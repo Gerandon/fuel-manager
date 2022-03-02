@@ -1,14 +1,15 @@
 import {
     ChangeDetectionStrategy, ChangeDetectorRef,
-    Component,
+    Component, EventEmitter,
     Input,
     OnChanges,
-    OnInit,
-    SimpleChanges,
+    OnInit, Output,
+    SimpleChanges, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import * as moment from "moment";
-import {Moment} from "moment";
+import {isMoment, Moment} from "moment";
+import {CalendarHeaderDirection, TimelineData} from "../interfaces/calendar-common";
 
 @Component({
     selector: 'timeline',
@@ -17,63 +18,32 @@ import {Moment} from "moment";
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimelineComponent implements OnInit, OnChanges {
+export class TimelineComponent implements OnChanges {
 
     @Input() public date: Date = new Date();
+    @Input() public timelineData: TimelineData[] = [];
+    @Output() public onIntervalChanged = new EventEmitter<Date>();
 
     public dayColumns = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    public months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
     public dayRows = 5;
 
-    public data = [];
     public calendarMatrix: { inCurrentMonth: boolean, date: Date}[][];
 
-    private oneDay = [
-        {
-            type: 'Fuel',
-            separator: '-',
-            color: { background: '#198700', foreground: '#ffffff'},
-            props: [
-                { index: 1, value: `Spent: ${123}` },
-            ]
-        },
-        {
-            type: 'Travel',
-            separator: '-',
-            color: { background: '#c00000', foreground: '#ffffff'},
-            props: [
-                { index: 1, value: `Kilometers: ${123415}` },
-            ]
-        }
-    ];
-
     constructor() {
-        this.data = [
-            {
-                date: new Date('2022.02.28'),
-                dayData: this.oneDay
-            },
-            {
-                date: new Date('2022.03.10'),
-                dayData: this.oneDay
-            },
-            {
-                date: new Date('2022.03.15'),
-                dayData: [
-                    ...this.oneDay,
-                    {
-                        type: 'Travel',
-                        separator: '-',
-                        color: { background: '#c00000', foreground: '#ffffff'},
-                        props: [
-                            { index: 1, value: `Kilometers: ${123415}` },
-                        ]
-                    }
-                ]
-            }
-        ];
-    }
-
-    ngOnInit(): void {
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -82,8 +52,18 @@ export class TimelineComponent implements OnInit, OnChanges {
         }
     }
 
+    public onMove(direction: CalendarHeaderDirection) {
+        if (direction === CalendarHeaderDirection.LEFT) {
+            this.date = this.getDate().subtract(1, 'month').toDate();
+        } else {
+            this.date = this.getDate().add(1, 'month').toDate();
+        }
+        this.calendarMatrix = this.generateMatrixFromDate();
+        this.onIntervalChanged.emit(this.date);
+    }
+
     public getRecording(date: Date) {
-        return this.data.find(acc => moment(acc.date).format('yyyy.MM.DD') === moment(date).format('yyyy.MM.DD'))?.dayData || null
+        return this.timelineData?.find(acc => moment(acc.date).format('yyyy.MM.DD') === moment(date).format('yyyy.MM.DD'))?.dayData || null
     }
 
     public generateMatrixFromDate(): { inCurrentMonth: boolean, date: Date}[][] {
@@ -122,5 +102,9 @@ export class TimelineComponent implements OnInit, OnChanges {
                 };
             });
         });
+    }
+
+    private getDate(): Moment {
+        return isMoment(this.date) ? (<Moment>this.date) : moment(this.date);
     }
 }

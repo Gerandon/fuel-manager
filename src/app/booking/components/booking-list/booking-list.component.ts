@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {Observable} from "rxjs";
+import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {BookingService} from "../../services/booking.service";
 import {MatDialog} from "@angular/material/dialog";
 import {BookTravelComponent} from "../book-travel/book-travel.component";
@@ -7,6 +7,8 @@ import {MatTabGroup} from "@angular/material/tabs";
 import {BookFuelComponent} from "../book-fuel/book-fuel.component";
 import {TravelDiaryType} from "../../../app-common/interfaces/travel-diary.interface";
 import {map, startWith} from "rxjs/operators";
+import {TimelineData} from "../../../app-common/modules/calendar/interfaces/calendar-common";
+import * as moment from "moment";
 
 @Component({
     selector: 'app-booking-list',
@@ -28,6 +30,9 @@ export class BookingListComponent implements OnInit, AfterViewInit {
     public fuelQueryParams?: { key: keyof TravelDiaryType, value: string | number, operator?: string}[];
     public actualTabLabel: Observable<string>;
 
+    public timelineData: Observable<TimelineData[]>;
+    public timelineDate = new BehaviorSubject<Date>(this.dateFilter.dateFrom);
+
     private tabIndexComponent;
 
     constructor(public bookingService: BookingService,
@@ -44,6 +49,39 @@ export class BookingListComponent implements OnInit, AfterViewInit {
         this.amountPaid = this.bookingService.getChartDataByValue('amountPaid', true);
         this.fullSpent = this.bookingService.getChartDataByValue('fullSpent', false);
         this.onDateChange();
+
+        const dateString = (date: Date) => moment(date).format('yyyy.MM');
+        const dateStringFull = (date: Date) => moment(date).format('yyyy.MM.DD');
+        const compare = (date1, date2) => dateString(date1) === dateString(date2);
+        const compareFull = (date1, date2) => dateStringFull(date1) === dateStringFull(date2);
+        // FIXME MomentJS console warning
+        this.timelineData = combineLatest([
+            this.bookingService.getTravelDiaryList(),
+            this.timelineDate
+        ]).pipe(
+            map(([diaryList, timelineDate]) => diaryList.filter(acc => {
+                const onConcreteDate = compare(acc.date, timelineDate);
+                const beforeMonth = compare(acc.date, dateString(moment(timelineDate).subtract(1, 'month').toDate()));
+                const afterMonth = compare(acc.date, dateString(moment(timelineDate).add(1, 'month').toDate()));
+                return onConcreteDate || beforeMonth || afterMonth;
+            })),
+            map((array: TravelDiaryType[]) => {
+                return array.map(acc => {
+                    return array.filter(accItem => compareFull(acc.date, accItem.date));
+                });
+            }),
+            map((array:TravelDiaryType[][]) => array.map(acc => <TimelineData>({
+                date: acc[0].date,
+                dayData: acc.map(item => ({
+                    color: { background: '#198700', foreground: '#ffffff' },
+                    props: [
+                        {index: 0, value: `${item.route.from} -> ${item.route.to}`},
+                        {index: 1, value: `${item.distance} Km`},
+                    ],
+                    separator: '-'
+                })),
+            })))
+        );
     }
 
     ngAfterViewInit() {

@@ -1,13 +1,32 @@
 <div class="timeline">
     <mat-card>
         <mat-card-content>
-            <table>
-                <thead>
+            <div #customHeader fxLayout="row">
+                <ng-content select="[header]"></ng-content>
+            </div>
+            <div *ngIf="!customHeader.children?.length" fxLayout="row">
+                <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center">
+                    <button mat-raised-button fxFlex color="primary" (click)="onMove('left')">
+                        <mat-icon>arrow_backward</mat-icon>
+                    </button>
+                </div>
+                <div fxLayout="row" fxFlex="60" fxLayoutAlign="center center">
+                    <h2>{{'CALENDAR_TIMELINE.MONTHS.' + months[date.getMonth()].toUpperCase() | translate}}</h2>
+                </div>
+                <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center">
+                    <button mat-raised-button fxFlex color="primary" (click)="onMove('right')">
+                        <mat-icon>arrow_forward</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <table>
+                    <thead>
                     <tr>
-                        <th *ngFor="let day of dayColumns">{{day}}</th>
+                        <th *ngFor="let day of dayColumns">{{'CALENDAR_TIMELINE.DAYS.' + day.toUpperCase() | translate}}</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr class="table-row" *ngFor="let row of calendarMatrix">
                         <td *ngFor="let calendarItem of row">
                             <timeline-day-item fxLayout="column"
@@ -17,8 +36,9 @@
                             </timeline-day-item>
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

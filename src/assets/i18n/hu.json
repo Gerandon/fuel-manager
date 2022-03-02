@@ -149,5 +149,30 @@
         "VEHICLE_TILE": {
             "DATAS": "Adatok"
         }
+    },
+    "CALENDAR_TIMELINE": {
+        "DAYS": {
+            "MONDAY": "Hétfő",
+            "TUESDAY": "Kedd",
+            "WEDNESDAY": "Szerda",
+            "THURSDAY": "Csütörtök",
+            "FRIDAY": "Péntek",
+            "SATURDAY": "Szombat",
+            "SUNDAY": "Vasárnap"
+        },
+        "MONTHS": {
+            "JANUARY": "Január",
+            "FEBRUARY": "Február",
+            "MARCH": "Március",
+            "APRIL": "Április",
+            "MAY": "Május",
+            "JUNE": "Június",
+            "JULY": "Július",
+            "AUGUST": "Augusztus",
+            "SEPTEMBER": "Szeptember",
+            "OCTOBER": "Október",
+            "NOVEMBER": "November",
+            "DECEMBER": "December"
+        }
     }
 }

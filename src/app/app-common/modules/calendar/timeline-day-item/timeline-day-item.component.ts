@@ -1,4 +1,5 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {TimelineDayItem} from "../interfaces/calendar-common";
 
 @Component({
     selector: 'timeline-day-item',
@@ -10,7 +11,7 @@ export class TimelineDayItemComponent implements OnInit {
 
     @Input() public date: Date;
     @Input() public disabled: boolean = false;
-    @Input() public recordings: any[];
+    @Input() public recordings: TimelineDayItem[];
 
     constructor() {
     }

@@ -2,17 +2,18 @@
      fxLayoutGap="3px"
      fxFlex="100"
      class="day-item-main" [class.disabled]="disabled">
-    <div fxLayout="row" fxLayoutAlign="end top">
-        <p>{{date | date: 'MMMM dd'}}</p>
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <p class="m-0" style="font-size: large; color: grey">{{date | date: 'dd'}}</p>
     </div>
     <div *ngFor="let record of recordings"
          [style.background]="record.color.background"
          [style.color]="record.color.foreground"
+         [matTooltip]="record.props[0].value"
          fxLayout="row-wrap"
          class="item-row">
-        <div *ngFor="let prop of record.props; let last = last">
-            <span>{{prop.value}}</span>
-            <span *ngIf="!last" class="separator">{{record.separator}}</span>
-        </div>
+        <span *ngFor="let prop of record.props; let last = last">
+            <label>{{prop.value}}</label>
+            <label *ngIf="!last" class="separator">{{record.separator}}</label>
+        </span>
     </div>
 </div>
