@@ -1,20 +1,24 @@
 <div class="timeline">
     <mat-card>
         <mat-card-content>
+            <ng-content select="[additionalHeader]"></ng-content>
             <div #customHeader fxLayout="row">
                 <ng-content select="[header]"></ng-content>
             </div>
-            <div *ngIf="!customHeader.children?.length" fxLayout="row">
+            <div *ngIf="!customHeader.children?.length" fxLayout="row" class="mt-20 mb-20">
                 <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center">
-                    <button mat-raised-button fxFlex color="primary" (click)="onMove('left')">
+                    <button mat-raised-button fxFlex color="primary" (click)="onMove(directionRef.LEFT)">
                         <mat-icon>arrow_backward</mat-icon>
                     </button>
                 </div>
                 <div fxLayout="row" fxFlex="60" fxLayoutAlign="center center">
-                    <h2>{{date | date: 'yyyy'}} {{'CALENDAR_TIMELINE.MONTHS.' + months[date.getMonth()].toUpperCase() | translate}}</h2>
+                    <button fxFlex="25" mat-raised-button color="primary" (click)="onMove()">
+                        <mat-icon class="mr-10">my_location</mat-icon>
+                        <span class="current-date">{{date | date: 'yyyy'}} {{'CALENDAR_TIMELINE.MONTHS.' + months[date.getMonth()].toUpperCase() | translate}}</span>
+                    </button>
                 </div>
                 <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center">
-                    <button mat-raised-button fxFlex color="primary" (click)="onMove('right')">
+                    <button mat-raised-button fxFlex color="primary" (click)="onMove(directionRef.RIGHT)">
                         <mat-icon>arrow_forward</mat-icon>
                     </button>
                 </div>

@@ -40,8 +40,8 @@ export class TimelineComponent implements OnChanges {
         'December'
     ];
     public dayRows = 5;
-
     public calendarMatrix: { inCurrentMonth: boolean, date: Date}[][];
+    public directionRef = CalendarHeaderDirection;
 
     constructor() {
     }
@@ -52,11 +52,17 @@ export class TimelineComponent implements OnChanges {
         }
     }
 
-    public onMove(direction: CalendarHeaderDirection) {
-        if (direction === CalendarHeaderDirection.LEFT) {
-            this.date = this.getDate().subtract(1, 'month').toDate();
-        } else {
-            this.date = this.getDate().add(1, 'month').toDate();
+    public onMove(direction?: CalendarHeaderDirection) {
+        switch(direction) {
+            case CalendarHeaderDirection.LEFT:
+                this.date = this.getDate().subtract(1, 'month').toDate();
+                break;
+            case CalendarHeaderDirection.RIGHT:
+                this.date = this.getDate().add(1, 'month').toDate();
+                break;
+            default:
+                this.date = new Date();
+                break;
         }
         this.calendarMatrix = this.generateMatrixFromDate();
         this.onIntervalChanged.emit(this.date);

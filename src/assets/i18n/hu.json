@@ -104,7 +104,9 @@
                 "AMOUNT_SPENT": "Teljes elköltött összeg",
                 "AMOUNT_PAID": "Térített összeg",
                 "FULL_SPENT": "Teljes kiadás levonásokkal"
-            }
+            },
+            "INCOME": "Bevétel",
+            "OUTGOINGS": "Kiadás"
         }
     },
     "MEANS_OF_TRANSPORT": {

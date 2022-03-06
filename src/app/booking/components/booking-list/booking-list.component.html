@@ -48,7 +48,18 @@
     </div>
     <timeline [date]="timelineDate | async"
               [timelineData]="timelineData | async"
-              (onIntervalChanged)="timelineDate.next($event)"></timeline>
+              (onIntervalChanged)="timelineDate.next($event)">
+        <div *ngIf="tabGroup.selectedIndex === 1"
+             additionalHeader
+             fxLayout="row" fxLayoutGap="15px">
+            <div fxFlex="10" class="p-5" style="background: green; color: white">
+                {{ 'BOOKING.FUEL_LIST.INCOME' | translate }}
+            </div>
+            <div fxFlex="10" class="p-5" style="background: red; color: white">
+                {{ 'BOOKING.FUEL_LIST.OUTGOINGS' | translate }}
+            </div>
+        </div>
+    </timeline>
     <!--
     <br>
     <div fxLayout="row wrap">

@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {IBookingService} from "../../app-common/interfaces/booking-service.interface";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {first, tap} from "rxjs/operators";
 import {LocalStorageService} from "ngx-webstorage";
 import {AuthService} from "../../auth/services/auth.service";
 import {TravelDiaryType} from "../../app-common/interfaces/travel-diary.interface";
 import {FuelCostDiaryType} from "../../app-common/interfaces/fuel-cost.interface";
+import {TimelineData} from "../../app-common/modules/calendar/interfaces/calendar-common";
 
 @Injectable({
     providedIn: 'root'
@@ -99,5 +100,13 @@ export class LocaleBookingService implements IBookingService {
 
     getFuelCostDiaryList(): Observable<FuelCostDiaryType[]> {
         return this.fuelCostDiaryList.asObservable();
+    }
+
+    getTravelTimeline(trigger: Observable<any> | Subject<any>): Observable<TimelineData[]> {
+        return undefined;
+    }
+
+    getFuelTimeline(dateTrigger: Observable<any> | Subject<any>): Observable<TimelineData[]> {
+        return undefined;
     }
 }

@@ -1,10 +1,14 @@
 import {Injectable} from '@angular/core';
 import {IBookingService} from "../../app-common/interfaces/booking-service.interface";
-import {Observable} from "rxjs";
+import {combineLatest, Observable, Subject} from "rxjs";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {FirebaseDatabaseService} from "../../app-common/services/firebase-database.service";
 import {TravelDiaryType} from "../../app-common/interfaces/travel-diary.interface";
 import {FuelCostDiaryType} from 'src/app/app-common/interfaces/fuel-cost.interface';
+import {TimelineData} from "../../app-common/modules/calendar/interfaces/calendar-common";
+import {debounceTime, map, tap} from "rxjs/operators";
+import * as moment from "moment";
+import {compareDate, compareYearMonth} from "../../app-common/date-util";
 
 @Injectable({
     providedIn: 'root',
@@ -59,5 +63,69 @@ export class RemoteBookingService implements IBookingService {
 
     getFuelCostDiaryList(): Observable<FuelCostDiaryType[]> {
         return this.fuelFbService.getAll('date');
+    }
+
+    getTravelTimeline(dateTrigger: Observable<any> | Subject<any>): Observable<TimelineData[]> {
+        return combineLatest([
+            this.getTravelDiaryList(),
+            dateTrigger,
+        ]).pipe(
+            debounceTime(300),
+            map(([diaryList, timelineDate]) => diaryList.filter(acc => {
+                const onConcreteDate = compareYearMonth(acc.date, timelineDate);
+                const beforeMonth = compareYearMonth(acc.date, moment(timelineDate).subtract(1, 'month').toDate());
+                const afterMonth = compareYearMonth(acc.date, moment(timelineDate).add(1, 'month').toDate());
+                return onConcreteDate || beforeMonth || afterMonth;
+            })),
+            map((array: TravelDiaryType[]) => {
+                return array.map(acc => {
+                    return array.filter(accItem => compareDate(acc.date, accItem.date));
+                });
+            }),
+            map((array:TravelDiaryType[][]) => array.map(acc => <TimelineData>({
+                date: acc[0].date,
+                dayData: acc.map(item => ({
+                    color: { background: '#198700', foreground: '#ffffff' },
+                    props: [
+                        {index: 0, value: `${item.route.from} -> ${item.route.to}`},
+                        {index: 1, value: `${item.distance} Km`},
+                    ],
+                    separator: '-'
+                })),
+            })))
+        );
+    }
+
+    getFuelTimeline(dateTrigger: Observable<any> | Subject<any>): Observable<TimelineData[]> {
+        return combineLatest([
+            this.getFuelCostDiaryList(),
+            dateTrigger,
+        ]).pipe(
+            debounceTime(300),
+            map(([fuelList, timelineDate]) => fuelList.filter(acc => {
+                const onConcreteDate = compareYearMonth(acc.date, timelineDate);
+                const beforeMonth = compareYearMonth(acc.date, moment(timelineDate).subtract(1, 'month').toDate());
+                const afterMonth = compareYearMonth(acc.date, moment(timelineDate).add(1, 'month').toDate());
+                return onConcreteDate || beforeMonth || afterMonth;
+            })),
+            map((array: FuelCostDiaryType[]) => {
+                return array.map(acc => {
+                    return array.filter(accItem => compareDate(acc.date, accItem.date));
+                });
+            }),
+            map((array:FuelCostDiaryType[][]) => array.map(acc => <TimelineData>({
+                date: acc[0].date,
+                dayData: acc.map(item => ({
+                    color: (item.fullSpent > 0
+                        ? { background: '#fa0023', foreground: '#ffffff' }
+                        : { background: '#198700', foreground: '#ffffff' }),
+                    props: [
+                        {index: 0, value: `${item.quantity} Liter`},
+                        {index: 1, value: `${Math.abs(item.fullSpent)} HUF`},
+                    ],
+                    separator: '|'
+                })),
+            })))
+        );
     }
 }

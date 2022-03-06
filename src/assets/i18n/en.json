@@ -104,7 +104,9 @@
                 "AMOUNT_SPENT": "Full amount spent",
                 "AMOUNT_PAID": "Amount paid",
                 "FULL_SPENT": "Difference"
-            }
+            },
+            "INCOME": "Income",
+            "OUTGOINGS": "Outgoings"
         }
     },
     "MEANS_OF_TRANSPORT": {
