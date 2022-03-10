@@ -1,0 +1,35 @@
+<div fxLayout="row">
+    <mat-expansion-panel fxFlex fxLayoutGap="15px">
+        <mat-expansion-panel-header>
+            <div fxLayout="row" fxFlex fxLayoutAlign="start center" fxLayoutGap="15px">
+                <span class="p-10 request-span"
+                      [style.background-color]="colorByRequest[type]">
+                    {{type}}
+                </span>
+                <b>{{endpoint}}</b>
+            </div>
+        </mat-expansion-panel-header>
+        <div class="content mt-10" fxLayout="column" fxLayoutGap="15px grid">
+            <div fxLayout="row">
+                <span>Description: Ez a request valami valamijének a valamije</span>
+            </div>
+            <div fxLayout="row wrap" fxLayoutGap="15px grid">
+                <div fxFlex="50" fxFlex.lt-lg="100">
+                    <mat-card class="card-outlined" fxFlex>
+                        <p class="card-outlined__title">{{ 'Header' | translate }}</p>
+                        <json-editor [options]="editorOptions" [(ngModel)]="jsonData"></json-editor>
+                    </mat-card>
+                </div>
+                <div fxFlex="50" fxFlex.lt-lg="100">
+                    <mat-card class="card-outlined" fxFlex>
+                        <p class="card-outlined__title">{{ 'Body' | translate }}</p>
+                        <json-editor [options]="editorOptions" [(ngModel)]="jsonData"></json-editor>
+                    </mat-card>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <button mat-raised-button color="primary">Send Request</button>
+            </div>
+        </div>
+    </mat-expansion-panel>
+</div>

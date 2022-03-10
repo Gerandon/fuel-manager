@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: () => import('./means-of-transport/means-of-transport.module').then(m => m.MeansOfTransportModule)
     },
     {
+        path: 'public',
+        loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
+    },
+    {
         path: '**',
         redirectTo: 'home',
     }

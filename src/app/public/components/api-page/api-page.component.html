@@ -1,0 +1,6 @@
+<div fxLayout="row">
+    <mat-accordion fxFlex [displayMode]="'flat'" fxLayoutGap="15px">
+        <crud-test-row [type]="'POST'" endpoint="/valami/getValami"></crud-test-row>
+        <crud-test-row [type]="'GET'" endpoint="/valami/getValami"></crud-test-row>
+    </mat-accordion>
+</div>

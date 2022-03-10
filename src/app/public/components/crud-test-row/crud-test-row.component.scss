@@ -1,0 +1,11 @@
+@import '~jsoneditor/dist/jsoneditor.min.css';
+
+crud-test-row {
+    .request-span {
+        border-radius: 10px;
+        color: white;
+    }
+    .jsoneditor-mode-tree {
+        border: 0px;
+    }
+}
