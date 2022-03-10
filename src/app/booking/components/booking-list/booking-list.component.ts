@@ -8,6 +8,7 @@ import {BookFuelComponent} from "../book-fuel/book-fuel.component";
 import {TravelDiaryType} from "../../../app-common/interfaces/travel-diary.interface";
 import {map, startWith, tap} from "rxjs/operators";
 import {TimelineData} from "../../../app-common/modules/calendar/interfaces/calendar-common";
+import {appTheming} from "../../../app-common/common";
 
 @Component({
     selector: 'app-booking-list',
@@ -18,6 +19,7 @@ export class BookingListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     @ViewChild('tabGroup') public tabGroup!: MatTabGroup;
 
+    public appThemingRef = appTheming;
     public amountSpent!: Observable<any[]>;
     public amountPaid!: Observable<any[]>;
     public fullSpent!: Observable<any[]>;

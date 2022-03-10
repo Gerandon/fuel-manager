@@ -9,6 +9,7 @@ import {TimelineData} from "../../app-common/modules/calendar/interfaces/calenda
 import {debounceTime, map, tap} from "rxjs/operators";
 import * as moment from "moment";
 import {compareDate, compareYearMonth} from "../../app-common/date-util";
+import {appTheming} from "../../app-common/common";
 
 @Injectable({
     providedIn: 'root',
@@ -85,7 +86,7 @@ export class RemoteBookingService implements IBookingService {
             map((array:TravelDiaryType[][]) => array.map(acc => <TimelineData>({
                 date: acc[0].date,
                 dayData: acc.map(item => ({
-                    color: { background: '#198700', foreground: '#ffffff' },
+                    color: { background: appTheming.primaryColor, foreground: '#ffffff' },
                     props: [
                         {index: 0, value: `${item.route.from} -> ${item.route.to}`},
                         {index: 1, value: `${item.distance} Km`},
@@ -117,8 +118,8 @@ export class RemoteBookingService implements IBookingService {
                 date: acc[0].date,
                 dayData: acc.map(item => ({
                     color: (item.fullSpent > 0
-                        ? { background: '#fa0023', foreground: '#ffffff' }
-                        : { background: '#198700', foreground: '#ffffff' }),
+                        ? { background: appTheming.primaryColor, foreground: '#ffffff' }
+                        : { background: appTheming.secondaryColor, foreground: '#ffffff' }),
                     props: [
                         {index: 0, value: `${item.quantity} Liter`},
                         {index: 1, value: `${Math.abs(item.fullSpent)} HUF`},
