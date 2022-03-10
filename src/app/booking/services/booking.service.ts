@@ -1,10 +1,11 @@
 import {Inject, Injectable} from '@angular/core';
 import {BOOKING_SERVICE, IBookingService} from "../../app-common/interfaces/booking-service.interface";
-import {Observable} from "rxjs";
+import {Observable, Subject, Subscribable} from "rxjs";
 import {map} from "rxjs/operators";
 import {v4} from "uuid";
-import { TravelDiaryType } from 'src/app/app-common/interfaces/travel-diary.interface';
+import {TravelDiaryType} from 'src/app/app-common/interfaces/travel-diary.interface';
 import {FuelCostDiaryType} from "../../app-common/interfaces/fuel-cost.interface";
+import {TimelineData} from 'src/app/app-common/modules/calendar/interfaces/calendar-common';
 
 @Injectable({
     providedIn: 'root',
@@ -61,5 +62,13 @@ export class BookingService implements IBookingService {
 
     searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string }[]): Observable<FuelCostDiaryType[]> {
         return this._bookingService.searchInFuelCost(queryParams);
+    }
+
+    getTravelTimeline(trigger: Observable<any> | Subject<any>): Observable<TimelineData[]> {
+        return this._bookingService.getTravelTimeline(trigger);
+    }
+
+    getFuelTimeline(dateTrigger: Observable<any> | Subject<any>): Observable<TimelineData[]> {
+        return this._bookingService.getFuelTimeline(dateTrigger);
     }
 }

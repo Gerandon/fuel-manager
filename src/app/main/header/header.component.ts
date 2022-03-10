@@ -1,4 +1,7 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AuthService} from "../../auth/services/auth.service";
+import {Subscription} from "rxjs";
+import {appTheming} from "../../app-common/common";
 
 @Component({
     selector: 'app-header',
@@ -6,12 +9,24 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
     styleUrls: ['./header.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
-    constructor() {
+    @ViewChild('headerDiv') public header: ElementRef;
+    private headerSubscription: Subscription;
+
+    constructor(private authService: AuthService) {
     }
 
     ngOnInit(): void {
+        this.headerSubscription = this.authService.getPersonalSettings().subscribe(() => {
+            const primary = window.getComputedStyle(this.header.nativeElement).backgroundColor;
+            const secondary = window.getComputedStyle(document.querySelector('.app-title')).color;
+            appTheming.primaryColor = primary;
+            appTheming.secondaryColor = secondary;
+        });
     }
 
+    ngOnDestroy() {
+        this.headerSubscription?.unsubscribe();
+    }
 }

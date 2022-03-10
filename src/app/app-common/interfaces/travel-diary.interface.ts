@@ -2,7 +2,6 @@ import {VehicleDataType} from "./vehicle.interface";
 import {BaseType} from "./common.interface";
 
 export interface TravelDiaryType extends BaseType {
-    date: Date;
     distance: number;
     route: RouteType;
     vehicle?: VehicleDataType;

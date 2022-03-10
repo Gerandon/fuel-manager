@@ -13,6 +13,7 @@ export interface BaseType {
     id: string;
     creationDate: Date;
     modificationDate?: Date;
+    date?: Date;
 }
 
 export interface IMenu {

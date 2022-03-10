@@ -31,7 +31,7 @@ export class BookFuelComponent implements OnInit {
 
     calculateFullSpent() {
         const { amountSpent, amountPaid } = this.model;
-        this.model.fullSpent = Math.abs((amountSpent || 0) - (amountPaid || 0));
+        this.model.fullSpent = (amountSpent || 0) - (amountPaid || 0);
     }
 
     calculateAmountSpentQuantity() {

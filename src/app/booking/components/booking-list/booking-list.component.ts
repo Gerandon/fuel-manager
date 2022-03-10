@@ -1,22 +1,25 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {Observable} from "rxjs";
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {BehaviorSubject, Observable, of, Subscription} from "rxjs";
 import {BookingService} from "../../services/booking.service";
 import {MatDialog} from "@angular/material/dialog";
 import {BookTravelComponent} from "../book-travel/book-travel.component";
 import {MatTabGroup} from "@angular/material/tabs";
 import {BookFuelComponent} from "../book-fuel/book-fuel.component";
 import {TravelDiaryType} from "../../../app-common/interfaces/travel-diary.interface";
-import {map, startWith} from "rxjs/operators";
+import {map, startWith, tap} from "rxjs/operators";
+import {TimelineData} from "../../../app-common/modules/calendar/interfaces/calendar-common";
+import {appTheming} from "../../../app-common/common";
 
 @Component({
     selector: 'app-booking-list',
     templateUrl: './booking-list.component.html',
     styleUrls: ['./booking-list.component.scss']
 })
-export class BookingListComponent implements OnInit, AfterViewInit {
+export class BookingListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     @ViewChild('tabGroup') public tabGroup!: MatTabGroup;
 
+    public appThemingRef = appTheming;
     public amountSpent!: Observable<any[]>;
     public amountPaid!: Observable<any[]>;
     public fullSpent!: Observable<any[]>;
@@ -28,7 +31,11 @@ export class BookingListComponent implements OnInit, AfterViewInit {
     public fuelQueryParams?: { key: keyof TravelDiaryType, value: string | number, operator?: string}[];
     public actualTabLabel: Observable<string>;
 
+    public timelineData: Observable<TimelineData[]>;
+    public timelineDate = new BehaviorSubject<Date>(this.dateFilter.dateFrom);
+
     private tabIndexComponent;
+    private $timelineDataChange: Subscription;
 
     constructor(public bookingService: BookingService,
                 private dialog: MatDialog,
@@ -54,6 +61,21 @@ export class BookingListComponent implements OnInit, AfterViewInit {
                 startWith(this.tabGroup.selectedIndex),
                 map(index => this.tabGroup._tabs.get(index).textLabel)
             );
+            this.$timelineDataChange = this.actualTabLabel.pipe(
+                tap(() => {
+                    switch (this.tabGroup.selectedIndex) {
+                        case 0:
+                            this.timelineData = this.bookingService.getTravelTimeline(this.timelineDate);
+                            break;
+                        case 1:
+                            this.timelineData = this.bookingService.getFuelTimeline(this.timelineDate);
+                            break;
+                        default:
+                            this.timelineData = of(null);
+                            break;
+                    }
+                })
+            ).subscribe();
         });
     }
 
@@ -83,5 +105,9 @@ export class BookingListComponent implements OnInit, AfterViewInit {
                 }
             });
         }
+    }
+
+    ngOnDestroy() {
+        this.$timelineDataChange?.unsubscribe();
     }
 }

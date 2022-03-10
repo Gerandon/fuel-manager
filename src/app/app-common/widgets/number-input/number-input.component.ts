@@ -27,6 +27,7 @@ export class NumberInputComponent extends BaseInput<Number> implements OnInit {
     private readonly defaultIMask: MaskType = {
         mask: Number,
         max: 999999,
+        min: -999999,
         scale: 4,
         radix: ',',
         thousandsSeparator: ' ',

@@ -34,6 +34,7 @@ projects/vdrbo/src/assets/docs
 
 # IDEs and editors
 /.idea
+.idea/*
 .project
 .classpath
 .c9/
