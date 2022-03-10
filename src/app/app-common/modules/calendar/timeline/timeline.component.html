@@ -1,0 +1,48 @@
+<div class="timeline">
+    <mat-card>
+        <mat-card-content>
+            <ng-content select="[additionalHeader]"></ng-content>
+            <div #customHeader fxLayout="row">
+                <ng-content select="[header]"></ng-content>
+            </div>
+            <div *ngIf="!customHeader.children?.length" fxLayout="row" class="mt-20 mb-20">
+                <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center">
+                    <button mat-raised-button fxFlex color="primary" (click)="onMove(directionRef.LEFT)">
+                        <mat-icon>arrow_backward</mat-icon>
+                    </button>
+                </div>
+                <div fxLayout="row" fxFlex="60" fxLayoutAlign="center center">
+                    <button fxFlex="25" mat-raised-button color="primary" (click)="onMove()">
+                        <mat-icon class="mr-10">my_location</mat-icon>
+                        <span class="current-date">{{date | date: 'yyyy'}} {{'CALENDAR_TIMELINE.MONTHS.' + months[date.getMonth()].toUpperCase() | translate}}</span>
+                    </button>
+                </div>
+                <div fxLayout="row" fxFlex="20" fxLayoutAlign="center center">
+                    <button mat-raised-button fxFlex color="primary" (click)="onMove(directionRef.RIGHT)">
+                        <mat-icon>arrow_forward</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <table>
+                    <thead>
+                    <tr>
+                        <th *ngFor="let day of dayColumns">{{'CALENDAR_TIMELINE.DAYS.' + day.toUpperCase() | translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="table-row" *ngFor="let row of calendarMatrix">
+                        <td *ngFor="let calendarItem of row">
+                            <timeline-day-item fxLayout="column"
+                                               [date]="calendarItem.date"
+                                               [disabled]="!calendarItem.inCurrentMonth"
+                                               [recordings]="getRecording(calendarItem.date)">
+                            </timeline-day-item>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

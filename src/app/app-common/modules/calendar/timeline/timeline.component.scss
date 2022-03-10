@@ -1,0 +1,14 @@
+timeline {
+    table {
+        table-layout: fixed;
+        height:100%;
+        width:100%;
+        .table-row td timeline-day-item {
+            height:100% !important;
+            min-height: 120px;
+        }
+    }
+    span.current-date {
+        font-size: 17px;
+    }
+}

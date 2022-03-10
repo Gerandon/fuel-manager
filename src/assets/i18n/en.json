@@ -104,7 +104,9 @@
                 "AMOUNT_SPENT": "Full amount spent",
                 "AMOUNT_PAID": "Amount paid",
                 "FULL_SPENT": "Difference"
-            }
+            },
+            "INCOME": "Income",
+            "OUTGOINGS": "Outgoings"
         }
     },
     "MEANS_OF_TRANSPORT": {
@@ -148,6 +150,31 @@
         },
         "VEHICLE_TILE": {
             "DATAS": "Datas"
+        }
+    },
+    "CALENDAR_TIMELINE": {
+        "DAYS": {
+            "MONDAY": "Monday",
+            "TUESDAY": "Tuesday",
+            "WEDNESDAY": "Wednesday",
+            "THURSDAY": "Thursday",
+            "FRIDAY": "Friday",
+            "SATURDAY": "Saturday",
+            "SUNDAY": "Sunday"
+        },
+        "MONTHS": {
+            "JANUARY": "January",
+            "FEBRUARY": "February",
+            "MARCH": "March",
+            "APRIL": "April",
+            "MAY": "May",
+            "JUNE": "June",
+            "JULY": "July",
+            "AUGUST": "August",
+            "SEPTEMBER": "September",
+            "OCTOBER": "October",
+            "NOVEMBER": "November",
+            "DECEMBER": "December"
         }
     }
 }

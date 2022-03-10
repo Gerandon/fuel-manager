@@ -15,6 +15,12 @@ import {_} from "./vendor/vendor.module";
 import {IMenu, PersonalSettingsType} from "./interfaces/common.interface";
 import {v4} from "uuid";
 
+// src/app/main/header/header.component.ts:25
+export const appTheming = {
+    primaryColor: '',
+    secondaryColor: '',
+}
+
 export const fullSizeDialogConfig = {
     height: '90%',
     width: '90%',

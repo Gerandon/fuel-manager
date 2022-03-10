@@ -9,11 +9,12 @@ import {LineChartComponent} from './components/line-chart/line-chart.component';
 import {SelectComponent} from './widgets/select/select.component';
 import {NumberInputComponent} from "./widgets/number-input/number-input.component";
 import {TriangleButtonComponent} from './widgets/triangle-button/triangle-button.component';
-import { WithLoadingPipe } from './pipes/with-loading.pipe';
-import { ResolveRequestComponent } from './components/resolve-request/resolve-request.component';
-import { MultiLinePipe } from './pipes/multi-line.pipe';
-import { ActionsComponent } from './components/actions/actions.component';
-import { IconRadioButtonComponent } from './components/icon-radio-button/icon-radio-button.component';
+import {WithLoadingPipe} from './pipes/with-loading.pipe';
+import {ResolveRequestComponent} from './components/resolve-request/resolve-request.component';
+import {MultiLinePipe} from './pipes/multi-line.pipe';
+import {ActionsComponent} from './components/actions/actions.component';
+import {IconRadioButtonComponent} from './components/icon-radio-button/icon-radio-button.component';
+import {CalendarModule} from "./modules/calendar/calendar.module";
 
 @NgModule({
     declarations: [
@@ -34,7 +35,7 @@ import { IconRadioButtonComponent } from './components/icon-radio-button/icon-ra
         CommonModule,
         VendorModule,
         FormsModule,
-        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'always'}),
+        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'always'})
     ],
     exports: [
         VendorModule,
@@ -51,7 +52,8 @@ import { IconRadioButtonComponent } from './components/icon-radio-button/icon-ra
         ResolveRequestComponent,
         MultiLinePipe,
         ActionsComponent,
-        IconRadioButtonComponent
+        IconRadioButtonComponent,
+        CalendarModule
     ]
 })
 export class AppCommonModule {

@@ -1,0 +1,25 @@
+timeline-day-item {
+    .disabled {
+        opacity: 0.3;
+    }
+    .day-item-main {
+        background: rgba(153, 153, 153, 0.38);
+        border-radius: 10px;
+        box-shadow: 2px 2px 2px grey;
+        padding: 10px;
+        .separator {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        .item-row {
+            border: 0.5px solid;
+            border-radius: 3px;
+            padding: 3px;
+
+            display: block !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
