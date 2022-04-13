@@ -19,6 +19,7 @@ export class TimelineDayItemComponent implements OnInit {
     @Input() public date: Date;
     @Input() public disabled: boolean = false;
     @Input() public recordings: TimelineDayItem[];
+    @Input() public currentDay: boolean = false;
     @ContentChild('dayRow',{static: false}) dayRowRef: TemplateRef<any>;
 
     constructor() {

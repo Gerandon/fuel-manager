@@ -14,36 +14,36 @@
 
     // Create theme specfic styles
     .primary-background-trans {
-        background-color: mat-color($primary, 0.9);
+        background-color: mat-color($primary, 0.9) !important;
     }
     .primary-background {
-        background: mat-color($primary);
+        background: mat-color($primary) !important;
     }
     .accent-background-trans {
-        background-color: mat-color($accent, 0.9);
+        background-color: mat-color($accent, 0.9) !important;
     }
     .accent-background {
-        background: mat-color($accent);
+        background: mat-color($accent) !important;
     }
     .warn-background {
-        background-color: mat-color($warn);
+        background-color: mat-color($warn) !important;
     }
     .primary-color {
-        color: mat-color($primary);
+        color: mat-color($primary) !important;
     }
     .accent-color {
-        color: mat-color($accent);
+        color: mat-color($accent) !important;
     }
     .warn-color {
-        color: mat-color($warn);
+        color: mat-color($warn) !important;
     }
     .primary-border-color {
-        border-color: mat-color($primary);
+        border-color: mat-color($primary) !important;
     }
     .accent-border-color {
         border-color: mat-color($accent) !important;
     }
     .warn-border-color {
-        border-color: mat-color($warn);
+        border-color: mat-color($warn) !important;
     }
 }

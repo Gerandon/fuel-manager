@@ -1,15 +1,19 @@
 <div fxLayout="column"
      fxLayoutGap="3px"
      fxFlex="100"
-     class="day-item-main" [class.disabled]="disabled">
+     class="day-item-main"
+     [ngClass]="{ 'day-item-main__current-day-background': currentDay }"
+     [class.disabled]="disabled">
     <div fxLayout="row" fxLayoutAlign="end center">
-        <p class="m-0" style="font-size: large; color: grey">{{date | date: 'd'}}</p>
+        <p class="m-0 day-item-main__day-label"
+           [style.font-size]="'large'">
+            {{date | date: 'd'}}
+        </p>
     </div>
     <ng-container *ngIf="dayRowRef">
         <div *ngFor="let record of recordings">
             <span *ngFor="let prop of record.props; let last = last">
-                <ng-container *ngIf="dayRowRef"
-                              [ngTemplateOutlet]="dayRowRef"
+                <ng-container [ngTemplateOutlet]="dayRowRef"
                               [ngTemplateOutletContext]="{$implicit: prop}">
                 </ng-container>
             </span>

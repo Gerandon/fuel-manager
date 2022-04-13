@@ -1,15 +1,15 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
     Component, EventEmitter,
     Input,
     OnChanges,
-    OnInit, Output,
-    SimpleChanges, ViewChild,
+    Output,
+    SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import * as moment from "moment";
 import {isMoment, Moment} from "moment";
-import {CalendarHeaderDirection, TimelineData} from "../interfaces/calendar-common";
+import {CalendarHeaderDirection, TimelineData, TimelineDayItem} from "../interfaces/calendar-common";
 
 @Component({
     selector: 'timeline',
@@ -22,6 +22,7 @@ export class TimelineComponent implements OnChanges {
 
     @Input() public date: Date = new Date();
     @Input() public timelineData: TimelineData[] = [];
+    @Input() public shift: number = 0;
     @Output() public onIntervalChanged = new EventEmitter<Date>();
 
     public dayColumns = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -40,15 +41,21 @@ export class TimelineComponent implements OnChanges {
         'December'
     ];
     public dayRows = 5;
-    public calendarMatrix: { inCurrentMonth: boolean, date: Date}[][];
+    public calendarMatrix: { inCurrentMonth: boolean, isCurrentDay: boolean, date: Date}[][];
     public directionRef = CalendarHeaderDirection;
 
     constructor() {
     }
 
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         if (changes.date) {
-            this.calendarMatrix = this.generateMatrixFromDate();
+            this.calendarMatrix = this.generateMatrixFromDate(this.shift);
+            if (!!this.shift) {
+                this.dayColumns = [
+                    ...this.dayColumns.slice(this.dayColumns.length - this.shift, this.dayColumns.length),
+                    ...this.dayColumns.slice(0, this.dayColumns.length - this.shift)
+                ];
+            }
         }
     }
 
@@ -64,26 +71,29 @@ export class TimelineComponent implements OnChanges {
                 this.date = new Date();
                 break;
         }
-        this.calendarMatrix = this.generateMatrixFromDate();
+        this.calendarMatrix = this.generateMatrixFromDate(this.shift);
         this.onIntervalChanged.emit(this.date);
     }
 
-    public getRecording(date: Date) {
+    public getRecording(date: Date): TimelineDayItem[] | null {
         return this.timelineData?.find(acc => moment(acc.date).format('yyyy.MM.DD') === moment(date).format('yyyy.MM.DD'))?.dayData || null
     }
 
-    public generateMatrixFromDate(): { inCurrentMonth: boolean, date: Date}[][] {
+    private generateMatrixFromDate(shift: number = 0): { inCurrentMonth: boolean, isCurrentDay: boolean, date: Date}[][] {
         // Its just for initializing the size of the matrix
-        const initialMatrix: any[][] = [
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0],
+        const initialMatrix: Date[][] = [
+            [null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null],
         ];
-        const dateAsMom: Moment = moment(this.date);
-        const monthStartWeekIndex = this.dayColumns.indexOf(dateAsMom.startOf('month').format('dddd'));
-        const monthEndIndex = dateAsMom.endOf('month').date();
+        const dateAsMom: Moment = moment(this.date).startOf('month');
+        const monthStartWeekIndex = this.dayColumns.indexOf((!!shift
+            ? dateAsMom.add(shift, 'days')
+            : dateAsMom.subtract(shift, 'days')
+        ).format('dddd'));
+        const monthEndIndex = dateAsMom.clone().endOf('month').date();
 
         let dayIndex = 0;
         return initialMatrix.map((week) => {
@@ -93,17 +103,18 @@ export class TimelineComponent implements OnChanges {
                 let isInCurrentMonth = dayIndex >= (monthStartWeekIndex + 1) && dayIndex - 1 <= monthEndIndex;
                 if (isInCurrentMonth) {
                     // LoopDate is in the current month
-                    loopDate = moment(this.date).set('date',  dayIndex - monthStartWeekIndex).toDate();
+                    loopDate = dateAsMom.clone().set('date',  dayIndex - monthStartWeekIndex).toDate();
                 } else if (dayIndex > monthEndIndex) {
                     // LoopDate is after the current month last day
                     const newDayIndex = dayIndex - monthEndIndex;
-                    loopDate = moment(this.date).endOf('month').add(newDayIndex + 1, 'days').toDate();
+                    loopDate = TimelineComponent.cloneEndOfMonth(dateAsMom).add(newDayIndex - 1, 'days').toDate();
                 } else {
                     // LoopDate is before the current month first day
-                    loopDate = moment(this.date).startOf('month').subtract((monthEndIndex - 1) - dayIndex).toDate();
+                    loopDate = TimelineComponent.cloneStartOfMonth(dateAsMom).subtract((monthEndIndex - 1) - dayIndex).toDate();
                 }
                 return {
                     inCurrentMonth: isInCurrentMonth,
+                    isCurrentDay: TimelineComponent.pure(moment(loopDate)) === TimelineComponent.pure(moment()),
                     date: loopDate
                 };
             });
@@ -112,5 +123,20 @@ export class TimelineComponent implements OnChanges {
 
     private getDate(): Moment {
         return isMoment(this.date) ? (<Moment>this.date) : moment(this.date);
+    }
+
+    // private-static fields
+    // this way they wont be instance-dependent
+
+    private static pure(moment: Moment): string {
+        return moment.clone().format('yyyy.MM.DD');
+    }
+
+    private static cloneEndOfMonth(moment: Moment): Moment {
+        return moment.clone().endOf('month');
+    }
+
+    private static cloneStartOfMonth(moment: Moment): Moment {
+        return moment.clone().startOf('month');
     }
 }
