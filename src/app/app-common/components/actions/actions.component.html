@@ -24,7 +24,7 @@
         </button>
         <button *ngIf="showAll || actions.includes('DELETE')"
                 mat-icon-button color="warn"
-                (click)="delete.emit()"
+                (confirmClick)="delete.emit()"
                 matTooltip="Elem törlése">
             <mat-icon>delete</mat-icon>
         </button>

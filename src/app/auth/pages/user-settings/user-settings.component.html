@@ -9,7 +9,11 @@
                         <p class="card-outlined__title">{{ 'USER_SETTINGS.USER_DATA' | translate }}</p>
                         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px grid">
                             <div fxFlex="30" fxFlex.lt-sm="100" fxLayout="row" fxLayoutAlign="center center">
-                                <img style="border-radius: 50px;" src="{{user.photoURL}}">
+                                <resolve-request #resolveReq
+                                                 [catchUrl]="'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png'"
+                                                 [url]="user.photoURL">
+                                    <img style="border-radius: 50px;height:120px" [src]="resolveReq.value">
+                                </resolve-request>
                             </div>
                             <div fxFlex="70" fxFlex.lt-sm="100">
                                 <p style="font-weight:bold">{{'USER_SETTINGS.COMMON_DATA' | translate}}</p>

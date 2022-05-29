@@ -41,7 +41,7 @@
             <button mat-icon-button (click)="prevent($event);detail.emit(vehicle)"><mat-icon>search</mat-icon></button>
             <button mat-icon-button (click)="prevent($event);onUpdate.emit(vehicle)"><mat-icon>edit</mat-icon></button>
             <button mat-icon-button (click)="prevent($event);"><mat-icon>description</mat-icon></button>
-            <button mat-icon-button (click)="prevent($event);onDelete.emit(vehicle)"><mat-icon>delete</mat-icon></button>
+            <button mat-icon-button (confirmClick)="onDelete.emit(vehicle)"><mat-icon>delete</mat-icon></button>
         </div>
     </mat-card-actions>
 </mat-card>
