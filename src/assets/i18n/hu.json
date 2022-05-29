@@ -176,5 +176,9 @@
             "NOVEMBER": "November",
             "DECEMBER": "December"
         }
+    },
+    "CONFIRM_DIALOG": {
+        "TITLE": "Megerősítés",
+        "CONTENT": "A művelet nem visszavonható!\nBiztos, hogy végre szeretnéd hajtani?"
     }
 }

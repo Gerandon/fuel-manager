@@ -61,9 +61,7 @@
                             </div>
                         </div>
                         <div *ngIf="!(serviceReports | async)?.length">
-                            <span>
-                                {{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.MISSING_REPORTS' }}
-                            </span>
+                            <span translate="MEANS_OF_TRANSPORT.VEHICLE_DETAIL.MISSING_REPORTS"></span>
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>

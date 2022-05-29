@@ -8,7 +8,10 @@
         "build": "ng build",
         "build:prod": "npm run updateBuild && node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --prod",
         "watch": "ng build --watch --configuration development",
-        "test": "ng test"
+        "test": "ng test",
+        "compodoc:build": "compodoc -p tsconfig.doc.json",
+        "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+        "compodoc:serve": "compodoc -s"
     },
     "private": true,
     "dependencies": {
@@ -25,6 +28,7 @@
         "@angular/platform-browser": "~13.2.1",
         "@angular/platform-browser-dynamic": "~13.2.1",
         "@angular/router": "~13.2.1",
+        "@compodoc/compodoc": "^1.1.19",
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
         "angular-imask": "^6.2.2",

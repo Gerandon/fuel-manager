@@ -1,6 +1,6 @@
-import {Component, ContentChild, Input, OnInit, TemplateRef} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {distinctUntilChanged, tap} from "rxjs/operators";
+import {catchError, distinctUntilChanged, tap} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -12,6 +12,7 @@ export class ResolveRequestComponent implements OnInit {
 
     @Input() public observable?: Observable<any>;
     @Input() public url?: string;
+    @Input() public catchUrl?: string;
     public value: any;
 
     private lastGotUrl?: string;
@@ -23,13 +24,21 @@ export class ResolveRequestComponent implements OnInit {
         if (this.url) {
             this.observable = this.http.get(this.url, { responseType: 'blob' }).pipe(
                 distinctUntilChanged(() => this.url !== this.lastGotUrl),
+                catchError((asd) => {
+                    console.log(asd);
+                    return this.http.get(this.catchUrl || 'assets/images/nocar.jpeg', { responseType: 'blob' });
+                }),
                 tap((byteArray) => {
                     this.lastGotUrl = this.url;
-                    const r = new FileReader();
-                    r.onload = () => this.value = `data:image/png;base64,${btoa(<string>r.result)}`;
-                    r.readAsBinaryString(byteArray);
-                })
+                    this.processByteArray(byteArray);
+                }),
             );
         }
+    }
+
+    private processByteArray(byteArray) {
+        const r = new FileReader();
+        r.onload = () => this.value = `data:image/png;base64,${btoa(<string>r.result)}`;
+        r.readAsBinaryString(byteArray);
     }
 }

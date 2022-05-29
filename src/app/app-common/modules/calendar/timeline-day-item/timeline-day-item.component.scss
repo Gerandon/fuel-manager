@@ -1,9 +1,20 @@
+@import './src/theme.scss';
+
 timeline-day-item {
     .disabled {
         opacity: 0.3;
     }
     .day-item-main {
         background: rgba(153, 153, 153, 0.38);
+        .day-item-main__day-label {
+            color: grey;
+        }
+        &__current-day-background {
+            @extend .primary-background;
+            .day-item-main__day-label {
+                color: white;
+            }
+        }
         border-radius: 10px;
         box-shadow: 2px 2px 2px grey;
         padding: 10px;

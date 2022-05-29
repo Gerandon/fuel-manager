@@ -36,6 +36,7 @@
                             <timeline-day-item fxLayout="column"
                                                [date]="calendarItem.date"
                                                [disabled]="!calendarItem.inCurrentMonth"
+                                               [currentDay]="calendarItem.isCurrentDay"
                                                [recordings]="getRecording(calendarItem.date)">
                             </timeline-day-item>
                         </td>

@@ -2,8 +2,12 @@
     <div class="m-10" *ngIf="userData | async as user">
         <mat-card (click)="navigateToProfile()" style="cursor:pointer">
             <mat-card-content>
-                <div *ngIf="user.photoURL" fxLayout="row" fxLayoutAlign="center center">
-                    <img src="{{user.photoURL}}" style="border-radius: 50px" width="50" height="50">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <resolve-request #resolveReq
+                                     [catchUrl]="'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png'"
+                                     [url]="user.photoURL">
+                        <img [src]="resolveReq.value" style="border-radius: 50px" width="50" height="50">
+                    </resolve-request>
                 </div>
                 <br>
                 <div fxLayout="row"

@@ -176,5 +176,9 @@
             "NOVEMBER": "November",
             "DECEMBER": "December"
         }
+    },
+    "CONFIRM_DIALOG": {
+        "TITLE": "Confirmation",
+        "CONTENT": "This process cannot be revoked!\nAre you sure, you want to proceed?"
     }
 }

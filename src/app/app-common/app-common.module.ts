@@ -15,6 +15,8 @@ import {MultiLinePipe} from './pipes/multi-line.pipe';
 import {ActionsComponent} from './components/actions/actions.component';
 import {IconRadioButtonComponent} from './components/icon-radio-button/icon-radio-button.component';
 import {CalendarModule} from "./modules/calendar/calendar.module";
+import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
+import { ConfirmClickDirective } from './directives/confirm-click.directive';
 
 @NgModule({
     declarations: [
@@ -30,6 +32,8 @@ import {CalendarModule} from "./modules/calendar/calendar.module";
         MultiLinePipe,
         ActionsComponent,
         IconRadioButtonComponent,
+        ConfirmDialogComponent,
+        ConfirmClickDirective,
     ],
     imports: [
         CommonModule,
@@ -53,7 +57,8 @@ import {CalendarModule} from "./modules/calendar/calendar.module";
         MultiLinePipe,
         ActionsComponent,
         IconRadioButtonComponent,
-        CalendarModule
+        CalendarModule,
+        ConfirmClickDirective
     ]
 })
 export class AppCommonModule {
