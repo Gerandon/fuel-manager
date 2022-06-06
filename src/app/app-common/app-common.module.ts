@@ -17,6 +17,7 @@ import {IconRadioButtonComponent} from './components/icon-radio-button/icon-radi
 import {CalendarModule} from "./modules/calendar/calendar.module";
 import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
 import { ConfirmClickDirective } from './directives/confirm-click.directive';
+import { ThreeExampleComponent } from './components/three-example/three-example.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { ConfirmClickDirective } from './directives/confirm-click.directive';
         IconRadioButtonComponent,
         ConfirmDialogComponent,
         ConfirmClickDirective,
+        ThreeExampleComponent,
     ],
     imports: [
         CommonModule,
@@ -58,7 +60,8 @@ import { ConfirmClickDirective } from './directives/confirm-click.directive';
         ActionsComponent,
         IconRadioButtonComponent,
         CalendarModule,
-        ConfirmClickDirective
+        ConfirmClickDirective,
+        ThreeExampleComponent
     ]
 })
 export class AppCommonModule {
