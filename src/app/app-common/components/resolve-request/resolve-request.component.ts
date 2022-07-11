@@ -25,7 +25,6 @@ export class ResolveRequestComponent implements OnInit {
             this.observable = this.http.get(this.url, { responseType: 'blob' }).pipe(
                 distinctUntilChanged(() => this.url !== this.lastGotUrl),
                 catchError((asd) => {
-                    console.log(asd);
                     return this.http.get(this.catchUrl || 'assets/images/nocar.jpeg', { responseType: 'blob' });
                 }),
                 tap((byteArray) => {
