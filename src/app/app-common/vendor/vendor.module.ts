@@ -29,6 +29,7 @@ import {NgxContentLoadingModule} from "ngx-content-loading";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatRadioModule} from "@angular/material/radio";
 import {ColorPickerModule} from "ngx-color-picker";
+import {MatChipsModule} from "@angular/material/chips";
 
 export const _ = {
     ...lodash,
@@ -65,6 +66,7 @@ export const _ = {
         NgxContentLoadingModule,
         MatRadioModule,
         ColorPickerModule,
+        MatChipsModule,
     ],
     exports: [
         MatExpansionModule,
@@ -95,6 +97,7 @@ export const _ = {
         NgxContentLoadingModule,
         MatRadioModule,
         ColorPickerModule,
+        MatChipsModule,
     ]
 })
 export class VendorModule {

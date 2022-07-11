@@ -141,6 +141,14 @@ export const Config: { menu: IMenu[] } = {
             icon: 'menu_book'
         },
         {
+            label: 'MENU.REGULAR_EXPENSES',
+            navigateTo: 'regular-expenses',
+            showAsTile: true,
+            showAsMenu: true,
+            imageUrl: '',
+            icon: 'menu_book'
+        },
+        {
             label: 'MENU.MY_VEHICLES',
             navigateTo: 'means-of-transport/my-vehicles',
             showAsTile: true,

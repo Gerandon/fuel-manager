@@ -1,0 +1,16 @@
+<div>
+    <mat-chip-list aria-label="Fish selection">
+        <mat-chip *ngFor="let expense of expenses" matChipRemove
+                  color="primary"
+                  (click)="onChipPicked(expense)"
+                  [selected]="selectedChipExpense && expense?.id === selectedChipExpense?.id">
+            {{ expense.title }}
+            <button (click)="onChipRemoved(expense)" matChipRemove>
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </mat-chip>
+        <button mat-raised-button color="primary">
+            Add regular expense
+        </button>
+    </mat-chip-list>
+</div>

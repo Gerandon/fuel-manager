@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: () => import('./means-of-transport/means-of-transport.module').then(m => m.MeansOfTransportModule)
     },
     {
+        path: 'regular-expenses',
+        loadChildren: () => import('./regular-expenses/regular-expenses.module').then(m => m.RegularExpensesModule)
+    },
+    {
         path: '**',
         redirectTo: 'home',
     }
