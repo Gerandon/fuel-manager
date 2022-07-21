@@ -87,31 +87,35 @@ export class TimelineComponent implements OnChanges {
             [null, null, null, null, null, null, null],
             [null, null, null, null, null, null, null],
             [null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null],
         ];
-        const dateAsMom: Moment = moment(this.date).startOf('month');
-        const monthStartWeekIndex = this.dayColumns.indexOf((!!shift
-            ? dateAsMom.add(shift, 'days')
-            : dateAsMom.subtract(shift, 'days')
+        const dateAsMoment: Moment = moment(this.date).startOf('month');
+        const monthFirstDayMatrixIndex = this.dayColumns.indexOf((!!shift
+            ? dateAsMoment.add(shift, 'days')
+            : dateAsMoment.subtract(shift, 'days')
         ).format('dddd'));
-        const monthEndIndex = dateAsMom.clone().endOf('month').date();
-
-        let dayIndex = 0;
+        const lastDayOfMonth = dateAsMoment.clone().endOf('month').date();
+        let matrixIndex = 0;
+        let monthDayIndex = 1;
+        let nextMonthDayIndex = 1;
         return initialMatrix.map((week) => {
             return week.map(() => {
-                dayIndex++;
                 let loopDate: Date;
-                let isInCurrentMonth = dayIndex >= (monthStartWeekIndex + 1) && dayIndex - 1 <= monthEndIndex;
+                let isInCurrentMonth = matrixIndex >= monthFirstDayMatrixIndex && monthDayIndex <= lastDayOfMonth;
                 if (isInCurrentMonth) {
                     // LoopDate is in the current month
-                    loopDate = dateAsMom.clone().set('date',  dayIndex - monthStartWeekIndex).toDate();
-                } else if (dayIndex > monthEndIndex) {
+                    loopDate = dateAsMoment.clone().set('date',  (matrixIndex - monthFirstDayMatrixIndex) + 1).toDate();
+                    monthDayIndex++;
+                } else if (matrixIndex >= (lastDayOfMonth + monthFirstDayMatrixIndex)) {
                     // LoopDate is after the current month last day
-                    const newDayIndex = dayIndex - monthEndIndex;
-                    loopDate = TimelineComponent.cloneEndOfMonth(dateAsMom).add(newDayIndex - 1, 'days').toDate();
+                    loopDate = TimelineComponent.cloneEndOfMonth(dateAsMoment)
+                        .add(nextMonthDayIndex++, 'days').toDate();
                 } else {
                     // LoopDate is before the current month first day
-                    loopDate = TimelineComponent.cloneStartOfMonth(dateAsMom).subtract((monthEndIndex - 1) - dayIndex).toDate();
+                    loopDate = TimelineComponent.cloneStartOfMonth(dateAsMoment)
+                        .subtract(monthFirstDayMatrixIndex - matrixIndex, 'days').toDate();
                 }
+                matrixIndex++;
                 return {
                     inCurrentMonth: isInCurrentMonth,
                     isCurrentDay: TimelineComponent.pure(moment(loopDate)) === TimelineComponent.pure(moment()),
