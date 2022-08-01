@@ -6,7 +6,7 @@ import {
     Input,
     OnInit,
 } from '@angular/core';
-import { FormControl, FormGroup, NgForm, ValidationErrors } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, NgForm, ValidationErrors } from '@angular/forms';
 import { _ } from 'src/app/app-common/vendor/vendor.module';
 
 @Directive({
@@ -18,7 +18,7 @@ export class CheckFormDirective implements OnInit, DoCheck {
      * Külön Opcionális input, osztály szintű CDR átadáshoz
      */
     @Input() inputCdr?: ChangeDetectorRef;
-    @Input() boFormGroup?: FormGroup;
+    @Input() boFormGroup?: UntypedFormGroup;
 
     private _cdr!: ChangeDetectorRef;
 
@@ -41,14 +41,14 @@ export class CheckFormDirective implements OnInit, DoCheck {
      * majd megjeloli dirty/touched allapotra, amennyiben nem a kotelezoseg validacioja az egyetlen hiba.
      */
     private checkForm() {
-        const markFields = (form: FormGroup | NgForm) => {
+        const markFields = (form: UntypedFormGroup | NgForm) => {
             _.forEach(form.controls, (control) => {
-                if (control instanceof FormControl) {
+                if (control instanceof UntypedFormControl) {
                     if (control.errors && !(_.size(control.errors) === 1 && (control.errors['required'] && !control.dirty))) {
                         control.markAsDirty();
                         control.markAsTouched();
                     }
-                } else if (control instanceof FormGroup) {
+                } else if (control instanceof UntypedFormGroup) {
                     markFields(control);
                 }
             });
@@ -58,7 +58,7 @@ export class CheckFormDirective implements OnInit, DoCheck {
         this._cdr.markForCheck();
     }
 
-    getForm(): NgForm | FormGroup {
+    getForm(): NgForm | UntypedFormGroup {
         return this.boFormGroup || this.form;
     }
 

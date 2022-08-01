@@ -1,5 +1,8 @@
 #UPGRADE Angular 13.x --> Angular 14.x
 
+https://blog.ninja-squad.com/2022/06/02/angular-cli-14.0/
+https://update.angular.io/?l=3&v=13.0-14.0
+
 <table>
     <thead>
         <tr>
