@@ -76,7 +76,7 @@ export class TimelineComponent implements OnChanges {
     }
 
     public getRecording(date: Date): TimelineDayItem[] | null {
-        return this.timelineData?.find(acc => moment(acc.date).format('yyyy.MM.DD') === moment(date).format('yyyy.MM.DD'))?.dayData || null
+        return this.timelineData?.find(acc => moment(acc.date).format('yyyy.MM.DD') === moment(date).format('yyyy.MM.DD'))?.dayData || null;
     }
 
     private generateMatrixFromDate(shift: number = 0): { inCurrentMonth: boolean, isCurrentDay: boolean, date: Date}[][] {

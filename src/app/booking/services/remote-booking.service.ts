@@ -86,7 +86,7 @@ export class RemoteBookingService implements IBookingService {
             map((array:TravelDiaryType[][]) => array.map(acc => <TimelineData>({
                 date: acc[0].date,
                 dayData: acc.map(item => ({
-                    color: { background: appTheming.primaryColor, foreground: '#ffffff' },
+                    color: { background: 'primary-background', foreground: '#ffffff' },
                     props: [
                         {index: 0, value: `${item.route.from} -> ${item.route.to}`},
                         {index: 1, value: `${item.distance} Km`},
@@ -118,8 +118,8 @@ export class RemoteBookingService implements IBookingService {
                 date: acc[0].date,
                 dayData: acc.map(item => ({
                     color: (item.fullSpent > 0
-                        ? { background: appTheming.primaryColor, foreground: '#ffffff' }
-                        : { background: appTheming.secondaryColor, foreground: '#ffffff' }),
+                        ? { background: 'primary-background', foreground: '#ffffff' }
+                        : { background: 'secondary-background', foreground: '#ffffff' }),
                     props: [
                         {index: 0, value: `${item.quantity} Liter`},
                         {index: 1, value: `${Math.abs(item.fullSpent)} HUF`},

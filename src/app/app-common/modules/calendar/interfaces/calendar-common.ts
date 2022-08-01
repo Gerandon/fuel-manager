@@ -8,7 +8,16 @@ export interface TimelineDayItemProp {
 }
 export interface TimelineDayItem {
     separator: string;
-    color: { background: string; foreground: string; };
+    color: {
+        /**
+         * CSS class
+         */
+        background: string;
+        /**
+         * style
+         */
+        foreground: string;
+    };
     props: TimelineDayItemProp[];
 }
 export interface TimelineData {

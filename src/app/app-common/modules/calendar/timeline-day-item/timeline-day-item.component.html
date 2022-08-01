@@ -21,10 +21,10 @@
     </ng-container>
     <ng-container *ngIf="!dayRowRef">
         <div *ngFor="let record of recordings"
-             [style.background]="record.color.background"
              [style.color]="record.color.foreground"
              [matTooltip]="record | recordValue"
              fxLayout="row-wrap"
+             [ngClass]="record.color.background"
              class="item-row">
             <span *ngFor="let prop of record.props; let last = last">
                 <label>{{prop.value}}</label>
