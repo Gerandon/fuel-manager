@@ -154,13 +154,34 @@
     },
     "CALENDAR_TIMELINE": {
         "DAYS": {
-            "MONDAY": "Monday",
-            "TUESDAY": "Tuesday",
-            "WEDNESDAY": "Wednesday",
-            "THURSDAY": "Thursday",
-            "FRIDAY": "Friday",
-            "SATURDAY": "Saturday",
-            "SUNDAY": "Sunday"
+            "MONDAY": {
+                "SHORT": "Mon",
+                "FULL": "Monday"
+            },
+            "TUESDAY": {
+                "SHORT": "Tue",
+                "FULL": "Tuesday"
+            },
+            "WEDNESDAY": {
+                "SHORT": "Wed",
+                "FULL": "Wednesday"
+            },
+            "THURSDAY": {
+                "SHORT": "Thu",
+                "FULL": "Thursday"
+            },
+            "FRIDAY": {
+                "SHORT": "Fri",
+                "FULL": "Friday"
+            },
+            "SATURDAY": {
+                "SHORT": "Sat",
+                "FULL": "Saturday"
+            },
+            "SUNDAY": {
+                "SHORT": "Son",
+                "FULL": "Sonday"
+            }
         },
         "MONTHS": {
             "JANUARY": "January",
