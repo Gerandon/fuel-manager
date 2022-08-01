@@ -3,6 +3,7 @@
 https://blog.ninja-squad.com/2022/06/02/angular-cli-14.0/
 https://update.angular.io/?l=3&v=13.0-14.0
 
+##Dependencies
 <table>
     <thead>
         <tr>
@@ -145,7 +146,7 @@ https://update.angular.io/?l=3&v=13.0-14.0
         <tr>
            <td>ng2-charts</td>
            <td>^3.0.0-rc.7</td>
-           <td>^3.1.11</td>
+           <td>^4.0.0</td>
         </tr>
         <tr>
            <td>ngx-color-picker</td>
@@ -191,6 +192,29 @@ https://update.angular.io/?l=3&v=13.0-14.0
            <td>zone.js</td>
            <td>~0.11.4</td>
            <td>~0.11.7</td>
+        </tr>
+    </tbody>
+</table>
+
+##DevDependencies
+<table>
+    <thead>
+        <tr>
+            <th>Package</th>
+            <th>Current Version</th>
+            <th>New Version</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@types/jasmine</td>
+            <td>~3.8.0</td>
+            <td>~4.0.3</td>
+        </tr>
+        <tr>
+            <td>@types/node</td>
+            <td>^12.11.1</td>
+            <td>^18.6.2</td>
         </tr>
     </tbody>
 </table>
