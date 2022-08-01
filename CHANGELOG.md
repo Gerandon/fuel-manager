@@ -152,7 +152,7 @@
         <tr>
            <td>ngx-content-loading</td>
            <td>^0.2.1</td>
-           <td>-</td>
+           <td>--removed--</td>
         </tr>
         <tr>
            <td>ngx-webstorage</td>

@@ -25,7 +25,6 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {GoogleMapsModule} from "@angular/google-maps";
-import {NgxContentLoadingModule} from "ngx-content-loading";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatRadioModule} from "@angular/material/radio";
 import {ColorPickerModule} from "ngx-color-picker";
@@ -62,7 +61,6 @@ export const _ = {
         MatGridListModule,
         MatProgressSpinnerModule,
         GoogleMapsModule,
-        NgxContentLoadingModule,
         MatRadioModule,
         ColorPickerModule,
     ],
@@ -92,7 +90,6 @@ export const _ = {
         MatGridListModule,
         MatProgressSpinnerModule,
         GoogleMapsModule,
-        NgxContentLoadingModule,
         MatRadioModule,
         ColorPickerModule,
     ]
