@@ -45,7 +45,7 @@ https://update.angular.io/?l=3&v=13.0-14.0
         <tr>
            <td>@angular/flex-layout</td>
            <td>^13.0.0-beta.37</td>
-           <td>14.0.0-beta.40</td>
+           <td>^14.0.0-beta.40</td>
         </tr>
         <tr>
            <td>@angular/forms</td>

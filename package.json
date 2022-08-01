@@ -21,7 +21,7 @@
         "@angular/compiler": "^14.1.0",
         "@angular/core": "^14.1.0",
         "@angular/fire": "^7.4.1",
-        "@angular/flex-layout": "^13.0.0-beta.37",
+        "@angular/flex-layout": "^14.0.0-beta.40",
         "@angular/forms": "^14.1.0",
         "@angular/google-maps": "^12.2.12",
         "@angular/material": "^13.2.1",
