@@ -5,7 +5,7 @@ import {_} from "../../../app-common/vendor/vendor.module";
 import html2canvas from "html2canvas";
 import {AuthService} from "../../../auth/services/auth.service";
 import {first, tap} from "rxjs/operators";
-import {MatFormFieldAppearance} from "@angular/material/form-field/form-field";
+import {MatFormFieldAppearance} from "@angular/material/form-field";
 
 @Component({
     selector: 'app-traffic-license',
@@ -38,8 +38,10 @@ export class TrafficLicenseComponent implements OnInit {
         this.cdr.detectChanges();
         html2canvas(this.screen.nativeElement,{
             onclone: (clonedDoc) => {
-                // @ts-ignore
-                clonedDoc?.getElementsByClassName('license-container')[0]?.style?.display = 'block';
+                const clonedDocEl = <HTMLElement>clonedDoc.getElementsByClassName('license-container')[0];
+                if (clonedDocEl?.style) {
+                    clonedDocEl.style.display = 'block';
+                }
             }
         }).then(canvas => {
             this.authService.getUserData().pipe(

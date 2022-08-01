@@ -1,7 +1,7 @@
 import {
     AbstractControl,
     ControlValueAccessor,
-    FormControl,
+    UntypedFormControl,
     NgControl,
     ValidationErrors,
     Validator, ValidatorFn
@@ -25,7 +25,7 @@ export class BaseValueAccessor<T> implements ControlValueAccessor, OnInit, Valid
     @ViewChild('input', { static: true }) input!: NgControl;
     @Input() public validator: Observable<ValidationErrors> = of({});
 
-    public control!: FormControl;
+    public control!: UntypedFormControl;
 
     protected get valueAccessor(): ControlValueAccessor | null {
         return this.input ? this.input.valueAccessor : null;
@@ -50,7 +50,7 @@ export class BaseValueAccessor<T> implements ControlValueAccessor, OnInit, Valid
     ngOnInit() {
         // @ts-ignore
         this.controlDir = this.injector.get<NgControl>(NgControl, null, InjectFlags.Optional | InjectFlags.Self);
-        this.control = <FormControl>this.controlDir?.control || new FormControl('');
+        this.control = <UntypedFormControl>this.controlDir?.control || new UntypedFormControl('');
         // For ng-valid expression changed error workaround purposes
         this.cdr.detectChanges();
     }
