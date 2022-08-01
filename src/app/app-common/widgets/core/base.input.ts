@@ -6,8 +6,7 @@ import {
     Input,
     OnInit,
 } from "@angular/core";
-import {FloatLabelType} from "@angular/material/form-field";
-import {MatFormFieldAppearance} from "@angular/material/form-field/form-field";
+import {FloatLabelType, MatFormFieldAppearance} from "@angular/material/form-field";
 import {TranslateService} from "@ngx-translate/core";
 import {BaseValueAccessor} from "./base-value-accessor";
 

@@ -15,32 +15,32 @@ https://update.angular.io/?l=3&v=13.0-14.0
         <tr>
            <td>@angular/animations</td>
            <td>~13.2.1</td>
-           <td></td>
+           <td>^14.1.0</td>
         </tr>
         <tr>
            <td>@angular/cdk</td>
            <td>^13.2.1</td>
-           <td></td>
+           <td>^14.1.0</td>
         </tr>
         <tr>
            <td>@angular/common</td>
            <td>~13.2.1</td>
-           <td></td>
+           <td>^14.1.0</td>
         </tr>
         <tr>
            <td>@angular/compiler</td>
            <td>~13.2.1</td>
-           <td></td>
+           <td>^14.1.0</td>
         </tr>
         <tr>
            <td>@angular/core</td>
            <td>~13.2.1</td>
-           <td></td>
+           <td>^14.1.0</td>
         </tr>
         <tr>
            <td>@angular/fire</td>
            <td>^7.4.1</td>
-           <td>^7.4</td>
+           <td>-</td>
         </tr>
         <tr>
            <td>@angular/flex-layout</td>
