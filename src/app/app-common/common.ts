@@ -16,7 +16,8 @@ import {IMenu, PersonalSettingsType} from "./interfaces/common.interface";
 import {v4} from "uuid";
 
 // src/app/main/header/header.component.ts:25
-export const appTheming = {
+// FIXME remove this and replace with css class usage
+export const appTheming: {primaryColor: string, secondaryColor: string} = {
     primaryColor: '',
     secondaryColor: '',
 }

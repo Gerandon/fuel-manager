@@ -1,5 +1,5 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BehaviorSubject, Observable, of, Subscription} from "rxjs";
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {BehaviorSubject, Observable, of, Subject, Subscription} from "rxjs";
 import {BookingService} from "../../services/booking.service";
 import {MatDialog} from "@angular/material/dialog";
 import {BookTravelComponent} from "../book-travel/book-travel.component";
@@ -9,6 +9,8 @@ import {TravelDiaryType} from "../../../app-common/interfaces/travel-diary.inter
 import {map, startWith, tap} from "rxjs/operators";
 import {TimelineData} from "../../../app-common/modules/calendar/interfaces/calendar-common";
 import {appTheming} from "../../../app-common/common";
+import {TranslateService} from "@ngx-translate/core";
+import {IBookingService} from "../../../app-common/interfaces/booking-service.interface";
 
 @Component({
     selector: 'app-booking-list',
@@ -33,20 +35,22 @@ export class BookingListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public timelineData: Observable<TimelineData[]>;
     public timelineDate = new BehaviorSubject<Date>(this.dateFilter.dateFrom);
+    public timelineShift: Observable<number> = of(0);
+    public actualTabIndex = new BehaviorSubject<number>(0);
 
-    private tabIndexComponent;
+    private tabIndexComponent: { index: number, addComponent: any, service: IBookingService, addMethod: string}[];
     private $timelineDataChange: Subscription;
 
     constructor(public bookingService: BookingService,
-                private dialog: MatDialog,
-                private cdr: ChangeDetectorRef) {
+                private translateService: TranslateService,
+                private dialog: MatDialog) {
     }
 
     ngOnInit(): void {
         this.tabIndexComponent = [
             { index: 0, addComponent: BookTravelComponent, service: this.bookingService, addMethod: 'addTravelDiary'},
             { index: 1, addComponent: BookFuelComponent, service: this.bookingService, addMethod: 'addFuelCost'},
-        ]
+        ];
         this.amountSpent = this.bookingService.getChartDataByValue('amountSpent');
         this.amountPaid = this.bookingService.getChartDataByValue('amountPaid', true);
         this.fullSpent = this.bookingService.getChartDataByValue('fullSpent', false);
@@ -63,6 +67,7 @@ export class BookingListComponent implements OnInit, AfterViewInit, OnDestroy {
             );
             this.$timelineDataChange = this.actualTabLabel.pipe(
                 tap(() => {
+                    this.actualTabIndex.next(this.tabGroup.selectedIndex);
                     switch (this.tabGroup.selectedIndex) {
                         case 0:
                             this.timelineData = this.bookingService.getTravelTimeline(this.timelineDate);

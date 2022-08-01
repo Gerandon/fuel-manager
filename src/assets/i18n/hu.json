@@ -154,13 +154,34 @@
     },
     "CALENDAR_TIMELINE": {
         "DAYS": {
-            "MONDAY": "Hétfő",
-            "TUESDAY": "Kedd",
-            "WEDNESDAY": "Szerda",
-            "THURSDAY": "Csütörtök",
-            "FRIDAY": "Péntek",
-            "SATURDAY": "Szombat",
-            "SUNDAY": "Vasárnap"
+            "MONDAY": {
+                "SHORT": "H",
+                "FULL": "Hétfő"
+            },
+            "TUESDAY": {
+                "SHORT": "K",
+                "FULL": "Kedd"
+            },
+            "WEDNESDAY": {
+                "SHORT": "Sze",
+                "FULL": "Szerda"
+            },
+            "THURSDAY": {
+                "SHORT": "Cs",
+                "FULL": "Csütörtök"
+            },
+            "FRIDAY": {
+                "SHORT": "P",
+                "FULL": "Péntek"
+            },
+            "SATURDAY": {
+                "SHORT": "Szo",
+                "FULL": "Szombat"
+            },
+            "SUNDAY": {
+                "SHORT": "V",
+                "FULL": "Vasárnap"
+            }
         },
         "MONTHS": {
             "JANUARY": "Január",

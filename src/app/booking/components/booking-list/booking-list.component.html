@@ -49,7 +49,7 @@
     <timeline [date]="timelineDate | async"
               [timelineData]="timelineData | async"
               (onIntervalChanged)="timelineDate.next($event)">
-        <div *ngIf="tabGroup.selectedIndex === 1"
+        <div *ngIf="(actualTabIndex | async) === 1"
              additionalHeader
              fxLayout="row" fxLayoutGap="15px">
             <div fxFlex="10" class="p-5"

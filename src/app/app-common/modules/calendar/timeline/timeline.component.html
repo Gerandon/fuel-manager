@@ -12,7 +12,7 @@
                     </button>
                 </div>
                 <div fxLayout="row" fxFlex="60" fxLayoutAlign="center center">
-                    <button fxFlex="25" mat-raised-button color="primary" (click)="onMove()">
+                    <button fxFlex="80" fxFlex.gt-sm="25" mat-raised-button color="primary" (click)="onMove()">
                         <mat-icon class="mr-10">my_location</mat-icon>
                         <span class="current-date">{{date | date: 'yyyy'}} {{'CALENDAR_TIMELINE.MONTHS.' + months[date.getMonth()].toUpperCase() | translate}}</span>
                     </button>
@@ -23,11 +23,14 @@
                     </button>
                 </div>
             </div>
-            <div fxLayout="row">
+            <div fxLayout="row" class="table-container">
                 <table>
                     <thead>
                     <tr>
-                        <th *ngFor="let day of dayColumns">{{'CALENDAR_TIMELINE.DAYS.' + day.toUpperCase() | translate}}</th>
+                        <th *ngFor="let day of dayColumns">
+                            <span fxHide fxShow.sm>{{'CALENDAR_TIMELINE.DAYS.' + day.toUpperCase() + '.FULL' | translate}}</span>
+                            <span fxHide fxShow.lt-sm>{{'CALENDAR_TIMELINE.DAYS.' + day.toUpperCase() + '.SHORT' | translate}}</span>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
