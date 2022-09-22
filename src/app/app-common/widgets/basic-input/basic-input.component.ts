@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component, forwardRef, Injector, OnInit, ViewEncapsulation} from '@angular/core';
-import {AbstractControl, NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors} from "@angular/forms";
+import {NG_ASYNC_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {BaseTextInput} from "../core/base-text.input";
-import {Observable, of} from "rxjs";
 
 @Component({
     selector: 'basic-input',

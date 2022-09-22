@@ -1,40 +1,41 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {
     filter,
     first,
     skipWhile,
     tap
 } from "rxjs/operators";
-import {combineLatest, Observable, Subscription} from "rxjs";
+import {combineLatest, Observable} from "rxjs";
 import {AuthService} from "./auth/services/auth.service";
 import {defaultPersonalSettings, filteredMenu} from "./app-common/common";
-import {NavigationStart, Router} from "@angular/router";
+import {Event, NavigationStart, Router} from "@angular/router";
 import {IMenu, PersonalSettingsType} from "./app-common/interfaces/common.interface";
 import {SidebarContainer} from "ng-sidebar";
 import {_} from "./app-common/vendor/vendor.module";
 import {AppTranslateService} from "./app-common/services/app-translate.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {MatIconRegistry} from "@angular/material/icon";
+import {UnsubscribeOnDestroy} from "./app-common/component-unsubscribe";
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
     @ViewChild(SidebarContainer) sidebarContainer: SidebarContainer;
 
     public title = 'fuel-manager';
     public _opened: boolean = false;
     public animated: boolean = false;
-    public isAuthenticated: Observable<boolean>;
+    @UnsubscribeOnDestroy() public isAuthenticated: Observable<boolean>;
     public menu: IMenu[];
     public backgroundColor = '';
     public personalSettingsHolder: PersonalSettingsType = _.clone(defaultPersonalSettings);
 
-    private routingChangedSubscription!: Subscription;
-    private persSettSubscription: Subscription;
+    @UnsubscribeOnDestroy() private routerEvents$: Observable<Event>;
+    @UnsubscribeOnDestroy() private personalSettings$: Observable<any>;
 
     constructor(private appTranslate: AppTranslateService,
                 private authService: AuthService,
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 private matIconRegistry: MatIconRegistry) {
         this.menu = filteredMenu('showAsMenu');
         this.isAuthenticated = authService.isAuthenticated();
+        this.routerEvents$ = router.events;
         this.addCustomIcons();
     }
 
@@ -64,7 +66,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
         this.changeAnimatedState();
 
-        this.routingChangedSubscription = this.router.events.pipe(
+        this.routerEvents$.pipe(
             filter((event: any) => event instanceof NavigationStart),
             tap(() => {
                 if (this._opened) {
@@ -75,7 +77,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     initSettingsChangeSubscription() {
-        this.persSettSubscription = combineLatest([
+        this.personalSettings$ = combineLatest([
             this.authService.getPersonalSettings(),
             this.isAuthenticated
         ]).pipe(
@@ -97,7 +99,8 @@ export class AppComponent implements OnInit, OnDestroy {
                     }
                 }
             })
-        ).subscribe();
+        );
+        this.personalSettings$.subscribe();
     }
 
     changeAnimatedState() {
@@ -118,9 +121,5 @@ export class AppComponent implements OnInit, OnDestroy {
             .addSvgIcon('english',sanitize(`${iconsBasePath}/english.svg`));
         this.matIconRegistry
             .addSvgIcon('hungarian',sanitize(`${iconsBasePath}/hungarian.svg`));
-    }
-
-    ngOnDestroy() {
-        this.routingChangedSubscription?.unsubscribe();
     }
 }

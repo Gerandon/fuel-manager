@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BehaviorSubject, Observable, of, Subject, Subscription} from "rxjs";
+import {BehaviorSubject, Observable, of, Subscription} from "rxjs";
 import {BookingService} from "../../services/booking.service";
 import {MatDialog} from "@angular/material/dialog";
 import {BookTravelComponent} from "../book-travel/book-travel.component";
@@ -11,6 +11,7 @@ import {TimelineData} from "../../../app-common/modules/calendar/interfaces/cale
 import {appTheming} from "../../../app-common/common";
 import {TranslateService} from "@ngx-translate/core";
 import {IBookingService} from "../../../app-common/interfaces/booking-service.interface";
+import {UnsubscribeOnDestroy} from "../../../app-common/component-unsubscribe";
 
 @Component({
     selector: 'app-booking-list',
@@ -31,15 +32,13 @@ export class BookingListComponent implements OnInit, AfterViewInit, OnDestroy {
     };
     public travelQueryParams?: { key: keyof TravelDiaryType, value: string | number, operator?: string}[];
     public fuelQueryParams?: { key: keyof TravelDiaryType, value: string | number, operator?: string}[];
-    public actualTabLabel: Observable<string>;
-
+    @UnsubscribeOnDestroy() public actualTabLabel: Observable<string>;
     public timelineData: Observable<TimelineData[]>;
     public timelineDate = new BehaviorSubject<Date>(this.dateFilter.dateFrom);
     public timelineShift: Observable<number> = of(0);
     public actualTabIndex = new BehaviorSubject<number>(0);
 
     private tabIndexComponent: { index: number, addComponent: any, service: IBookingService, addMethod: string}[];
-    private $timelineDataChange: Subscription;
 
     constructor(public bookingService: BookingService,
                 private translateService: TranslateService,
@@ -65,7 +64,7 @@ export class BookingListComponent implements OnInit, AfterViewInit, OnDestroy {
                 startWith(this.tabGroup.selectedIndex),
                 map(index => this.tabGroup._tabs.get(index).textLabel)
             );
-            this.$timelineDataChange = this.actualTabLabel.pipe(
+            this.actualTabLabel.pipe(
                 tap(() => {
                     this.actualTabIndex.next(this.tabGroup.selectedIndex);
                     switch (this.tabGroup.selectedIndex) {
@@ -113,6 +112,5 @@ export class BookingListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.$timelineDataChange?.unsubscribe();
     }
 }
