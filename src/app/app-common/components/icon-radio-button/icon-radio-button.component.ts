@@ -4,7 +4,6 @@ import {
     forwardRef,
     Injector,
     Input,
-    OnDestroy,
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
@@ -12,7 +11,8 @@ import {BaseInput} from "../../widgets/core/base.input";
 import {MatRadioButton} from "@angular/material/radio";
 import {NG_ASYNC_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {tap} from "rxjs/operators";
-import {Subscription} from "rxjs";
+import {Observable} from "rxjs";
+import {UnsubscribeOnDestroy} from "../../component-unsubscribe";
 
 @Component({
     selector: 'app-icon-radio-button',
@@ -24,12 +24,13 @@ import {Subscription} from "rxjs";
         { provide: NG_ASYNC_VALIDATORS, useExisting: forwardRef(() => IconRadioButtonComponent), multi: true },
     ],
 })
-export class IconRadioButtonComponent extends BaseInput<MatRadioButton> implements OnInit, OnDestroy {
+export class IconRadioButtonComponent extends BaseInput<MatRadioButton> implements OnInit {
 
     @Input() public data: { value: string, icon: string}[];
     public chosen: string;
 
-    private valueChangeSubscription: Subscription;
+    @UnsubscribeOnDestroy()
+    private controlValueChanges: Observable<any>;
 
     constructor(protected injector: Injector, protected cdr: ChangeDetectorRef) {
         super(cdr, injector);
@@ -37,7 +38,8 @@ export class IconRadioButtonComponent extends BaseInput<MatRadioButton> implemen
 
     ngOnInit(): void {
         super.ngOnInit();
-        this.valueChangeSubscription = this.control.valueChanges.pipe(
+        this.controlValueChanges = this.control.valueChanges;
+        this.controlValueChanges.pipe(
             tap(value => {
                 let _value = value;
                 if (!value) {
@@ -51,9 +53,5 @@ export class IconRadioButtonComponent extends BaseInput<MatRadioButton> implemen
 
     public chooseButton(item: any) {
         this.control.setValue(item);
-    }
-
-    ngOnDestroy() {
-        this.valueChangeSubscription?.unsubscribe();
     }
 }

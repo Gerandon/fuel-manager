@@ -20,6 +20,7 @@ interface _BaseType extends BaseType {
 @Injectable()
 export class FirebaseDatabaseService<ITEM extends _BaseType> {
 
+    // FIXME sometimes its null, then a 'Client doesn't have permission to access the desired data.' error comes
     @SessionStorage('uid')
     private uid!: string;
 

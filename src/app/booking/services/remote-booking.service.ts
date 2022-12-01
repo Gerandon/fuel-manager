@@ -6,7 +6,7 @@ import {FirebaseDatabaseService} from "../../app-common/services/firebase-databa
 import {TravelDiaryType} from "../../app-common/interfaces/travel-diary.interface";
 import {FuelCostDiaryType} from 'src/app/app-common/interfaces/fuel-cost.interface';
 import {TimelineData} from "../../app-common/modules/calendar/interfaces/calendar-common";
-import {debounceTime, map, tap} from "rxjs/operators";
+import {debounceTime, first, map, tap} from "rxjs/operators";
 import * as moment from "moment";
 import {compareDate, compareYearMonth} from "../../app-common/date-util";
 import {appTheming} from "../../app-common/common";
@@ -37,11 +37,11 @@ export class RemoteBookingService implements IBookingService {
     }
 
     removeTravelDiary(item: TravelDiaryType): void {
-        this.travelFbService.delete(item).subscribe();
+        this.travelFbService.delete(item).pipe(first()).subscribe();
     }
 
     editTravelDiary(item: TravelDiaryType): TravelDiaryType {
-        this.travelFbService.update(item).subscribe();
+        this.travelFbService.update(item).pipe(first()).subscribe();
         return item;
     }
 
@@ -50,11 +50,11 @@ export class RemoteBookingService implements IBookingService {
     }
 
     removeFuelCost(item: FuelCostDiaryType): void {
-        this.fuelFbService.delete(item).subscribe();
+        this.fuelFbService.delete(item).pipe(first()).subscribe();
     }
 
     editFuelCost(item: FuelCostDiaryType): FuelCostDiaryType {
-        this.fuelFbService.update(item).subscribe();
+        this.fuelFbService.update(item).pipe(first()).subscribe();
         return item;
     }
 
