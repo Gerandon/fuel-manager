@@ -41,6 +41,7 @@ projects/vdrbo/src/assets/docs
 *.launch
 .settings/
 *.sublime-workspace
+.idea/runConfigurations.xml
 
 # IDE - VSCode
 .vscode/*
