@@ -1,6 +1,10 @@
 @import 'theme';
 @import 'mixin.scss';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
     min-height: 100%;
