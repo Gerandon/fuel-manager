@@ -1,4 +1,4 @@
-<div fxLayout="row">
+<div class="row without-wrapping">
     <input
         #inputElement
         #input="ngForm"
@@ -6,7 +6,7 @@
         [formControl]="control"
         [name]="name"
         [required]="required"/>
-    <div *ngFor="let item of data">
+    <div *ngFor="let item of data" class="col-auto">
         <button mat-icon-button
                 [class.selected]="item.value === chosen"
                 (click)="chooseButton(item.value)">

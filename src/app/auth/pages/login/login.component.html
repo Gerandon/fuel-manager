@@ -1,77 +1,86 @@
-<div class="login" fxLayout="row" fxLayoutAlign="center center">
-    <app-three-example *ngIf="false" [style.position]="'absolute'"></app-three-example>
-    <div fxLayout="column" fxFlex fxLayoutGap="15px grid" [style.height]="'100%'">
-        <div fxFlex fxLayoutAlign="center start">
-            <mat-card fxFlex>
+<app-three-example *ngIf="false" [style.position]="'absolute'"></app-three-example>
+<div class="login container" [style.height]="'100%'">
+    <div class="row mb-5 pt-5">
+        <div class="col-xs-12">
+            <mat-card>
                 <mat-card-content>
                     <p>{{ 'MANAGER.DESCRIPTION' | translate }}</p>
                     <ul>
-                        <li *ngFor="let func of functionalities | async" class="pb-5">
+                        <li *ngFor="let func of functionalities | async">
                             {{func.KEY}}
-                            <ul><li class="pb-5">{{func.VALUE}}</li></ul>
+                            <ul><li>{{func.VALUE}}</li></ul>
                         </li>
                     </ul>
                 </mat-card-content>
             </mat-card>
         </div>
-        <div fxLayout="row">
-            <div fxFlex="60" fxFlexOffset="20" fxLayoutAlign="center center">
-                <mat-card class="login-card" fxFlex>
-                    <mat-card-header>
-                        <h3 translate="LOGIN.TITLE"></h3>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <form #loginForm="ngForm" appCheckForm>
-                            <div class="open-panel" fxLayout="column" fxFlex="90" fxFlexOffset="5">
-                                <div fxLayout="column" class="mb-15">
-                                    <basic-input name="username"
-                                                 *ngIf="useLocally"
-                                                 [(ngModel)]="user.username"
-                                                 [required]="true"
-                                                 icon="person"
-                                                 [translateParams]="{field: 'LOGIN.USERNAME.LABEL'}"
-                                                 label="LOGIN.USERNAME.LABEL"
-                                                 placeholder="LOGIN.USERNAME.PLACEHOLDER">
-                                    </basic-input>
-                                    <basic-input name="password"
-                                                 *ngIf="false && !useLocally"
-                                                 [(ngModel)]="user.password"
-                                                 [required]="true"
-                                                 type="password"
-                                                 icon="lock"
-                                                 [translateParams]="{field: 'LOGIN.PASSWORD.LABEL'}"
-                                                 label="LOGIN.PASSWORD.LABEL"
-                                                 placeholder="LOGIN.PASSWORD.PLACEHOLDER">
-                                    </basic-input>
-                                    <mat-checkbox [ngModel]="useLocally"
-                                                  [disabled]="true"
-                                                  matTooltip="Jelenleg szünetel"
-                                                  (ngModelChange)="changeLocalRemote($event)"
-                                                  color="primary"
-                                                  name="uselocally">
-                                        {{ 'COMMON.LOCALE_USAGE' | translate }}
-                                    </mat-checkbox>
-                                </div>
-                                <div class="mb-20" fxLayout="row" fxLayoutAlign="center center">
-                                    <app-icon-radio-button name="languagePicker"
-                                                           [data]="[{ value: 'hu', icon: 'hungarian' }, { value: 'en', icon: 'english' }]"
-                                                           [(ngModel)]="chosenLanguage"
-                                                           (ngModelChange)="chosenLangChange()">
-                                    </app-icon-radio-button>
-                                </div>
-                                <div class="buttons" fxLayout="row" fxLayoutAlign="center center">
-                                    <button mat-raised-button color="primary"
-                                            class="login-button"
-                                            (click)="login()"
-                                            [disabled]="loginForm.invalid">
-                                        {{(useLocally ? 'LOGIN.LOGIN_BUTTON' : 'COMMON.LOGIN_GOOGLE_BUTTON') | translate}}
-                                    </button>
-                                </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <mat-card class="login-card">
+                <mat-card-header>
+                    <h3 translate="LOGIN.TITLE"></h3>
+                </mat-card-header>
+                <mat-card-content>
+                    <form #loginForm="ngForm" appCheckForm>
+                        <div class="row mb-2">
+                            <div class="col-xs-12">
+                                <basic-input name="username"
+                                             [(ngModel)]="user.username"
+                                             [required]="true"
+                                             [disabled]="true"
+                                             icon="person"
+                                             [translateParams]="{field: 'LOGIN.USERNAME.LABEL'}"
+                                             label="LOGIN.USERNAME.LABEL"
+                                             placeholder="LOGIN.USERNAME.PLACEHOLDER">
+                                </basic-input>
                             </div>
-                        </form>
-                    </mat-card-content>
-                </mat-card>
-            </div>
+                            <div class="col-xs-12">
+                                <basic-input name="password"
+                                             [(ngModel)]="user.password"
+                                             [required]="true"
+                                             [disabled]="true"
+                                             type="password"
+                                             icon="lock"
+                                             [translateParams]="{field: 'LOGIN.PASSWORD.LABEL'}"
+                                             label="LOGIN.PASSWORD.LABEL"
+                                             placeholder="LOGIN.PASSWORD.PLACEHOLDER">
+                                </basic-input>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6 d-flex justify-content-end align-items-center">
+                                <mat-checkbox [ngModel]="useLocally"
+                                              [disabled]="true"
+                                              matTooltip="Jelenleg szünetel"
+                                              (ngModelChange)="changeLocalRemote($event)"
+                                              color="primary"
+                                              name="uselocally">
+                                    {{ 'COMMON.LOCALE_USAGE' | translate }}
+                                </mat-checkbox>
+                            </div>
+                            <div class="col-6 d-flex justify-content-start">
+                                <app-icon-radio-button name="languagePicker"
+                                                       [data]="[{ value: 'hu', icon: 'hungarian' }, { value: 'en', icon: 'english' }]"
+                                                       [(ngModel)]="chosenLanguage"
+                                                       (ngModelChange)="chosenLangChange()">
+                                </app-icon-radio-button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button mat-raised-button color="primary"
+                                        class="login-button w-100"
+                                        type="button"
+                                        (click)="login()"
+                                        [disabled]="loginForm.invalid">
+                                    {{(useLocally ? 'LOGIN.LOGIN_BUTTON' : 'COMMON.LOGIN_GOOGLE_BUTTON') | translate}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
         </div>
     </div>
 </div>
