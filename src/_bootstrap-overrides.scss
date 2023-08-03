@@ -1,5 +1,5 @@
 
 // Container original width: 100% is somehow bigger than the main width...
-.container {
+.container, .container-fluid {
     width: inherit !important;
 }
