@@ -9,9 +9,8 @@
         <app-sidemenu-content [menuItems]="menu"></app-sidemenu-content>
     </ng-sidebar>
 
-    <!-- Page content -->
-    <div ng-sidebar-content [style.height]="(isAuthenticated | async) ? '100%' : '97%'">
-        <div class="app d-flex flex-column">
+    <ng-container ng-sidebar-content [style.height]="(isAuthenticated | async) ? '100%' : '97%'">
+        <header>
             <app-header *showOnAuthenticated>
                 <div class="container-fluid">
                     <div class="row align-items-center">
@@ -34,11 +33,10 @@
                     </div>
                 </div>
             </app-header>
-            <div class="content h-100">
-                <router-outlet></router-outlet>
-            </div>
-            <div class="footer"></div>
-        </div>
-    </div>
-
+        </header>
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+        <footer></footer>
+    </ng-container>
 </ng-sidebar-container>

@@ -1,17 +1,15 @@
-<form #addForm="ngForm" class="book-milage" fxFlex="100" fxLayout="column">
+<form #addForm="ngForm" class="book-milage">
     <app-transport-type [vehicle]="model"></app-transport-type>
-    <div *ngIf="editMode" fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">
-        <div fxFlex="50">
-            <button mat-raised-button [mat-dialog-close]="model"
+    <mat-dialog-actions>
+        <ng-container *ngIf="editMode">
+            <button type="button" mat-raised-button [mat-dialog-close]="model"
                     [disabled]="addForm.invalid"
                     [color]="'primary'">
-                {{ 'COMMON.BUTTON.ADD' | translate }}
+                {{ 'COMMON.BUTTON.SAVE' | translate }}
             </button>
-        </div>
-        <div fxFlex="50" fxLayoutAlign="end center">
-            <button mat-button mat-dialog-close [color]="'primary'">
+            <button type="button" mat-button mat-dialog-close [color]="'primary'">
                 {{ 'COMMON.BUTTON.CANCEL' | translate }}
             </button>
-        </div>
-    </div>
+        </ng-container>
+    </mat-dialog-actions>
 </form>

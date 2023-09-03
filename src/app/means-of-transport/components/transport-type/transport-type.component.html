@@ -1,91 +1,89 @@
-<form #ownForm="ngForm" appCheckForm fxLayout="row">
-    <mat-card fxFlex="100"
-              [ngClass]="{ 'card-outlined': showContainer, 'mat-elevation-z0': !showContainer }">
-        <p *ngIf="showContainer" class="card-outlined__title">{{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.VEHICLE_DATA' | translate }}</p>
-        <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
-            <basic-input name="brand"
-                         fxFlex="auto"
-                         fxFlex.lt-sm="100"
-                         [(ngModel)]="vehicle.brand"
-                         [required]="true"
-                         label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.BRAND"
-                         placeholder="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.BRAND">
-            </basic-input>
-            <basic-input name="type"
-                         fxFlex="auto"
-                         fxFlex.lt-sm="100"
-                         [(ngModel)]="vehicle.type"
-                         [required]="true"
-                         label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.TYPE"
-                         placeholder="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.TYPE">
-            </basic-input>
-            <app-select
-                fxFlex="auto"
-                fxFlex.lt-sm="100"
-                [options]="[
-                    { value: 'Diesel', label: 'Diesel'},
-                    { value: 'Gasoline', label: 'Benzin'}
-                ]"
-                [required]="true"
-                label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.ENGINE_TYPE"
-                name="engineType"
-                [(ngModel)]="vehicle.engineType">
-            </app-select>
-            <number-input name="engineVolume"
-                          fxFlex="auto"
-                          fxFlex.lt-sm="100"
-                          [(ngModel)]="vehicle.engineVolume"
-                          [required]="true"
-                          [maxLength]="15"
-                          [unmask]="true"
-                          suffix="(ccm)"
-                          label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.ENGINE_VOLUME"
-                          placeholder="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.ENGINE_VOLUME">
-            </number-input>
-            <number-input name="avgConsumption"
-                          fxFlex="auto"
-                          fxFlex.lt-sm="100"
-                          [(ngModel)]="vehicle.avgConsumption"
-                          [required]="true"
-                          [unmask]="true"
-                          suffix="(Liter)"
-                          label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.AVERAGE_CONSUMPTION"
-                          placeholder="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.AVERAGE_CONSUMPTION">
-            </number-input>
-            <basic-input name="image"
-                         fxFlex="auto"
-                         fxFlex.lt-sm="100"
-                         [(ngModel)]="vehicle.ownerData!.imageUrl"
-                         label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.IMAGE">
-            </basic-input>
-            <basic-input name="since"
-                         fxFlex="auto"
-                         fxFlex.lt-sm="100"
-                         [required]="true"
-                         [(ngModel)]="vehicle.ownerData!.since"
-                         label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.SINCE">
-            </basic-input>
-            <basic-input name="frameNumber"
-                         fxFlex="auto"
-                         fxFlex.lt-sm="100"
-                         [required]="true"
-                         [(ngModel)]="vehicle.frameNumber"
-                         label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.FRAME_NUMBER">
-            </basic-input>
-            <basic-input name="motorCode"
-                         fxFlex="auto"
-                         fxFlex.lt-sm="100"
-                         [required]="true"
-                         [(ngModel)]="vehicle.motorCode"
-                         label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.MOTOR_CODE">
-            </basic-input>
-            <basic-input name="kilowatt"
-                         fxFlex="auto"
-                         fxFlex.lt-sm="100"
-                         [required]="true"
-                         [(ngModel)]="vehicle.kilowatt"
-                         label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.KILOWATT">
-            </basic-input>
-        </mat-card-content>
-    </mat-card>
-</form>
+<div [class.container-fluid]="showContainer">
+    <form #ownForm="ngForm" appCheckForm>
+        <mat-card [ngClass]="{ 'card-outlined': showContainer, 'mat-elevation-z0': !showContainer }">
+            <p *ngIf="showContainer" class="card-outlined__title">{{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.VEHICLE_DATA' | translate }}</p>
+            <mat-card-content>
+                <div class="row">
+                    <basic-input name="brand"
+                                 class="col-md-4 col-sm-12"
+                                 [(ngModel)]="vehicle.brand"
+                                 [required]="true"
+                                 label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.BRAND"
+                                 placeholder="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.BRAND">
+                    </basic-input>
+                    <basic-input name="type"
+                                 class="col-md-4 col-sm-12"
+                                 [(ngModel)]="vehicle.type"
+                                 [required]="true"
+                                 label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.TYPE"
+                                 placeholder="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.TYPE">
+                    </basic-input>
+                    <app-select
+                        class="col-md-4 col-sm-12"
+                        [options]="[
+                                { value: 'Diesel', label: 'Diesel'},
+                                { value: 'Gasoline', label: 'Benzin'}
+                            ]"
+                        [required]="true"
+                        label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.ENGINE_TYPE"
+                        name="engineType"
+                        [(ngModel)]="vehicle.engineType">
+                    </app-select>
+                </div>
+                <div class="row">
+                    <number-input name="avgConsumption"
+                                  class="col-md-4 col-sm-12"
+                                  [(ngModel)]="vehicle.avgConsumption"
+                                  [required]="true"
+                                  [unmask]="true"
+                                  suffix="(Liter)"
+                                  label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.AVERAGE_CONSUMPTION"
+                                  placeholder="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.AVERAGE_CONSUMPTION">
+                    </number-input>
+                    <basic-input name="image"
+                                 class="col-md-4 col-sm-12"
+                                 [(ngModel)]="vehicle.ownerData!.imageUrl"
+                                 label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.IMAGE">
+                    </basic-input>
+                    <basic-input name="since"
+                                 class="col-md-4 col-sm-12"
+                                 [required]="true"
+                                 [(ngModel)]="vehicle.ownerData!.since"
+                                 label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.SINCE">
+                    </basic-input>
+                </div>
+                <div class="row">
+                    <number-input name="engineVolume"
+                                  class="col-md-3 col-sm-12"
+                                  [(ngModel)]="vehicle.engineVolume"
+                                  [required]="true"
+                                  [maxLength]="15"
+                                  [unmask]="true"
+                                  suffix="(ccm)"
+                                  label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.ENGINE_VOLUME"
+                                  placeholder="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.ENGINE_VOLUME">
+                    </number-input>
+                    <basic-input name="frameNumber"
+                                 class="col-md-3 col-sm-12"
+                                 [required]="true"
+                                 [(ngModel)]="vehicle.frameNumber"
+                                 label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.FRAME_NUMBER">
+                    </basic-input>
+                    <basic-input name="motorCode"
+                                 class="col-md-3 col-sm-12"
+                                 [required]="true"
+                                 [(ngModel)]="vehicle.motorCode"
+                                 label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.MOTOR_CODE">
+                    </basic-input>
+                    <basic-input name="kilowatt"
+                                 class="col-md-3 col-sm-12"
+                                 [required]="true"
+                                 [(ngModel)]="vehicle.kilowatt"
+                                 label="MEANS_OF_TRANSPORT.TRANSPORT_TYPE.KILOWATT">
+                    </basic-input>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+
+</div>

@@ -1,38 +1,23 @@
-<mat-card fxFlex.lg="calc(33% - 16px)"
-          fxFlex.lt-lg="calc(50% - 16px)"
-          fxFlex.xs="calc(100% - 16px)" [class.main]="vehicle.ownerData?.isMain">
+<mat-card [class.main]="vehicle.ownerData?.isMain">
     <mat-card-header>
         <mat-card-title>
-            <div fxLayout="row" fxLayoutGap="15px">
-                <div fxLayoutAlign="start center">{{ vehicle.brand }} {{vehicle.type}}</div>
-            </div>
-
+            {{ vehicle.brand }} {{vehicle.type}}
         </mat-card-title>
         <mat-card-subtitle>{{ vehicle.engineVolume }} ccm</mat-card-subtitle>
     </mat-card-header>
-    <div fxLayout="row" fxLayoutAlign="center center">
-        <resolve-request #resolveReq
-                         style="height:100px"
-                         [url]="vehicle.ownerData?.imageUrl?.trim() || 'assets/images/nocar.jpeg'">
-            <div fxLayout="row" fxLayoutAlign="center center">
-                <img [src]="resolveReq.value" style="height: 100px"/>
-            </div>
-        </resolve-request>
-        <!--
-        <img
-             style="height:100px"
-             [src]="'https://kep.cdn.index.hu/1/0/3975/39757/397573/39757307_3033467_cff894add5cbd8a2ad2248bcd9cec88b_wm.jpg'"
-             class="card-image">
-        -->
-    </div>
+    <resolve-request #resolveReq
+                     style="height:100px"
+                     [url]="vehicle.ownerData?.imageUrl?.trim() || 'assets/images/nocar.jpeg'">
+        <div class="text-center">
+            <img [src]="resolveReq.value" style="height: 100px"/>
+        </div>
+    </resolve-request>
     <mat-card-content>
-        <div *ngIf="false" fxLayout="row" class="mt-15">
-            <mat-card fxFlex="100" class="card-outlined">
+        <div *ngIf="false" class="mt-15">
+            <mat-card class="card-outlined">
                 <p class="card-outlined__title">
                     {{ 'MEANS_OF_TRANSPORT.VEHICLE_TILE.DATAS' | translate }}
                 </p>
-                <mat-card-content>
-                </mat-card-content>
             </mat-card>
         </div>
     </mat-card-content>

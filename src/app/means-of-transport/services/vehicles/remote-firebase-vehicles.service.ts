@@ -13,7 +13,7 @@ enum Services {
 @Injectable({
     providedIn: 'root'
 })
-export class RemoteVehiclesService implements IVehiclesService {
+export class RemoteFirebaseVehiclesService implements IVehiclesService {
 
     private fbVehicleService!: FirebaseDatabaseService<VehicleDataType>;
 

@@ -12,9 +12,9 @@ app-vehicle-detail {
             .mat-panel-description,
             mat-panel-title,
             mat-panel-description {
-                @extend .accent-color;
+                @extend .primary-color;
             }
-            @extend .primary-background;
+            @extend .accent-background;
         }
         .mat-panel-title,
         .mat-panel-description,
@@ -22,6 +22,9 @@ app-vehicle-detail {
         mat-panel-description {
             align-items: center;
         }
+    }
+    app-transport-type mat-card {
+        @extend .accent-background;
     }
     .custom-tile {
         .mat-card {
