@@ -1,57 +1,45 @@
-<div>
-    <div class="m-10" *ngIf="userData | async as user">
-        <mat-card (click)="navigateToProfile()" style="cursor:pointer">
-            <mat-card-content>
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <resolve-request #resolveReq
-                                     [catchUrl]="'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png'"
-                                     [url]="user.photoURL">
-                        <img [src]="resolveReq.value" style="border-radius: 50px" width="50" height="50">
-                    </resolve-request>
-                </div>
-                <br>
-                <div fxLayout="row"
-                     fxLayoutAlign="center center">
-                    <button mat-raised-button color="primary">
-                        {{ 'MENU.PROFILE_SETTINGS' | translate }}
-                    </button>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div class="m-10" fxLayout="row" fxLayoutAlign="center center">
-        <mat-card fxFlex>
-            <mat-card-content>
-                <app-icon-radio-button name="languagePicker"
-                                       [data]="[{ value: 'hu', icon: 'hungarian' }, { value: 'en', icon: 'english' }]"
-                                       [(ngModel)]="chosenLanguage"
-                                       (ngModelChange)="chosenLanguageChange()">
-                </app-icon-radio-button>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <mat-selection-list [multiple]="false" fxLayout="column">
-        <mat-list-option *ngFor="let item of menuItems"
-                         [selected]="(url | async)?.includes(item.navigateTo)"
-                         [routerLink]="['/'+item.navigateTo]"
-                         [value]="item.label | translate">
-            <p>{{item.label | translate}}</p>
-        </mat-list-option>
-    </mat-selection-list>
-    <div class="m-10">
-        <button fxLayout="row"
-                fxFlex
-                (click)="authService.logout()"
-                mat-raised-button>
-            {{ 'COMMON.LOGOUT' | translate }}
-        </button>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
-        <span style="font-size:12px">Version: {{version}}</span>
-    </div>
-    <div *ngIf="env.buildTimestamp!=='{BUILD_TIMESTAMP}'" fxLayout="row" fxLayoutAlign="center center">
-        <span *ngIf="env.buildTimestamp | date: 'yyyy.MM.dd hh:mm' as _timestamp" style="font-size:12px">
-            Timestamp: {{_timestamp}}
-        </span>
-    </div>
+<div *ngIf="userData | async as user">
+  <mat-card style="cursor:pointer">
+    <mat-card-content class="text-center">
+      <resolve-request #resolveReq
+                       [catchUrl]="'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png'"
+                       [url]="user.photoURL">
+        <img [src]="resolveReq.value" style="border-radius: 50px" width="50" height="50">
+      </resolve-request>
+      <button type="button"
+              mat-raised-button
+              color="primary"
+              class="mt-3"
+              (click)="navigateToProfile()">
+        {{ 'MENU.PROFILE_SETTINGS' | translate }}
+      </button>
+      <app-icon-radio-button name="languagePicker"
+                             class="mt-3"
+                             [data]="[{ value: 'hu', icon: 'hungarian' }, { value: 'en', icon: 'english' }]"
+                             [(ngModel)]="chosenLanguage"
+                             (ngModelChange)="chosenLanguageChange()">
+      </app-icon-radio-button>
+    </mat-card-content>
+  </mat-card>
+</div>
+<mat-selection-list [multiple]="false">
+  <mat-list-option *ngFor="let item of menuItems"
+                   [selected]="(url | async)?.includes(item.navigateTo)"
+                   [routerLink]="['/'+item.navigateTo]"
+                   [value]="item.label | translate">
+    <p>{{item.label | translate}}</p>
+  </mat-list-option>
+</mat-selection-list>
+<div class="m-10 d-flex flex-column text-center">
+  <button type="button"
+          (click)="authService.logout()"
+          mat-raised-button>
+    {{ 'COMMON.LOGOUT' | translate }}
+  </button>
+  <span style="font-size:12px">Version: {{version}}</span>
+</div>
+<div *ngIf="env.buildTimestamp!=='{BUILD_TIMESTAMP}'" fxLayout="row" fxLayoutAlign="center center">
+    <span *ngIf="env.buildTimestamp | date: 'yyyy.MM.dd hh:mm' as _timestamp" style="font-size:12px">
+        Timestamp: {{_timestamp}}
+    </span>
 </div>

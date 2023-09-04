@@ -88,3 +88,6 @@ body {
     white-space: pre-line;
     font-size: 20px !important;
 }
+.container-fluid-full {
+    @extend .container-fluid;
+}
