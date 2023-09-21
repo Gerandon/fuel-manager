@@ -1,19 +1,13 @@
-<div fxFlex="100" fxLayout="column">
-    <div mat-dialog-title translate="CONFIRM_DIALOG.TITLE"></div>
-    <div mat-dialog-content>
-        <p translate="CONFIRM_DIALOG.CONTENT"></p>
-    </div>
-    <div mat-dialog-actions fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">
-        <div fxFlex="50">
-            <button mat-raised-button [mat-dialog-close]="true"
-                    [color]="'primary'">
-                {{ 'true' | translate }}
-            </button>
-        </div>
-        <div fxFlex="50" fxLayoutAlign="end center">
-            <button mat-button mat-dialog-close [color]="'primary'">
-                {{ 'COMMON.BUTTON.CANCEL' | translate }}
-            </button>
-        </div>
-    </div>
-</div>
+<span mat-dialog-title translate="CONFIRM_DIALOG.TITLE"></span>
+<mat-dialog-content>
+  <p translate="CONFIRM_DIALOG.CONTENT"></p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" mat-raised-button [mat-dialog-close]="true"
+          [color]="'primary'">
+    {{ 'true' | translate }}
+  </button>
+  <button type="button" mat-button mat-dialog-close [color]="'primary'">
+    {{ 'COMMON.BUTTON.CANCEL' | translate }}
+  </button>
+</mat-dialog-actions>

@@ -1,72 +1,76 @@
-<form #addForm="ngForm" class="book-milage" fxLayout="column">
-    <div fxLayout="row">
-        <mat-card fxFlex="100" class="card-outlined">
-            <p class="card-outlined__title">{{ 'BOOKING.BOOK_TRAVEL.TITLE' | translate }}</p>
-            <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
-                <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
-                    <mat-label>{{ 'COMMON.CHOOSE_DATE' | translate }}</mat-label>
-                    <input matInput
-                           name="date"
-                           [disabled]="!editable"
-                           [(ngModel)]="model.date"
-                           [matDatepicker]="picker">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-                <number-input name="distance"
-                              fxFlex="auto"
-                              fxFlex.lt-sm="100"
-                              [(ngModel)]="model.distance"
-                              [required]="true"
-                              [disabled]="!editable"
-                              [unmask]="true"
-                              suffix="(Km)"
-                              label="BOOKING.BOOK_TRAVEL.DISTANCE">
-                </number-input>
-                <basic-input name="route"
-                             fxFlex="auto"
-                             fxFlex.lt-sm="100"
-                             [(ngModel)]="model.route.from"
-                             [disabled]="!editable"
-                             [required]="true"
-                             label="BOOKING.BOOK_TRAVEL.ROUTE.FROM">
-                </basic-input>
-                <basic-input name="amountSpent"
-                              fxFlex="auto"
-                             fxFlex.lt-sm="100"
-                              [(ngModel)]="model.route.to"
-                              [disabled]="!editable"
-                              [required]="true"
-                              label="BOOKING.BOOK_TRAVEL.ROUTE.TO">
-                </basic-input>
-                <div fxFlex="auto" class="mat-form-field">
-                    <mat-checkbox [(ngModel)]="model.route.retour"
-                                  [disabled]="!editable"
-                                  color="primary"
-                                  name="retour">
-                        {{ 'BOOKING.BOOK_TRAVEL.RETOUR' | translate }}
-                    </mat-checkbox>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
+<div class="container-fluid">
+  <form #addForm="ngForm" class="book-milage">
+    <mat-card class="card-outlined">
+      <p class="card-outlined__title">{{ 'BOOKING.BOOK_TRAVEL.TITLE' | translate }}</p>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'COMMON.CHOOSE_DATE' | translate }}</mat-label>
+              <input matInput
+                     name="date"
+                     [disabled]="!editable"
+                     [(ngModel)]="model.date"
+                     [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <number-input name="distance"
+                          [(ngModel)]="model.distance"
+                          [required]="true"
+                          [disabled]="!editable"
+                          [unmask]="true"
+                          suffix="(Km)"
+                          label="BOOKING.BOOK_TRAVEL.DISTANCE">
+            </number-input>
+          </div>
+        </div>
+        <div class="row">
+          <basic-input name="route"
+                       class="col-sm-12 col-md-6"
+                       [(ngModel)]="model.route.from"
+                       [disabled]="!editable"
+                       [required]="true"
+                       label="BOOKING.BOOK_TRAVEL.ROUTE.FROM">
+          </basic-input>
+          <basic-input name="amountSpent"
+                       class="col-sm-12 col-md-6"
+                       [(ngModel)]="model.route.to"
+                       [disabled]="!editable"
+                       [required]="true"
+                       label="BOOKING.BOOK_TRAVEL.ROUTE.TO">
+          </basic-input>
+        </div>
+        <div class="col-auto mat-form-field">
+          <mat-checkbox [(ngModel)]="model.route.retour"
+                        [disabled]="!editable"
+                        color="primary"
+                        name="retour">
+            {{ 'BOOKING.BOOK_TRAVEL.RETOUR' | translate }}
+          </mat-checkbox>
+        </div>
+      </mat-card-content>
+    </mat-card>
     <!--
     <br>
-    <google-map fxLayout="row" width="100%" height="300px"></google-map>
+    <google-map width="100%" height="300px"></google-map>
     -->
-    <br>
-    <div *ngIf="editable" fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">
-        <div fxFlex="50">
-            <button mat-raised-button [mat-dialog-close]="model"
-                    [disabled]="!!addForm.invalid"
-                    [color]="'primary'">
-                {{ (isNew ? 'COMMON.BUTTON.ADD' : 'COMMON.BUTTON.SAVE_EDITED') | translate }}
-            </button>
-        </div>
-        <div fxFlex="50" fxLayoutAlign="end center">
-            <button mat-button mat-dialog-close [color]="'primary'">
-                {{ 'COMMON.BUTTON.CANCEL' | translate }}
-            </button>
-        </div>
-    </div>
-</form>
+    <mat-dialog-actions>
+      <ng-container *ngIf="editable">
+        <button mat-raised-button
+                type="button"
+                [mat-dialog-close]="model"
+                [disabled]="!!addForm.invalid"
+                [color]="'primary'">
+          {{ (isNew ? 'COMMON.BUTTON.ADD' : 'COMMON.BUTTON.SAVE_EDITED') | translate }}
+        </button>
+        <button mat-button type="button"
+                mat-dialog-close [color]="'primary'">
+          {{ 'COMMON.BUTTON.CANCEL' | translate }}
+        </button>
+      </ng-container>
+    </mat-dialog-actions>
+  </form>
+</div>

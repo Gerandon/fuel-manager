@@ -72,9 +72,8 @@
 </div>
 <!--
 <br>
-<div fxLayout="row wrap">
-    <app-line-chart [fxFlex]="'100'"
-                    [dataSetList]="[
+<div>
+    <app-line-chart [dataSetList]="[
         {label: 'Elköltött', numbers: (amountSpent | async)},
         {label: 'Térített', numbers: (amountPaid | async)},
         {label: 'Különbözet', numbers: (fullSpent | async)}

@@ -1,15 +1,14 @@
-<form #addForm="ngForm" class="book-milage">
-    <app-transport-type [vehicle]="model"></app-transport-type>
-    <mat-dialog-actions>
-        <ng-container *ngIf="editMode">
-            <button type="button" mat-raised-button [mat-dialog-close]="model"
-                    [disabled]="addForm.invalid"
-                    [color]="'primary'">
-                {{ 'COMMON.BUTTON.SAVE' | translate }}
-            </button>
-            <button type="button" mat-button mat-dialog-close [color]="'primary'">
-                {{ 'COMMON.BUTTON.CANCEL' | translate }}
-            </button>
-        </ng-container>
-    </mat-dialog-actions>
-</form>
+<app-transport-type #transportTypeComponent [vehicle]="model"></app-transport-type>
+<mat-dialog-actions>
+  <ng-container *ngIf="editMode">
+    <button type="button"
+            mat-raised-button [mat-dialog-close]="model"
+            [disabled]="transportTypeComponent.ownForm.invalid"
+            [color]="'primary'">
+      {{ 'COMMON.BUTTON.SAVE' | translate }}
+    </button>
+    <button type="button" mat-button mat-dialog-close [color]="'primary'">
+      {{ 'COMMON.BUTTON.CANCEL' | translate }}
+    </button>
+  </ng-container>
+</mat-dialog-actions>

@@ -1,82 +1,78 @@
-<form #addForm="ngForm" class="add-service-report" fxLayout="column">
-    <div fxLayout="row wrap">
-        <div fxLayout="row wrap" fxFlex="100">
-            <mat-form-field fxFlex="25" fxFlex.lt-md="50" fxFlex.lt-sm="100" appearance="outline">
-                <mat-label>{{ 'MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.DATE_OF_SERVICE' | translate }}</mat-label>
-                <input matInput
-                       name="date"
-                       required="true"
-                       [(ngModel)]="model.date"
-                       [matDatepicker]="pickerOne">
-                <mat-datepicker-toggle matSuffix [for]="pickerOne"></mat-datepicker-toggle>
-                <mat-datepicker #pickerOne></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <mat-card fxFlex="100" class="card-outlined">
-            <p class="card-outlined__title">{{ 'MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.SERVICE_DATA' | translate }}</p>
-            <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
-                <basic-input name="shortDescription"
-                             fxFlex="auto"
-                             fxFlex.lt-sm="100"
-                             [(ngModel)]="model.shortDescription"
-                             [required]="true"
-                             label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.SHORT_DESCRIPTION">
-                </basic-input>
-                <number-input name="amount"
-                              fxFlex="auto"
-                              fxFlex.lt-sm="100"
-                              [(ngModel)]="model.amount"
-                              [required]="true"
-                              [maxLength]="15"
-                              suffix="(HUF)"
-                              label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.AMOUNT_OF_FIX">
-                </number-input>
-                <basic-input name="location"
-                             fxFlex="auto"
-                             fxFlex.lt-sm="100"
-                             [(ngModel)]="model.location"
-                             [required]="true"
-                             label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.PLACE_OF_FIX">
-                </basic-input>
-                <number-input name="milage"
-                              fxFlex="auto"
-                              fxFlex.lt-sm="100"
-                              [(ngModel)]="model.milage"
-                              [required]="true"
-                              [maxLength]="15"
-                              suffix="Km"
-                              label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.MILAGE_OF_ITEM">
-                </number-input>
-                <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
-                    <mat-label>{{ 'MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.NEXT_SERVICE_DATE' | translate }}</mat-label>
-                    <input matInput
-                           name="nextSimilarServiceDate"
-                           [(ngModel)]="model.nextSimilarServiceDate"
-                           [matDatepicker]="picker">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-                <basic-input name="description"
-                             fxFlex="100"
-                             fxFlex.lt-sm="100"
-                             [(ngModel)]="model.description"
-                             label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.DESCRIPTION">
-                </basic-input>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">
-        <div fxFlex="50">
-            <button mat-raised-button [mat-dialog-close]="model"
-                    [disabled]="addForm.invalid"
-                    [color]="'primary'">
-                {{ 'COMMON.BUTTON.ADD' | translate }}
-            </button>
-        </div>
-        <div fxFlex="50" fxLayoutAlign="end center">
-            <button mat-button mat-dialog-close [color]="'primary'">
-                {{ 'COMMON.BUTTON.CANCEL' | translate }}
-            </button>
-        </div>
-    </div>
+
+<form #addForm="ngForm" class="add-service-report">
+  <div class="container-fluid">
+    <span mat-dialog-title translate="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.SERVICE_DATA"></span>
+    <mat-dialog-content>
+      <div class="row">
+        <mat-form-field class="col-sm-12 col-md-6 col-lg-4" appearance="outline">
+          <mat-label>{{ 'MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.DATE_OF_SERVICE' | translate }}</mat-label>
+          <input matInput
+                 name="date"
+                 required="true"
+                 [(ngModel)]="model.date"
+                 [matDatepicker]="pickerOne">
+          <mat-datepicker-toggle matSuffix [for]="pickerOne"></mat-datepicker-toggle>
+          <mat-datepicker #pickerOne></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <basic-input name="shortDescription"
+                     class="col-sm-12 col-md-6 col-lg-4"
+                     [(ngModel)]="model.shortDescription"
+                     [required]="true"
+                     label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.SHORT_DESCRIPTION">
+        </basic-input>
+        <number-input name="amount"
+                      class="col-sm-12 col-md-6 col-lg-4"
+                      [(ngModel)]="model.amount"
+                      [required]="true"
+                      [maxLength]="15"
+                      suffix="(HUF)"
+                      label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.AMOUNT_OF_FIX">
+        </number-input>
+        <basic-input name="location"
+                     class="col-sm-12 col-md-6 col-lg-4"
+                     [(ngModel)]="model.location"
+                     [required]="true"
+                     label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.PLACE_OF_FIX">
+        </basic-input>
+      </div>
+      <div class="row">
+        <number-input name="milage"
+                      class="col-sm-12 col-md-6 col-lg-4"
+                      [(ngModel)]="model.milage"
+                      [required]="true"
+                      [maxLength]="15"
+                      suffix="Km"
+                      label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.MILAGE_OF_ITEM">
+        </number-input>
+        <mat-form-field class="col-sm-12 col-md-6 col-lg-4" appearance="outline">
+          <mat-label>{{ 'MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.NEXT_SERVICE_DATE' | translate }}</mat-label>
+          <input matInput
+                 name="nextSimilarServiceDate"
+                 [(ngModel)]="model.nextSimilarServiceDate"
+                 [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <basic-input name="description"
+                     class="col-sm-12 col-md-12 col-lg-12 col-xl-6"
+                     [(ngModel)]="model.description"
+                     label="MEANS_OF_TRANSPORT.DIALOG.ADD_SERVICE_REPORT.DESCRIPTION">
+        </basic-input>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button type="button" mat-raised-button [mat-dialog-close]="model"
+              [disabled]="addForm.invalid"
+              [color]="'primary'">
+        {{ 'COMMON.BUTTON.ADD' | translate }}
+      </button>
+      <button type="button" mat-button mat-dialog-close [color]="'primary'">
+        {{ 'COMMON.BUTTON.CANCEL' | translate }}
+      </button>
+    </mat-dialog-actions>
+  </div>
 </form>
