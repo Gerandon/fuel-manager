@@ -91,3 +91,7 @@ body {
 .container-fluid-full {
     @extend .container-fluid;
 }
+
+fieldset {
+    border-radius: 10px;
+}

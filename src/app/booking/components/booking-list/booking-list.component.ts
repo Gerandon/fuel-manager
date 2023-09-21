@@ -1,22 +1,23 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BehaviorSubject, Observable, of, Subscription} from "rxjs";
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {BookingService} from "../../services/booking.service";
 import {MatDialog} from "@angular/material/dialog";
 import {BookTravelComponent} from "../book-travel/book-travel.component";
 import {MatTabGroup} from "@angular/material/tabs";
 import {BookFuelComponent} from "../book-fuel/book-fuel.component";
-import {TravelDiaryType} from "../../../app-common/interfaces/travel-diary.interface";
 import {map, startWith, tap} from "rxjs/operators";
 import {TimelineData} from "../../../app-common/modules/calendar/interfaces/calendar-common";
 import {appTheming} from "../../../app-common/common";
 import {TranslateService} from "@ngx-translate/core";
 import {IBookingService} from "../../../app-common/interfaces/booking-service.interface";
 import {UnsubscribeOnDestroy} from "../../../app-common/component-unsubscribe";
+import {BookingListType} from "../../../app-common/interfaces/common.interface";
 
 @Component({
     selector: 'app-booking-list',
     templateUrl: './booking-list.component.html',
-    styleUrls: ['./booking-list.component.scss']
+    styleUrls: ['./booking-list.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class BookingListComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -30,8 +31,8 @@ export class BookingListComponent implements OnInit, AfterViewInit, OnDestroy {
         dateFrom: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
         dateTo: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
     };
-    public travelQueryParams?: { key: keyof TravelDiaryType, value: string | number, operator?: string}[];
-    public fuelQueryParams?: { key: keyof TravelDiaryType, value: string | number, operator?: string}[];
+    public travelQueryParams?: { key: keyof BookingListType, value: string | number, operator?: string}[];
+    public fuelQueryParams?: { key: keyof BookingListType, value: string | number, operator?: string}[];
     @UnsubscribeOnDestroy() public actualTabLabel: Observable<string>;
     public timelineData: Observable<TimelineData[]>;
     public timelineDate = new BehaviorSubject<Date>(this.dateFilter.dateFrom);
