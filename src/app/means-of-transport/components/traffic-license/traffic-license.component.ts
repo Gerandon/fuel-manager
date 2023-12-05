@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild, View
 import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
 import {defaultVehicle} from "../../../app-common/common";
 import {_} from "../../../app-common/vendor/vendor.module";
-import html2canvas from "html2canvas";
+//import html2canvas from "html2canvas";
 import {AuthService} from "../../../auth/services/auth.service";
 import {first, tap} from "rxjs/operators";
 import {MatFormFieldAppearance} from "@angular/material/form-field";
@@ -23,19 +23,20 @@ export class TrafficLicenseComponent implements OnInit {
     @ViewChild('canvas') canvas!: ElementRef;
     @ViewChild('downloadLink') downloadLink!: ElementRef;
 
-    public appearance: MatFormFieldAppearance = 'legacy';
+    public appearance: MatFormFieldAppearance = 'outline';
 
     constructor(private cdr: ChangeDetectorRef,
                 private authService: AuthService) {
     }
 
     ngOnInit(): void {
-        this.appearance = this.edit ? 'legacy' : <MatFormFieldAppearance>'none';
+        this.appearance = this.edit ? 'outline' : <MatFormFieldAppearance>'none';
     }
 
     download() {
         this.edit = false;
         this.cdr.detectChanges();
+        /*
         html2canvas(this.screen.nativeElement,{
             onclone: (clonedDoc) => {
                 const clonedDocEl = <HTMLElement>clonedDoc.getElementsByClassName('license-container')[0];
@@ -54,5 +55,6 @@ export class TrafficLicenseComponent implements OnInit {
                 }),
             ).subscribe();
         });
+         */
     }
 }

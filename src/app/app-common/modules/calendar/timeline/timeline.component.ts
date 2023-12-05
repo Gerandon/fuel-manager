@@ -6,7 +6,6 @@ import {
     OnChanges,
     Output,
     SimpleChanges,
-    ViewEncapsulation,
 } from '@angular/core';
 import * as moment from "moment";
 import {CalendarHeaderDirection, TimelineData, TimelineDayItem} from "../interfaces/calendar-common";
