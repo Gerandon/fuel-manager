@@ -1,13 +1,12 @@
-import {AfterViewInit, Component, ElementRef, Host, Input, OnInit, Optional, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Host, Input, OnInit, Optional} from '@angular/core';
 import {BaseFormComponent} from "../../../app-common/widgets/core/base-form.component";
 import {NgForm, ValidationErrors} from "@angular/forms";
 import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
 import {defaultVehicle} from "../../../app-common/common";
 import {Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {catchError, debounceTime, map, startWith, switchMap, tap} from "rxjs/operators";
-import {BasicInputComponent} from "../../../app-common/widgets/basic-input/basic-input.component";
-import {_} from "../../../app-common/vendor/vendor.module";
+import {catchError, map, switchMap} from "rxjs/operators";
+import {cloneDeep} from "lodash-es";
 
 @Component({
     selector: 'app-transport-type',
@@ -16,7 +15,7 @@ import {_} from "../../../app-common/vendor/vendor.module";
 })
 export class TransportTypeComponent extends BaseFormComponent implements OnInit, AfterViewInit {
 
-    @Input() public vehicle: VehicleDataType = _.cloneDeep(defaultVehicle);
+    @Input() public vehicle: VehicleDataType = cloneDeep(defaultVehicle);
     @Input() public showContainer = true;
 
     public wrongImageValidator!: Observable<ValidationErrors>;

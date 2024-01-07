@@ -1,4 +1,4 @@
-@import './src/theme.scss';
+@import 'src/theme.scss';
 
 app-vehicle-detail {
     h2 {
@@ -14,7 +14,6 @@ app-vehicle-detail {
             mat-panel-description {
                 @extend .primary-color;
             }
-            @extend .accent-background;
         }
         .mat-panel-title,
         .mat-panel-description,
@@ -24,7 +23,6 @@ app-vehicle-detail {
         }
     }
     app-transport-type mat-card {
-        @extend .accent-background;
     }
     .custom-tile {
         .mat-card {

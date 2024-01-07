@@ -5,8 +5,8 @@
       <br>
       <div class="row">
         <div class="col-sm-12 col-md-6">
-          <mat-card *ngIf="userData | async as user" class="card-outlined">
-            <p class="card-outlined__title">{{ 'USER_SETTINGS.USER_DATA' | translate }}</p>
+          <fieldset *ngIf="userData | async as user">
+            <legend>{{ 'USER_SETTINGS.USER_DATA' | translate }}</legend>
             <div class="row">
               <div class="col-sm-12 col-md-4 col-lg-2">
                 <resolve-request #resolveReq
@@ -42,11 +42,11 @@
                 </div>
               </div>
             </div>
-          </mat-card>
+          </fieldset>
         </div>
         <div class="col-sm-12 col-md-6">
-          <mat-card class="card-outlined">
-            <p class="card-outlined__title">{{ 'USER_SETTINGS.PAGE_DATA.TITLE' | translate }}</p>
+          <fieldset>
+            <legend>{{ 'USER_SETTINGS.PAGE_DATA.TITLE' | translate }}</legend>
             <div>
               <div>
                 <p style="font-weight:bold">{{'USER_SETTINGS.PAGE_DATA.THEME' | translate}}</p>
@@ -74,7 +74,7 @@
                        readonly="true"/>
               </div>
             </div>
-          </mat-card>
+          </fieldset>
         </div>
       </div>
     </mat-card-content>

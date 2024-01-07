@@ -1,31 +1,35 @@
 <div class="container">
   <div class="row gy-4">
     <div class="col-sm-12">
-      <fieldset>
-        <legend>{{ 'COMMON.FILTERING_CONDITIONS' | translate }}</legend>
-        <div class="row">
-          <mat-form-field class="date-input col-md-auto col-sm-12" appearance="outline">
-            <mat-label>{{ 'COMMON.DATE_FROM' | translate }}</mat-label>
-            <input matInput
-                   name="dateFrom"
-                   [(ngModel)]="dateFilter.dateFrom"
-                   [matDatepicker]="pickerFrom"
-                   (ngModelChange)="onDateChange()">
-            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-            <mat-datepicker #pickerFrom></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field class="date-input col-md-auto col-sm-12" appearance="outline">
-            <mat-label>{{ 'COMMON.DATE_TO' | translate }}</mat-label>
-            <input matInput
-                   name="dateTo"
-                   [(ngModel)]="dateFilter.dateTo"
-                   [matDatepicker]="pickerTo"
-                   (ngModelChange)="onDateChange()">
-            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-            <mat-datepicker #pickerTo></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </fieldset>
+      <mat-card>
+        <mat-card-content>
+          <fieldset>
+            <legend>{{ 'COMMON.FILTERING_CONDITIONS' | translate }}</legend>
+            <div class="row pt-4">
+              <mat-form-field class="date-input col-md-auto col-sm-12" appearance="outline">
+                <mat-label>{{ 'COMMON.DATE_FROM' | translate }}</mat-label>
+                <input matInput
+                       name="dateFrom"
+                       [(ngModel)]="dateFilter.dateFrom"
+                       [matDatepicker]="pickerFrom"
+                       (ngModelChange)="onDateChange()">
+                <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFrom></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="date-input col-md-auto col-sm-12" appearance="outline">
+                <mat-label>{{ 'COMMON.DATE_TO' | translate }}</mat-label>
+                <input matInput
+                       name="dateTo"
+                       [(ngModel)]="dateFilter.dateTo"
+                       [matDatepicker]="pickerTo"
+                       (ngModelChange)="onDateChange()">
+                <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                <mat-datepicker #pickerTo></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </fieldset>
+        </mat-card-content>
+      </mat-card>
     </div>
     <div class="col-sm-12">
       <button *ngIf="actualTabLabel"

@@ -19,7 +19,7 @@ export class BaseInput<T> extends BaseValueAccessor<T> implements OnInit {
     @Input() public placeholder?: string = this.label;
     @Input() public required?: boolean = false;
     @Input() public disabled?: boolean = false;
-    @Input() public floatLabel?: FloatLabelType;
+    @Input() public floatLabel?: FloatLabelType = 'auto';
     @Input() public appearance?: MatFormFieldAppearance = 'outline';
     @Input() public icon?: string;
     @Input() public suffix?: string;

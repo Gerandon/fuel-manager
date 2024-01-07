@@ -45,7 +45,7 @@ $primary-palette: map.get($color-config, 'primary');
 ng-sidebar {
     aside {
         width: 200px;
-        @extend .primary-background-trans;
+        @extend .primary-background;
         color: white;
     }
 }
