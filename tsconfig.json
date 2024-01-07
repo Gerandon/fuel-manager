@@ -16,19 +16,15 @@
         "moduleResolution": "node",
         "importHelpers": true,
         "target": "ES2022",
-        "module": "es2020",
+        "module": "es2022",
         "lib": [
-            "es2018",
+            "es2022",
             "dom"
         ],
         "strictNullChecks": false,
-        // FIXME Added because angular fire is supported with typescript 4.4, current is 4.5
-        // instead of reverting typescript package, this line is inserted
-        "skipLibCheck": true,
         "useDefineForClassFields": false
     },
     "angularCompilerOptions": {
-        "strictPropertyInitialization": false,
-        "suppressImplicitAnyIndexErrors": true
+        "strictPropertyInitialization": false
     }
 }

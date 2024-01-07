@@ -10,7 +10,7 @@ import {AuthService} from "./auth/services/auth.service";
 import {defaultPersonalSettings, filteredMenu} from "./app-common/common";
 import {Event, NavigationStart, Router} from "@angular/router";
 import {IMenu, PersonalSettingsType} from "./app-common/interfaces/common.interface";
-import {SidebarContainer} from "ng-sidebar";
+import {SidebarContainer} from "ng-sidebar-v2";
 import {_} from "./app-common/vendor/vendor.module";
 import {AppTranslateService} from "./app-common/services/app-translate.service";
 import {DomSanitizer} from "@angular/platform-browser";
