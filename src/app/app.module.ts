@@ -8,7 +8,7 @@ import {LocalStorageService, NgxWebstorageModule, SessionStorageService} from "n
 import {MissingTranslationHandler, TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
 import {MissingTranslationService} from "./app-common/services/missing-translations.service";
-import {SidebarModule} from "ng-sidebar";
+import {SidebarModule} from "ng-sidebar-v2";
 import {MainModule} from "./main/main.module";
 import {BOOKING_SERVICE} from "./app-common/interfaces/booking-service.interface";
 import {AUTH_SERVICE} from "./app-common/interfaces/auth-service.interface";
