@@ -1,70 +1,43 @@
-<div class="vehicle-detail">
+<div class="vehicle-detail container">
     <resolve-request [observable]="this.vehicle" *ngIf="vehicle | async as veh">
-        <div class="ml-30" fxLayout="row wrap" fxLayoutAlign="start center">
-            <h2>{{ veh.brand }} {{ veh.type }}</h2>
-        </div>
-        <div fxLayout="row wrap" fxLayoutGap="15px grid">
-            <app-traffic-license fxFlex="50"
-                                 fxFlex.gt-md="35"
-                                 fxFlex.lt-md="auto"
-                                 [vehicle]="veh" (click)="onLicenseClick()">
-            </app-traffic-license>
-            <div fxFlex="50"
-                 fxFlex.gt-md="65"
-                 fxFlex.lt-md="100"
-                 fxLayout="column"
-                 fxLayoutGap="15px">
-                <mat-accordion>
-                    <mat-expansion-panel class="mb-10">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>{{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.VEHICLE_DATA' | translate }}</mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <app-transport-type [vehicle]="veh" [showContainer]="false"></app-transport-type>
-                    </mat-expansion-panel>
-                    <mat-expansion-panel #exp>
-                        <mat-expansion-panel-header>
-                            <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="15px grid" fxLayoutAlign="center center">
-                                <span class="mat-panel-title" fxFlex="calc(100/3)">
+        <h2 translate="MEANS_OF_TRANSPORT.TRAFFIC_LICENSE.TITLE_PART" [translateParams]="{ name: veh.brand + ' ' + veh.type }"></h2>
+        <div class="row">
+            <app-traffic-license class="col-sm-12" [vehicle]="veh" (click)="onLicenseClick()"></app-traffic-license>
+            <div class="col-sm-12">
+                <h3>Jármű adatok</h3>
+                <app-transport-type [vehicle]="veh" [showContainer]="false"></app-transport-type>
+            </div>
+            <div class="col-sm-12 mt-4">
+                <mat-expansion-panel #exp>
+                    <mat-expansion-panel-header>
+                        <div class="d-grid" style="line-height: 25px">
+                                <span class="mat-panel-title">
                                     {{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.SERVICE_REPORT' | translate }}
                                 </span>
-                                <div fxFlex="calc(100/3)" *ngIf="!exp.expanded">
-                                    <span *ngIf="sumAmount | async as sum"
-                                          class="mat-panel-description">
-                                        {{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.AMOUNT_SPENT_WITH_VALUE' | translate: { value: (sum | currency: ' ':'symbol':'1.0-0') + ' HUF' } }}
+                            <span class="mat-panel-description">
+                                        {{ 'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.AMOUNT_SPENT_WITH_VALUE' | translate: { value: ((sumAmount | async) | currency: ' ':'symbol':'1.0-0') + ' HUF' } }}
                                 </span>
-                                </div>
-                                <div fxFlex="calc(100/3)" fxLayoutAlign="center center">
-                                    <button mat-raised-button color="accent"
-                                            (click)="$event.stopPropagation();addServiceReport()">
-                                        {{ 'COMMON.BUTTON.ADD' | translate }}
-                                    </button>
-                                </div>
-                            </div>
-                        </mat-expansion-panel-header>
-                        <div fxLayout="row wrap" fxLayoutGap="15px grid">
-                            <div class="custom-tile" *ngFor="let report of serviceReports | async">
-                                <mat-card fxFlex.lg="calc(33% - 16px)"
-                                          fxFlex.lt-lg="calc(50% - 16px)"
-                                          fxFlex.xs="calc(100% - 16px)" fxLayout="column"
-                                          [matTooltip]="[
-                                            'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.LOCATION' | translate, report.location,
-                                            '',
-                                            'MEANS_OF_TRANSPORT.VEHICLE_DETAIL.DESCRIPTION' | translate, report.description
-                                          ] | multiLine"
-                                          matTooltipClass="theme-tooltip">
-                                    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-                                        <span>{{report.shortDescription}}</span>
-                                        <span>{{report.date | date: 'YYYY.MM.dd'}}</span>
-                                        <span class="mt-5">{{(report.amount | currency: ' ':'symbol':'1.0-0') + ' HUF'}}</span>
-                                    </mat-card-content>
-                                </mat-card>
-                            </div>
+                            <button mat-raised-button type="button" color="primary"
+                                    (click)="$event.stopPropagation();addServiceReport()">
+                                {{ 'COMMON.BUTTON.ADD' | translate }}
+                            </button>
                         </div>
-                        <div *ngIf="!(serviceReports | async)?.length">
-                            <span translate="MEANS_OF_TRANSPORT.VEHICLE_DETAIL.MISSING_REPORTS"></span>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="custom-tile col-lg-4 col-md-6 col-sm-12" *ngFor="let report of serviceReports | async">
+                            <mat-card>
+                                <mat-card-content class="d-grid">
+                                    <span>{{report.shortDescription}}</span>
+                                    <span>{{report.date | date: 'YYYY.MM.dd'}}</span>
+                                    <span class="mt-5">{{(report.amount | currency: ' ':'symbol':'1.0-0') + ' HUF'}}</span>
+                                </mat-card-content>
+                            </mat-card>
                         </div>
-                    </mat-expansion-panel>
-                </mat-accordion>
+                    </div>
+                    <div *ngIf="!(serviceReports | async)?.length">
+                        <span translate="MEANS_OF_TRANSPORT.VEHICLE_DETAIL.MISSING_REPORTS"></span>
+                    </div>
+                </mat-expansion-panel>
             </div>
         </div>
     </resolve-request>

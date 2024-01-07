@@ -1,3 +1,6 @@
+import {TravelDiaryType} from "./travel-diary.interface";
+import {FuelCostDiaryType} from "./fuel-cost.interface";
+
 export interface PersonalSettingsType extends BaseType {
     theme: string;
     backgroundColor: string;
@@ -26,3 +29,5 @@ export interface IMenu {
     submenu?: IMenu[];
     disabled?: string;
 }
+
+export type BookingListType = TravelDiaryType | FuelCostDiaryType;

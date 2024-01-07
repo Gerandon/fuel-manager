@@ -1,29 +1,22 @@
-<div fxLayout="column" fxFlex fxLayoutAlign="center center">
-    <div class="item-container"
-         fxLayout="row wrap"
-         fxLayoutGap="15px grid"
-         fxLayoutAlign="center center">
+<div class="container h-100 d-flex flex-column justify-content-center">
+    <div class="item-container row gy-4">
         <div *ngFor="let menuItem of menu"
-             class="menu-item"
-             fxLayout="column"
-             fxLayoutGap="10px"
+             class="menu-item col-md-4 col-sm-6 col-xs-12"
              [routerLink]="['/'+menuItem.navigateTo]">
-            <div class="content content__big"
-                 fxLayout="column"
-                 fxFlex="auto">
-                <div fxLayoutAlign="center center"><span>{{menuItem.label | translate}}</span></div>
-                <div *ngIf="menuItem.icon" class="mat-icon-container" fxFlex fxLayoutAlign="center center">
-                    <mat-icon>{{menuItem.icon}}</mat-icon>
+            <div class="content content__big text-center align-items-center h-100 d-grid">
+                <div class="align-middle">
+                    <span>{{menuItem.label | translate}}</span>
+                    <div *ngIf="menuItem.icon" class="mat-icon-container">
+                        <mat-icon>{{menuItem.icon}}</mat-icon>
+                    </div>
                 </div>
             </div>
-            <div *ngIf="menuItem.submenu?.length"
-                 fxLayout="row"
-                 fxLayoutGap="10px">
+            <div *ngIf="menuItem.submenu?.length">
                 <div *ngFor="let submenu of menuItem.submenu"
                      [routerLink]="['/'+submenu.navigateTo]"
-                     class="content" fxLayout="column" fxFlex
+                     class="content"
                      [matTooltip]="(submenu.disabled || submenu.label) | translate">
-                    <div *ngIf="submenu.icon" fxFlex fxLayoutAlign="center center">
+                    <div *ngIf="submenu.icon">
                         <mat-icon>{{submenu.icon}}</mat-icon>
                     </div>
                 </div>

@@ -1,17 +1,11 @@
-@import './src/theme.scss';
+@import 'src/theme';
 
 .login {
     height: 100%;
     .login-card {
         max-width: 500px;
-        mat-card-content {
-            margin-top: 10px;
-        }
     }
     h3, span {
         @extend .primary-color;
-    }
-    .login-button {
-        white-space: pre-wrap;
     }
 }

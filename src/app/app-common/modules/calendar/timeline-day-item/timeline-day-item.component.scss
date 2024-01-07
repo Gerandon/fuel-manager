@@ -10,6 +10,7 @@ timeline-day-item {
             color: grey;
         }
         &__current-day-background {
+            display: inherit;
             @extend .primary-background;
             .day-item-main__day-label {
                 color: white;

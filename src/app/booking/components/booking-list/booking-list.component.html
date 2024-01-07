@@ -1,78 +1,86 @@
-<div class="booking-list" fxLayout="column" fxLayoutGap="15px">
-    <div fxLayout="row">
-        <mat-expansion-panel fxFlex>
-            <mat-expansion-panel-header>
-                <mat-panel-title>{{ 'COMMON.FILTERING_CONDITIONS' | translate }}</mat-panel-title>
-            </mat-expansion-panel-header>
-            <div fxLayout="row wrap" fxLayoutGap="15px grid">
-                <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
-                    <mat-label>{{ 'COMMON.DATE_FROM' | translate }}</mat-label>
-                    <input matInput
-                           name="dateFrom"
-                           [(ngModel)]="dateFilter.dateFrom"
-                           [matDatepicker]="pickerFrom"
-                           (ngModelChange)="onDateChange()">
-                    <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerFrom></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
-                    <mat-label>{{ 'COMMON.DATE_TO' | translate }}</mat-label>
-                    <input matInput
-                           name="dateTo"
-                           [(ngModel)]="dateFilter.dateTo"
-                           [matDatepicker]="pickerTo"
-                           (ngModelChange)="onDateChange()">
-                    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerTo></mat-datepicker>
-                </mat-form-field>
+<div class="container">
+  <div class="row gy-4">
+    <div class="col-sm-12">
+      <mat-card>
+        <mat-card-content>
+          <fieldset>
+            <legend>{{ 'COMMON.FILTERING_CONDITIONS' | translate }}</legend>
+            <div class="row pt-4">
+              <mat-form-field class="date-input col-md-auto col-sm-12" appearance="outline">
+                <mat-label>{{ 'COMMON.DATE_FROM' | translate }}</mat-label>
+                <input matInput
+                       name="dateFrom"
+                       [(ngModel)]="dateFilter.dateFrom"
+                       [matDatepicker]="pickerFrom"
+                       (ngModelChange)="onDateChange()">
+                <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFrom></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="date-input col-md-auto col-sm-12" appearance="outline">
+                <mat-label>{{ 'COMMON.DATE_TO' | translate }}</mat-label>
+                <input matInput
+                       name="dateTo"
+                       [(ngModel)]="dateFilter.dateTo"
+                       [matDatepicker]="pickerTo"
+                       (ngModelChange)="onDateChange()">
+                <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                <mat-datepicker #pickerTo></mat-datepicker>
+              </mat-form-field>
             </div>
-        </mat-expansion-panel>
+          </fieldset>
+        </mat-card-content>
+      </mat-card>
     </div>
-    <div class="row">
-        <button *ngIf="actualTabLabel"
-                fxFlex.lt-sm="100"
-                (click)="addToList()"
-                mat-raised-button color="primary">
-            {{ 'COMMON.BUTTON.ITEM_ADD' | translate: { item: actualTabLabel | async } }}
-        </button>
+    <div class="col-sm-12">
+      <button *ngIf="actualTabLabel"
+              type="button"
+              (click)="addToList()"
+              mat-raised-button color="primary">
+        {{ 'COMMON.BUTTON.ITEM_ADD' | translate: {item: actualTabLabel | async} }}
+      </button>
     </div>
-    <div fxLayout="row">
-        <mat-tab-group #tabGroup fxFlex="100" style="background: white">
-            <mat-tab label="{{'BOOKING.BOOK_TRAVEL.TITLE' | translate}}">
-                <ng-template matTabContent><app-travel-diary [queryParams]="travelQueryParams"></app-travel-diary></ng-template>
-            </mat-tab>
-            <mat-tab label="{{'BOOKING.BOOK_FUEL.TITLE' | translate}}">
-                <ng-template matTabContent><app-fuel-cost-diary [queryParams]="fuelQueryParams"></app-fuel-cost-diary></ng-template>
-            </mat-tab>
-        </mat-tab-group>
+    <div class="col-sm-12">
+      <mat-tab-group #tabGroup style="background: white">
+        <mat-tab label="{{'BOOKING.BOOK_TRAVEL.TITLE' | translate}}">
+          <ng-template matTabContent>
+            <app-travel-diary [queryParams]="travelQueryParams"></app-travel-diary>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="{{'BOOKING.BOOK_FUEL.TITLE' | translate}}">
+          <ng-template matTabContent>
+            <app-fuel-cost-diary [queryParams]="fuelQueryParams"></app-fuel-cost-diary>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
     </div>
-    <timeline [date]="timelineDate | async"
-              [timelineData]="timelineData | async"
-              (onIntervalChanged)="timelineDate.next($event)">
+    <div class="col-sm-12">
+      <gerandon-timeline [date]="timelineDate | async"
+                [timelineData]="timelineData | async"
+                (onIntervalChanged)="timelineDate.next($event)">
         <div *ngIf="(actualTabIndex | async) === 1"
-             additionalHeader
-             fxLayout="row" fxLayoutGap="15px">
-            <div fxFlex="10" class="p-5"
-                 [style.background-color]="appThemingRef.primaryColor"
-                 [style.color]="'#ffffff'">
-                {{ 'BOOKING.FUEL_LIST.INCOME' | translate }}
-            </div>
-            <div fxFlex="10" class="p-5"
-                 [style.background-color]="appThemingRef.secondaryColor"
-                 [style.color]="'#ffffff'">
-                {{ 'BOOKING.FUEL_LIST.OUTGOINGS' | translate }}
-            </div>
+             additionalHeader class="row">
+          <div class="col-auto"
+               [style.background-color]="appThemingRef.primaryColor"
+               [style.color]="'#ffffff'">
+            {{ 'BOOKING.FUEL_LIST.INCOME' | translate }}
+          </div>
+          <div class="col-auto"
+               [style.background-color]="appThemingRef.secondaryColor"
+               [style.color]="'#ffffff'">
+            {{ 'BOOKING.FUEL_LIST.OUTGOINGS' | translate }}
+          </div>
         </div>
-    </timeline>
-    <!--
-    <br>
-    <div fxLayout="row wrap">
-        <app-line-chart [fxFlex]="'100'"
-                        [dataSetList]="[
-            {label: 'Elköltött', numbers: (amountSpent | async)},
-            {label: 'Térített', numbers: (amountPaid | async)},
-            {label: 'Különbözet', numbers: (fullSpent | async)}
-    ]"></app-line-chart>
+      </gerandon-timeline>
     </div>
-    -->
+  </div>
 </div>
+<!--
+<br>
+<div>
+    <app-line-chart [dataSetList]="[
+        {label: 'Elköltött', numbers: (amountSpent | async)},
+        {label: 'Térített', numbers: (amountPaid | async)},
+        {label: 'Különbözet', numbers: (fullSpent | async)}
+]"></app-line-chart>
+</div>
+-->

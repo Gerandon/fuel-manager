@@ -1,13 +1,32 @@
+@import 'src/theme';
+
 app-traffic-license {
+    .download-info {
+        @extend .primary-color;
+        @extend .accent-background;
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        mat-icon {
+            flex: 0 0 auto;
+        }
+    }
     .license-container {
-        background-image: url('../../../../assets/images/forgalmi.jpg');
-        background-size: cover;
-        max-height:300px;
-        max-width:430px;
+        z-index: -99999;
+        width: fit-content;
+        height: fit-content;
         border-radius:10px;
+        .position-absolute {
+            top: 200px;
+        }
     }
     .small-input-row {
-        height:25px
+        height:35px;
+        margin-left: 90px;
+        margin-bottom: 7px;
+        align-items: center;
+        display: flex;
     }
     .small-input {
         .mat-form-field-wrapper {

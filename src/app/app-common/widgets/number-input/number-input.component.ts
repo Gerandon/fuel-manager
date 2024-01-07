@@ -50,25 +50,4 @@ export class NumberInputComponent extends BaseInput<Number> implements OnInit {
         }
         super.ngOnInit();
     }
-
-    /*validate({ value }: FormControl) {
-        let error = null;
-        if (this.required && !value) {
-            error = { required: true };
-        } else {
-            const bigNumber = new BigNumber(value);
-            const maxComparator = !this.maxExclusive ?
-                'isGreaterThan' : 'isGreaterThanOrEqualTo';
-            const minComparator = !this.minExclusive ?
-                'isLessThan' : 'isLessThanOrEqualTo';
-
-            if (this.customImask?.max && bigNumber[maxComparator](<BigNumber>this.customImask.max)) {
-                error = { max: true };
-            } else if (this.customImask?.min && bigNumber[minComparator](<BigNumber>this.customImask.min)) {
-                error = { min: true };
-            }
-        }
-        return error;
-    }*/
-
 }

@@ -1,18 +1,43 @@
-timeline {
-    .table-container {
-        overflow-x: auto;
+:host {
+    display: flex;
+    justify-content: center;
+}
+.timeline {
+    &__card {
+        max-width: 1300px;
     }
-    table {
-        table-layout: fixed;
-        height:100%;
-        width:100%;
-        min-width: 700px;
-        .table-row td timeline-day-item {
-            height:100% !important;
-            min-height: 120px;
+    &__table-container {
+        display: flex;
+        table {
+            flex: 1;
+            table-layout: fixed;
+            height:100%;
+            width:100%;
+            .table-row td timeline-day-item {
+                display: grid;
+                aspect-ratio: 4/3;
+            }
         }
     }
     span.current-date {
         font-size: 17px;
+    }
+    &__build-in-header {
+        display: flex;
+        flex-direction: row;
+        &__first-column {
+            flex: 1;
+            text-align: end;
+        }
+        &__second-column {
+            flex: 1;
+            text-align: center;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        &__third-column {
+            flex: 1;
+            text-align: start;
+        }
     }
 }

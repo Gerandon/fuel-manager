@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, shareReplay} from "rxjs";
 import {catchError, distinctUntilChanged, tap} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 
@@ -22,11 +22,9 @@ export class ResolveRequestComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.url) {
-            this.observable = this.http.get(this.url, { responseType: 'blob' }).pipe(
+            this.observable = this.http.get(this.url, {responseType: 'blob'}).pipe(
                 distinctUntilChanged(() => this.url !== this.lastGotUrl),
-                catchError((asd) => {
-                    return this.http.get(this.catchUrl || 'assets/images/nocar.jpeg', { responseType: 'blob' });
-                }),
+                catchError(() => this.http.get(this.catchUrl || 'assets/images/nocar.jpeg', {responseType: 'blob'}).pipe(shareReplay())),
                 tap((byteArray) => {
                     this.lastGotUrl = this.url;
                     this.processByteArray(byteArray);

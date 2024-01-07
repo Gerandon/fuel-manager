@@ -9,7 +9,7 @@ import {AuthService} from "../auth/services/auth.service";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {LocalVehiclesService} from "../means-of-transport/services/vehicles/local-vehicles.service";
-import {RemoteVehiclesService} from "../means-of-transport/services/vehicles/remote-vehicles.service";
+import {RemoteFirebaseVehiclesService} from "../means-of-transport/services/vehicles/remote-firebase-vehicles.service";
 import {ServiceReportType, VehicleDataType} from "./interfaces/vehicle.interface";
 import {_} from "./vendor/vendor.module";
 import {IMenu, PersonalSettingsType} from "./interfaces/common.interface";
@@ -79,7 +79,7 @@ export const vehiclesServiceFactory = (sStorage: SessionStorageService,
     if (sStorage.retrieve('local')) {
         return new LocalVehiclesService();
     }
-    return new RemoteVehiclesService(db);
+    return new RemoteFirebaseVehiclesService(db);
 }
 
 export const defaultVehicle: VehicleDataType = {

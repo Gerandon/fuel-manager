@@ -9,28 +9,34 @@
         <app-sidemenu-content [menuItems]="menu"></app-sidemenu-content>
     </ng-sidebar>
 
-    <!-- Page content -->
-    <div ng-sidebar-content [style.height]="(isAuthenticated | async) ? '100%' : '97%'">
-        <div class="app">
+    <ng-container ng-sidebar-content [style.height]="(isAuthenticated | async) ? '100%' : '97%'">
+        <header>
             <app-header *showOnAuthenticated>
-                <div fxFlex="5">
-                    <button mat-icon-button (click)="_toggleSidebar()">
-                        <mat-icon [style.color]="'white'">menu</mat-icon>
-                    </button>
-                </div>
-                <div fxFlex="96" fxLayout="row">
-                    <div fxFlex="70" fxFlexOffset="15" fxLayoutAlign="center center">
-                        <h3 class="app-title">Expense Manager</h3>
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <button mat-icon-button (click)="_toggleSidebar()">
+                                <mat-icon [style.color]="'white'">menu</mat-icon>
+                            </button>
+                        </div>
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col-10">
+                                    <h3 class="app-title">Expense Manager - <i>The design is awful, I know...</i></h3>
+                                </div>
+                                <div class="col-2">
+                                    <img src="assets/images/under_constr_2.png"
+                                         style="height: 50px" class="w-100"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <img fxHide.xs src="assets/images/under_constr_2.png"
-                         style="height: 100px;margin-top:-35px;margin-bottom:-10px"/>
                 </div>
             </app-header>
-            <div class="content">
-                <router-outlet></router-outlet>
-            </div>
-            <div class="footer"></div>
-        </div>
-    </div>
-
+        </header>
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+        <footer></footer>
+    </ng-container>
 </ng-sidebar-container>

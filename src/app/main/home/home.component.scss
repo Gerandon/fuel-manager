@@ -1,4 +1,4 @@
-@import './src/theme.scss';
+@import 'src/theme';
 
 app-home {
     height: 100%;
@@ -6,7 +6,7 @@ app-home {
         justify-content: center;
     }
     .menu-item {
-        width: 210px;
+        max-width: 210px;
         height: 170px;
     }
     .content {
@@ -20,7 +20,6 @@ app-home {
                 font-size: 50px;
             }
         }
-        padding: 10px;
         @extend .primary-background;
         @extend .accent-border-color;
         border-radius: 10px;

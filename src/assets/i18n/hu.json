@@ -38,6 +38,7 @@
         "BUTTON": {
             "ADD": "Hozzáadás",
             "SAVE_EDITED": "Felülírás",
+            "SAVE": "Mentés",
             "CANCEL": "Mégse",
             "ITEM_ADD": "\"{{item}}\" hozzáadása"
         }
@@ -126,7 +127,9 @@
             "NO_VEHICLE": "Jelenleg még nincs hozzáadott járműved! Ha szeretnél rögzíteni egyet, kattints a \"Hozzáadás\" gombra!"
         },
         "TRAFFIC_LICENSE": {
-            "DOWNLOAD_LICENSE": "Forgalmi engedély letöltése"
+            "TITLE_PART": "{{name}} - nevezetű jármű adatai",
+            "DOWNLOAD_LICENSE": "Forgalmi engedély letöltése",
+            "INFO": "A \"Forgalmi engedély letöltése\" gombra kattintva a \"Jármű adatok\" szekcióban lévő, aktuális adatok jelennek meg a forgalmi engedélyen!"
         },
         "TRANSPORT_TYPE": {
             "BRAND": "Márka",

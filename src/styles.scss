@@ -1,5 +1,6 @@
 @import 'theme';
 @import 'mixin.scss';
+@import '_bootstrap-overrides.scss';
 
 html,
 body {
@@ -76,42 +77,6 @@ body {
     }
 }
 
-$pixels: (0: 0px, 5: 5px, 10: 10px, 15: 15px, 20: 20px, 25: 25px, 30: 30px, 35:35px, 40:40px, 45:45px, 50:50px, 55: 55px );
-
-@each $pixel, $px in $pixels {
-    .mt-#{$pixel} {
-        margin-top: $px !important;
-    }
-    .mb-#{$pixel} {
-        margin-bottom: $px !important;;
-    }
-    .ml-#{$pixel} {
-        margin-left: $px !important;;
-    }
-    .mr-#{$pixel} {
-        margin-right: $px !important;;
-    }
-    .m-#{$pixel} {
-        margin: $px !important;;
-    }
-    // Padding
-    .pt-#{$pixel} {
-        padding-top: $px !important;
-    }
-    .pb-#{$pixel} {
-        padding-bottom: $px !important;;
-    }
-    .pl-#{$pixel} {
-        padding-left: $px !important;;
-    }
-    .pr-#{$pixel} {
-        padding-right: $px !important;;
-    }
-    .p-#{$pixel} {
-        padding: $px !important;;
-    }
-}
-
 .of-ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -122,4 +87,11 @@ $pixels: (0: 0px, 5: 5px, 10: 10px, 15: 15px, 20: 20px, 25: 25px, 30: 30px, 35:3
     @extend .accent-color;
     white-space: pre-line;
     font-size: 20px !important;
+}
+.container-fluid-full {
+    @extend .container-fluid;
+}
+
+fieldset {
+    border-radius: 10px;
 }
