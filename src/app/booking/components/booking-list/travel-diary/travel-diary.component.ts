@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {BookingService} from "../../../services/booking.service";
 import {Observable} from "rxjs";
 import {TravelDiaryType} from "../../../../app-common/interfaces/travel-diary.interface";
+import {BookingListType} from "../../../../app-common/interfaces/common.interface";
 
 @Component({
     selector: 'app-travel-diary',
@@ -13,7 +14,7 @@ import {TravelDiaryType} from "../../../../app-common/interfaces/travel-diary.in
 })
 export class TravelDiaryComponent implements OnInit, OnChanges {
 
-    @Input() queryParams?: {key: keyof TravelDiaryType, value: string, operator?: string}[];
+    @Input() queryParams?: {key: keyof BookingListType, value: string | number, operator?: string}[];
 
     public travelDiarySource!: Observable<TravelDiaryType[]>;
     public distance!: Observable<any[]>;

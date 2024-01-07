@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface";
 
 @Component({
@@ -7,7 +7,7 @@ import {VehicleDataType} from "../../../app-common/interfaces/vehicle.interface"
     styleUrls: ['./vehicle-tile.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class VehicleTileComponent implements OnInit {
+export class VehicleTileComponent {
 
     @Input() vehicle!: VehicleDataType;
     @Output() onUpdate = new EventEmitter<VehicleDataType>();
@@ -15,9 +15,6 @@ export class VehicleTileComponent implements OnInit {
     @Output() onDelete = new EventEmitter<VehicleDataType>();
 
     constructor() {
-    }
-
-    ngOnInit(): void {
     }
 
     prevent(event) {

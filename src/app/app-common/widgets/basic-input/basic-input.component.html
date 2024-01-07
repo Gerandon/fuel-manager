@@ -1,5 +1,5 @@
 <mat-form-field [floatLabel]="floatLabel && 'always'" [appearance]="appearance">
-    <mat-label *ngIf="label && floatLabel !== 'never'">{{ label | translate: translateParams }}</mat-label>
+    <mat-label *ngIf="label && floatLabel">{{ label | translate: translateParams }}</mat-label>
     <input
         #inputElement
         #input="ngForm"

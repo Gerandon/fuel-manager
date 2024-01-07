@@ -1,16 +1,15 @@
-<div fxLayout="row">
-    <input
-        #inputElement
-        #input="ngForm"
-        [type]="'hidden'"
-        [formControl]="control"
-        [name]="name"
-        [required]="required"/>
-    <div *ngFor="let item of data">
-        <button mat-icon-button
-                [class.selected]="item.value === chosen"
-                (click)="chooseButton(item.value)">
-            <mat-icon [svgIcon]="item.icon">{{ item.icon }}</mat-icon>
-        </button>
-    </div>
+<input
+  #inputElement
+  #input="ngForm"
+  [type]="'hidden'"
+  [formControl]="control"
+  [name]="name"
+  [required]="required"/>
+<div *ngFor="let item of data" class="col-auto">
+  <button mat-icon-button
+          type="button"
+          [class.selected]="item.value === chosen"
+          (click)="chooseButton(item.value)">
+    <mat-icon [svgIcon]="item.icon">{{ item.icon }}</mat-icon>
+  </button>
 </div>

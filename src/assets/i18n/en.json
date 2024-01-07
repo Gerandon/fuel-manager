@@ -38,6 +38,7 @@
         "BUTTON": {
             "ADD": "Add",
             "SAVE_EDITED": "Overwrite",
+            "SAVE": "Save",
             "CANCEL": "Cancel",
             "ITEM_ADD": "Add new \"{{item}}\""
         }
@@ -126,7 +127,9 @@
             "NO_VEHICLE": "Currently you have no added vehicle! If you want to register one, please click on the \"Add\" button!"
         },
         "TRAFFIC_LICENSE": {
-            "DOWNLOAD_LICENSE": "Download license"
+            "TITLE_PART": "{{name}} - vehicle details",
+            "DOWNLOAD_LICENSE": "Download license",
+            "INFO": "Clicking on the \"Download license\" button, the downloaded driving license will contain data from the \"Vehicle data\" section!"
         },
         "TRANSPORT_TYPE": {
             "BRAND": "Brand",

@@ -33,9 +33,12 @@
                         "styles": [
                             "src/mixin.scss",
                             "src/styles.scss",
-                            "src/theme.scss"
+                            "src/theme.scss",
+                            "node_modules/bootstrap/scss/bootstrap-grid.scss",
+                            "node_modules/bootstrap/scss/bootstrap-utilities.scss"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "allowedCommonJsDependencies": ["moment", "lodash"]
                     },
                     "configurations": {
                         "production": {

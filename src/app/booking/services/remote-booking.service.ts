@@ -24,7 +24,10 @@ export class RemoteBookingService implements IBookingService {
         this.fuelFbService = new FirebaseDatabaseService(firebaseDb, 'fuel-cost-list');
     }
 
-    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string; }[]): Observable<FuelCostDiaryType[]> {
+    searchInFuelCost(queryParams?: {
+        key: keyof FuelCostDiaryType;
+        value: string;
+    }[]): Observable<FuelCostDiaryType[]> {
         return this.fuelFbService.search(queryParams);
     }
 
@@ -83,17 +86,18 @@ export class RemoteBookingService implements IBookingService {
                     return array.filter(accItem => compareDate(acc.date, accItem.date));
                 });
             }),
-            map((array:TravelDiaryType[][]) => array.map(acc => <TimelineData>({
-                date: acc[0].date,
-                dayData: acc.map(item => ({
-                    color: { background: 'primary-background', foreground: '#ffffff' },
-                    props: [
-                        {index: 0, value: `${item.route.from} -> ${item.route.to}`},
-                        {index: 1, value: `${item.distance} Km`},
-                    ],
-                    separator: '-'
-                })),
-            })))
+            map((array: TravelDiaryType[][]) => array.map(acc => <TimelineData>({
+                    date: acc[0].date,
+                    dayData: acc.map(item => ({
+                        color: {background: 'primary-background', foreground: '#ffffff'},
+                        props: [
+                            {index: 0, value: `${item.route.from} -> ${item.route.to}`},
+                            {index: 1, value: `${item.distance} Km`},
+                        ],
+                        separator: '-'
+                    })),
+                })
+            )),
         );
     }
 
@@ -114,12 +118,12 @@ export class RemoteBookingService implements IBookingService {
                     return array.filter(accItem => compareDate(acc.date, accItem.date));
                 });
             }),
-            map((array:FuelCostDiaryType[][]) => array.map(acc => <TimelineData>({
+            map((array: FuelCostDiaryType[][]) => array.map(acc => <TimelineData>({
                 date: acc[0].date,
                 dayData: acc.map(item => ({
                     color: (item.fullSpent > 0
-                        ? { background: 'primary-background', foreground: '#ffffff' }
-                        : { background: 'secondary-background', foreground: '#ffffff' }),
+                        ? {background: 'primary-background', foreground: '#ffffff'}
+                        : {background: 'secondary-background', foreground: '#ffffff'}),
                     props: [
                         {index: 0, value: `${item.quantity} Liter`},
                         {index: 1, value: `${Math.abs(item.fullSpent)} HUF`},

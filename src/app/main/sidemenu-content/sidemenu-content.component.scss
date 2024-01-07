@@ -5,6 +5,9 @@ app-sidemenu-content {
             .mat-list-text {
                 color: white;
             }
+            .mdc-list-item__end {
+                display: none !important;
+            }
         }
     }
     .ellipsis {

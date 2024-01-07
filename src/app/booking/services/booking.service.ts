@@ -60,7 +60,7 @@ export class BookingService implements IBookingService {
         );
     }
 
-    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string }[]): Observable<FuelCostDiaryType[]> {
+    searchInFuelCost(queryParams?: { key: keyof FuelCostDiaryType; value: string | number }[]): Observable<FuelCostDiaryType[]> {
         return this._bookingService.searchInFuelCost(queryParams);
     }
 

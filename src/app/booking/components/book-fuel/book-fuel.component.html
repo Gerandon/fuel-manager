@@ -1,83 +1,81 @@
-<form #addForm="ngForm" class="book-milage" fxLayout="column">
-    <div fxLayout="row">
-        <mat-card fxFlex="100" class="card-outlined">
-            <p class="card-outlined__title">{{ 'BOOKING.BOOK_FUEL.TITLE' | translate }}</p>
-            <mat-card-content fxLayout="row wrap" fxLayoutGap="15px grid">
-                <mat-form-field fxFlex="auto" fxFlex.lt-sm="100" appearance="outline">
-                    <mat-label>{{ 'COMMON.CHOOSE_DATE' | translate }}</mat-label>
-                    <input matInput
-                           name="date"
-                           [disabled]="!editable"
-                           [(ngModel)]="model.date"
-                           [matDatepicker]="picker">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-                <number-input name="fuelCost"
-                              fxFlex="auto"
-                              fxFlex.lt-sm="100"
-                              [(ngModel)]="currentFuelCost"
-                              (input)="calculateAmountSpentQuantity()"
-                              [required]="true"
-                              [disabled]="!editable"
-                              suffix="HUF"
-                              label="BOOKING.BOOK_FUEL.FUEL_COST">
-                </number-input>
-                <number-input name="quantity"
-                              fxFlex="auto"
-                              fxFlex.lt-sm="100"
-                              [(ngModel)]="model.quantity"
-                              (input)="calculateAmountSpentQuantity()"
-                              [required]="true"
-                              [disabled]="!editable"
-                              suffix="Liter"
-                              label="BOOKING.BOOK_FUEL.QUANTITY">
-                </number-input>
-                <number-input name="amountSpent"
-                              fxFlex="auto"
-                              fxFlex.lt-sm="100"
-                              [(ngModel)]="model.amountSpent"
-                              (input)="calculateQuantityByPaid()"
-                              [required]="true"
-                              [disabled]="!editable"
-                              suffix="HUF"
-                              label="BOOKING.BOOK_FUEL.AMOUNT_SPENT">
-                </number-input>
-                <number-input name="amountPaid"
-                              fxFlex="auto"
-                              fxFlex.lt-sm="100"
-                              [(ngModel)]="model.amountPaid"
-                              (ngModelChange)="calculateFullSpent()"
-                              [required]="true"
-                              [disabled]="!editable"
-                              suffix="HUF"
-                              label="BOOKING.BOOK_FUEL.AMOUNT_PAID">
-                </number-input>
-                <number-input name="fullSpent"
-                              fxFlex="auto"
-                              fxFlex.lt-sm="100"
-                              [ngModel]="model.fullSpent"
-                              [required]="true"
-                              [disabled]="true"
-                              suffix="HUF"
-                              label="BOOKING.BOOK_FUEL.FULL_SPENT">
-                </number-input>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <br>
-    <div *ngIf="editable" fxLayout="row" fxFlex="1 0 50px" fxLayoutAlign="start end" style="padding-bottom: 10px">
-        <div fxFlex="50">
-            <button mat-raised-button [mat-dialog-close]="model"
-                    [disabled]="!!addForm.invalid"
-                    [color]="'primary'">
-                {{ (isNew ? 'COMMON.BUTTON.ADD' : 'COMMON.BUTTON.SAVE_EDITED') | translate }}
-            </button>
+<div class="container-fluid">
+  <form #addForm="ngForm" class="book-milage">
+    <span mat-dialog-title translate="BOOKING.BOOK_FUEL.TITLE"></span>
+    <mat-dialog-content>
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'COMMON.CHOOSE_DATE' | translate }}</mat-label>
+            <input matInput
+                   name="date"
+                   [disabled]="!editable"
+                   [(ngModel)]="model.date"
+                   [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         </div>
-        <div fxFlex="50" fxLayoutAlign="end center">
-            <button mat-button mat-dialog-close [color]="'primary'">
-                {{ 'COMMON.BUTTON.CANCEL' | translate }}
-            </button>
-        </div>
-    </div>
-</form>
+      </div>
+      <div class="row">
+        <number-input name="fuelCost"
+                      class="col-sm-12 col-md-6 col-lg-4"
+                      [(ngModel)]="currentFuelCost"
+                      (input)="calculateAmountSpentQuantity()"
+                      [required]="true"
+                      [disabled]="!editable"
+                      suffix="HUF"
+                      label="BOOKING.BOOK_FUEL.FUEL_COST">
+        </number-input>
+        <number-input name="quantity"
+                      class="col-sm-12 col-md-6 col-lg-4"
+                      [(ngModel)]="model.quantity"
+                      (input)="calculateAmountSpentQuantity()"
+                      [required]="true"
+                      [disabled]="!editable"
+                      suffix="Liter"
+                      label="BOOKING.BOOK_FUEL.QUANTITY">
+        </number-input>
+        <number-input name="amountSpent"
+                      class="col-sm-12 col-md-6 col-lg-4"
+                      [(ngModel)]="model.amountSpent"
+                      (input)="calculateQuantityByPaid()"
+                      [required]="true"
+                      [disabled]="!editable"
+                      suffix="HUF"
+                      label="BOOKING.BOOK_FUEL.AMOUNT_SPENT">
+        </number-input>
+      </div>
+      <div class="row">
+        <number-input name="amountPaid"
+                      class="col-sm-12 col-md-6"
+                      [(ngModel)]="model.amountPaid"
+                      (ngModelChange)="calculateFullSpent()"
+                      [required]="true"
+                      [disabled]="!editable"
+                      suffix="HUF"
+                      label="BOOKING.BOOK_FUEL.AMOUNT_PAID">
+        </number-input>
+        <number-input name="fullSpent"
+                      class="col-sm-12 col-md-6"
+                      [ngModel]="model.fullSpent"
+                      [required]="true"
+                      [disabled]="true"
+                      suffix="HUF"
+                      label="BOOKING.BOOK_FUEL.FULL_SPENT">
+        </number-input>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <ng-container *ngIf="editable">
+        <button type="button" mat-raised-button [mat-dialog-close]="model"
+                [disabled]="!!addForm.invalid"
+                [color]="'primary'">
+          {{ (isNew ? 'COMMON.BUTTON.ADD' : 'COMMON.BUTTON.SAVE_EDITED') | translate }}
+        </button>
+        <button type="button" mat-button mat-dialog-close [color]="'primary'">
+          {{ 'COMMON.BUTTON.CANCEL' | translate }}
+        </button>
+      </ng-container>
+    </mat-dialog-actions>
+  </form>
+</div>

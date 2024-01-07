@@ -1,35 +1,29 @@
-<div fxLayout="column"
-     fxLayoutGap="3px"
-     fxFlex="100"
-     class="day-item-main"
+<div class="day-item-main"
      [ngClass]="{ 'day-item-main__current-day-background': currentDay }"
      [class.disabled]="disabled">
-    <div fxLayout="row" fxLayoutAlign="end center">
-        <p class="m-0 day-item-main__day-label"
-           [style.font-size]="'large'">
-            {{date | date: 'd'}}
-        </p>
-    </div>
-    <ng-container *ngIf="dayRowRef">
-        <div *ngFor="let record of recordings">
+  <p class="m-0 day-item-main__day-label"
+     [style.font-size]="'large'">
+    {{date | date: 'd'}}
+  </p>
+  <ng-container *ngIf="dayRowRef">
+    <div *ngFor="let record of recordings">
             <span *ngFor="let prop of record.props; let last = last">
                 <ng-container [ngTemplateOutlet]="dayRowRef"
                               [ngTemplateOutletContext]="{$implicit: prop}">
                 </ng-container>
             </span>
-        </div>
-    </ng-container>
-    <ng-container *ngIf="!dayRowRef">
-        <div *ngFor="let record of recordings"
-             [style.color]="record.color.foreground"
-             [matTooltip]="record | recordValue"
-             fxLayout="row-wrap"
-             [ngClass]="record.color.background"
-             class="item-row">
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!dayRowRef">
+    <div *ngFor="let record of recordings"
+         [style.color]="record.color.foreground"
+         [matTooltip]="record | recordValue"
+         [ngClass]="record.color.background"
+         class="item-row">
             <span *ngFor="let prop of record.props; let last = last">
                 <label>{{prop.value}}</label>
                 <label *ngIf="!last" class="separator">{{record.separator}}</label>
             </span>
-        </div>
-    </ng-container>
+    </div>
+  </ng-container>
 </div>

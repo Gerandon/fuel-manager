@@ -1,4 +1,4 @@
-@import './src/theme.scss';
+@import 'src/theme.scss';
 
 app-vehicle-detail {
     h2 {
@@ -12,9 +12,8 @@ app-vehicle-detail {
             .mat-panel-description,
             mat-panel-title,
             mat-panel-description {
-                @extend .accent-color;
+                @extend .primary-color;
             }
-            @extend .primary-background;
         }
         .mat-panel-title,
         .mat-panel-description,
@@ -22,6 +21,8 @@ app-vehicle-detail {
         mat-panel-description {
             align-items: center;
         }
+    }
+    app-transport-type mat-card {
     }
     .custom-tile {
         .mat-card {

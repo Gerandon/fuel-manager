@@ -1,6 +1,7 @@
 app-line-chart {
+    display: block;
     background: white;
-    width: 100%;
+    padding: 10px;
     canvas {
         max-height: 400px;
     }

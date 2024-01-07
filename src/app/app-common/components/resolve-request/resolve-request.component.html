@@ -1,8 +1,8 @@
-<div *ngIf="observable | withLoading | async as obs">
+<ng-container *ngIf="observable | withLoading | async as obs">
     <mat-progress-spinner *ngIf="obs.loading" color="accent"
                           mode="indeterminate">
     </mat-progress-spinner>
-    <div *ngIf="!obs.loading">
+    <ng-container *ngIf="!obs.loading">
         <ng-content></ng-content>
-    </div>
-</div>
+    </ng-container>
+</ng-container>

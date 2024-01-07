@@ -10,7 +10,14 @@ $app-white: mat.define-palette(mat.$blue-grey-palette, 50);
 $app-primary: mat.define-palette(mat.$blue-grey-palette, 500);
 $app-accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400);
 
-$app-theme: mat.define-light-theme($app-primary, $app-accent);
+$app-theme: mat.define-light-theme((
+    color: (
+        primary: $app-primary,
+        accent: $app-accent,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+));
 $color-config:    mat.get-color-config($app-theme);
 $primary-palette: map.get($color-config, 'primary');
 @include theme-color-grabber($app-theme);
@@ -22,16 +29,23 @@ $primary-palette: map.get($color-config, 'primary');
     $app-primary-alter: mat.define-palette(mat.$brown-palette, 500);
     $app-accent-alter: mat.define-palette(mat.$brown-palette, A200, A100, A400);
 
-    $app-alter-theme: mat.define-light-theme($app-primary-alter, $app-accent-alter);
+    $app-alter-theme: mat.define-light-theme((
+        color: (
+            primary: $app-primary-alter,
+            accent: $app-accent-alter,
+        ),
+        typography: mat.define-typography-config(),
+        density: 0,
+    ));
     @include theme-color-grabber($app-alter-theme);
-    @include mat.all-component-themes($app-alter-theme);
+    @include mat.all-component-colors($app-alter-theme);
 }
 
 // OTHER THEME CONFIGS
 ng-sidebar {
     aside {
         width: 200px;
-        @extend .primary-background-trans;
+        @extend .primary-background;
         color: white;
     }
 }
